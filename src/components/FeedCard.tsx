@@ -46,9 +46,14 @@ export function FeedCard({ item, scrollRoot }: Props) {
     <article ref={ref} className={`card ${dwelled ? 'dwelled' : ''}`}>
       <div
         className="card-cover"
-        style={{ background: item.cover }}
+        style={item.image ? undefined : { background: item.cover }}
         onClick={() => dispatch({ type: 'OPEN_DETAIL', id: item.id })}
       >
+        {item.image ? (
+          <img className="card-photo" src={item.image} alt="" loading="lazy" />
+        ) : (
+          <span className="card-emoji">{item.emoji}</span>
+        )}
         <span className="card-kind">{item.kind}</span>
         <button
           className={`card-save ${saved ? 'on' : ''}`}
@@ -60,8 +65,7 @@ export function FeedCard({ item, scrollRoot }: Props) {
         >
           {saved ? '♥' : '♡'}
         </button>
-        <span className="card-emoji">{item.emoji}</span>
-        <span className="card-distance">📍 {item.distance}</span>
+        {item.distance && <span className="card-distance">📍 {item.distance}</span>}
       </div>
 
       <div
@@ -70,10 +74,12 @@ export function FeedCard({ item, scrollRoot }: Props) {
       >
         <div className="card-title-row">
           <h3>{item.title}</h3>
-          <span className="card-rating">★ {item.rating.toFixed(1)}</span>
+          {item.rating != null && (
+            <span className="card-rating">★ {item.rating.toFixed(1)}</span>
+          )}
         </div>
         <div className="card-meta">
-          {item.category} · {item.neighborhood} · {item.price}
+          {[item.category, item.neighborhood, item.price].filter(Boolean).join(' · ')}
         </div>
         <p className="card-blurb">{item.blurb}</p>
         <div className="card-tags">

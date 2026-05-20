@@ -13,18 +13,29 @@ export function DetailSheet() {
     <div className="sheet-wrap" onClick={close}>
       <div className="sheet" onClick={(e) => e.stopPropagation()}>
         <div className="sheet-grip" />
-        <div className="detail-cover" style={{ background: item.cover }}>
-          <span className="card-emoji big">{item.emoji}</span>
+        <div
+          className="detail-cover"
+          style={item.image ? undefined : { background: item.cover }}
+        >
+          {item.image ? (
+            <img className="detail-photo" src={item.image} alt="" />
+          ) : (
+            <span className="card-emoji big">{item.emoji}</span>
+          )}
           <span className="card-kind">{item.kind}</span>
         </div>
 
         <div className="detail-body">
           <div className="card-title-row">
             <h2>{item.title}</h2>
-            <span className="card-rating">★ {item.rating.toFixed(1)}</span>
+            {item.rating != null && (
+              <span className="card-rating">★ {item.rating.toFixed(1)}</span>
+            )}
           </div>
           <div className="card-meta">
-            {item.category} · {item.neighborhood} · {item.distance} · {item.price}
+            {[item.category, item.neighborhood, item.distance, item.price]
+              .filter(Boolean)
+              .join(' · ')}
           </div>
           <p className="detail-blurb">{item.blurb}</p>
           <div className="card-tags">

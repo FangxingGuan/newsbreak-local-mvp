@@ -13,11 +13,14 @@ export interface FeedItem {
   title: string
   category: string
   emoji: string
-  /** CSS gradient used as the faux cover photo. */
+  /** CSS gradient used as the cover when there is no real photo. */
   cover: string
+  /** Real photo URL from the source API, when available. */
+  image?: string
   neighborhood: string
   distance: string
-  rating: number
+  /** Star rating; omitted for sources that don't provide one (e.g. events). */
+  rating?: number
   price: string
   blurb: string
   tags: string[]

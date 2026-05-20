@@ -4,6 +4,7 @@
 // plausible (fictional) venue names.
 
 import type { FeedItem, Plan, PlanStop, Vertical } from './types'
+import snapshot from './feed.generated.json'
 
 /** The user's current location, shown in the feed app bar. */
 export const USER_LOCATION = 'Palo Alto, CA'
@@ -14,7 +15,8 @@ export const VERTICALS: { id: Vertical; label: string; emoji: string }[] = [
   { id: 'family', label: '家庭活动', emoji: '🧸' },
 ]
 
-export const FEED: FeedItem[] = [
+// Built-in sample data — used as a fallback when no real snapshot exists.
+const FALLBACK_FEED: FeedItem[] = [
   // ---- Date / Social Dining ----
   {
     id: 'd1',
@@ -163,6 +165,24 @@ export const FEED: FeedItem[] = [
     intentLabel: '加入家庭计划',
   },
 ]
+
+/** Real data captured by scripts/snapshot.mjs — empty until the snapshot runs. */
+const SNAPSHOT = snapshot.items as unknown as FeedItem[]
+
+/**
+ * The live feed. Each vertical independently uses real snapshot data when
+ * available, and falls back to the built-in sample data otherwise.
+ */
+export const FEED: FeedItem[] = (['dining', 'weekend', 'family'] as Vertical[]).flatMap(
+  (v) => {
+    const real = SNAPSHOT.filter((i) => i.vertical === v)
+    return real.length ? real : FALLBACK_FEED.filter((i) => i.vertical === v)
+  },
+)
+
+/** Whether the feed is showing real API data, and when it was captured. */
+export const USING_REAL_DATA = SNAPSHOT.length > 0
+export const SNAPSHOT_AT: string | null = snapshot.generatedAt
 
 export function getItem(id: string): FeedItem | undefined {
   return FEED.find((i) => i.id === id)

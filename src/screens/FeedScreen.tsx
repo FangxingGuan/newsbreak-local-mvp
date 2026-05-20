@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 import { useStore } from '../store'
-import { FEED, USER_LOCATION, VERTICALS } from '../data'
+import { FEED, USER_LOCATION, USING_REAL_DATA, VERTICALS } from '../data'
 import { FeedCard } from '../components/FeedCard'
 
 export function FeedScreen() {
@@ -33,7 +33,10 @@ export function FeedScreen() {
       </header>
 
       <div className="feed-hint">
-        本地附近 · 为你推荐 · 停留浏览即可触发出行规划
+        <span className={`hint-dot ${USING_REAL_DATA ? 'live' : 'sample'}`} />
+        {USING_REAL_DATA
+          ? 'Yelp · Google Places · Ticketmaster · Amadeus 实时本地数据'
+          : '示例数据 · 运行 npm run snapshot 可接入真实 API'}
       </div>
 
       <div className="feed-list">

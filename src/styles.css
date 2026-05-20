@@ -208,6 +208,23 @@ h3 {
   font-size: 11.5px;
   color: var(--muted);
   padding: 13px 18px 2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hint-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex: none;
+}
+.hint-dot.live {
+  background: #27c93f;
+  box-shadow: 0 0 0 3px rgba(39, 201, 63, 0.18);
+}
+.hint-dot.sample {
+  background: #f5a623;
+  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.18);
 }
 .feed-list {
   padding: 9px 14px 22px;
@@ -240,6 +257,7 @@ h3 {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  overflow: hidden;
 }
 .card-emoji {
   font-size: 56px;
@@ -247,6 +265,14 @@ h3 {
 }
 .card-emoji.big {
   font-size: 76px;
+}
+.card-photo,
+.detail-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .card-kind {
   position: absolute;
@@ -320,6 +346,10 @@ h3 {
   line-height: 1.55;
   color: #3c3f47;
   margin-top: 8px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .card-tags {
   display: flex;
@@ -427,6 +457,7 @@ h3 {
   align-items: center;
   justify-content: center;
   margin-top: 4px;
+  overflow: hidden;
 }
 .detail-body {
   padding: 16px 18px 10px;

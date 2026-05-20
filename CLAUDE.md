@@ -12,13 +12,30 @@ running entirely on mock data (no backend, no API keys).
 - Vite + React 18 + TypeScript.
 - `npm install` — install dependencies
 - `npm run dev` — dev server at http://localhost:5173
+- `npm run snapshot` — fetch real local data into `src/feed.generated.json`
 - `npm run build` — type-check (`tsc`) + production build to `dist/`
 - `npm run preview` — serve the production build
+
+### Real data (build-time snapshot)
+
+The feed can run on **real API data** instead of sample data:
+
+- `scripts/snapshot.mjs` calls Yelp Fusion (dining), Google Places (family),
+  Ticketmaster (weekend) and Amadeus (weekend), normalizes everything into
+  `FeedItem`, and writes `src/feed.generated.json`.
+- API keys live in `.env` (gitignored — see `.env.example`). They are used
+  **only** by the Node snapshot script, never bundled into the browser app.
+- `data.ts` imports the snapshot; each vertical falls back to sample data when
+  the snapshot has no items for it.
+- The deployed site stays fully static — the snapshot is committed JSON, so
+  there is no backend and no key exposure. Re-run `npm run snapshot` and commit
+  to refresh.
 
 ### Code layout (`src/`)
 
 - `types.ts` — domain types (FeedItem, Plan, Signal, …)
-- `data.ts` — mock feed content + the lightweight plan generator
+- `data.ts` — feed assembly (real snapshot + sample fallback) + plan generator
+- `feed.generated.json` — real-data snapshot, written by `scripts/snapshot.mjs`
 - `store.tsx` — single reducer + context driving the whole core loop; also
   derives the WLA North Star metric
 - `App.tsx` — phone frame, screen routing, overlay sheets, desktop legend

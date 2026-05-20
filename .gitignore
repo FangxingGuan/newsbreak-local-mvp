@@ -4,3 +4,8 @@ dist
 *.local
 .vite
 *.tsbuildinfo
+
+# API keys — never commit
+.env
+.env.*
+!.env.example
