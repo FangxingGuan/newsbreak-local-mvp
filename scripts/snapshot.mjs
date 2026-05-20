@@ -160,6 +160,7 @@ async function fromGooglePlaces() {
   // Regional queries — span the wider Bay Area, not just Palo Alto city.
   const queries = [
     "children's museum San Francisco Bay Area",
+    'u-pick cherry and berry farm near Palo Alto, California',
     'aquarium near Palo Alto, California',
     'kid-friendly attraction on the SF Peninsula',
     'family amusement park near San Jose, CA',
@@ -209,15 +210,23 @@ async function fromGooglePlaces() {
     .slice(0, 8)
     .map(({ p }) => {
     const types = p.types || []
-    const nice = uniq(types.map((t) => TYPE_NICE[t]))
+    const name = p.displayName?.text || 'Family Spot'
+    // U-pick farms aren't reliably typed — detect them by name too.
+    const isFarm =
+      /farm|ranch|orchard|u-?pick|berr|cherr/i.test(name) ||
+      types.some((t) => ['farm', 'orchard'].includes(t))
+    const nice = uniq([
+      ...(isFarm ? ['U-Pick Farm'] : []),
+      ...types.map((t) => TYPE_NICE[t]),
+    ])
     const city = (p.formattedAddress || '').split(', ')[1] || 'Palo Alto'
     return {
       id: `gp-${p.id}`,
       vertical: 'family',
       kind: '地点',
-      title: p.displayName?.text || 'Family Spot',
+      title: name,
       category: nice[0] || 'Family Spot',
-      emoji: emojiPlace(types),
+      emoji: isFarm ? '🍓' : emojiPlace(types),
       cover: nextCover(),
       image: undefined, // Google photos need a keyed URL — keep gradient covers
       neighborhood: city,

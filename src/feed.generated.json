@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-20T22:12:45.917Z",
+  "generatedAt": "2026-05-20T22:18:41.198Z",
   "location": "Palo Alto, CA",
   "items": [
     {
@@ -105,13 +105,32 @@
       "intentLabel": "策划一次约会"
     },
     {
+      "id": "yelp-1vMgajRAI3lYwuCeGX58oQ",
+      "vertical": "dining",
+      "kind": "地点",
+      "title": "Evvia Estiatorio",
+      "category": "Greek",
+      "emoji": "🥙",
+      "cover": "linear-gradient(135deg,#3a1c71,#d76d77)",
+      "image": "https://s3-media0.fl.yelpcdn.com/bphoto/yOnhCNx9B-l_rxT4nFAyhw/o.jpg",
+      "neighborhood": "Palo Alto",
+      "distance": "1.2 mi",
+      "rating": 4.3,
+      "price": "$$$",
+      "blurb": "Greek · Yelp 4.3★ · 3173 条评价",
+      "tags": [
+        "Greek"
+      ],
+      "intentLabel": "策划一次约会"
+    },
+    {
       "id": "yelp-UJcIE439kxIQo4v8t_MXQQ",
       "vertical": "dining",
       "kind": "地点",
       "title": "Macarena",
       "category": "Spanish · Mediterranean",
       "emoji": "🥘",
-      "cover": "linear-gradient(135deg,#3a1c71,#d76d77)",
+      "cover": "linear-gradient(135deg,#f7971e,#ffd200)",
       "image": "https://s3-media0.fl.yelpcdn.com/bphoto/Skpv2fbCdwZFdrfEbvpe1w/o.jpg",
       "neighborhood": "Palo Alto",
       "distance": "1.1 mi",
@@ -122,25 +141,6 @@
         "Spanish",
         "Mediterranean",
         "Soul Food"
-      ],
-      "intentLabel": "策划一次约会"
-    },
-    {
-      "id": "yelp-1vMgajRAI3lYwuCeGX58oQ",
-      "vertical": "dining",
-      "kind": "地点",
-      "title": "Evvia Estiatorio",
-      "category": "Greek",
-      "emoji": "🥙",
-      "cover": "linear-gradient(135deg,#f7971e,#ffd200)",
-      "image": "https://s3-media0.fl.yelpcdn.com/bphoto/yOnhCNx9B-l_rxT4nFAyhw/o.jpg",
-      "neighborhood": "Palo Alto",
-      "distance": "1.2 mi",
-      "rating": 4.3,
-      "price": "$$$",
-      "blurb": "Greek · Yelp 4.3★ · 3173 条评价",
-      "tags": [
-        "Greek"
       ],
       "intentLabel": "策划一次约会"
     },
@@ -164,13 +164,31 @@
       "intentLabel": "安排家庭日"
     },
     {
+      "id": "gp-ChIJcbxGsxelj4ARRVXmfCIfn7k",
+      "vertical": "family",
+      "kind": "地点",
+      "title": "U-Pick at Webb Ranch",
+      "category": "U-Pick Farm",
+      "emoji": "🍓",
+      "cover": "linear-gradient(135deg,#ee0979,#ff6a00)",
+      "neighborhood": "Portola Valley",
+      "distance": "3.9 mi",
+      "rating": 4.5,
+      "price": "",
+      "blurb": "U-Pick Farm · Google 4.5★ · 72 条评价",
+      "tags": [
+        "U-Pick Farm"
+      ],
+      "intentLabel": "安排家庭日"
+    },
+    {
       "id": "gp-ChIJq7iF28bJj4ARdWUD6DQUr3I",
       "vertical": "family",
       "kind": "地点",
       "title": "California's Great America",
       "category": "Amusement Park",
       "emoji": "🎡",
-      "cover": "linear-gradient(135deg,#ee0979,#ff6a00)",
+      "cover": "linear-gradient(135deg,#ff7a59,#ef2d56)",
       "neighborhood": "Santa Clara",
       "distance": "9.6 mi",
       "rating": 4.4,
@@ -189,7 +207,7 @@
       "title": "Planet Snoopy",
       "category": "Amusement Park",
       "emoji": "🎡",
-      "cover": "linear-gradient(135deg,#ff7a59,#ef2d56)",
+      "cover": "linear-gradient(135deg,#f9a826,#e8112d)",
       "neighborhood": "Santa Clara",
       "distance": "9.9 mi",
       "rating": 4.6,
@@ -207,7 +225,7 @@
       "title": "Pulgas Water Temple",
       "category": "Attraction",
       "emoji": "🧸",
-      "cover": "linear-gradient(135deg,#f9a826,#e8112d)",
+      "cover": "linear-gradient(135deg,#b06ab3,#4568dc)",
       "neighborhood": "Redwood City",
       "distance": "10.0 mi",
       "rating": 4.6,
@@ -225,7 +243,7 @@
       "title": "Infinite Aquarium",
       "category": "Family Spot",
       "emoji": "🧸",
-      "cover": "linear-gradient(135deg,#b06ab3,#4568dc)",
+      "cover": "linear-gradient(135deg,#2193b0,#6dd5ed)",
       "neighborhood": "Santa Clara",
       "distance": "11.8 mi",
       "rating": 4.7,
@@ -241,7 +259,7 @@
       "title": "LEGOLAND Discovery Center Bay Area",
       "category": "Attraction",
       "emoji": "🛝",
-      "cover": "linear-gradient(135deg,#2193b0,#6dd5ed)",
+      "cover": "linear-gradient(135deg,#56ab2f,#a8e063)",
       "neighborhood": "Milpitas",
       "distance": "13.6 mi",
       "rating": 4.2,
@@ -260,7 +278,7 @@
       "title": "CuriOdyssey",
       "category": "Zoo",
       "emoji": "🦁",
-      "cover": "linear-gradient(135deg,#56ab2f,#a8e063)",
+      "cover": "linear-gradient(135deg,#3a1c71,#d76d77)",
       "neighborhood": "San Mateo",
       "distance": "14.1 mi",
       "rating": 4.6,
@@ -270,24 +288,6 @@
         "Zoo",
         "Attraction",
         "Museum"
-      ],
-      "intentLabel": "安排家庭日"
-    },
-    {
-      "id": "gp-ChIJa7wBTJIzjoARZH3UjsKCnzA",
-      "vertical": "family",
-      "kind": "地点",
-      "title": "FUNBOX SAN JOSE",
-      "category": "Amusement Park",
-      "emoji": "🎡",
-      "cover": "linear-gradient(135deg,#3a1c71,#d76d77)",
-      "neighborhood": "San Jose",
-      "distance": "18.7 mi",
-      "rating": 4.3,
-      "price": "",
-      "blurb": "Amusement Park · Google 4.3★ · 43 条评价",
-      "tags": [
-        "Amusement Park"
       ],
       "intentLabel": "安排家庭日"
     },
@@ -491,7 +491,7 @@
       "category": "Tours & Activities",
       "emoji": "🎟️",
       "cover": "linear-gradient(135deg,#11998e,#38ef7d)",
-      "image": "https://images.holibob.tech/eyJrZXkiOiJwcm9kdWN0SW1hZ2VzL2IwYWUxZDk5LWZjOTMtMTFlYi04MDFmLTA2YjgxYWQ0YzU3OSIsImVkaXRzIjp7InJlc2l6ZSI6eyJmaXQiOiJjb3ZlciIsIndpZHRoIjoxOTIwLCJoZWlnaHQiOjEwODB9fX0=",
+      "image": "https://images.holibob.tech/eyJrZXkiOiJwcm9kdWN0SW1hZ2VzL2IwYWUxNTAwLWZjOTMtMTFlYi04MDFmLTA2YjgxYWQ0YzU3OSIsImVkaXRzIjp7InJlc2l6ZSI6eyJmaXQiOiJjb3ZlciIsIndpZHRoIjoxOTIwLCJoZWlnaHQiOjEwODB9fX0=",
       "neighborhood": "Bay Area",
       "distance": "28.5 mi",
       "price": "$9",
