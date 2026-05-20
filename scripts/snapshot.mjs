@@ -45,9 +45,9 @@ const COVERS = [
 let coverSeq = 0
 const nextCover = () => COVERS[coverSeq++ % COVERS.length]
 
-/** Great-circle distance from Palo Alto, formatted as "X.X mi". */
-function miles(lat, lng) {
-  if (lat == null || lng == null || Number.isNaN(lat) || Number.isNaN(lng)) return ''
+/** Great-circle distance from Palo Alto in miles (Infinity if no coords). */
+function milesNum(lat, lng) {
+  if (lat == null || lng == null || Number.isNaN(lat) || Number.isNaN(lng)) return Infinity
   const R = 3958.8
   const toRad = (d) => (d * Math.PI) / 180
   const dLat = toRad(lat - PA.lat)
@@ -55,7 +55,13 @@ function miles(lat, lng) {
   const a =
     Math.sin(dLat / 2) ** 2 +
     Math.cos(toRad(PA.lat)) * Math.cos(toRad(lat)) * Math.sin(dLng / 2) ** 2
-  return `${(2 * R * Math.asin(Math.sqrt(a))).toFixed(1)} mi`
+  return 2 * R * Math.asin(Math.sqrt(a))
+}
+
+/** Distance from Palo Alto formatted as "X.X mi" (empty string if unknown). */
+function miles(lat, lng) {
+  const d = milesNum(lat, lng)
+  return Number.isFinite(d) ? `${d.toFixed(1)} mi` : ''
 }
 
 const stripHtml = (s = '') =>
@@ -151,10 +157,13 @@ async function fromYelp() {
 async function fromGooglePlaces() {
   const key = process.env.GOOGLE_PLACES_API_KEY
   if (!key) return skip('Google Places', 'GOOGLE_PLACES_API_KEY')
+  // Regional queries — span the wider Bay Area, not just Palo Alto city.
   const queries = [
-    "children's museum near Palo Alto, CA",
-    'family-friendly park in Palo Alto, CA',
-    'kid activities near Palo Alto, CA',
+    "children's museum San Francisco Bay Area",
+    'aquarium near Palo Alto, California',
+    'kid-friendly attraction on the SF Peninsula',
+    'family amusement park near San Jose, CA',
+    'science museum San Francisco Bay Area',
   ]
   const seen = new Set()
   const places = []
@@ -169,7 +178,18 @@ async function fromGooglePlaces() {
           'places.priceLevel,places.formattedAddress,places.location,' +
           'places.types,places.editorialSummary',
       },
-      body: JSON.stringify({ textQuery, maxResultCount: 6 }),
+      body: JSON.stringify({
+        textQuery,
+        maxResultCount: 6,
+        // Bias to a ~50 km circle around Palo Alto so results cover the
+        // wider Bay Area (SF, San Jose, the Peninsula), not just the city.
+        locationBias: {
+          circle: {
+            center: { latitude: PA.lat, longitude: PA.lng },
+            radius: 50000,
+          },
+        },
+      }),
     })
     if (!res.ok) throw new Error(`HTTP ${res.status} — ${(await res.text()).slice(0, 160)}`)
     const { places: got = [] } = await res.json()
@@ -180,7 +200,14 @@ async function fromGooglePlaces() {
       }
     }
   }
-  return places.slice(0, 7).map((p) => {
+  // Keep results within the greater Bay Area, nearest first.
+  const MAX_MI = 45
+  return places
+    .map((p) => ({ p, mi: milesNum(p.location?.latitude, p.location?.longitude) }))
+    .filter((x) => x.mi <= MAX_MI)
+    .sort((a, b) => a.mi - b.mi)
+    .slice(0, 8)
+    .map(({ p }) => {
     const types = p.types || []
     const nice = uniq(types.map((t) => TYPE_NICE[t]))
     const city = (p.formattedAddress || '').split(', ')[1] || 'Palo Alto'
