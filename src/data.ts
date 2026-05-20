@@ -189,31 +189,70 @@ export function getItem(id: string): FeedItem | undefined {
 }
 
 // ---- Lightweight plan generator -------------------------------------------
-// Given a feed item, slot it into a small vertical-specific itinerary.
-// Supporting stops reference real Palo Alto spots.
+// Slots a feed item into a small vertical-specific itinerary. Each vertical
+// has multiple "variants" (moods) so a plan can be re-rolled — see generatePlan.
+
+interface PlanVariant {
+  vibe: string
+  before: PlanStop[]
+  after: PlanStop[]
+}
 
 const PLAN_TEMPLATE: Record<
   Vertical,
-  { title: (i: FeedItem) => string; when: string; before: PlanStop[]; after: PlanStop[]; anchorTime: string }
+  {
+    title: (i: FeedItem) => string
+    when: string
+    anchorTime: string
+    anchorTravel: string
+    variants: PlanVariant[]
+  }
 > = {
   dining: {
     title: (i) => `${i.neighborhood} 约会夜`,
     when: '本周五 18:00',
     anchorTime: '19:00',
-    before: [
+    anchorTravel: '🚶 6 分钟',
+    variants: [
       {
-        time: '18:00',
-        emoji: '🌇',
-        title: 'University Ave 散步集合',
-        desc: '沿 University Ave 逛逛橱窗、看看落日,慢慢热场。',
+        vibe: '🌇 浪漫慢节奏',
+        before: [
+          {
+            time: '18:00',
+            emoji: '🚶',
+            title: 'University Ave 散步',
+            desc: '沿街逛逛橱窗、看看落日,把约会的节奏慢下来。',
+          },
+        ],
+        after: [
+          {
+            time: '21:00',
+            emoji: '🍨',
+            title: '餐后甜点',
+            desc: '走几步去吃个意式冰淇淋,边走边聊。',
+            travel: '🚶 5 分钟',
+          },
+        ],
       },
-    ],
-    after: [
       {
-        time: '21:00',
-        emoji: '🍨',
-        title: '餐后甜点',
-        desc: '走到 University Ave 上的意式冰淇淋店,边走边聊。',
+        vibe: '🍸 微醺夜生活',
+        before: [
+          {
+            time: '18:30',
+            emoji: '🍸',
+            title: '餐前小酌',
+            desc: '先到附近的鸡尾酒吧喝一杯,热热场。',
+          },
+        ],
+        after: [
+          {
+            time: '21:30',
+            emoji: '🎶',
+            title: '现场音乐',
+            desc: '转场去 University Ave 的 live house 收尾。',
+            travel: '🚶 8 分钟',
+          },
+        ],
       },
     ],
   },
@@ -221,20 +260,47 @@ const PLAN_TEMPLATE: Record<
     title: (i) => `周末 · ${i.title}`,
     when: '本周六 09:30',
     anchorTime: '10:30',
-    before: [
+    anchorTravel: '🚗 15 分钟',
+    variants: [
       {
-        time: '09:30',
-        emoji: '☕️',
-        title: '晨间咖啡',
-        desc: 'Philz Coffee · 先来一杯本地人最爱的手冲,顺路取上装备。',
+        vibe: '☀️ 户外松弛日',
+        before: [
+          {
+            time: '09:30',
+            emoji: '☕️',
+            title: '晨间咖啡',
+            desc: 'Philz Coffee 来一杯本地人最爱的手冲,慢慢醒神。',
+          },
+        ],
+        after: [
+          {
+            time: '13:00',
+            emoji: '🥗',
+            title: '收尾午餐',
+            desc: 'California Ave 找家有户外座位的馆子收尾。',
+            travel: '🚗 12 分钟',
+          },
+        ],
       },
-    ],
-    after: [
       {
-        time: '12:30',
-        emoji: '🥗',
-        title: '收尾午餐',
-        desc: 'California Ave · 找家有户外座位的馆子收尾。',
+        vibe: '🎟️ 文化探索日',
+        before: [
+          {
+            time: '09:45',
+            emoji: '🛍️',
+            title: '逛逛市集',
+            desc: '先去加州大道的周末市集淘点小东西。',
+          },
+        ],
+        after: [
+          {
+            time: '13:00',
+            emoji: '🍦',
+            title: '甜点歇脚',
+            desc: '活动结束顺路吃个冰淇淋,歇歇脚。',
+            travel: '🚶 10 分钟',
+          },
+        ],
       },
     ],
   },
@@ -242,31 +308,67 @@ const PLAN_TEMPLATE: Record<
     title: (i) => `家庭日 · ${i.title}`,
     when: '本周六 10:00',
     anchorTime: '10:00',
-    before: [],
-    after: [
+    anchorTravel: '',
+    variants: [
       {
-        time: '12:00',
-        emoji: '🥞',
-        title: '家庭午餐',
-        desc: 'Town & Country Village · 有儿童餐和高脚椅,孩子友好。',
+        vibe: '🧺 轻松遛娃日',
+        before: [],
+        after: [
+          {
+            time: '12:00',
+            emoji: '🥞',
+            title: '家庭午餐',
+            desc: 'Town & Country Village,有儿童餐和高脚椅。',
+            travel: '🚗 10 分钟',
+          },
+          {
+            time: '14:00',
+            emoji: '🛝',
+            title: '公园放电',
+            desc: '去 Magical Bridge 游乐场让孩子跑一跑。',
+            travel: '🚗 8 分钟',
+          },
+        ],
       },
       {
-        time: '14:00',
-        emoji: '🛝',
-        title: '公园放电',
-        desc: 'Mitchell Park · 饭后去 Magical Bridge 游乐场跑一跑。',
+        vibe: '🍓 田园体验日',
+        before: [],
+        after: [
+          {
+            time: '12:30',
+            emoji: '🧺',
+            title: '户外野餐',
+            desc: '就近铺开野餐垫,吃顿轻松的户外午饭。',
+            travel: '🚶 5 分钟',
+          },
+          {
+            time: '14:30',
+            emoji: '🍦',
+            title: '冰淇淋时间',
+            desc: '回程路上来个冰淇淋,给今天画上句号。',
+            travel: '🚗 12 分钟',
+          },
+        ],
       },
     ],
   },
 }
 
-export function generatePlan(item: FeedItem): Plan {
+/** Number of distinct plan variants (moods) available for an item. */
+export function planVariantCount(item: FeedItem): number {
+  return PLAN_TEMPLATE[item.vertical].variants.length
+}
+
+export function generatePlan(item: FeedItem, variant = 0): Plan {
   const t = PLAN_TEMPLATE[item.vertical]
+  const v = t.variants[((variant % t.variants.length) + t.variants.length) % t.variants.length]
   const anchor: PlanStop = {
     time: t.anchorTime,
     emoji: item.emoji,
     title: item.title,
     desc: item.blurb,
+    travel: t.anchorTravel || undefined,
+    image: item.image,
     anchor: true,
   }
   return {
@@ -274,9 +376,10 @@ export function generatePlan(item: FeedItem): Plan {
     vertical: item.vertical,
     title: t.title(item),
     when: t.when,
+    vibe: v.vibe,
     basedOnId: item.id,
     basedOnTitle: item.title,
-    stops: [...t.before, anchor, ...t.after],
+    stops: [...v.before, anchor, ...v.after],
     createdAt: Date.now(),
   }
 }

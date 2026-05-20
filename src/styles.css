@@ -239,32 +239,39 @@ h3 {
   padding: 16px 0 10px;
 }
 
-/* ---- Feed card ---- */
+/* ---- Feed card (data-rich decision card) ---- */
 .card {
   background: var(--card);
   border-radius: var(--radius);
-  overflow: hidden;
   box-shadow: var(--shadow);
+  overflow: hidden;
   transition: box-shadow 0.25s;
 }
 .card.dwelled {
-  box-shadow: 0 0 0 2px rgba(240, 53, 63, 0.22), var(--shadow);
+  box-shadow: 0 0 0 2px rgba(240, 53, 63, 0.28),
+    0 10px 26px rgba(240, 53, 63, 0.14);
 }
-.card-cover {
-  height: 132px;
+
+.card-top {
+  display: flex;
+  gap: 12px;
+  padding: 12px 12px 10px;
+  cursor: pointer;
+}
+.card-thumb {
+  width: 96px;
+  height: 96px;
+  border-radius: 14px;
+  flex: none;
   position: relative;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  overflow: hidden;
 }
-.card-emoji {
-  font-size: 56px;
-  filter: drop-shadow(0 5px 9px rgba(0, 0, 0, 0.28));
-}
-.card-emoji.big {
-  font-size: 76px;
+.card-thumb-emoji {
+  font-size: 42px;
+  filter: drop-shadow(0 4px 7px rgba(0, 0, 0, 0.26));
 }
 .card-photo,
 .detail-photo {
@@ -273,6 +280,160 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+.card-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.card-kindrow {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.card-kindtag {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--brand);
+  background: #fdecec;
+  padding: 2px 7px;
+  border-radius: 6px;
+}
+.card-dist {
+  font-size: 10.5px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.card-name {
+  font-size: 16px;
+  line-height: 1.25;
+  margin-top: 5px;
+}
+.card-rate {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 5px;
+}
+.stars {
+  position: relative;
+  display: inline-block;
+  font-size: 12px;
+  color: #dcdce1;
+  letter-spacing: 1.5px;
+}
+.stars-on {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: #f5a623;
+}
+.card-rate-num {
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #e8920a;
+}
+.card-rate-cnt {
+  font-size: 11px;
+  color: var(--muted);
+}
+.card-datechip {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--brand);
+}
+.card-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 5px;
+}
+.card-drive {
+  color: #3c3f47;
+  font-weight: 600;
+}
+
+.card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 0 12px 10px;
+}
+.cbadge {
+  font-size: 11px;
+  font-weight: 700;
+  color: #44474f;
+  background: var(--bg);
+  padding: 5px 9px;
+  border-radius: 8px;
+}
+
+.card-reason {
+  margin: 0 12px 10px;
+  padding: 9px 11px;
+  font-size: 11.5px;
+  color: #8a3b3b;
+  background: linear-gradient(100deg, #fff3f3, #ffeae4);
+  border: 1px dashed #f3b9b9;
+  border-radius: 11px;
+  animation: intentIn 0.35s ease;
+}
+.card-reason strong {
+  font-weight: 800;
+}
+
+.card-foot {
+  display: flex;
+  gap: 9px;
+  padding: 0 12px 12px;
+}
+.card-plan {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+}
+.card-plan.hot {
+  background: var(--brand);
+  color: #fff;
+  box-shadow: 0 5px 14px rgba(240, 53, 63, 0.34);
+}
+.card-save {
+  width: 46px;
+  flex: none;
+  border-radius: 12px;
+  background: var(--bg);
+  color: #9a9ca6;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-save.on {
+  color: var(--brand);
+  background: #fdecec;
+}
+
+@keyframes intentIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+}
+
+/* shared with DetailSheet */
+.card-emoji {
+  font-size: 56px;
+  filter: drop-shadow(0 5px 9px rgba(0, 0, 0, 0.28));
+}
+.card-emoji.big {
+  font-size: 76px;
 }
 .card-kind {
   position: absolute;
@@ -285,53 +446,17 @@ h3 {
   padding: 3px 8px;
   border-radius: 8px;
 }
-.card-distance {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  background: rgba(0, 0, 0, 0.34);
-  color: #fff;
-  font-size: 10.5px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 8px;
-}
-.card-save {
-  position: absolute;
-  top: 9px;
-  right: 9px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.94);
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #9a9ca6;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
-}
-.card-save.on {
-  color: var(--brand);
-}
-.card-body {
-  padding: 12px 14px 14px;
-  cursor: pointer;
-}
 .card-title-row {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   gap: 8px;
 }
-.card-title-row h3 {
-  font-size: 16px;
-}
 .card-title-row h2 {
   font-size: 21px;
 }
 .card-rating {
-  color: #f5a623;
+  color: #e8920a;
   font-size: 12.5px;
   font-weight: 700;
   white-space: nowrap;
@@ -340,16 +465,6 @@ h3 {
   font-size: 11.5px;
   color: var(--muted);
   margin-top: 4px;
-}
-.card-blurb {
-  font-size: 13px;
-  line-height: 1.55;
-  color: #3c3f47;
-  margin-top: 8px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
 .card-tags {
   display: flex;
@@ -364,49 +479,6 @@ h3 {
   padding: 3px 8px;
   border-radius: 7px;
   font-weight: 600;
-}
-
-/* ---- Intent trigger banner ---- */
-.intent {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 11px 14px;
-  background: linear-gradient(100deg, #fff3f3, #ffeae4);
-  border-top: 1px dashed #f3b9b9;
-  animation: intentIn 0.35s ease;
-}
-@keyframes intentIn {
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  to {
-    opacity: 1;
-  }
-}
-.intent-text {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  flex: 1;
-}
-.intent-text strong {
-  font-size: 12.5px;
-}
-.intent-text span {
-  font-size: 11px;
-  color: var(--muted);
-}
-.intent-btn {
-  background: var(--brand);
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 10px 13px;
-  border-radius: 12px;
-  white-space: nowrap;
-  box-shadow: 0 4px 11px rgba(240, 53, 63, 0.34);
 }
 
 /* ---- Bottom sheets ---- */
@@ -573,10 +645,24 @@ h3 {
   font-size: 20px;
   margin-top: 5px;
 }
-.plan-when {
-  font-size: 12.5px;
+.plan-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 9px;
+}
+.plan-vibe {
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--brand);
+  background: #fdecec;
+  padding: 4px 10px;
+  border-radius: 9px;
+}
+.plan-facts {
+  font-size: 11.5px;
   color: var(--muted);
-  margin-top: 6px;
 }
 .plan-repeat {
   margin-top: 9px;
@@ -591,16 +677,31 @@ h3 {
 
 /* ---- Plan timeline ---- */
 .timeline {
-  padding: 16px 18px 4px;
+  padding: 14px 18px 6px;
 }
 .tstop {
   display: flex;
   gap: 12px;
+  animation: stopIn 0.4s ease both;
 }
-.tstop-rail {
+.tconnector {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  gap: 12px;
+  animation: stopIn 0.4s ease both;
+}
+@keyframes stopIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+.tstop-rail,
+.tconnector-rail {
+  width: 38px;
+  flex: none;
+  display: flex;
+  justify-content: center;
 }
 .tstop-dot {
   width: 38px;
@@ -612,25 +713,39 @@ h3 {
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  flex: none;
 }
 .tstop.anchor .tstop-dot {
   border-color: var(--brand);
   background: #fdecec;
+  box-shadow: 0 0 0 4px rgba(240, 53, 63, 0.1);
 }
-.tstop-line {
+.tconnector-line {
   width: 2px;
-  flex: 1;
-  background: var(--line);
-  margin: 3px 0;
+  height: 30px;
+  background: linear-gradient(var(--line), var(--line)) center / 2px 6px
+    repeat-y;
+}
+.tconnector-chip {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--muted);
+  background: var(--bg);
+  padding: 4px 9px;
+  border-radius: 7px;
 }
 .tstop-body {
-  padding-bottom: 18px;
   flex: 1;
+  min-width: 0;
+}
+.tstop.anchor .tstop-body {
+  background: #fff6f6;
+  border: 1px solid #fbe0e0;
+  border-radius: 12px;
+  padding: 9px 11px 11px;
 }
 .tstop-time {
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--brand);
 }
 .tstop-title {
@@ -654,6 +769,13 @@ h3 {
   color: var(--muted);
   margin-top: 3px;
   line-height: 1.5;
+}
+.tstop-photo {
+  width: 100%;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 9px;
 }
 
 .plan-realworld {

@@ -21,6 +21,10 @@ export interface FeedItem {
   distance: string
   /** Star rating; omitted for sources that don't provide one (e.g. events). */
   rating?: number
+  /** Number of reviews behind the rating, when available. */
+  reviews?: number
+  /** Event date (YYYY-MM-DD) for time-bound items like concerts. */
+  date?: string
   price: string
   blurb: string
   tags: string[]
@@ -34,6 +38,10 @@ export interface PlanStop {
   emoji: string
   title: string
   desc: string
+  /** How you get to this stop from the previous one, e.g. "🚶 6 分钟". */
+  travel?: string
+  /** Real photo, set on the anchor stop (the feed item the plan is built on). */
+  image?: string
   /** True when this stop is the feed item the plan was generated from. */
   anchor?: boolean
 }
@@ -44,6 +52,8 @@ export interface Plan {
   vertical: Vertical
   title: string
   when: string
+  /** Short mood label for this itinerary variant, e.g. "🌇 浪漫慢节奏". */
+  vibe: string
   basedOnId: string
   basedOnTitle: string
   stops: PlanStop[]

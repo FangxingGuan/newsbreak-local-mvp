@@ -144,6 +144,7 @@ async function fromYelp() {
       neighborhood: b.location?.city || 'Palo Alto',
       distance: miles(b.coordinates?.latitude, b.coordinates?.longitude),
       rating: typeof b.rating === 'number' ? b.rating : undefined,
+      reviews: typeof b.review_count === 'number' ? b.review_count : undefined,
       price: b.price || '',
       blurb: `${titles.join(' · ') || '本地热门'} · Yelp ${b.rating ?? '–'}★ · ${b.review_count ?? 0} 条评价`,
       tags: titles.slice(0, 3),
@@ -232,6 +233,7 @@ async function fromGooglePlaces() {
       neighborhood: city,
       distance: miles(p.location?.latitude, p.location?.longitude),
       rating: typeof p.rating === 'number' ? p.rating : undefined,
+      reviews: typeof p.userRatingCount === 'number' ? p.userRatingCount : undefined,
       price: GP_PRICE[p.priceLevel] || '',
       blurb:
         p.editorialSummary?.text ||
@@ -281,7 +283,7 @@ async function fromTicketmaster() {
       vertical: 'weekend',
       kind: '活动',
       title: e.name,
-      category: uniq([seg, date]).join(' · ') || 'Event',
+      category: seg || 'Event',
       emoji: emojiSegment(seg),
       cover: nextCover(),
       image: pickImage(e.images || []) || undefined,
@@ -291,6 +293,7 @@ async function fromTicketmaster() {
         Number(venue?.location?.longitude),
       ),
       rating: undefined,
+      date: date || undefined,
       price: pr ? `$${Math.round(pr.min)}+` : '门票',
       blurb: uniq([genre || seg, venue?.name, date && `${date} 开演`]).join(' · '),
       tags: uniq([seg, genre, venue?.city?.name]).slice(0, 3),

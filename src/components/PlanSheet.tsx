@@ -1,9 +1,20 @@
-import { useEffect, useRef, useState } from 'react'
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
 import { useStore } from '../store'
-import { generatePlan, getItem } from '../data'
-import type { Plan } from '../types'
+import { generatePlan, getItem, planVariantCount } from '../data'
+import type { PlanStop } from '../types'
 
 const STEPS = ['读取你的浏览与收藏偏好…', '匹配附近相关地点…', '编排一条轻量行程…']
+
+/** Rough total span of an itinerary, first stop to last. */
+function spanHours(stops: PlanStop[]): string {
+  const toMin = (t: string) => {
+    const [h, m] = t.split(':').map(Number)
+    return h * 60 + m
+  }
+  const diff = toMin(stops[stops.length - 1].time) - toMin(stops[0].time)
+  const h = Math.round(diff / 30) / 2
+  return h > 0 ? `约 ${h} 小时` : ''
+}
 
 export function PlanSheet() {
   const { state, dispatch } = useStore()
@@ -11,15 +22,19 @@ export function PlanSheet() {
 
   const [phase, setPhase] = useState<'loading' | 'ready'>('loading')
   const [stepIdx, setStepIdx] = useState(0)
+  const [variant, setVariant] = useState(0)
   const [saved, setSaved] = useState(false)
   const [didMap, setDidMap] = useState(false)
   const [didCal, setDidCal] = useState(false)
-  const planRef = useRef<Plan | null>(null)
-  if (item && !planRef.current) planRef.current = generatePlan(item)
 
-  // True if the user has already planned in this vertical before → repeat planning.
+  // True if the user has already planned in this vertical → repeat planning.
   const isRepeat = useRef(
     item ? state.plans.some((p) => p.vertical === item.vertical) : false,
+  )
+
+  const plan = useMemo(
+    () => (item ? generatePlan(item, variant) : null),
+    [item, variant],
   )
 
   useEffect(() => {
@@ -44,9 +59,16 @@ export function PlanSheet() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (!item || !planRef.current) return null
-  const plan = planRef.current
+  if (!item || !plan) return null
   const close = () => dispatch({ type: 'CLOSE_PLANNING' })
+  const canReroll = planVariantCount(item) > 1
+
+  const reroll = () => {
+    setVariant((v) => v + 1)
+    setDidMap(false)
+    setDidCal(false)
+    dispatch({ type: 'TOAST', message: '✨ 换了一种玩法,你看看?' })
+  }
 
   return (
     <div className="sheet-wrap" onClick={close}>
@@ -56,7 +78,7 @@ export function PlanSheet() {
         {phase === 'loading' ? (
           <div className="plan-loading">
             <div className="plan-spinner" />
-            <h3>✨ 正在为你规划</h3>
+            <h3>✨ 正在为「{item.title}」规划</h3>
             <ul>
               {STEPS.map((s, i) => (
                 <li key={s} className={i <= stepIdx ? 'done' : ''}>
@@ -70,29 +92,61 @@ export function PlanSheet() {
             <div className="plan-head">
               <span className="loop-pill">第 3 步 · 轻量规划</span>
               <h2>{plan.title}</h2>
-              <div className="plan-when">🗓️ {plan.when} · 共 {plan.stops.length} 站</div>
+              <div className="plan-meta">
+                <span className="plan-vibe">{plan.vibe}</span>
+                <span className="plan-facts">
+                  🗓️ {plan.when} · {spanHours(plan.stops)} · {plan.stops.length} 站
+                </span>
+              </div>
               {isRepeat.current && (
                 <div className="plan-repeat">↻ 你常规划这一类 · 已按偏好微调</div>
               )}
             </div>
 
-            <div className="timeline">
-              {plan.stops.map((s, i) => (
-                <div className={`tstop ${s.anchor ? 'anchor' : ''}`} key={i}>
-                  <div className="tstop-rail">
-                    <span className="tstop-dot">{s.emoji}</span>
-                    {i < plan.stops.length - 1 && <span className="tstop-line" />}
-                  </div>
-                  <div className="tstop-body">
-                    <div className="tstop-time">{s.time}</div>
-                    <div className="tstop-title">
-                      {s.title}
-                      {s.anchor && <span className="anchor-tag">来自 Feed</span>}
+            <div className="timeline" key={variant}>
+              {(() => {
+                let delay = 0
+                return plan.stops.map((s, i) => {
+                  const conn = s.travel ? (
+                    <div
+                      className="tconnector"
+                      style={{ animationDelay: `${delay++ * 0.1}s` }}
+                    >
+                      <span className="tconnector-rail">
+                        <span className="tconnector-line" />
+                      </span>
+                      <span className="tconnector-chip">{s.travel}</span>
                     </div>
-                    <div className="tstop-desc">{s.desc}</div>
-                  </div>
-                </div>
-              ))}
+                  ) : null
+                  const stop = (
+                    <div
+                      className={`tstop ${s.anchor ? 'anchor' : ''}`}
+                      style={{ animationDelay: `${delay++ * 0.1}s` }}
+                    >
+                      <div className="tstop-rail">
+                        <span className="tstop-dot">{s.emoji}</span>
+                      </div>
+                      <div className="tstop-body">
+                        <div className="tstop-time">{s.time}</div>
+                        <div className="tstop-title">
+                          {s.title}
+                          {s.anchor && <span className="anchor-tag">来自 Feed</span>}
+                        </div>
+                        <div className="tstop-desc">{s.desc}</div>
+                        {s.anchor && s.image && (
+                          <img className="tstop-photo" src={s.image} alt="" />
+                        )}
+                      </div>
+                    </div>
+                  )
+                  return (
+                    <Fragment key={i}>
+                      {conn}
+                      {stop}
+                    </Fragment>
+                  )
+                })
+              })()}
             </div>
 
             <div className="plan-realworld">
@@ -125,9 +179,11 @@ export function PlanSheet() {
             </div>
 
             <div className="sheet-actions">
-              <button className="btn-ghost" onClick={close}>
-                关闭
-              </button>
+              {canReroll && (
+                <button className="btn-ghost" onClick={reroll}>
+                  ↻ 换个玩法
+                </button>
+              )}
               <button
                 className="btn-primary"
                 disabled={saved}
