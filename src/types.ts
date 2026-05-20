@@ -79,3 +79,25 @@ export interface Signal {
   itemTitle?: string
   ts: number
 }
+
+/** A local-news article — NewsBreak-style feed texture mixed among the cards. */
+export interface NewsItem {
+  type: 'news'
+  id: string
+  vertical: Vertical
+  category: string
+  headline: string
+  source: string
+  publishedAgo: string
+  emoji: string
+  cover: string
+  image?: string
+  summary: string
+  comments: number
+  reactions: number
+  /** Intent hook surfaced after dwell — ties news reading to the decision loop. */
+  hook: string
+}
+
+/** Anything that can appear in the feed: a decision card or a news article. */
+export type FeedEntry = FeedItem | NewsItem

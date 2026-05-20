@@ -3,7 +3,7 @@
 // Localized for a user in Palo Alto, CA: real neighborhoods & landmarks,
 // plausible (fictional) venue names.
 
-import type { FeedItem, Plan, PlanStop, Vertical } from './types'
+import type { FeedEntry, FeedItem, NewsItem, Plan, PlanStop, Vertical } from './types'
 import snapshot from './feed.generated.json'
 
 /** The user's current location, shown in the feed app bar. */
@@ -186,6 +186,166 @@ export const SNAPSHOT_AT: string | null = snapshot.generatedAt
 
 export function getItem(id: string): FeedItem | undefined {
   return FEED.find((i) => i.id === id)
+}
+
+// ---- Local news --------------------------------------------------------------
+// Simulated NewsBreak-style local news. (None of the available APIs is a news
+// source, so this content is mock — see the note in CLAUDE.md.) News is woven
+// into the feed: reading it is feed engagement, and a dwell surfaces an intent
+// hook — exactly the PRD's "news feed → decision engine" thesis.
+
+const NEWS_COVERS = [
+  'linear-gradient(135deg,#3a6073,#16222a)',
+  'linear-gradient(135deg,#5614b0,#dbd65c)',
+  'linear-gradient(135deg,#1f4037,#99f2c8)',
+  'linear-gradient(135deg,#ee9ca7,#ffdde1)',
+  'linear-gradient(135deg,#42275a,#734b6d)',
+]
+
+export const NEWS: NewsItem[] = [
+  // ---- dining ----
+  {
+    type: 'news',
+    id: 'n-d1',
+    vertical: 'dining',
+    category: '本地 · 美食',
+    headline: 'University Ave 新开一家手工意面馆,本周五起试营业',
+    source: 'Palo Alto Local',
+    publishedAgo: '2 小时前',
+    emoji: '🍝',
+    cover: NEWS_COVERS[0],
+    summary: '主厨来自旧金山一家米其林餐厅,主打现做意面与自然酒,试营业期间甜点免费。',
+    comments: 47,
+    reactions: 213,
+    hook: '这家就在你 0.4 mi 外 · 周末想去看看吗?',
+  },
+  {
+    type: 'news',
+    id: 'n-d2',
+    vertical: 'dining',
+    category: '美食榜单',
+    headline: '读者票选:Palo Alto 最适合约会的 10 家餐厅出炉',
+    source: 'Peninsula Press',
+    publishedAgo: '昨天',
+    emoji: '🏆',
+    cover: NEWS_COVERS[1],
+    summary: '投票显示,庭院座位与现场音乐是最受欢迎的约会加分项,意餐与红酒吧上榜最多。',
+    comments: 132,
+    reactions: 540,
+    hook: '榜单里有 3 家就在你 1 mi 内',
+  },
+  {
+    type: 'news',
+    id: 'n-d3',
+    vertical: 'dining',
+    category: '本地',
+    headline: 'California Ave 周末美食市集本月延长至晚 9 点',
+    source: 'The Daily Post',
+    publishedAgo: '5 小时前',
+    emoji: '🧆',
+    cover: NEWS_COVERS[2],
+    summary: '夏季限定,新增 12 家餐车与现场乐队,主办方建议错峰前往。',
+    comments: 28,
+    reactions: 96,
+    hook: '周末顺路就能去逛一圈',
+  },
+  // ---- weekend ----
+  {
+    type: 'news',
+    id: 'n-w1',
+    vertical: 'weekend',
+    category: '天气',
+    headline: '本周末湾区持续晴朗,气温 22°C,适合户外出行',
+    source: 'Bay Area Now',
+    publishedAgo: '1 小时前',
+    emoji: '☀️',
+    cover: NEWS_COVERS[3],
+    summary: '气象部门预计周六周日连续晴天,紫外线偏强,户外活动注意防晒补水。',
+    comments: 19,
+    reactions: 88,
+    hook: '天气这么好 · 要不要规划个户外周末?',
+  },
+  {
+    type: 'news',
+    id: 'n-w2',
+    vertical: 'weekend',
+    category: '社区活动',
+    headline: '斯坦福露天电影季公布片单,6 月每周五开场',
+    source: 'Palo Alto Local',
+    publishedAgo: '昨天',
+    emoji: '🎬',
+    cover: NEWS_COVERS[4],
+    summary: '今年以经典老片为主,草坪免费入场,主办方建议自带毯子提前到场占位。',
+    comments: 64,
+    reactions: 274,
+    hook: '本周五就有一场 · 离你 1.8 mi',
+  },
+  {
+    type: 'news',
+    id: 'n-w3',
+    vertical: 'weekend',
+    category: '周末指南',
+    headline: '湾区周末好去处:本地编辑整理的 6 月户外清单',
+    source: 'Peninsula Press',
+    publishedAgo: '6 小时前',
+    emoji: '🗺️',
+    cover: NEWS_COVERS[0],
+    summary: '从皮划艇到农夫市集,20 个不踩雷的周末选择,大多在 30 分钟车程内。',
+    comments: 41,
+    reactions: 167,
+    hook: '清单里好几个就在你附近',
+  },
+  // ---- family ----
+  {
+    type: 'news',
+    id: 'n-f1',
+    vertical: 'family',
+    category: '本地',
+    headline: '加州樱桃采摘季开始,本地农场迎来周末客流高峰',
+    source: 'The Daily Post',
+    publishedAgo: '4 小时前',
+    emoji: '🍒',
+    cover: NEWS_COVERS[1],
+    summary: '今年雨水充足,果农预计樱桃个头更大、甜度更高,采摘大约持续到 6 月中旬。',
+    comments: 53,
+    reactions: 198,
+    hook: 'Webb Ranch 就在 3.9 mi · 很适合带娃',
+  },
+  {
+    type: 'news',
+    id: 'n-f2',
+    vertical: 'family',
+    category: '社区',
+    headline: 'Palo Alto 少儿博物馆与动物园完成翻新,本周重新开放',
+    source: 'Palo Alto Local',
+    publishedAgo: '昨天',
+    emoji: '🦉',
+    cover: NEWS_COVERS[2],
+    summary: '新增互动科学展区与低龄幼儿专区,会员首周免费入场。',
+    comments: 88,
+    reactions: 421,
+    hook: '离你 0.2 mi · 周末家庭日的首选',
+  },
+  {
+    type: 'news',
+    id: 'n-f3',
+    vertical: 'family',
+    category: '教育',
+    headline: '新学年学区日历公布,暑期亲子活动报名同步开放',
+    source: 'Peninsula Press',
+    publishedAgo: '2 天前',
+    emoji: '📅',
+    cover: NEWS_COVERS[3],
+    summary: '多个社区中心推出夏令营与亲子工作坊,热门班次名额有限,建议尽早报名。',
+    comments: 76,
+    reactions: 245,
+    hook: '趁早把家庭活动排进日历',
+  },
+]
+
+/** Type guard: distinguishes a news article from a decision card. */
+export function isNews(entry: FeedEntry): entry is NewsItem {
+  return 'headline' in entry
 }
 
 // ---- Lightweight plan generator -------------------------------------------

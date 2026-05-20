@@ -31,6 +31,10 @@ The feed can run on **real API data** instead of sample data:
   there is no backend and no key exposure. Re-run `npm run snapshot` and commit
   to refresh.
 
+The local **news** woven into the feed (`NEWS` in `data.ts`) is mock content —
+none of the available APIs is a news source. It simulates NewsBreak's feed
+style; swap in a real news API later if one becomes available.
+
 ### Code layout (`src/`)
 
 - `types.ts` — domain types (FeedItem, Plan, Signal, …)

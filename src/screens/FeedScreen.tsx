@@ -1,12 +1,29 @@
 import { useRef } from 'react'
 import { useStore } from '../store'
-import { FEED, USER_LOCATION, USING_REAL_DATA, VERTICALS } from '../data'
+import { FEED, NEWS, USER_LOCATION, USING_REAL_DATA, VERTICALS, isNews } from '../data'
 import { FeedCard } from '../components/FeedCard'
+import { NewsCard } from '../components/NewsCard'
+import type { FeedEntry } from '../types'
+
+/** Weave news articles into the decision cards — one news item per 2 cards. */
+function buildFeed(cards: FeedEntry[], news: FeedEntry[]): FeedEntry[] {
+  const out: FeedEntry[] = []
+  let n = 0
+  cards.forEach((card, i) => {
+    out.push(card)
+    if ((i + 1) % 2 === 0 && n < news.length) out.push(news[n++])
+  })
+  while (n < news.length) out.push(news[n++])
+  return out
+}
 
 export function FeedScreen() {
   const { state, dispatch } = useStore()
   const scrollRef = useRef<HTMLDivElement>(null)
-  const items = FEED.filter((i) => i.vertical === state.vertical)
+
+  const cards = FEED.filter((i) => i.vertical === state.vertical)
+  const news = NEWS.filter((n) => n.vertical === state.vertical)
+  const entries = buildFeed(cards, news)
 
   return (
     <div className="screen feed" ref={scrollRef}>
@@ -35,14 +52,18 @@ export function FeedScreen() {
       <div className="feed-hint">
         <span className={`hint-dot ${USING_REAL_DATA ? 'live' : 'sample'}`} />
         {USING_REAL_DATA
-          ? 'Yelp · Google Places · Ticketmaster · Amadeus 实时本地数据'
+          ? '本地资讯 + 实时商户数据 · 停留即触发出行规划'
           : '示例数据 · 运行 npm run snapshot 可接入真实 API'}
       </div>
 
       <div className="feed-list">
-        {items.map((item) => (
-          <FeedCard key={item.id} item={item} scrollRoot={scrollRef} />
-        ))}
+        {entries.map((entry) =>
+          isNews(entry) ? (
+            <NewsCard key={entry.id} item={entry} scrollRoot={scrollRef} />
+          ) : (
+            <FeedCard key={entry.id} item={entry} scrollRoot={scrollRef} />
+          ),
+        )}
         <div className="feed-end">— 已经到底啦 —</div>
       </div>
     </div>
