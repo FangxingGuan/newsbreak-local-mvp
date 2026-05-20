@@ -75,11 +75,22 @@ export function NewsCard({ item, scrollRoot }: Props) {
         <span>👍 {item.reactions}</span>
       </div>
 
-      {dwelled && (
-        <div className="news-hook">
-          <strong>✨ 出行意图</strong> · {item.hook}
-        </div>
-      )}
+      {dwelled &&
+        (item.linkId ? (
+          <button
+            className="news-hook news-hook-btn"
+            onClick={(e) => {
+              e.stopPropagation()
+              dispatch({ type: 'OPEN_DETAIL', id: item.linkId! })
+            }}
+          >
+            <strong>✨ 出行意图</strong> · {item.hook} →
+          </button>
+        ) : (
+          <div className="news-hook">
+            <strong>✨ 出行意图</strong> · {item.hook}
+          </div>
+        ))}
     </article>
   )
 }

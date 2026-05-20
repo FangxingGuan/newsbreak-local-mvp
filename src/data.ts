@@ -170,12 +170,42 @@ const FALLBACK_FEED: FeedItem[] = [
 const SNAPSHOT = snapshot.items as unknown as FeedItem[]
 
 /**
- * The live feed. Each vertical independently uses real snapshot data when
- * available, and falls back to the built-in sample data otherwise.
+ * Curated items sourced from articles / editorial picks rather than a category
+ * search — e.g. a place extracted from a news article, then enriched via the
+ * Yelp/Google APIs. Kept across snapshots since a re-run wouldn't rediscover it.
+ */
+const CURATED: FeedItem[] = [
+  {
+    id: 'curated-unclejohns',
+    vertical: 'family',
+    kind: '地点',
+    title: "Uncle John's Pancake House",
+    category: 'Breakfast & Brunch',
+    emoji: '🥞',
+    cover: 'linear-gradient(135deg,#f9a826,#e8112d)',
+    image: 'https://s3-media0.fl.yelpcdn.com/bphoto/gUQahdfGW9ro93D-8ggdxw/o.jpg',
+    neighborhood: 'San Jose',
+    distance: '14.8 mi',
+    rating: 4.4,
+    reviews: 1022,
+    price: '$$',
+    blurb:
+      'The Alameda 上的人气早餐馆 —— 蓬松煎饼、招牌炸鸡排和经典 brunch,分量足、上菜快,适合带娃来一顿热闹的周末早午餐。',
+    tags: ['Breakfast & Brunch', '煎饼', '亲子早午餐'],
+    intentLabel: '安排家庭日',
+  },
+]
+
+/**
+ * The live feed. Each vertical independently uses curated + real snapshot data
+ * when available, and falls back to the built-in sample data otherwise.
  */
 export const FEED: FeedItem[] = (['dining', 'weekend', 'family'] as Vertical[]).flatMap(
   (v) => {
-    const real = SNAPSHOT.filter((i) => i.vertical === v)
+    const real = [
+      ...CURATED.filter((i) => i.vertical === v),
+      ...SNAPSHOT.filter((i) => i.vertical === v),
+    ]
     return real.length ? real : FALLBACK_FEED.filter((i) => i.vertical === v)
   },
 )
@@ -296,6 +326,23 @@ export const NEWS: NewsItem[] = [
     hook: '清单里好几个就在你附近',
   },
   // ---- family ----
+  {
+    type: 'news',
+    id: 'n-f4',
+    vertical: 'family',
+    category: '美食 · 推荐',
+    headline: "San Jose 必吃煎饼店:The Alameda 上的 Uncle John's",
+    source: 'GoTo Destinations',
+    publishedAgo: '1 天前',
+    emoji: '🥞',
+    cover: NEWS_COVERS[4],
+    summary:
+      '本地美食栏目推荐:这家开在 The Alameda 的早餐馆主打蓬松煎饼与经典 brunch,出品扎实、上菜快、分量大方。',
+    comments: 39,
+    reactions: 156,
+    hook: '这家就在 San Jose · 14.8 mi · 周末带娃去尝尝',
+    linkId: 'curated-unclejohns',
+  },
   {
     type: 'news',
     id: 'n-f1',
