@@ -1,5 +1,491 @@
 {
-  "generatedAt": null,
+  "generatedAt": "2026-05-20T22:05:13.318Z",
   "location": "Palo Alto, CA",
-  "items": []
+  "items": [
+    {
+      "id": "yelp-3PAJ3Q3UYBaq_Z2qKqhV_g",
+      "vertical": "dining",
+      "kind": "地点",
+      "title": "Horsefeather",
+      "category": "New American · Cocktail Bars",
+      "emoji": "🍽️",
+      "cover": "linear-gradient(135deg,#ff7a59,#ef2d56)",
+      "image": "https://s3-media0.fl.yelpcdn.com/bphoto/mhzBeyD1Ktm2FR-hdhaxFQ/o.jpg",
+      "neighborhood": "Palo Alto",
+      "distance": "0.9 mi",
+      "rating": 4.1,
+      "price": "",
+      "blurb": "New American · Cocktail Bars · Yelp 4.1★ · 212 条评价",
+      "tags": [
+        "New American",
+        "Cocktail Bars"
+      ],
+      "intentLabel": "策划一次约会"
+    },
+    {
+      "id": "yelp-be1z3HdjBqntCpsk8ThpCQ",
+      "vertical": "dining",
+      "kind": "地点",
+      "title": "Ethel's Fancy",
+      "category": "New American",
+      "emoji": "🍽️",
+      "cover": "linear-gradient(135deg,#f9a826,#e8112d)",
+      "image": "https://s3-media0.fl.yelpcdn.com/bphoto/Eweqz8MUwOxs1104cS7SbA/o.jpg",
+      "neighborhood": "Palo Alto",
+      "distance": "1.0 mi",
+      "rating": 4.5,
+      "price": "",
+      "blurb": "New American · Yelp 4.5★ · 395 条评价",
+      "tags": [
+        "New American"
+      ],
+      "intentLabel": "策划一次约会"
+    },
+    {
+      "id": "yelp-oRsoXNgTAG8p3n-iiR7BLQ",
+      "vertical": "dining",
+      "kind": "地点",
+      "title": "Sekoya",
+      "category": "Cocktail Bars · New American",
+      "emoji": "🍸",
+      "cover": "linear-gradient(135deg,#b06ab3,#4568dc)",
+      "image": "https://s3-media0.fl.yelpcdn.com/bphoto/i2aFhLQ--NHg-toKapciKA/o.jpg",
+      "neighborhood": "Palo Alto",
+      "distance": "1.1 mi",
+      "rating": 4.3,
+      "price": "",
+      "blurb": "Cocktail Bars · New American · Wine Bars · Yelp 4.3★ · 182 条评价",
+      "tags": [
+        "Cocktail Bars",
+        "New American",
+        "Wine Bars"
+      ],
+      "intentLabel": "策划一次约会"
+    },
+    {
+      "id": "yelp-ZpCyMF0fh7duuAH26PrBEQ",
+      "vertical": "dining",
+      "kind": "地点",
+      "title": "Haven",
+      "category": "Wine Bars · Tapas/Small Plates",
+      "emoji": "🍷",
+      "cover": "linear-gradient(135deg,#2193b0,#6dd5ed)",
+      "image": "https://s3-media0.fl.yelpcdn.com/bphoto/PsvPfl3FyRjfIQvqXLraRw/o.jpg",
+      "neighborhood": "Menlo Park",
+      "distance": "1.3 mi",
+      "rating": 4.8,
+      "price": "",
+      "blurb": "Wine Bars · Tapas/Small Plates · Breakfast & Brunch · Yelp 4.8★ · 34 条评价",
+      "tags": [
+        "Wine Bars",
+        "Tapas/Small Plates",
+        "Breakfast & Brunch"
+      ],
+      "intentLabel": "策划一次约会"
+    },
+    {
+      "id": "yelp-WFRgcUGX3aNpzLvUwOz9wg",
+      "vertical": "dining",
+      "kind": "地点",
+      "title": "Meyhouse",
+      "category": "Turkish · Mediterranean",
+      "emoji": "🥙",
+      "cover": "linear-gradient(135deg,#56ab2f,#a8e063)",
+      "image": "https://s3-media0.fl.yelpcdn.com/bphoto/aJvQy_JNoV5zto5Oqo_0yw/o.jpg",
+      "neighborhood": "Palo Alto",
+      "distance": "1.0 mi",
+      "rating": 4.4,
+      "price": "$$$",
+      "blurb": "Turkish · Mediterranean · Middle Eastern · Yelp 4.4★ · 309 条评价",
+      "tags": [
+        "Turkish",
+        "Mediterranean",
+        "Middle Eastern"
+      ],
+      "intentLabel": "策划一次约会"
+    },
+    {
+      "id": "yelp-UJcIE439kxIQo4v8t_MXQQ",
+      "vertical": "dining",
+      "kind": "地点",
+      "title": "Macarena",
+      "category": "Spanish · Mediterranean",
+      "emoji": "🥘",
+      "cover": "linear-gradient(135deg,#3a1c71,#d76d77)",
+      "image": "https://s3-media0.fl.yelpcdn.com/bphoto/Skpv2fbCdwZFdrfEbvpe1w/o.jpg",
+      "neighborhood": "Palo Alto",
+      "distance": "1.1 mi",
+      "rating": 4.1,
+      "price": "$$$",
+      "blurb": "Spanish · Mediterranean · Soul Food · Yelp 4.1★ · 255 条评价",
+      "tags": [
+        "Spanish",
+        "Mediterranean",
+        "Soul Food"
+      ],
+      "intentLabel": "策划一次约会"
+    },
+    {
+      "id": "yelp-1vMgajRAI3lYwuCeGX58oQ",
+      "vertical": "dining",
+      "kind": "地点",
+      "title": "Evvia Estiatorio",
+      "category": "Greek",
+      "emoji": "🥙",
+      "cover": "linear-gradient(135deg,#f7971e,#ffd200)",
+      "image": "https://s3-media0.fl.yelpcdn.com/bphoto/yOnhCNx9B-l_rxT4nFAyhw/o.jpg",
+      "neighborhood": "Palo Alto",
+      "distance": "1.2 mi",
+      "rating": 4.3,
+      "price": "$$$",
+      "blurb": "Greek · Yelp 4.3★ · 3173 条评价",
+      "tags": [
+        "Greek"
+      ],
+      "intentLabel": "策划一次约会"
+    },
+    {
+      "id": "gp-ChIJ59OJRxq7j4ARx5SvEGmwmJg",
+      "vertical": "family",
+      "kind": "地点",
+      "title": "Palo Alto Junior Museum and Zoo",
+      "category": "Zoo",
+      "emoji": "🦁",
+      "cover": "linear-gradient(135deg,#11998e,#38ef7d)",
+      "neighborhood": "Palo Alto",
+      "distance": "0.2 mi",
+      "rating": 4.7,
+      "price": "",
+      "blurb": "Child-oriented venue with animals like birds & turtles, plus interactive educational exhibits.",
+      "tags": [
+        "Zoo",
+        "Museum"
+      ],
+      "intentLabel": "安排家庭日"
+    },
+    {
+      "id": "gp-ChIJjStv1n26j4ARWboj_Q7xOd0",
+      "vertical": "family",
+      "kind": "地点",
+      "title": "Juana Briones Park",
+      "category": "Park",
+      "emoji": "🌳",
+      "cover": "linear-gradient(135deg,#ee0979,#ff6a00)",
+      "neighborhood": "Palo Alto",
+      "distance": "2.5 mi",
+      "rating": 4.7,
+      "price": "",
+      "blurb": "Fanciful playground in a former apricot orchard with a field, basketball court & picnic tables.",
+      "tags": [
+        "Park",
+        "Attraction"
+      ],
+      "intentLabel": "安排家庭日"
+    },
+    {
+      "id": "gp-ChIJfx7_to-6j4ARHbG6lNdTsrk",
+      "vertical": "family",
+      "kind": "地点",
+      "title": "Cornelis Bol Park",
+      "category": "Park",
+      "emoji": "🌳",
+      "cover": "linear-gradient(135deg,#ff7a59,#ef2d56)",
+      "neighborhood": "Palo Alto",
+      "distance": "2.2 mi",
+      "rating": 4.7,
+      "price": "",
+      "blurb": "13.8-acre city park featuring multi-use trails, a playground & a native plant garden.",
+      "tags": [
+        "Park",
+        "Attraction"
+      ],
+      "intentLabel": "安排家庭日"
+    },
+    {
+      "id": "gp-ChIJ8SC5IWm6j4ARafLVLcgZwVI",
+      "vertical": "family",
+      "kind": "地点",
+      "title": "Mitchell Park",
+      "category": "Park",
+      "emoji": "🌳",
+      "cover": "linear-gradient(135deg,#f9a826,#e8112d)",
+      "neighborhood": "Palo Alto",
+      "distance": "2.1 mi",
+      "rating": 4.7,
+      "price": "",
+      "blurb": "Grassy park with tennis/handball courts, horseshoe pits, playgrounds, splash pad & a fenced dog run.",
+      "tags": [
+        "Park",
+        "Attraction"
+      ],
+      "intentLabel": "安排家庭日"
+    },
+    {
+      "id": "gp-ChIJs6f2tG66j4AR9lsgNj8XiSc",
+      "vertical": "family",
+      "kind": "地点",
+      "title": "Magical Bridge Playground",
+      "category": "Playground",
+      "emoji": "🛝",
+      "cover": "linear-gradient(135deg,#b06ab3,#4568dc)",
+      "neighborhood": "Palo Alto",
+      "distance": "2.2 mi",
+      "rating": 4.8,
+      "price": "",
+      "blurb": "Slides, swings & climbing frames around an artificial hill, plus a treehouse & bridge.",
+      "tags": [
+        "Playground",
+        "Attraction"
+      ],
+      "intentLabel": "安排家庭日"
+    },
+    {
+      "id": "gp-ChIJn6yiduG6j4ARBP9ci2gGMws",
+      "vertical": "family",
+      "kind": "地点",
+      "title": "Peers Park",
+      "category": "Park",
+      "emoji": "🌳",
+      "cover": "linear-gradient(135deg,#2193b0,#6dd5ed)",
+      "neighborhood": "Palo Alto",
+      "distance": "0.8 mi",
+      "rating": 4.6,
+      "price": "",
+      "blurb": "This 4.7-acre park offers age-specific play areas, a grassy lawn & courts for basketball & tennis.",
+      "tags": [
+        "Park",
+        "Attraction"
+      ],
+      "intentLabel": "安排家庭日"
+    },
+    {
+      "id": "gp-ChIJL1Si4Bq7j4ARgpybwXpd9kg",
+      "vertical": "family",
+      "kind": "地点",
+      "title": "Rinconada Cultural Park",
+      "category": "Park",
+      "emoji": "🌳",
+      "cover": "linear-gradient(135deg,#56ab2f,#a8e063)",
+      "neighborhood": "Palo Alto",
+      "distance": "0.2 mi",
+      "rating": 4.6,
+      "price": "",
+      "blurb": "City's 19-acre park with live oaks & redwoods, hosting a swimming pool, playground & sports fields.",
+      "tags": [
+        "Park",
+        "Attraction"
+      ],
+      "intentLabel": "安排家庭日"
+    },
+    {
+      "id": "tm-Z7r9jZ1A7Q7oF",
+      "vertical": "weekend",
+      "kind": "活动",
+      "title": "San Jose Giants vs. Stockton Ports",
+      "category": "Sports · 2026-05-20",
+      "emoji": "🏟️",
+      "cover": "linear-gradient(135deg,#3a1c71,#d76d77)",
+      "image": "https://s1.ticketm.net/dam/c/3c2/23f6a973-82f1-4503-ab46-e890539e13c2_106101_RETINA_PORTRAIT_16_9.jpg",
+      "neighborhood": "San Jose",
+      "distance": "15.9 mi",
+      "price": "门票",
+      "blurb": "Miscellaneous · Excite Ballpark · 2026-05-20 开演",
+      "tags": [
+        "Sports",
+        "Miscellaneous",
+        "San Jose"
+      ],
+      "intentLabel": "规划这个周末"
+    },
+    {
+      "id": "tm-Z7r9jZ1A7OkF3",
+      "vertical": "weekend",
+      "kind": "活动",
+      "title": "Hell's Kitchen (Touring)",
+      "category": "Arts & Theatre · 2026-05-20",
+      "emoji": "🎭",
+      "cover": "linear-gradient(135deg,#f7971e,#ffd200)",
+      "image": "https://s1.ticketm.net/dam/a/cc7/e506039e-ce0b-4a57-bdbc-cfa72081acc7_RETINA_PORTRAIT_16_9.jpg",
+      "neighborhood": "San Francisco",
+      "distance": "27.8 mi",
+      "price": "门票",
+      "blurb": "Arts & Theatre · Orpheum Theatre-San Francisco · 2026-05-20 开演",
+      "tags": [
+        "Arts & Theatre",
+        "San Francisco"
+      ],
+      "intentLabel": "规划这个周末"
+    },
+    {
+      "id": "tm-Z7r9jZ1A70F7d",
+      "vertical": "weekend",
+      "kind": "活动",
+      "title": "The Lunchbox",
+      "category": "Undefined · 2026-05-20",
+      "emoji": "🎟️",
+      "cover": "linear-gradient(135deg,#11998e,#38ef7d)",
+      "image": "https://s1.ticketm.net/dam/c/8cf/a6653880-7899-4f67-8067-1f95f4d158cf_124761_RETINA_PORTRAIT_16_9.jpg",
+      "neighborhood": "Berkeley",
+      "distance": "30.2 mi",
+      "price": "门票",
+      "blurb": "Undefined · Berkeley Repertory Theatre · 2026-05-20 开演",
+      "tags": [
+        "Undefined",
+        "Berkeley"
+      ],
+      "intentLabel": "规划这个周末"
+    },
+    {
+      "id": "tm-Z7r9jZ1A7x7-b",
+      "vertical": "weekend",
+      "kind": "活动",
+      "title": "Gatecreeper",
+      "category": "Music · 2026-05-20",
+      "emoji": "🎵",
+      "cover": "linear-gradient(135deg,#ee0979,#ff6a00)",
+      "image": "https://s1.ticketm.net/dam/a/bff/cc6fbd26-e821-45a6-99e2-53716d1e8bff_RETINA_PORTRAIT_16_9.jpg",
+      "neighborhood": "San Francisco",
+      "distance": "27.8 mi",
+      "price": "门票",
+      "blurb": "Other · Rickshaw Stop · 2026-05-20 开演",
+      "tags": [
+        "Music",
+        "Other",
+        "San Francisco"
+      ],
+      "intentLabel": "规划这个周末"
+    },
+    {
+      "id": "tm-G5vYZ_7G-AGvL",
+      "vertical": "weekend",
+      "kind": "活动",
+      "title": "Dave Landau",
+      "category": "Arts & Theatre · 2026-05-20",
+      "emoji": "🎭",
+      "cover": "linear-gradient(135deg,#ff7a59,#ef2d56)",
+      "image": "https://s1.ticketm.net/dam/a/d74/4adaa7b3-91c9-4541-a3df-59e35af8bd74_RETINA_PORTRAIT_16_9.jpg",
+      "neighborhood": "San Francisco",
+      "distance": "29.0 mi",
+      "price": "门票",
+      "blurb": "Comedy · Cobb's Comedy Club · 2026-05-20 开演",
+      "tags": [
+        "Arts & Theatre",
+        "Comedy",
+        "San Francisco"
+      ],
+      "intentLabel": "规划这个周末"
+    },
+    {
+      "id": "tm-rZ7HnEZ1AfZwjV",
+      "vertical": "weekend",
+      "kind": "活动",
+      "title": "Neck of the Woods SF Open Mic Wednesdays",
+      "category": "Music · 2026-05-20",
+      "emoji": "🎵",
+      "cover": "linear-gradient(135deg,#f9a826,#e8112d)",
+      "image": "https://s1.ticketm.net/dam/a/c21/5d2a0c40-4a40-4be0-b5d0-0c19590dec21_72321_RETINA_PORTRAIT_16_9.jpg",
+      "neighborhood": "San Francisco",
+      "distance": "29.4 mi",
+      "price": "$0+",
+      "blurb": "Other · Neck of the Woods · 2026-05-20 开演",
+      "tags": [
+        "Music",
+        "Other",
+        "San Francisco"
+      ],
+      "intentLabel": "规划这个周末"
+    },
+    {
+      "id": "tm-rZ7HnEZ1Af0efS",
+      "vertical": "weekend",
+      "kind": "活动",
+      "title": "Western Wednesday #90: Hearts Gone South x Bastard Sons of Johnny Cash",
+      "category": "Music · 2026-05-20",
+      "emoji": "🎵",
+      "cover": "linear-gradient(135deg,#b06ab3,#4568dc)",
+      "image": "https://s1.ticketm.net/dam/c/677/c58dd0af-cda8-49b2-bdaf-068540c3a677_106541_RETINA_PORTRAIT_16_9.jpg",
+      "neighborhood": "Santa Cruz",
+      "distance": "32.6 mi",
+      "price": "$18+",
+      "blurb": "Country · Moe's Alley · 2026-05-20 开演",
+      "tags": [
+        "Music",
+        "Country",
+        "Santa Cruz"
+      ],
+      "intentLabel": "规划这个周末"
+    },
+    {
+      "id": "amadeus-27043757",
+      "vertical": "weekend",
+      "kind": "活动",
+      "title": "iFLY San Francisco Bay",
+      "category": "Tours & Activities",
+      "emoji": "🎟️",
+      "cover": "linear-gradient(135deg,#2193b0,#6dd5ed)",
+      "image": "https://aws-tiqets-cdn.imgix.net/images/content/1be5bcb42bb1474f8bc140c9d8917a55.jpeg?auto=format%2Ccompress&fit=crop&h=1284&ixlib=python-3.2.1&q=70&w=1284",
+      "neighborhood": "Bay Area",
+      "distance": "11.6 mi",
+      "price": "$124",
+      "blurb": "Soar to new heights with tickets for indoor skydiving",
+      "tags": [
+        "Tours & Activities"
+      ],
+      "intentLabel": "规划这个周末"
+    },
+    {
+      "id": "amadeus-138947398",
+      "vertical": "weekend",
+      "kind": "活动",
+      "title": "Filoli Summer Nights Admission",
+      "category": "Tours & Activities",
+      "emoji": "🎟️",
+      "cover": "linear-gradient(135deg,#56ab2f,#a8e063)",
+      "image": "https://aws-tiqets-cdn.imgix.net/images/content/32def80d01444674bef2bbb0b17e1d49.jpeg?auto=format%2Ccompress&fit=crop&h=1284&ixlib=python-3.2.1&q=70&w=1284",
+      "neighborhood": "Bay Area",
+      "distance": "9.4 mi",
+      "price": "$39",
+      "blurb": "Summer loving, you'll have a blast",
+      "tags": [
+        "Tours & Activities"
+      ],
+      "intentLabel": "规划这个周末"
+    },
+    {
+      "id": "amadeus-139628593",
+      "vertical": "weekend",
+      "kind": "活动",
+      "title": "Yosemite National Park One-Way",
+      "category": "Tours & Activities",
+      "emoji": "🎟️",
+      "cover": "linear-gradient(135deg,#3a1c71,#d76d77)",
+      "image": "https://images.holibob.tech/eyJrZXkiOiJwcm9kdWN0SW1hZ2VzLzhhZjIyM2UwLWEzZDYtNDlhMS04NGU1LWM3NjAwZjBlYjA3NiIsImVkaXRzIjp7InJlc2l6ZSI6eyJmaXQiOiJjb3ZlciIsIndpZHRoIjoxOTIwLCJoZWlnaHQiOjEwODB9fX0=",
+      "neighborhood": "Bay Area",
+      "distance": "28.0 mi",
+      "price": "$135",
+      "blurb": "One-way from SF to Yosemite: 6:40am-12:30pm (12:30pm is the approximate arrival time in Yosemite Valley) One-way from Yosemite to ",
+      "tags": [
+        "Tours & Activities"
+      ],
+      "intentLabel": "规划这个周末"
+    },
+    {
+      "id": "amadeus-139313128",
+      "vertical": "weekend",
+      "kind": "活动",
+      "title": "Food, History, and Resistance: A Self-Guided Audio Tour",
+      "category": "Tours & Activities",
+      "emoji": "🎟️",
+      "cover": "linear-gradient(135deg,#f7971e,#ffd200)",
+      "image": "https://images.holibob.tech/eyJrZXkiOiJwcm9kdWN0SW1hZ2VzL2IwYWUxNTAwLWZjOTMtMTFlYi04MDFmLTA2YjgxYWQ0YzU3OSIsImVkaXRzIjp7InJlc2l6ZSI6eyJmaXQiOiJjb3ZlciIsIndpZHRoIjoxOTIwLCJoZWlnaHQiOjEwODB9fX0=",
+      "neighborhood": "Bay Area",
+      "distance": "28.5 mi",
+      "price": "$9",
+      "blurb": "Explore San Francisco's historic Japantown at your own pace on this self-guided audio tour. Japanese-American local Kristin Eriko ",
+      "tags": [
+        "Tours & Activities"
+      ],
+      "intentLabel": "规划这个周末"
+    }
+  ]
 }
