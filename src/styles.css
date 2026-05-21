@@ -1479,6 +1479,62 @@ h4 {
   font-size: 11px;
   color: var(--muted);
 }
+.persona {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.persona-row {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+}
+.persona-emoji {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex: none;
+}
+.persona-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.persona-label {
+  font-size: 13.5px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.persona-level {
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 6px;
+}
+.persona-level.high {
+  background: #fdecec;
+  color: var(--brand);
+}
+.persona-level.mid {
+  background: #fff4d6;
+  color: #9a6b00;
+}
+.persona-level.low {
+  background: var(--bg);
+  color: var(--muted);
+}
+.persona-hint {
+  font-size: 11.5px;
+  color: var(--muted);
+}
 .loopbar {
   display: flex;
   justify-content: space-between;

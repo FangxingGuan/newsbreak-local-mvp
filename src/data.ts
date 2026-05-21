@@ -1209,6 +1209,97 @@ export function getPreferences(s: {
     .sort((a, b) => b.rate - a.rate || b.num - a.num)
 }
 
+// ---- User persona ----------------------------------------------------------
+// Alongside WHAT the user likes (getPreferences), infer WHO they are — life
+// stage / household — from real interactions. The strongest signal is the
+// "和谁一起" choice made when committing a plan; content topics are softer
+// supporting evidence. No survey; the persona emerges from behaviour.
+
+interface PersonaDef {
+  key: string
+  label: string
+  emoji: string
+  hint: string
+  /** Content tags that softly point to this trait. */
+  tags: string[]
+  /** The "和谁一起" choice that strongly points to it. */
+  whom: string
+}
+
+const PERSONA: PersonaDef[] = [
+  {
+    key: 'family',
+    label: '带娃家庭',
+    emoji: '🧸',
+    hint: '常看亲子内容、和家人一起出行',
+    tags: ['亲子', '遛娃', '科普', '动物', '游乐场'],
+    whom: '带家人',
+  },
+  {
+    key: 'couple',
+    label: '约会 / 情侣',
+    emoji: '💑',
+    hint: '常规划约会、关注适合两人的去处',
+    tags: ['约会'],
+    whom: '约会',
+  },
+  {
+    key: 'social',
+    label: '社交活跃',
+    emoji: '🎉',
+    hint: '常和朋友组局、看演出活动',
+    tags: ['演出', '音乐', '脱口秀', '话剧', '喜剧', '棒球', '体育', '音乐剧', 'Live', '现场演出', '文化'],
+    whom: '和朋友',
+  },
+  {
+    key: 'solo',
+    label: '单身 / 独自生活',
+    emoji: '🧍',
+    hint: '常独自探索本地',
+    tags: [],
+    whom: '自己一个人',
+  },
+]
+
+/**
+ * Infers the user's persona — life stage / household — from interactions.
+ * Committing a plan with a given "和谁一起" is the strong signal (+3);
+ * opening (+1) / saving (+1.5) topically-matching content is supporting.
+ */
+export function getPersona(s: {
+  opened: string[]
+  saved: string[]
+  plans: Plan[]
+}): {
+  label: string
+  emoji: string
+  hint: string
+  score: number
+  level: 'low' | 'mid' | 'high'
+}[] {
+  const score = new Map<string, number>()
+  const bump = (key: string, w: number) => score.set(key, (score.get(key) ?? 0) + w)
+  s.plans.forEach((p) => {
+    const d = PERSONA.find((x) => x.whom === p.withWhom)
+    if (d) bump(d.key, 3)
+  })
+  const fromTags = (id: string, w: number) => {
+    const tags = tagsForRef(id)
+    PERSONA.forEach((d) => {
+      if (d.tags.some((t) => tags.includes(t))) bump(d.key, w)
+    })
+  }
+  s.opened.forEach((id) => fromTags(id, 1))
+  s.saved.forEach((id) => fromTags(id, 1.5))
+  return PERSONA.map((d) => {
+    const n = score.get(d.key) ?? 0
+    const level: 'low' | 'mid' | 'high' = n >= 6 ? 'high' : n >= 3 ? 'mid' : 'low'
+    return { label: d.label, emoji: d.emoji, hint: d.hint, score: n, level }
+  })
+    .filter((d) => d.score > 0)
+    .sort((a, b) => b.score - a.score)
+}
+
 // ---- Plan generator ---------------------------------------------------------
 // A plan is tailored to the KIND of place it centres on — a dinner out, a
 // coffee morning, an outdoor half-day, a bookstore afternoon, a grocery run or

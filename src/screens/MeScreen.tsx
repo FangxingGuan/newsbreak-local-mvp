@@ -1,6 +1,12 @@
 import { useStore } from '../store'
-import { getArticle, getDiscover, getPreferences } from '../data'
+import { getArticle, getDiscover, getPersona, getPreferences } from '../data'
 import type { SignalType } from '../types'
+
+const LEVEL_TEXT: Record<'low' | 'mid' | 'high', string> = {
+  low: '初步',
+  mid: '较明显',
+  high: '明显',
+}
 
 const SIGNAL_EMOJI: Record<SignalType, string> = {
   read: '📖',
@@ -45,6 +51,9 @@ export function MeScreen() {
   const liked = allPrefs.filter((p) => p.rate > 0).slice(0, 7)
   const disliked = allPrefs.filter((p) => p.rate < 0)
   const prefMax = liked[0]?.rate ?? 1
+
+  // Persona — who the user is (life stage / household), inferred from behaviour.
+  const persona = getPersona(state)
 
   const loop = [
     { label: '本地内容流', done: read.length + seen.length > 0 },
@@ -151,6 +160,35 @@ export function MeScreen() {
                 </span>
               ))}
             </div>
+          </div>
+        )}
+      </section>
+
+      <section className="block">
+        <h2>AI 推断的用户画像</h2>
+        <p className="block-sub">
+          从你的「和谁一起」选择与内容互动里推断 —— 仅为行为推断
+        </p>
+        {persona.length === 0 ? (
+          <div className="muted-line">
+            还不够了解你 · 多点开内容、加入几次计划就能看出来
+          </div>
+        ) : (
+          <div className="persona">
+            {persona.map((t) => (
+              <div className="persona-row" key={t.label}>
+                <span className="persona-emoji">{t.emoji}</span>
+                <span className="persona-info">
+                  <span className="persona-label">
+                    {t.label}
+                    <span className={`persona-level ${t.level}`}>
+                      {LEVEL_TEXT[t.level]}
+                    </span>
+                  </span>
+                  <span className="persona-hint">{t.hint}</span>
+                </span>
+              </div>
+            ))}
           </div>
         )}
       </section>

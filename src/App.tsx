@@ -96,7 +96,7 @@ export function App() {
           <li>POI 由 Yelp / Google Places 实时数据富化</li>
           <li>「加入计划」把想去的存成会提醒你的小约定,可选展开成一日行程</li>
           <li>卡片可标记「不感兴趣」—— 正负反馈都回流引擎</li>
-          <li>「我的」页:偏好按交互率算(含负反馈)· WLA 只计真实行动</li>
+          <li>「我的」页:偏好画像 + 用户画像(带娃 / 约会 / 单身…)+ WLA</li>
         </ul>
         <div className="legend-foot">
           真实本地报道 · 真实 API 数据 · WLA 为北极星指标
