@@ -1318,46 +1318,68 @@ const PLAN_KINDS: Record<PlanKind, PlanKindTemplate> = {
   },
 }
 
-// Preference-matched extra stop — appended when it fits the user's profile.
-const PREF_STOPS: { match: string[]; skip: PlanKind; emoji: string; title: string; desc: string }[] = [
+// Preference-matched extra stop. `window` is the sensible hour range for the
+// stop (no late-night coffee); `prefer` is whether it reads better appended at
+// the end or slotted in before the plan starts.
+const PREF_STOPS: {
+  match: string[]
+  skip: PlanKind
+  prefer: 'pre' | 'post'
+  window: [number, number]
+  emoji: string
+  title: string
+  desc: string
+}[] = [
   {
     match: ['咖啡', '咖啡馆'],
     skip: 'cafe',
+    prefer: 'post',
+    window: [7, 18],
     emoji: '☕️',
     title: '顺路来杯咖啡',
-    desc: '你最近常看咖啡内容 —— 收尾拐进一家 {area} 的本地咖啡馆歇个脚。',
+    desc: '你最近常看咖啡内容 —— 在 {area} 拐进一家本地咖啡馆坐坐。',
   },
   {
     match: ['甜品', '冰品', 'gelato', '抹茶'],
     skip: 'cafe',
+    prefer: 'post',
+    window: [11, 23],
     emoji: '🍦',
     title: '加一份甜的',
-    desc: '你偏爱甜点 —— 顺道来支冰淇淋,或一块现做蛋糕。',
+    desc: '你偏爱甜点 —— 安排一份冰淇淋,或一块现做蛋糕。',
   },
   {
     match: ['户外', '散步', '徒步', '自然', '植物园'],
     skip: 'outdoor',
+    prefer: 'pre',
+    window: [7, 18],
     emoji: '🌳',
     title: '绿地里走走',
-    desc: '你常关注户外 —— 顺路去 {area} 附近的公园绿地走一圈。',
+    desc: '你常关注户外 —— 去 {area} 附近的公园绿地走一圈。',
   },
   {
     match: ['书店', '阅读'],
     skip: 'bookstore',
+    prefer: 'pre',
+    window: [10, 20],
     emoji: '📚',
     title: '逛家书店',
-    desc: '你常看书店内容 —— 路过的话进家本地独立书店翻翻。',
+    desc: '你常看书店内容 —— 进家 {area} 的本地独立书店翻翻。',
   },
   {
     match: ['红酒', '小酌'],
     skip: 'meal',
+    prefer: 'post',
+    window: [17, 24],
     emoji: '🍷',
     title: '小酌一杯',
-    desc: '你偏好微醺时光 —— 找家红酒小馆,给这趟收个尾。',
+    desc: '你偏好微醺时光 —— 找家红酒小馆小酌一杯。',
   },
   {
     match: ['烘焙', '面包'],
     skip: 'cafe',
+    prefer: 'pre',
+    window: [7, 16],
     emoji: '🥐',
     title: '带个面包走',
     desc: '你常看烘焙内容 —— 顺路买个现烤的带回家。',
@@ -1418,23 +1440,42 @@ export function planSeedFromDiscover(d: DiscoverCard): PlanSeed {
   }
 }
 
-/** Builds the optional preference-matched stop from the user's top tags. */
+/**
+ * Builds the optional preference-matched stop — time-of-day aware. A daytime
+ * stop (coffee, a walk) won't be tacked onto the end of a late evening; it is
+ * slotted in before the plan instead, or dropped if neither time fits.
+ */
 function preferenceStop(
   prefTags: string[],
   kind: PlanKind,
   area: string,
+  firstTime: string,
   lastTime: string,
-): PlanStop | null {
+): { stop: PlanStop; pos: 'pre' | 'post' } | null {
+  const hourOf = (t: string) => {
+    const [h, m] = t.split(':').map(Number)
+    return h + m / 60
+  }
+  const postT = addMinutes(lastTime, 75)
+  const preT = addMinutes(firstTime, -80)
   for (const tag of prefTags) {
     const m = PREF_STOPS.find((p) => p.match.includes(tag) && p.skip !== kind)
-    if (m) {
+    if (!m) continue
+    const fits = (t: string) => hourOf(t) >= m.window[0] && hourOf(t) <= m.window[1]
+    const order = m.prefer === 'pre' ? (['pre', 'post'] as const) : (['post', 'pre'] as const)
+    for (const pos of order) {
+      const time = pos === 'post' ? postT : preT
+      if (!fits(time)) continue
       return {
-        time: addMinutes(lastTime, 75),
-        emoji: m.emoji,
-        title: m.title,
-        desc: m.desc.replace(/\{area\}/g, area),
-        travel: '🚶 顺路',
-        forYou: true,
+        pos,
+        stop: {
+          time,
+          emoji: m.emoji,
+          title: m.title,
+          desc: m.desc.replace(/\{area\}/g, area),
+          travel: pos === 'post' ? '🚶 顺路' : undefined,
+          forYou: true,
+        },
       }
     }
   }
@@ -1458,12 +1499,28 @@ export function generatePlan(seed: PlanSeed, variant = 0, prefTags: string[] = [
     anchor: true,
   }
   const stops = [...before, anchor, ...after]
-  const pref = preferenceStop(prefTags, seed.kind, seed.area, stops[stops.length - 1].time)
-  if (pref) stops.push(pref)
+  const pref = preferenceStop(
+    prefTags,
+    seed.kind,
+    seed.area,
+    stops[0].time,
+    stops[stops.length - 1].time,
+  )
+  let when = v.when
+  if (pref) {
+    if (pref.pos === 'post') {
+      stops.push(pref.stop)
+    } else {
+      // Slot the preference stop in first; the old first stop now needs a connector.
+      stops[0] = { ...stops[0], travel: stops[0].travel ?? '🚶 顺路' }
+      stops.unshift(pref.stop)
+      when = v.when.replace(/\d{1,2}:\d{2}/, pref.stop.time)
+    }
+  }
   return {
     id: `plan-${seed.id}-${Date.now()}`,
     title: `${seed.anchorName} · ${t.title}`,
-    when: v.when,
+    when,
     vibe: v.vibe,
     basedOnId: seed.id,
     basedOnTitle: seed.title,
