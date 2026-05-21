@@ -1422,24 +1422,21 @@ h4 {
   border-top: 1px solid var(--line);
 }
 .prefs-neg-label {
+  display: block;
   font-size: 11px;
   font-weight: 700;
-  color: var(--muted);
+  color: #c0405a;
+  margin-bottom: 11px;
 }
-.neg-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin-top: 9px;
-}
-.neg-chip {
-  font-size: 11.5px;
-  font-weight: 600;
+.pref.neg .pref-tag {
   color: #9aa0ab;
-  background: var(--bg);
-  padding: 5px 9px;
-  border-radius: 8px;
   text-decoration: line-through;
+}
+.pref-n.neg {
+  color: #c0405a;
+}
+.pref-fill.neg {
+  background: linear-gradient(90deg, #7c8290, #aab0bb);
 }
 .signal-row.neg .signal-text strong {
   color: #c0405a;

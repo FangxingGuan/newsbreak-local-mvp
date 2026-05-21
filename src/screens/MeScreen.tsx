@@ -20,6 +20,9 @@ const SIGNAL_EMOJI: Record<SignalType, string> = {
 
 const WLA_GOAL = 4
 
+/** Render an interaction score with an explicit sign — +4, −4. */
+const signed = (n: number) => (n > 0 ? `+${n}` : `−${Math.abs(n)}`)
+
 function relTime(ts: number): string {
   const diff = Math.round((Date.now() - ts) / 1000)
   if (diff < 10) return '刚刚'
@@ -49,8 +52,11 @@ export function MeScreen() {
   // Preference profile — interaction rate; positive and negative.
   const allPrefs = getPreferences(state)
   const liked = allPrefs.filter((p) => p.rate > 0).slice(0, 7)
-  const disliked = allPrefs.filter((p) => p.rate < 0)
+  const disliked = allPrefs
+    .filter((p) => p.rate < 0)
+    .sort((a, b) => a.rate - b.rate)
   const prefMax = liked[0]?.rate ?? 1
+  const negMax = Math.max(...disliked.map((p) => Math.abs(p.rate)), 1)
 
   // Persona — who the user is (life stage / household), inferred from behaviour.
   const persona = getPersona(state)
@@ -126,7 +132,8 @@ export function MeScreen() {
       <section className="block">
         <h2>你的本地生活偏好</h2>
         <p className="block-sub">
-          交互率 = 点开 +1 / 收藏 +2 / 规划 +3 / 不感兴趣 −4 · 除以出 CTA 次数
+          互动分:点开 +1 / 收藏 +2 / 加入计划 +3 / 不感兴趣 −4 · 偏好强度 =
+          互动分 ÷ 看过张数
         </p>
         {liked.length === 0 ? (
           <div className="muted-line">还没有正向偏好 · 去「发现」点开点内容</div>
@@ -137,7 +144,7 @@ export function MeScreen() {
                 <div className="pref-row">
                   <span className="pref-tag">{p.tag}</span>
                   <span className="pref-n">
-                    {p.num} / {p.denom} 次
+                    互动分 {signed(p.num)} · 看过 {p.denom} 张
                   </span>
                 </div>
                 <div className="pref-bar">
@@ -152,12 +159,23 @@ export function MeScreen() {
         )}
         {disliked.length > 0 && (
           <div className="prefs-neg">
-            <span className="prefs-neg-label">➖ 似乎不感兴趣</span>
-            <div className="neg-chips">
+            <span className="prefs-neg-label">➖ 似乎不感兴趣(负向偏好)</span>
+            <div className="prefs">
               {disliked.map((p) => (
-                <span className="neg-chip" key={p.tag}>
-                  {p.tag}
-                </span>
+                <div className="pref neg" key={p.tag}>
+                  <div className="pref-row">
+                    <span className="pref-tag">{p.tag}</span>
+                    <span className="pref-n neg">
+                      互动分 {signed(p.num)} · 看过 {p.denom} 张
+                    </span>
+                  </div>
+                  <div className="pref-bar">
+                    <div
+                      className="pref-fill neg"
+                      style={{ width: `${(Math.abs(p.rate) / negMax) * 100}%` }}
+                    />
+                  </div>
+                </div>
               ))}
             </div>
           </div>
