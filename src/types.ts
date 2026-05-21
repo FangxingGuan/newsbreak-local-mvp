@@ -48,6 +48,8 @@ export interface PoiReview {
 export interface Article {
   id: string
   source: string
+  /** Link to the original published report. */
+  sourceUrl: string
   publishedAgo: string
   topic: string
   headline: string

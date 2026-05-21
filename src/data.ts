@@ -13,6 +13,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a-bts-vesta',
     source: 'San Francisco Chronicle',
+    sourceUrl:
+      'https://www.sfchronicle.com/entertainment/music/article/bts-pizza-pickleball-22264673.php',
     publishedAgo: '3 天前',
     topic: '名人 · 美食',
     headline: 'BTS 赛前低调探店,把湾区这家披萨小馆带火了',
@@ -66,6 +68,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a-kirana',
     source: 'The Mountain View Voice',
+    sourceUrl:
+      'https://www.mv-voice.com/menlo-park/2026/05/19/kirana-bakehouse-menlo-park-sourdough-bread/',
     publishedAgo: '1 天前',
     topic: '新店 · 烘焙',
     headline: '前软件工程师在 Menlo Park 家里开起微型面包房',
@@ -119,6 +123,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a-haraz',
     source: 'The Mountain View Voice',
+    sourceUrl:
+      'https://www.mv-voice.com/mountain-view/2026/05/19/haraz-coffee-house-mountain-view-yemeni-coffee/',
     publishedAgo: '1 天前',
     topic: '新店 · 咖啡',
     headline: '也门咖啡馆 Haraz 落子 Mountain View,六月开业',
@@ -184,6 +190,7 @@ export const ARTICLES: Article[] = [
   {
     id: 'a-als',
     source: 'Family Destinations Guide',
+    sourceUrl: 'https://familydestinationsguide.com/california-famous-gigantic-cheeseburgers/',
     publishedAgo: '上周',
     topic: '美食 · 必吃',
     headline: '东湾这家小店,藏着一个「巨无霸」级别的芝士汉堡',
@@ -236,6 +243,7 @@ export const ARTICLES: Article[] = [
   {
     id: 'a-wagon-wheel',
     source: 'NewsBreak',
+    sourceUrl: 'https://mp.newsbreakapp.com/post/161298100?sig=34253BEDA61626B0EFEE1854A0C56B98',
     publishedAgo: '4 天前',
     topic: '美食 · 必吃',
     headline: 'Mountain View 最值得专程一去的烟熏布里斯特午餐',
@@ -289,6 +297,7 @@ export const ARTICLES: Article[] = [
   {
     id: 'a-tt',
     source: 'San Francisco Chronicle',
+    sourceUrl: 'https://www.sfchronicle.com/food/article/tt-supermarket-san-jose-22267469.php',
     publishedAgo: '1 天前',
     topic: '新店 · 开业',
     headline: '加拿大亚洲超市巨头 T&T 首店落地湾区 San Jose',
@@ -324,6 +333,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a-hmart',
     source: 'San Francisco Chronicle',
+    sourceUrl:
+      'https://www.sfchronicle.com/eastbay/article/h-mart-asian-grocery-store-supermarket-22245358.php',
     publishedAgo: '今天',
     topic: '社区 · 趋势',
     headline: '亚洲超市在东湾扎堆开业,有人欢迎,也有人不满',
@@ -377,6 +388,7 @@ export const ARTICLES: Article[] = [
   {
     id: 'a-minipot',
     source: 'SFGATE',
+    sourceUrl: 'https://www.sfgate.com/food/article/mini-potstickers-sf-22259114.php',
     publishedAgo: '今天',
     topic: '美食 · 必吃',
     headline: 'Outer Sunset 的「迷你」饺子小馆,成了旧金山的生煎包明星',
@@ -431,6 +443,8 @@ export const ARTICLES: Article[] = [
   {
     id: 'a-mixt',
     source: 'KRON4',
+    sourceUrl:
+      'https://www.newsbreak.com/kron4-news-1589914/4660792681671-fast-casual-salad-chain-taking-over-longtime-family-run-walnut-creek-deli',
     publishedAgo: '2 天前',
     topic: '社区 · 开业',
     headline: '百年熟食店谢幕,沙拉新店 MIXT 接手 Walnut Creek 原址',

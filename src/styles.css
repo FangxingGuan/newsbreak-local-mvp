@@ -449,6 +449,20 @@ h4 {
   color: #2f323a;
   margin-top: 13px;
 }
+.article-origin {
+  display: inline-block;
+  margin-top: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--brand);
+  background: #fdecec;
+  padding: 7px 12px;
+  border-radius: 9px;
+  text-decoration: none;
+}
+.article-origin:active {
+  transform: scale(0.98);
+}
 
 .intent-box {
   margin-top: 18px;

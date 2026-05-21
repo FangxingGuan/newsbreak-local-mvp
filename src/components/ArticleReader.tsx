@@ -127,6 +127,15 @@ export function ArticleReader() {
             <span>· 👍 {article.reactions}</span>
           </div>
 
+          <a
+            className="article-origin"
+            href={article.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            📄 阅读 {article.source} 原文报道 ↗
+          </a>
+
           {article.body.map((p, i) => (
             <p className="article-p" key={i}>
               {p}
