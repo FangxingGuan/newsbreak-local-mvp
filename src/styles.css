@@ -296,6 +296,7 @@ h4 {
   display: flex;
   flex-direction: column;
   gap: 3px;
+  width: calc(100% - 26px);
   margin: 0 13px 13px;
   padding: 10px 12px;
   border-radius: 11px;
