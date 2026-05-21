@@ -22,7 +22,7 @@ function relTime(ts: number): string {
 
 export function MeScreen() {
   const { state, wla } = useStore()
-  const { signals, read, seen, saved } = state
+  const { signals, read, seen, opened, saved, plans } = state
 
   const count = (t: SignalType) => signals.filter((s) => s.type === t).length
 
@@ -40,8 +40,9 @@ export function MeScreen() {
     .filter((x): x is { emoji: string; intent: string; from: string } => !!x)
     .slice(0, 6)
 
-  // Local-life preference profile — read + seen + saved (saved weighted x2).
-  const prefs = getPreferences(read, seen, saved).slice(0, 8)
+  // Local-life preference profile — built from real interactions only
+  // (opened / saved / planned), weighted; a dwell does not count.
+  const prefs = getPreferences(opened, saved, plans).slice(0, 8)
   const prefMax = prefs[0]?.n ?? 1
 
   const loop = [
@@ -102,7 +103,9 @@ export function MeScreen() {
 
       <section className="block">
         <h2>你的本地生活偏好</h2>
-        <p className="block-sub">由你读过、看过、收藏过的内容聚合 · 收藏权重更高</p>
+        <p className="block-sub">
+          由你点开、收藏、加入计划的内容加权聚合 · 仅停留浏览不计入
+        </p>
         {prefs.length === 0 ? (
           <div className="muted-line">还没有偏好信号 · 去「发现」读点内容</div>
         ) : (
@@ -111,7 +114,6 @@ export function MeScreen() {
               <div className="pref" key={p.tag}>
                 <div className="pref-row">
                   <span className="pref-tag">{p.tag}</span>
-                  <span className="pref-n">×{p.n}</span>
                 </div>
                 <div className="pref-bar">
                   <div

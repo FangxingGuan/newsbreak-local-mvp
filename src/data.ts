@@ -1159,22 +1159,34 @@ export function isDiscover(entry: FeedEntry): entry is DiscoverCard {
  * The user's local-life preference profile — aggregated from the tags of the
  * articles they have read and the discover cards they have engaged with.
  */
+/** Tags representing an article, a discover card, or a POI — by its id. */
+function tagsForRef(id: string): string[] {
+  const a = getArticle(id)
+  if (a) return a.tags
+  const d = getDiscover(id)
+  if (d) return d.tags
+  return ARTICLES.find((x) => x.pois.some((p) => p.id === id))?.tags ?? []
+}
+
+/**
+ * The user's local-life preference profile — built only from real interactions,
+ * weighted by strength. A ~2-second dwell is deliberately NOT counted: it only
+ * means the user's attention passed over the card. What counts:
+ *   opened content (tapped through)  → weight 1
+ *   saved a place                    → weight 2
+ *   committed a plan                 → weight 3
+ */
 export function getPreferences(
-  read: string[],
-  seen: string[],
-  saved: string[] = [],
+  opened: string[],
+  saved: string[],
+  plans: Plan[],
 ): { tag: string; n: number }[] {
   const freq = new Map<string, number>()
-  const add = (tags: string[] | undefined, w: number) =>
-    tags?.forEach((t) => freq.set(t, (freq.get(t) ?? 0) + w))
-  read.forEach((id) => add(getArticle(id)?.tags, 1))
-  seen.forEach((id) => add(getDiscover(id)?.tags, 1))
-  // A saved POI is a stronger interest signal — weight it x2, using the tags
-  // of the article it belongs to.
-  saved.forEach((id) => {
-    const a = ARTICLES.find((x) => x.pois.some((p) => p.id === id))
-    add(a?.tags, 2)
-  })
+  const add = (id: string, w: number) =>
+    tagsForRef(id).forEach((t) => freq.set(t, (freq.get(t) ?? 0) + w))
+  opened.forEach((id) => add(id, 1))
+  saved.forEach((id) => add(id, 2))
+  plans.forEach((p) => add(p.basedOnId, 3))
   return [...freq.entries()]
     .map(([tag, n]) => ({ tag, n }))
     .sort((a, b) => b.n - a.n)

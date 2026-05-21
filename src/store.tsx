@@ -29,8 +29,11 @@ type PlanTarget = { kind: 'article' | 'discover'; id: string }
 
 interface State {
   tab: Tab
+  /** Cards dwelled on (~2s) — a weak "glanced at it" signal. */
   read: string[]
   seen: string[]
+  /** Content actually opened (tapped through) — a real interaction. */
+  opened: string[]
   saved: string[]
   signals: Signal[]
   plans: Plan[]
@@ -44,6 +47,7 @@ const initialState: State = {
   tab: 'feed',
   read: [],
   seen: [],
+  opened: [],
   saved: [],
   signals: [],
   plans: [],
@@ -96,7 +100,13 @@ function reducer(state: State, action: Action): State {
     case 'READ':
       return markRead(state, action.id, action.title)
     case 'OPEN_ARTICLE':
-      return { ...markRead(state, action.id, action.title), openArticleId: action.id }
+      return {
+        ...markRead(state, action.id, action.title),
+        openArticleId: action.id,
+        opened: state.opened.includes(action.id)
+          ? state.opened
+          : [...state.opened, action.id],
+      }
     case 'CLOSE_ARTICLE':
       return { ...state, openArticleId: null }
     case 'SEEN': {
@@ -120,7 +130,13 @@ function reducer(state: State, action: Action): State {
       }
     }
     case 'OPEN_PLANNING':
-      return { ...state, planning: action.target }
+      return {
+        ...state,
+        planning: action.target,
+        opened: state.opened.includes(action.target.id)
+          ? state.opened
+          : [...state.opened, action.target.id],
+      }
     case 'CLOSE_PLANNING':
       return { ...state, planning: null }
     case 'ADD_PLAN':
