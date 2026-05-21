@@ -1,9 +1,9 @@
-import { Fragment, useEffect, useMemo, useRef, useState } from 'react'
+import { Fragment, useEffect, useMemo, useState } from 'react'
 import { useStore } from '../store'
-import { generatePlan, getItem, planVariantCount } from '../data'
+import { generatePlan, getArticle, planVariantCount } from '../data'
 import type { PlanStop } from '../types'
 
-const STEPS = ['读取你的浏览与收藏偏好…', '匹配附近相关地点…', '编排一条轻量行程…']
+const STEPS = ['读取你最近读过的文章…', '定位文章里提到的地点…', '编排一条轻量行程…']
 
 /** Rough total span of an itinerary, first stop to last. */
 function spanHours(stops: PlanStop[]): string {
@@ -18,7 +18,9 @@ function spanHours(stops: PlanStop[]): string {
 
 export function PlanSheet() {
   const { state, dispatch } = useStore()
-  const item = state.planningId ? getItem(state.planningId) : undefined
+  const article = state.planningArticleId
+    ? getArticle(state.planningArticleId)
+    : undefined
 
   const [phase, setPhase] = useState<'loading' | 'ready'>('loading')
   const [stepIdx, setStepIdx] = useState(0)
@@ -27,14 +29,9 @@ export function PlanSheet() {
   const [didMap, setDidMap] = useState(false)
   const [didCal, setDidCal] = useState(false)
 
-  // True if the user has already planned in this vertical → repeat planning.
-  const isRepeat = useRef(
-    item ? state.plans.some((p) => p.vertical === item.vertical) : false,
-  )
-
   const plan = useMemo(
-    () => (item ? generatePlan(item, variant) : null),
-    [item, variant],
+    () => (article ? generatePlan(article, variant) : null),
+    [article, variant],
   )
 
   useEffect(() => {
@@ -45,11 +42,12 @@ export function PlanSheet() {
     const done = window.setTimeout(() => {
       window.clearInterval(ticker)
       setPhase('ready')
-      if (item) {
-        dispatch({ type: 'SIGNAL', signalType: 'plan_generated', itemTitle: item.title })
-        if (isRepeat.current) {
-          dispatch({ type: 'SIGNAL', signalType: 'repeat_plan', itemTitle: item.title })
-        }
+      if (article) {
+        dispatch({
+          type: 'SIGNAL',
+          signalType: 'plan_generated',
+          itemTitle: article.pois[0].name,
+        })
       }
     }, 1500)
     return () => {
@@ -59,9 +57,9 @@ export function PlanSheet() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  if (!item || !plan) return null
+  if (!article || !plan) return null
   const close = () => dispatch({ type: 'CLOSE_PLANNING' })
-  const canReroll = planVariantCount(item) > 1
+  const canReroll = planVariantCount() > 1
 
   const reroll = () => {
     setVariant((v) => v + 1)
@@ -78,7 +76,7 @@ export function PlanSheet() {
         {phase === 'loading' ? (
           <div className="plan-loading">
             <div className="plan-spinner" />
-            <h3>✨ 正在为「{item.title}」规划</h3>
+            <h3>✨ 正在为「{article.pois[0].name}」规划</h3>
             <ul>
               {STEPS.map((s, i) => (
                 <li key={s} className={i <= stepIdx ? 'done' : ''}>
@@ -98,9 +96,7 @@ export function PlanSheet() {
                   🗓️ {plan.when} · {spanHours(plan.stops)} · {plan.stops.length} 站
                 </span>
               </div>
-              {isRepeat.current && (
-                <div className="plan-repeat">↻ 你常规划这一类 · 已按偏好微调</div>
-              )}
+              <div className="plan-from">源自你读的《{article.headline}》</div>
             </div>
 
             <div className="timeline" key={variant}>
@@ -130,7 +126,7 @@ export function PlanSheet() {
                         <div className="tstop-time">{s.time}</div>
                         <div className="tstop-title">
                           {s.title}
-                          {s.anchor && <span className="anchor-tag">来自 Feed</span>}
+                          {s.anchor && <span className="anchor-tag">来自文章</span>}
                         </div>
                         <div className="tstop-desc">{s.desc}</div>
                         {s.anchor && s.image && (

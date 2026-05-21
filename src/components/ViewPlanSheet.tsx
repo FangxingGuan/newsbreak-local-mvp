@@ -22,6 +22,7 @@ export function ViewPlanSheet() {
               🗓️ {plan.when} · {plan.stops.length} 站
             </span>
           </div>
+          <div className="plan-from">源自《{plan.basedOnTitle}》</div>
         </div>
 
         <div className="timeline">
@@ -43,7 +44,7 @@ export function ViewPlanSheet() {
                   <div className="tstop-time">{s.time}</div>
                   <div className="tstop-title">
                     {s.title}
-                    {s.anchor && <span className="anchor-tag">来自 Feed</span>}
+                    {s.anchor && <span className="anchor-tag">来自文章</span>}
                   </div>
                   <div className="tstop-desc">{s.desc}</div>
                   {s.anchor && s.image && (

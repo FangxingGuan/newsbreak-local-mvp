@@ -1,35 +1,53 @@
-// Domain types for the NewsBreak Local MVP demo.
-// The whole demo runs on mock data — see data.ts.
-
-export type Vertical = 'dining' | 'weekend' | 'family'
+// Domain types for the article-driven NewsBreak Local MVP demo.
+// The feed is local news articles; intent is read OUT of articles the user
+// actually reads — nothing is proactively recommended.
 
 export type Tab = 'feed' | 'plans' | 'me'
 
-/** A single card in the high-frequency local feed. */
-export interface FeedItem {
+export type PoiStatus = 'open' | 'opening' | 'closed'
+
+/** A place mentioned in an article, best-effort enriched via the local APIs. */
+export interface ArticlePOI {
   id: string
-  vertical: Vertical
-  kind: '地点' | '活动' | '本地资讯'
-  title: string
+  name: string
   category: string
   emoji: string
-  /** CSS gradient used as the cover when there is no real photo. */
-  cover: string
-  /** Real photo URL from the source API, when available. */
-  image?: string
-  neighborhood: string
-  distance: string
-  /** Star rating; omitted for sources that don't provide one (e.g. events). */
-  rating?: number
-  /** Number of reviews behind the rating, when available. */
-  reviews?: number
-  /** Event date (YYYY-MM-DD) for time-bound items like concerts. */
-  date?: string
-  price: string
+  status: PoiStatus
+  /** What the article itself says about this place. */
   blurb: string
-  tags: string[]
-  /** Label for the intent-trigger call to action. */
-  intentLabel: string
+  neighborhood: string
+  /** Distance from Palo Alto; '' when not place-bound (e.g. delivery only). */
+  distance: string
+  rating?: number
+  reviews?: number
+  price?: string
+  /** Real photo URL from the enrichment API, when available. */
+  image?: string
+  /** Gradient cover used when there is no photo. */
+  cover: string
+  /** Which API the live data came from, e.g. "Yelp". */
+  via?: string
+  /** Status note, e.g. "本月开业 · 暂无评价". */
+  note?: string
+}
+
+/** A local-news article — the unit of the feed. */
+export interface Article {
+  id: string
+  source: string
+  publishedAgo: string
+  topic: string
+  headline: string
+  dek: string
+  emoji: string
+  cover: string
+  body: string[]
+  comments: number
+  reactions: number
+  /** The outing intent NewsBreak's engine reads out of this article. */
+  intent: string
+  /** Places mentioned in the article; pois[0] is the primary one. */
+  pois: ArticlePOI[]
 }
 
 /** One stop inside a generated plan. */
@@ -40,37 +58,29 @@ export interface PlanStop {
   desc: string
   /** How you get to this stop from the previous one, e.g. "🚶 6 分钟". */
   travel?: string
-  /** Real photo, set on the anchor stop (the feed item the plan is built on). */
+  /** Real photo, set on the anchor stop. */
   image?: string
-  /** True when this stop is the feed item the plan was generated from. */
+  /** True when this stop is the POI the plan was built around. */
   anchor?: boolean
 }
 
-/** A lightweight plan generated from a feed item. */
+/** A lightweight plan generated from an article's POIs. */
 export interface Plan {
   id: string
-  vertical: Vertical
   title: string
   when: string
-  /** Short mood label for this itinerary variant, e.g. "🌇 浪漫慢节奏". */
   vibe: string
-  basedOnId: string
+  basedOnArticleId: string
   basedOnTitle: string
   stops: PlanStop[]
   createdAt: number
 }
 
 /**
- * Preference / behaviour signals — the last step of the core loop.
- * `dwell` feeds the intent trigger; the rest count toward Weekly Local Actions.
+ * Behaviour signals. `read` is the core input — what you read drives the
+ * engine; the rest count toward Weekly Local Actions.
  */
-export type SignalType =
-  | 'dwell'
-  | 'save'
-  | 'plan_generated'
-  | 'map_open'
-  | 'calendar_add'
-  | 'repeat_plan'
+export type SignalType = 'read' | 'plan_generated' | 'map_open' | 'calendar_add' | 'save'
 
 export interface Signal {
   id: string
@@ -79,29 +89,3 @@ export interface Signal {
   itemTitle?: string
   ts: number
 }
-
-/** A local-news article — NewsBreak-style feed texture mixed among the cards. */
-export interface NewsItem {
-  type: 'news'
-  id: string
-  vertical: Vertical
-  category: string
-  headline: string
-  source: string
-  publishedAgo: string
-  emoji: string
-  cover: string
-  image?: string
-  summary: string
-  comments: number
-  reactions: number
-  /** Intent hook surfaced after dwell — ties news reading to the decision loop. */
-  hook: string
-  /** Full article text, one string per paragraph — shown in the reader. */
-  body: string[]
-  /** FeedItem id this article points at — makes the dwell hook tappable. */
-  linkId?: string
-}
-
-/** Anything that can appear in the feed: a decision card or a news article. */
-export type FeedEntry = FeedItem | NewsItem

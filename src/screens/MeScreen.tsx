@@ -1,18 +1,16 @@
-import { useMemo } from 'react'
 import { useStore } from '../store'
-import { getItem } from '../data'
+import { getArticle } from '../data'
 import type { SignalType } from '../types'
 
 const SIGNAL_EMOJI: Record<SignalType, string> = {
-  dwell: '👀',
-  save: '♥',
+  read: '📖',
   plan_generated: '✨',
   map_open: '🗺️',
   calendar_add: '🗓️',
-  repeat_plan: '↻',
+  save: '♥',
 }
 
-const WLA_GOAL = 8
+const WLA_GOAL = 6
 
 function relTime(ts: number): string {
   const diff = Math.round((Date.now() - ts) / 1000)
@@ -23,26 +21,22 @@ function relTime(ts: number): string {
 
 export function MeScreen() {
   const { state, wla } = useStore()
-  const { signals, saved, dwelled, plans } = state
+  const { signals, read, saved, plans } = state
 
   const count = (t: SignalType) => signals.filter((s) => s.type === t).length
 
-  // Inferred tastes: aggregate tags across browsed / saved / planned items.
-  const tastes = useMemo(() => {
-    const ids = new Set<string>([...saved, ...dwelled, ...plans.map((p) => p.basedOnId)])
-    const freq = new Map<string, number>()
-    ids.forEach((id) => {
-      getItem(id)?.tags.forEach((t) => freq.set(t, (freq.get(t) ?? 0) + 1))
-    })
-    return [...freq.entries()].sort((a, b) => b[1] - a[1]).slice(0, 6)
-  }, [saved, dwelled, plans])
+  // The intents NewsBreak read out of the articles you actually read.
+  const intents = read
+    .map((id) => getArticle(id))
+    .filter((a): a is NonNullable<typeof a> => !!a)
+    .slice(0, 5)
 
   const loop = [
-    { label: '高频 Feed', done: signals.length > 0 },
-    { label: '意图触发', done: dwelled.length > 0 },
+    { label: '本地文章流', done: read.length > 0 },
+    { label: '读出意图', done: read.length > 0 },
     { label: '轻量规划', done: count('plan_generated') > 0 },
     { label: '真实行动', done: count('map_open') + count('calendar_add') > 0 },
-    { label: '偏好信号', done: signals.length > 0 },
+    { label: '阅读偏好', done: signals.length > 0 },
   ]
 
   const ring = Math.min(wla / WLA_GOAL, 1) * 360
@@ -51,7 +45,7 @@ export function MeScreen() {
     <div className="screen">
       <header className="appbar simple">
         <h1>我的本地生活</h1>
-        <p>每一次浏览、收藏与规划,都会回流为偏好信号。</p>
+        <p>你读的每一篇本地文章,都会被读成出行意图与偏好信号。</p>
       </header>
 
       <section className="wla">
@@ -78,35 +72,36 @@ export function MeScreen() {
       <section className="stats">
         {(
           [
-            ['dwell', '停留'],
-            ['save', '收藏'],
-            ['plan_generated', '生成计划'],
-            ['map_open', '打开地图'],
-            ['calendar_add', '加入日历'],
-            ['repeat_plan', '再次规划'],
-          ] as [SignalType, string][]
-        ).map(([t, label]) => (
-          <div className="stat" key={t}>
-            <span className="stat-num">{count(t)}</span>
-            <span className="stat-label">
-              {SIGNAL_EMOJI[t]} {label}
-            </span>
+            ['read', '读过文章', read.length],
+            ['plan_generated', '生成计划', count('plan_generated')],
+            ['map_open', '打开地图', count('map_open')],
+            ['calendar_add', '加入日历', count('calendar_add')],
+            ['save', '收藏地点', count('save')],
+            ['__plans', '已存计划', plans.length],
+          ] as [string, string, number][]
+        ).map(([k, label, n]) => (
+          <div className="stat" key={k}>
+            <span className="stat-num">{n}</span>
+            <span className="stat-label">{label}</span>
           </div>
         ))}
       </section>
 
       <section className="block">
-        <h2>AI 读懂的你</h2>
-        <p className="block-sub">根据你的浏览、收藏与计划实时推断</p>
-        {tastes.length === 0 ? (
-          <div className="muted-line">还没有足够信号 · 去 Feed 逛逛看</div>
+        <h2>AI 从你的阅读里读到的意图</h2>
+        <p className="block-sub">不是凭空推荐 —— 全部来自你真正读过的文章</p>
+        {intents.length === 0 ? (
+          <div className="muted-line">还没读文章 · 去「发现」读一篇看看</div>
         ) : (
-          <div className="card-tags">
-            {tastes.map(([tag, n]) => (
-              <span className="taste" key={tag}>
-                {tag}
-                <span className="taste-n">{n}</span>
-              </span>
+          <div className="intent-list">
+            {intents.map((a) => (
+              <div className="intent-row" key={a.id}>
+                <span className="intent-emoji">{a.emoji}</span>
+                <span className="intent-text">
+                  <strong>{a.intent}</strong>
+                  <span className="intent-from">源自《{a.headline}》</span>
+                </span>
+              </div>
             ))}
           </div>
         )}

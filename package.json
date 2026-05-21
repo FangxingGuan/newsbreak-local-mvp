@@ -5,7 +5,6 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "snapshot": "node scripts/snapshot.mjs",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
