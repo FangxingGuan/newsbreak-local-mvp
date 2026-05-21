@@ -95,6 +95,7 @@ export interface DiscoverCard {
   tags: string[]
   quote?: PoiReview
   yelpUrl?: string
+  googleUrl?: string
   ticketUrl?: string
 }
 
