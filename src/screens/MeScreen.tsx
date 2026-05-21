@@ -9,6 +9,7 @@ const SIGNAL_EMOJI: Record<SignalType, string> = {
   map_open: '🗺️',
   calendar_add: '🗓️',
   save: '♥',
+  dismiss: '🚫',
 }
 
 const WLA_GOAL = 4
@@ -22,35 +23,35 @@ function relTime(ts: number): string {
 
 export function MeScreen() {
   const { state, wla } = useStore()
-  const { signals, read, seen, saved } = state
+  const { signals, read, seen, opened, saved } = state
 
   const count = (t: SignalType) => signals.filter((s) => s.type === t).length
 
-  // Intents the engine read out — newest first, drawn from the signal log so
-  // articles and discover cards interleave in true engagement order.
-  const intents = signals
-    .filter((s) => (s.type === 'read' || s.type === 'seen') && s.refId)
-    .map((s) => {
-      const a = getArticle(s.refId!)
+  // Intents the engine read out — from content actually opened, newest first.
+  const intents = [...opened]
+    .reverse()
+    .map((id) => {
+      const a = getArticle(id)
       if (a) return { emoji: a.emoji, intent: a.intent, from: a.headline }
-      const d = getDiscover(s.refId!)
+      const d = getDiscover(id)
       if (d) return { emoji: d.emoji, intent: d.intent, from: d.title }
       return null
     })
     .filter((x): x is { emoji: string; intent: string; from: string } => !!x)
     .slice(0, 6)
 
-  // Local-life preference profile — scored by interaction rate (real
-  // interactions ÷ times the card was dwelled / "checked").
-  const prefs = getPreferences(state).slice(0, 8)
-  const prefMax = prefs[0]?.rate ?? 1
+  // Preference profile — interaction rate; positive and negative.
+  const allPrefs = getPreferences(state)
+  const liked = allPrefs.filter((p) => p.rate > 0).slice(0, 7)
+  const disliked = allPrefs.filter((p) => p.rate < 0)
+  const prefMax = liked[0]?.rate ?? 1
 
   const loop = [
     { label: '本地内容流', done: read.length + seen.length > 0 },
-    { label: '读出意图', done: prefs.some((p) => p.num >= 2) },
+    { label: '读出意图', done: allPrefs.length > 0 },
     { label: '加入计划', done: count('commit') > 0 },
     { label: '真实行动', done: count('map_open') + count('calendar_add') > 0 },
-    { label: '偏好信号', done: signals.length > 0 },
+    { label: '偏好回流', done: signals.length > 0 },
   ]
 
   const ring = Math.min(wla / WLA_GOAL, 1) * 360
@@ -59,7 +60,7 @@ export function MeScreen() {
     <div className="screen">
       <header className="appbar simple">
         <h1>我的本地生活</h1>
-        <p>你读的新闻、看的推荐,都会被读成出行意图与本地生活偏好。</p>
+        <p>你的每一次点开、收藏、规划与「不感兴趣」,都在塑造引擎对你的理解。</p>
       </header>
 
       <section className="wla">
@@ -102,15 +103,27 @@ export function MeScreen() {
       </section>
 
       <section className="block">
+        <h2>核心闭环进度</h2>
+        <div className="loopbar">
+          {loop.map((s, i) => (
+            <div className={`loopstep ${s.done ? 'done' : ''}`} key={s.label}>
+              <span className="loopstep-dot">{s.done ? '✓' : i + 1}</span>
+              <span className="loopstep-label">{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="block">
         <h2>你的本地生活偏好</h2>
         <p className="block-sub">
-          按交互率排序 · 互动加权分(点开 1 / 收藏 2 / 规划 3)÷ 停留出 CTA 次数
+          交互率 = 点开 +1 / 收藏 +2 / 规划 +3 / 不感兴趣 −4 · 除以出 CTA 次数
         </p>
-        {prefs.length === 0 ? (
-          <div className="muted-line">还没有偏好信号 · 去「发现」读点内容</div>
+        {liked.length === 0 ? (
+          <div className="muted-line">还没有正向偏好 · 去「发现」点开点内容</div>
         ) : (
           <div className="prefs">
-            {prefs.map((p) => (
+            {liked.map((p) => (
               <div className="pref" key={p.tag}>
                 <div className="pref-row">
                   <span className="pref-tag">{p.tag}</span>
@@ -128,13 +141,25 @@ export function MeScreen() {
             ))}
           </div>
         )}
+        {disliked.length > 0 && (
+          <div className="prefs-neg">
+            <span className="prefs-neg-label">➖ 似乎不感兴趣</span>
+            <div className="neg-chips">
+              {disliked.map((p) => (
+                <span className="neg-chip" key={p.tag}>
+                  {p.tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
       </section>
 
       <section className="block">
         <h2>AI 从你的内容里读到的意图</h2>
-        <p className="block-sub">不是凭空推荐 —— 全部来自你真正读过/看过的内容</p>
+        <p className="block-sub">来自你真正点开的内容 · 最新在前(仅停留不计入)</p>
         {intents.length === 0 ? (
-          <div className="muted-line">还没有内容 · 去「发现」逛逛</div>
+          <div className="muted-line">还没点开过内容 · 去「发现」点开看看</div>
         ) : (
           <div className="intent-list">
             {intents.map((it, i) => (
@@ -151,26 +176,17 @@ export function MeScreen() {
       </section>
 
       <section className="block">
-        <h2>核心闭环进度</h2>
-        <div className="loopbar">
-          {loop.map((s, i) => (
-            <div className={`loopstep ${s.done ? 'done' : ''}`} key={s.label}>
-              <span className="loopstep-dot">{s.done ? '✓' : i + 1}</span>
-              <span className="loopstep-label">{s.label}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="block">
         <h2>偏好信号流</h2>
-        <p className="block-sub">闭环的最后一步 · 持续回流以优化推荐</p>
+        <p className="block-sub">闭环的最后一步 · 正负反馈持续回流以优化推荐</p>
         {signals.length === 0 ? (
           <div className="muted-line">暂无信号 · 你的每个动作都会出现在这里</div>
         ) : (
           <div className="signal-list">
             {signals.slice(0, 14).map((s) => (
-              <div className="signal-row" key={s.id}>
+              <div
+                className={`signal-row ${s.type === 'dismiss' ? 'neg' : ''}`}
+                key={s.id}
+              >
                 <span className="signal-emoji">{SIGNAL_EMOJI[s.type]}</span>
                 <span className="signal-text">
                   <strong>{s.label}</strong>

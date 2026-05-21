@@ -16,12 +16,13 @@ export function ArticleCard({ article, scrollRoot }: Props) {
   const { state, dispatch } = useStore()
   const ref = useRef<HTMLDivElement>(null)
   const read = state.read.includes(article.id)
+  const dismissed = state.dismissed.includes(article.id)
   const primary = article.pois[0]
 
   // Dwelling on an article is the engine's core input.
   useEffect(() => {
     const el = ref.current
-    if (!el || read) return
+    if (!el || read || dismissed) return
     let timer: number | undefined
     const io = new IntersectionObserver(
       ([e]) => {
@@ -41,7 +42,18 @@ export function ArticleCard({ article, scrollRoot }: Props) {
       io.disconnect()
       window.clearTimeout(timer)
     }
-  }, [article.id, article.headline, read, dispatch, scrollRoot])
+  }, [article.id, article.headline, read, dismissed, dispatch, scrollRoot])
+
+  if (dismissed) {
+    return (
+      <div className="card-hidden">
+        <span>🚫 已标记「不感兴趣」· NewsBreak 会少推这类</span>
+        <button onClick={() => dispatch({ type: 'UNDISMISS', id: article.id })}>
+          撤销
+        </button>
+      </div>
+    )
+  }
 
   const open = () =>
     dispatch({ type: 'OPEN_ARTICLE', id: article.id, title: article.headline })
@@ -51,7 +63,18 @@ export function ArticleCard({ article, scrollRoot }: Props) {
       <div className="card-badge article">
         <span>📰 本地报道</span>
         <span className="card-badge-src">{article.source}</span>
+        <button
+          className="card-dismiss"
+          aria-label="不感兴趣"
+          onClick={(e) => {
+            e.stopPropagation()
+            dispatch({ type: 'DISMISS', id: article.id, title: article.headline })
+          }}
+        >
+          ✕
+        </button>
       </div>
+
       <div className="acard-top" onClick={open}>
         <div className="acard-text">
           <h3 className="acard-headline">{article.headline}</h3>

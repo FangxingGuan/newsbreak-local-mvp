@@ -1170,13 +1170,13 @@ function tagsForRef(id: string): string[] {
 
 /**
  * The user's local-life preference profile, scored by INTERACTION RATE.
- *   denominator = times a card was dwelled long enough to surface its CTA
- *                 (i.e. the user "checked" that content)
- *   numerator   = weighted real interactions on that content —
- *                 opened (1), saved a place (2), committed a plan (3)
- *   preference  = numerator / denominator
- * A topic the user reliably acts on outranks one they merely scroll past,
- * even if the latter was seen more often.
+ *   denominator = times a card was dwelled / dismissed (the user "checked" it)
+ *   numerator   = weighted interactions, positive AND negative —
+ *                 opened (+1), saved a place (+2), committed a plan (+3),
+ *                 marked "not interested" (−4)
+ *   preference  = numerator / denominator  → can be negative
+ * A topic the user reliably acts on ranks high; one they keep dismissing
+ * ranks negative (a real disinterest signal, not just a low score).
  */
 export function getPreferences(s: {
   read: string[]
@@ -1184,26 +1184,28 @@ export function getPreferences(s: {
   opened: string[]
   saved: string[]
   plans: Plan[]
+  dismissed: string[]
 }): { tag: string; rate: number; num: number; denom: number }[] {
   const denom = new Map<string, number>()
   const num = new Map<string, number>()
-  // Denominator: every card that dwelled long enough to show its CTA.
-  ;[...s.read, ...s.seen].forEach((id) =>
+  // Denominator: every distinct card the user dwelled on or dismissed.
+  ;[...new Set([...s.read, ...s.seen, ...s.dismissed])].forEach((id) =>
     tagsForRef(id).forEach((t) => denom.set(t, (denom.get(t) ?? 0) + 1)),
   )
-  // Numerator: weighted real interactions.
+  // Numerator: weighted interactions — positive and negative.
   const addNum = (id: string, w: number) =>
     tagsForRef(id).forEach((t) => num.set(t, (num.get(t) ?? 0) + w))
   s.opened.forEach((id) => addNum(id, 1))
   s.saved.forEach((id) => addNum(id, 2))
   s.plans.forEach((p) => addNum(p.basedOnId, 3))
+  s.dismissed.forEach((id) => addNum(id, -4))
   return [...new Set([...denom.keys(), ...num.keys()])]
     .map((tag) => {
       const n = num.get(tag) ?? 0
       const d = denom.get(tag) ?? 0
       return { tag, num: n, denom: d, rate: n / Math.max(d, 1) }
     })
-    .filter((p) => p.num > 0)
+    .filter((p) => p.num !== 0)
     .sort((a, b) => b.rate - a.rate || b.num - a.num)
 }
 

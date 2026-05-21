@@ -344,10 +344,46 @@ h4 {
   padding: 9px 13px;
 }
 .card-badge-src {
+  flex: 1;
+  min-width: 0;
+  text-align: right;
   font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.card-badge-main {
+  flex: 1;
+  min-width: 0;
+}
+.card-dismiss {
+  flex: none;
+  font-size: 12px;
+  line-height: 1;
+  color: currentColor;
+  opacity: 0.4;
+  padding: 2px 0 2px 6px;
+}
+.card-dismiss:active {
+  opacity: 1;
+}
+.card-hidden {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 13px 15px;
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  font-size: 11.5px;
+  color: var(--muted);
+}
+.card-hidden button {
+  flex: none;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--brand);
 }
 .card-badge.article {
   color: #3f5b8c;
@@ -1379,6 +1415,34 @@ h4 {
   height: 100%;
   background: linear-gradient(90deg, #f0353f, #ff7a59);
   border-radius: 4px;
+}
+.prefs-neg {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.prefs-neg-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.neg-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 9px;
+}
+.neg-chip {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #9aa0ab;
+  background: var(--bg);
+  padding: 5px 9px;
+  border-radius: 8px;
+  text-decoration: line-through;
+}
+.signal-row.neg .signal-text strong {
+  color: #c0405a;
 }
 .intent-list {
   display: flex;

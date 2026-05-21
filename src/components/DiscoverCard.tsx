@@ -15,6 +15,7 @@ export function DiscoverCard({ card, scrollRoot }: Props) {
   const { state, dispatch } = useStore()
   const ref = useRef<HTMLDivElement>(null)
   const seen = state.seen.includes(card.id)
+  const dismissed = state.dismissed.includes(card.id)
   const link = card.ticketUrl ?? card.yelpUrl ?? card.googleUrl
   const linkLabel = card.ticketUrl
     ? '购票 ↗'
@@ -24,7 +25,7 @@ export function DiscoverCard({ card, scrollRoot }: Props) {
 
   useEffect(() => {
     const el = ref.current
-    if (!el || seen) return
+    if (!el || seen || dismissed) return
     let timer: number | undefined
     const io = new IntersectionObserver(
       ([e]) => {
@@ -44,7 +45,18 @@ export function DiscoverCard({ card, scrollRoot }: Props) {
       io.disconnect()
       window.clearTimeout(timer)
     }
-  }, [card.id, card.title, seen, dispatch, scrollRoot])
+  }, [card.id, card.title, seen, dismissed, dispatch, scrollRoot])
+
+  if (dismissed) {
+    return (
+      <div className="card-hidden">
+        <span>🚫 已标记「不感兴趣」· NewsBreak 会少推这类</span>
+        <button onClick={() => dispatch({ type: 'UNDISMISS', id: card.id })}>
+          撤销
+        </button>
+      </div>
+    )
+  }
 
   const plan = () =>
     dispatch({ type: 'OPEN_PLANNING', target: { kind: 'discover', id: card.id } })
@@ -58,7 +70,19 @@ export function DiscoverCard({ card, scrollRoot }: Props) {
 
   return (
     <article ref={ref} className={`dcard ${seen ? 'seen' : ''}`}>
-      <div className={`card-badge ${card.kind}`}>{card.badge}</div>
+      <div className={`card-badge ${card.kind}`}>
+        <span className="card-badge-main">{card.badge}</span>
+        <button
+          className="card-dismiss"
+          aria-label="不感兴趣"
+          onClick={(e) => {
+            e.stopPropagation()
+            dispatch({ type: 'DISMISS', id: card.id, title: card.title })
+          }}
+        >
+          ✕
+        </button>
+      </div>
 
       <div className="dcard-top" onClick={plan}>
         <div className="dcard-text">

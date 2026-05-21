@@ -181,6 +181,7 @@ export type SignalType =
   | 'map_open'
   | 'calendar_add'
   | 'save'
+  | 'dismiss'
 
 export interface Signal {
   id: string

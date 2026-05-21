@@ -17,6 +17,7 @@ const SIGNAL_LABEL: Record<SignalType, string> = {
   map_open: '打开地图导航',
   calendar_add: '加入日历',
   save: '收藏地点',
+  dismiss: '标记「不感兴趣」',
 }
 
 /**
@@ -35,6 +36,8 @@ interface State {
   /** Content actually opened (tapped through) — a real interaction. */
   opened: string[]
   saved: string[]
+  /** Content the user explicitly marked "not interested" — negative signal. */
+  dismissed: string[]
   signals: Signal[]
   plans: Plan[]
   openArticleId: string | null
@@ -49,6 +52,7 @@ const initialState: State = {
   seen: [],
   opened: [],
   saved: [],
+  dismissed: [],
   signals: [],
   plans: [],
   openArticleId: null,
@@ -64,6 +68,8 @@ type Action =
   | { type: 'CLOSE_ARTICLE' }
   | { type: 'SEEN'; id: string; title: string }
   | { type: 'TOGGLE_SAVE'; id: string; title: string }
+  | { type: 'DISMISS'; id: string; title: string }
+  | { type: 'UNDISMISS'; id: string }
   | { type: 'OPEN_PLANNING'; target: PlanTarget }
   | { type: 'CLOSE_PLANNING' }
   | { type: 'ADD_PLAN'; plan: Plan }
@@ -129,6 +135,22 @@ function reducer(state: State, action: Action): State {
           : [makeSignal('save', action.title, action.id), ...state.signals],
       }
     }
+    case 'DISMISS': {
+      if (state.dismissed.includes(action.id)) return state
+      return {
+        ...state,
+        dismissed: [...state.dismissed, action.id],
+        signals: [makeSignal('dismiss', action.title, action.id), ...state.signals],
+      }
+    }
+    case 'UNDISMISS':
+      return {
+        ...state,
+        dismissed: state.dismissed.filter((d) => d !== action.id),
+        signals: state.signals.filter(
+          (s) => !(s.type === 'dismiss' && s.refId === action.id),
+        ),
+      }
     case 'OPEN_PLANNING':
       return {
         ...state,
