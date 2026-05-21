@@ -75,7 +75,8 @@ export function App() {
             <div className="lc-text">
               <strong>发现卡 · 带动意图</strong>
               <span>
-                从 Yelp / Ticketmaster 主动挖出值得一去的小众新店与热门活动
+                从 Yelp / Google / Ticketmaster 挖出小众新店、亲子去处、
+                周末玩乐与热门活动
               </span>
             </div>
           </div>

@@ -118,7 +118,14 @@ export interface PlanSeed {
 }
 
 /** The kind of outing a plan is — drives its pacing, stops and tips. */
-export type PlanKind = 'meal' | 'cafe' | 'outdoor' | 'bookstore' | 'grocery' | 'event'
+export type PlanKind =
+  | 'meal'
+  | 'cafe'
+  | 'outdoor'
+  | 'bookstore'
+  | 'grocery'
+  | 'family'
+  | 'event'
 
 /** One stop inside a generated plan. */
 export interface PlanStop {
