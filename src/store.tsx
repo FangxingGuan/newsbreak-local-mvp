@@ -1,5 +1,5 @@
-// Global demo state: one reducer driving the article-driven core loop.
-// article feed → read article → intent → planning → real-world action → signals
+// Global demo state: one reducer driving the article-driven core loop, now
+// with a second, recommendation-driven card type.
 
 import {
   createContext,
@@ -11,7 +11,7 @@ import {
 import type { Plan, Signal, SignalType, Tab } from './types'
 
 const SIGNAL_LABEL: Record<SignalType, string> = {
-  read: '读完一篇文章',
+  read: '看过本地内容',
   plan_generated: '生成行程',
   map_open: '打开地图导航',
   calendar_add: '加入日历',
@@ -21,14 +21,17 @@ const SIGNAL_LABEL: Record<SignalType, string> = {
 /** Signal types that count toward the North Star metric (Weekly Local Actions). */
 const WLA_TYPES: SignalType[] = ['plan_generated', 'map_open', 'calendar_add']
 
+type PlanTarget = { kind: 'article' | 'discover'; id: string }
+
 interface State {
   tab: Tab
   read: string[]
+  seen: string[]
   saved: string[]
   signals: Signal[]
   plans: Plan[]
   openArticleId: string | null
-  planningArticleId: string | null
+  planning: PlanTarget | null
   viewPlanId: string | null
   toast: string | null
 }
@@ -36,11 +39,12 @@ interface State {
 const initialState: State = {
   tab: 'feed',
   read: [],
+  seen: [],
   saved: [],
   signals: [],
   plans: [],
   openArticleId: null,
-  planningArticleId: null,
+  planning: null,
   viewPlanId: null,
   toast: null,
 }
@@ -50,8 +54,9 @@ type Action =
   | { type: 'READ'; id: string; title: string }
   | { type: 'OPEN_ARTICLE'; id: string; title: string }
   | { type: 'CLOSE_ARTICLE' }
+  | { type: 'SEEN'; id: string; title: string }
   | { type: 'TOGGLE_SAVE'; id: string; title: string }
-  | { type: 'OPEN_PLANNING'; articleId: string }
+  | { type: 'OPEN_PLANNING'; target: PlanTarget }
   | { type: 'CLOSE_PLANNING' }
   | { type: 'ADD_PLAN'; plan: Plan }
   | { type: 'VIEW_PLAN'; id: string | null }
@@ -89,6 +94,14 @@ function reducer(state: State, action: Action): State {
       return { ...markRead(state, action.id, action.title), openArticleId: action.id }
     case 'CLOSE_ARTICLE':
       return { ...state, openArticleId: null }
+    case 'SEEN': {
+      if (state.seen.includes(action.id)) return state
+      return {
+        ...state,
+        seen: [...state.seen, action.id],
+        signals: [makeSignal('read', action.title), ...state.signals],
+      }
+    }
     case 'TOGGLE_SAVE': {
       const has = state.saved.includes(action.id)
       return {
@@ -102,9 +115,9 @@ function reducer(state: State, action: Action): State {
       }
     }
     case 'OPEN_PLANNING':
-      return { ...state, planningArticleId: action.articleId }
+      return { ...state, planning: action.target }
     case 'CLOSE_PLANNING':
-      return { ...state, planningArticleId: null }
+      return { ...state, planning: null }
     case 'ADD_PLAN':
       return { ...state, plans: [action.plan, ...state.plans] }
     case 'VIEW_PLAN':

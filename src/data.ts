@@ -5,7 +5,14 @@
 // Google Places (ratings, review counts, photos, prices captured 2026-05).
 // Article bodies are original Chinese summaries of the reporting — not copies.
 
-import type { Article, Plan, PlanStop } from './types'
+import type {
+  Article,
+  DiscoverCard,
+  FeedEntry,
+  Plan,
+  PlanSeed,
+  PlanStop,
+} from './types'
 
 export const USER_LOCATION = 'Palo Alto, CA'
 
@@ -24,6 +31,7 @@ export const ARTICLES: Article[] = [
     comments: 318,
     reactions: 1240,
     intent: '去 Vesta 打卡 BTS 同款 Sausage & Honey 披萨',
+    tags: ['披萨', '意餐', '约会'],
     body: [
       '韩国男团 BTS 五月在斯坦福体育场连开数场售罄演唱会,期间也在湾区四处走动。成员 V 在首场演出上提到当地一家披萨店很好吃,粉丝根据他的描述很快锁定了这家店。',
       '据报道,这家店是位于 Redwood City 的 Vesta。V 在台上说,下次再来斯坦福还要去吃那家披萨,并称「斯坦福这边的披萨最好吃」。',
@@ -79,6 +87,7 @@ export const ARTICLES: Article[] = [
     comments: 56,
     reactions: 287,
     intent: '下单尝鲜本地手作酸种面包',
+    tags: ['烘焙', '面包', '新店'],
     body: [
       '曾是软件工程师的 Vanya Weng 于 2026 年 3 月在 Menlo Park 的 The Willows 街区开了一家家庭式微型面包房 Kirana Bakehouse,主打按订单现做的酸种面包。',
       '此前她到法国休了一段间隔年,在当地学习艺术与烘焙,回来后决定把这份热情做成一门能连接社区的小生意。',
@@ -134,6 +143,7 @@ export const ARTICLES: Article[] = [
     comments: 41,
     reactions: 198,
     intent: '也门咖啡馆本月开业 · 加入期待清单',
+    tags: ['咖啡', '也门咖啡', '新店'],
     body: [
       '源自美国密歇根州、2021 年创立的也门咖啡连锁 Haraz Coffee House 将进驻 Mountain View,预计 2026 年六月在 California 街的 Landsby 公寓楼下开业 —— 目前该品牌在全美已有 50 多家门店。',
       'Haraz 专做传统的也门咖啡与茶饮 —— 咖啡的起源,正与也门在全球咖啡贸易早期的中心地位有关。',
@@ -200,6 +210,7 @@ export const ARTICLES: Article[] = [
     comments: 74,
     reactions: 402,
     intent: '安排一次东湾觅食 · 挑战巨型芝士堡',
+    tags: ['汉堡', '美式', '必吃'],
     body: [
       '这篇本地美食栏目介绍了位于 Albany 的 Al\'s Big Burger —— 一家朴实无华的小馆,以分量大得离谱的芝士汉堡闻名,远超一般餐厅所谓的「巨型」尺寸。',
       '文章细数了它的菜单,从 1/3 磅起步,一路到分量惊人的大号汉堡,还有各式配菜。',
@@ -253,6 +264,7 @@ export const ARTICLES: Article[] = [
     comments: 62,
     reactions: 254,
     intent: '找一顿慢熏布里斯特午餐 · 安排去 Wagon Wheel',
+    tags: ['烧烤', 'BBQ', '午餐'],
     body: [
       '这篇本地美食推荐介绍了 Mountain View 的 Wagon Wheel Barbecue —— 一家用加州橡木慢熏肉类的烧烤馆。',
       '招牌的布里斯特(牛胸肉)湿润、带着漂亮的烟圈,还会附赠蒜香法棍、腌菜等小食。',
@@ -307,6 +319,7 @@ export const ARTICLES: Article[] = [
     comments: 187,
     reactions: 612,
     intent: 'T&T 亚洲超市 San Jose 开业 · 加入期待清单',
+    tags: ['亚洲超市', '购物', '新店'],
     body: [
       '以备餐熟食、烘焙柜台和丰富亚洲食材著称的加拿大连锁超市 T&T,将在湾区开出它在加州的第一家门店。',
       '新店定于 6 月 18 日在 San Jose 的 Westgate Center(Saratoga 大道 1600 号)开业,当天上午 8 点开始开业活动,9 点正式对公众开放。',
@@ -344,6 +357,7 @@ export const ARTICLES: Article[] = [
     comments: 274,
     reactions: 731,
     intent: '去 Dublin 的 H Mart 逛亚洲超市与美食广场',
+    tags: ['亚洲超市', '韩式', '购物'],
     body: [
       '在东湾,大型亚洲超市正成为郊区购物中心新的「主力租户」。今年三月开业的 Dublin H Mart 就是个代表 —— 据零售商称,它已是这家韩国连锁全美表现最好的门店之一。',
       '到今年底,东湾至少会有三家大型亚洲超市开业,还有一家旗舰店即将动工。这既是经济利好,偶尔也成为文化摩擦点:有老居民抱怨停车拥挤,也有居民热烈欢迎这些新去处。',
@@ -398,6 +412,7 @@ export const ARTICLES: Article[] = [
     comments: 96,
     reactions: 388,
     intent: '去 Outer Sunset 吃拇指大小的生煎包',
+    tags: ['中餐', '饺子', '小馆'],
     body: [
       'Mini Potstickers 2023 年开在旧金山 Outer Sunset 的 Irving 街上,是一家只有约 300 平方英尺、十来张小桌的迷你餐馆。',
       '它的招牌其实是「拇指大小的生煎包」—— 比常见生煎小一半,皮薄底脆、咬开爆汁;店名里的「potstickers(锅贴)」只是为了让顾客更容易理解。',
@@ -454,6 +469,7 @@ export const ARTICLES: Article[] = [
     comments: 129,
     reactions: 463,
     intent: 'Walnut Creek 沙拉新店夏季开业 · 加入期待清单',
+    tags: ['沙拉', '轻食', '新店'],
     body: [
       '据报道,高端沙拉连锁 MIXT 将于今年夏天在 Walnut Creek 开出新店,地址正是已歇业的百年家族熟食店 Genova Deli 原址。',
       'Genova Deli 在经营 58 年后于今年二月关门。MIXT 创始人 Leslie Silverglide 表示,公司「想进 Walnut Creek 已经超过 15 年」。',
@@ -491,6 +507,189 @@ export const ARTICLES: Article[] = [
 
 export function getArticle(id: string): Article | undefined {
   return ARTICLES.find((a) => a.id === id)
+}
+
+// ---- Discover cards ---------------------------------------------------------
+// The second card type: recommendations the engine surfaces from API content
+// worth a user's attention. Two kinds —
+//   find  : under-the-radar Yelp spots (high rating, few reviews — a "新发现")
+//   event : trending, time-bound Ticketmaster events
+// Note: Yelp/Google don't expose an opening date, so "new" can't be verified
+// from the APIs — these are framed honestly as high-rated-but-low-review finds.
+
+export const DISCOVER: DiscoverCard[] = [
+  {
+    type: 'discover',
+    id: 'd-hibari',
+    kind: 'find',
+    badge: '🔍 本地小众新发现',
+    title: 'Hibari',
+    category: 'Sushi · 日料',
+    emoji: '🍣',
+    cover: 'linear-gradient(135deg,#2c3e50,#4ca1af)',
+    image: 'https://s3-media0.fl.yelpcdn.com/bphoto/AlgrKwpEydClDIMd3TOhaw/o.jpg',
+    neighborhood: 'Portola Valley',
+    distance: '3.9 mi',
+    rating: 4.9,
+    reviews: 87,
+    blurb: '藏在 Portola Valley 的寿司小店 —— 只有 87 条评价却拿到 4.9 分,口碑高得惊人。',
+    intent: '找个安静的晚上去 Hibari 吃顿寿司',
+    tags: ['寿司', '日料', '小众'],
+    quote: {
+      source: 'Yelp',
+      author: 'Richard L.',
+      rating: 5,
+      text: 'Truly authentic — the quality here rivals restaurants I’ve visited in Japan.',
+    },
+    yelpUrl: 'https://www.yelp.com/biz/hibari-portola-valley-2',
+  },
+  {
+    type: 'discover',
+    id: 'd-hellskitchen',
+    kind: 'event',
+    badge: '🔥 本周热门活动',
+    title: "Hell's Kitchen (巡演)",
+    category: '音乐剧 · 演出',
+    emoji: '🎭',
+    cover: 'linear-gradient(135deg,#3a1c71,#d76d77)',
+    image:
+      'https://s1.ticketm.net/dam/a/cc7/e506039e-ce0b-4a57-bdbc-cfa72081acc7_RETINA_PORTRAIT_16_9.jpg',
+    neighborhood: 'San Francisco',
+    distance: '30.3 mi',
+    date: '2026-05-20',
+    price: '门票',
+    blurb: 'Broadway 音乐剧《Hell’s Kitchen》巡演,本周登陆旧金山 Orpheum 剧院。',
+    intent: '订张票去看《Hell’s Kitchen》音乐剧',
+    tags: ['音乐剧', '演出', '文化'],
+    ticketUrl:
+      'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A7OkF3&utm_medium=affiliate',
+  },
+  {
+    type: 'discover',
+    id: 'd-redwood',
+    kind: 'find',
+    badge: '🔍 本地小众新发现',
+    title: 'The Redwood by Chef Julien',
+    category: 'Cafe · 早午餐',
+    emoji: '🥐',
+    cover: 'linear-gradient(135deg,#d38312,#a83279)',
+    image: 'https://s3-media0.fl.yelpcdn.com/bphoto/3nYKrxLzkmzxAXb1VXnMOA/o.jpg',
+    neighborhood: 'Palo Alto',
+    distance: '1.1 mi',
+    rating: 4.8,
+    reviews: 60,
+    blurb: 'Palo Alto 一家低调的早午餐咖啡馆,主厨手作三明治与糕点,60 条评价稳在 4.8 分。',
+    intent: '周末去 The Redwood 吃顿手作早午餐',
+    tags: ['早午餐', '咖啡', '三明治'],
+    quote: {
+      source: 'Yelp',
+      author: 'S M.',
+      rating: 5,
+      text: 'Excellent sandwiches and pastries — some traditional, some very creative and flavorful.',
+    },
+    yelpUrl: 'https://www.yelp.com/biz/the-redwood-by-chef-julien-palo-alto',
+  },
+  {
+    type: 'discover',
+    id: 'd-davelandau',
+    kind: 'event',
+    badge: '🔥 本周热门活动',
+    title: 'Dave Landau',
+    category: '脱口秀 · 喜剧',
+    emoji: '🎤',
+    cover: 'linear-gradient(135deg,#0f2027,#2c5364)',
+    image:
+      'https://s1.ticketm.net/dam/a/d74/4adaa7b3-91c9-4541-a3df-59e35af8bd74_RETINA_PORTRAIT_16_9.jpg',
+    neighborhood: 'San Francisco',
+    distance: '32.0 mi',
+    date: '2026-05-20',
+    price: '门票',
+    blurb: '喜剧演员 Dave Landau 本周在旧金山 Cobb’s Comedy Club 开演。',
+    intent: '订张票去 Cobb’s 看一场脱口秀',
+    tags: ['脱口秀', '喜剧', '演出'],
+    ticketUrl:
+      'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fdave-landau-san-francisco-california-05-20-2026%2Fevent%2F1C0064432114C05F&utm_medium=affiliate',
+  },
+  {
+    type: 'discover',
+    id: 'd-crust',
+    kind: 'find',
+    badge: '🔍 本地小众新发现',
+    title: 'Crust — Fresh Sourdough Deli',
+    category: 'Deli · 三明治',
+    emoji: '🥪',
+    cover: 'linear-gradient(135deg,#e0a96d,#8a5a2b)',
+    image: 'https://s3-media0.fl.yelpcdn.com/bphoto/WQc0o4Z8LkNu8RLm0FvyUQ/o.jpg',
+    neighborhood: 'Palo Alto',
+    distance: '1.4 mi',
+    rating: 4.8,
+    reviews: 125,
+    price: '$$',
+    blurb: '主打酸种面包三明治的小 deli —— 料足、面包够酸,本地口碑很稳。',
+    intent: '中午去 Crust 带个酸种三明治',
+    tags: ['三明治', '酸种', 'Deli'],
+    quote: {
+      source: 'Yelp',
+      author: 'Jon Y.',
+      rating: 5,
+      text: 'Delicious, loaded sandwiches on perfectly sour sourdough — fresh ingredients, cheerful staff.',
+    },
+    yelpUrl: 'https://www.yelp.com/biz/crust-fresh-sourdough-deli-palo-alto',
+  },
+  {
+    type: 'discover',
+    id: 'd-michoacanita',
+    kind: 'find',
+    badge: '🔍 本地小众新发现',
+    title: 'La Michoacanita Grill',
+    category: 'Tacos · 餐车',
+    emoji: '🌮',
+    cover: 'linear-gradient(135deg,#f7971e,#ffd200)',
+    image: 'https://s3-media0.fl.yelpcdn.com/bphoto/SQdHeFW0rLh_MgR2OheUCw/o.jpg',
+    neighborhood: 'East Palo Alto',
+    distance: '2.1 mi',
+    rating: 4.9,
+    reviews: 22,
+    blurb: 'East Palo Alto 的塔可餐车 —— 22 条评价高达 4.9 分,典型的本地小众宝藏。',
+    intent: '去 La Michoacanita 餐车吃顿地道塔可',
+    tags: ['塔可', '墨西哥菜', '餐车'],
+    quote: {
+      source: 'Yelp',
+      author: 'Shay W.',
+      rating: 5,
+      text: 'One of the cleanest taco trucks with the freshest ingredients — the carne asada quesadillas are to die for.',
+    },
+    yelpUrl: 'https://www.yelp.com/biz/la-michoacanita-grill-east-palo-alto',
+  },
+]
+
+export function getDiscover(id: string): DiscoverCard | undefined {
+  return DISCOVER.find((d) => d.id === id)
+}
+
+/** Type guard: distinguishes a discover card from an article. */
+export function isDiscover(entry: FeedEntry): entry is DiscoverCard {
+  return (entry as DiscoverCard).type === 'discover'
+}
+
+/**
+ * The user's local-life preference profile — aggregated from the tags of the
+ * articles they have read and the discover cards they have engaged with.
+ */
+export function getPreferences(
+  read: string[],
+  seen: string[],
+): { tag: string; n: number }[] {
+  const freq = new Map<string, number>()
+  read.forEach((id) =>
+    getArticle(id)?.tags.forEach((t) => freq.set(t, (freq.get(t) ?? 0) + 1)),
+  )
+  seen.forEach((id) =>
+    getDiscover(id)?.tags.forEach((t) => freq.set(t, (freq.get(t) ?? 0) + 1)),
+  )
+  return [...freq.entries()]
+    .map(([tag, n]) => ({ tag, n }))
+    .sort((a, b) => b.n - a.n)
 }
 
 // ---- Lightweight plan generator ---------------------------------------------
@@ -549,25 +748,52 @@ export function planVariantCount(): number {
   return PLAN_VARIANTS.length
 }
 
-export function generatePlan(article: Article, variant = 0): Plan {
-  const v = PLAN_VARIANTS[((variant % PLAN_VARIANTS.length) + PLAN_VARIANTS.length) % PLAN_VARIANTS.length]
-  const poi = article.pois[0]
+/** A plan is built from an article's primary POI… */
+export function planSeedFromArticle(a: Article): PlanSeed {
+  const p = a.pois[0]
+  return {
+    id: a.id,
+    title: a.headline,
+    anchorName: p.name,
+    anchorEmoji: p.emoji,
+    anchorBlurb: p.blurb,
+    anchorImage: p.image,
+  }
+}
+
+/** …or from a discover card. */
+export function planSeedFromDiscover(d: DiscoverCard): PlanSeed {
+  return {
+    id: d.id,
+    title: d.title,
+    anchorName: d.title,
+    anchorEmoji: d.emoji,
+    anchorBlurb: d.blurb,
+    anchorImage: d.image,
+  }
+}
+
+export function generatePlan(seed: PlanSeed, variant = 0): Plan {
+  const v =
+    PLAN_VARIANTS[
+      ((variant % PLAN_VARIANTS.length) + PLAN_VARIANTS.length) % PLAN_VARIANTS.length
+    ]
   const anchor: PlanStop = {
     time: '11:00',
-    emoji: poi.emoji,
-    title: poi.name,
-    desc: poi.blurb,
+    emoji: seed.anchorEmoji,
+    title: seed.anchorName,
+    desc: seed.anchorBlurb,
     travel: '🚗 前往',
-    image: poi.image,
+    image: seed.anchorImage,
     anchor: true,
   }
   return {
-    id: `plan-${article.id}-${Date.now()}`,
-    title: `${poi.name} 觅食计划`,
+    id: `plan-${seed.id}-${Date.now()}`,
+    title: `${seed.anchorName} 觅食计划`,
     when: '本周六 10:00',
     vibe: v.vibe,
-    basedOnArticleId: article.id,
-    basedOnTitle: article.headline,
+    basedOnId: seed.id,
+    basedOnTitle: seed.title,
     stops: [...v.before, anchor, ...v.after],
     createdAt: Date.now(),
   }

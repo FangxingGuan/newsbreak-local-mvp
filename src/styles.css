@@ -319,6 +319,136 @@ h4 {
   }
 }
 
+/* ---- Discover card (API recommendation) ---- */
+.dcard {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: box-shadow 0.25s;
+}
+.dcard.seen {
+  box-shadow: 0 0 0 2px rgba(240, 53, 63, 0.26),
+    0 10px 26px rgba(240, 53, 63, 0.13);
+}
+.dcard-badge {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  padding: 9px 13px;
+}
+.dcard-badge.find {
+  color: #1f7a8c;
+  background: #e6f3f5;
+}
+.dcard-badge.event {
+  color: #b03a8c;
+  background: #fbe9f4;
+}
+.dcard-top {
+  display: flex;
+  gap: 12px;
+  padding: 4px 13px 0;
+  cursor: pointer;
+}
+.dcard-text {
+  flex: 1;
+  min-width: 0;
+}
+.dcard-title {
+  font-size: 15.5px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+.dcard-rate {
+  font-size: 12px;
+  font-weight: 700;
+  color: #e8920a;
+  margin-top: 5px;
+}
+.dcard-price {
+  color: var(--muted);
+}
+.dcard-meta {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.dcard-blurb {
+  font-size: 12.5px;
+  color: #3c3f47;
+  line-height: 1.55;
+  margin-top: 7px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.dcard-thumb {
+  width: 84px;
+  height: 84px;
+  border-radius: 12px;
+  flex: none;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dcard-emoji {
+  font-size: 36px;
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.3));
+}
+.dcard-quote {
+  margin: 9px 13px 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: #3c3f47;
+}
+.dcard-quote-stars {
+  color: #f5a623;
+  font-size: 9.5px;
+  letter-spacing: 0.5px;
+  margin-right: 5px;
+}
+.dcard-foot {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  padding: 11px 13px 13px;
+}
+.dcard-plan {
+  margin-left: auto;
+  background: var(--brand);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 9px 13px;
+  border-radius: 11px;
+  box-shadow: 0 4px 11px rgba(240, 53, 63, 0.3);
+}
+.dcard-intent {
+  margin: 0 13px 13px;
+  padding: 10px 12px;
+  border-radius: 11px;
+  background: linear-gradient(100deg, #fff3f3, #ffeae4);
+  border: 1px dashed #f3b9b9;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: intentIn 0.35s ease;
+}
+.dcard-intent strong {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--brand);
+}
+.dcard-intent span {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #8a3b3b;
+}
+
 /* ---- Bottom sheets ---- */
 .sheet-wrap {
   position: absolute;
@@ -1010,6 +1140,37 @@ h4 {
   font-size: 12px;
   color: var(--muted);
   padding: 4px 0;
+}
+.prefs {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.pref-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.pref-tag {
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.pref-n {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.pref-bar {
+  height: 7px;
+  background: var(--bg);
+  border-radius: 4px;
+  margin-top: 5px;
+  overflow: hidden;
+}
+.pref-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f0353f, #ff7a59);
+  border-radius: 4px;
 }
 .intent-list {
   display: flex;

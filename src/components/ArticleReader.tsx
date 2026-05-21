@@ -165,7 +165,10 @@ export function ArticleReader() {
             className="btn-primary"
             onClick={() => {
               dispatch({ type: 'CLOSE_ARTICLE' })
-              dispatch({ type: 'OPEN_PLANNING', articleId: article.id })
+              dispatch({
+                type: 'OPEN_PLANNING',
+                target: { kind: 'article', id: article.id },
+              })
             }}
           >
             ✨ 规划进行程

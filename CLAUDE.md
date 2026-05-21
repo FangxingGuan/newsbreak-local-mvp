@@ -10,9 +10,16 @@ Guidance for Claude Code when working in this repository.
 ## What we're building
 
 Transform NewsBreak from a local news feed into a feed-driven *local decision
-engine*. The defining principle of this demo: **nothing is proactively
-recommended**. Intent is read OUT of the local-news articles the user actually
-reads.
+engine*. The feed mixes **two card types**:
+
+1. **Article cards** — real local-news reports; intent is read OUT of the
+   articles the user actually reads (the primary, defensible mechanic).
+2. **Discover cards** — recommendations the engine surfaces from API content
+   worth attention: under-the-radar Yelp finds (high rating / few reviews) and
+   trending Ticketmaster events.
+
+Both feed into the same loop, and both contribute to the user's local-life
+**preference profile** (aggregated tags shown on the Me screen).
 
 Core loop:
 

@@ -61,8 +61,54 @@ export interface Article {
   reactions: number
   /** The outing intent NewsBreak's engine reads out of this article. */
   intent: string
+  /** Topical tags — feed the user's local-life preference profile. */
+  tags: string[]
   /** Places mentioned in the article; pois[0] is the primary one. */
   pois: ArticlePOI[]
+}
+
+/**
+ * A recommendation card built from API content worth surfacing — a trending
+ * Ticketmaster event, or a top-rated place from a Yelp ranking. Unlike an
+ * article, this is the engine proactively proposing something.
+ */
+export interface DiscoverCard {
+  type: 'discover'
+  id: string
+  kind: 'event' | 'find'
+  /** Newsworthy hook, e.g. "🔥 本周热门活动" or "⭐ Yelp 高分榜 · 本地第 2". */
+  badge: string
+  title: string
+  category: string
+  emoji: string
+  cover: string
+  image?: string
+  neighborhood: string
+  distance: string
+  rating?: number
+  reviews?: number
+  price?: string
+  date?: string
+  blurb: string
+  /** The outing intent this recommendation is meant to spark. */
+  intent: string
+  tags: string[]
+  quote?: PoiReview
+  yelpUrl?: string
+  ticketUrl?: string
+}
+
+/** Anything that can appear in the feed. */
+export type FeedEntry = Article | DiscoverCard
+
+/** Minimal input needed to generate a plan — from an article or a card. */
+export interface PlanSeed {
+  id: string
+  title: string
+  anchorName: string
+  anchorEmoji: string
+  anchorBlurb: string
+  anchorImage?: string
 }
 
 /** One stop inside a generated plan. */
@@ -85,7 +131,7 @@ export interface Plan {
   title: string
   when: string
   vibe: string
-  basedOnArticleId: string
+  basedOnId: string
   basedOnTitle: string
   stops: PlanStop[]
   createdAt: number

@@ -46,7 +46,7 @@ export function App() {
             </div>
             <BottomNav />
             {state.openArticleId && <ArticleReader />}
-            {state.planningArticleId && <PlanSheet />}
+            {state.planning && <PlanSheet />}
             {state.viewPlanId && <ViewPlanSheet />}
             <Toast />
           </div>
