@@ -5,7 +5,7 @@ Guidance for Claude Code when working in this repository.
 ## Project status
 
 **Interactive MVP demo** — a clickable, mobile-framed web demo of NewsBreak's
-**article-driven local decision engine**.
+**local-content-driven decision engine**.
 
 ## What we're building
 

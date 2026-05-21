@@ -1400,6 +1400,45 @@ h4 {
 .legend p strong {
   color: #d6d7df;
 }
+.legend-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin: 16px 0 6px;
+}
+.legend-card {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.lc-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  flex: none;
+  margin-top: 4px;
+}
+.lc-dot.a {
+  background: #5b8def;
+}
+.lc-dot.d {
+  background: #27c93f;
+}
+.lc-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.lc-text strong {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #e7e8ee;
+}
+.lc-text span {
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: #a9abb8;
+}
 .legend-loop {
   margin: 22px 0;
   display: flex;

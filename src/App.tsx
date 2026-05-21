@@ -22,11 +22,11 @@ function StatusBar() {
 }
 
 const LOOP = [
-  { emoji: '📰', label: '本地文章流' },
-  { emoji: '✨', label: '读出出行意图' },
+  { emoji: '📰', label: '本地内容流(新闻 + 推荐)' },
+  { emoji: '✨', label: '形成出行意图' },
   { emoji: '🗺️', label: '轻量规划' },
   { emoji: '🚀', label: '真实行动' },
-  { emoji: '💜', label: '阅读偏好信号' },
+  { emoji: '💜', label: '偏好画像回流' },
 ]
 
 export function App() {
@@ -57,11 +57,29 @@ export function App() {
         <div className="legend-brand">
           <span className="legend-dot" /> NewsBreak Local
         </div>
-        <h1>文章驱动的本地决策引擎</h1>
+        <h1>本地内容驱动的决策引擎</h1>
         <p>
-          交互式 MVP 演示。不主动推荐 —— 出行意图全部从用户
-          <strong>真实读过的本地新闻</strong>里「读」出来。
+          交互式 MVP 演示。把 NewsBreak 的本地内容流变成出行意图,再到一条
+          可执行的轻量行程。出行意图有<strong>两个来源</strong>:
         </p>
+        <div className="legend-cards">
+          <div className="legend-card">
+            <span className="lc-dot a" />
+            <div className="lc-text">
+              <strong>文章卡 · 读出意图</strong>
+              <span>从用户真实读过的本地新闻报道里「读」出出行意图</span>
+            </div>
+          </div>
+          <div className="legend-card">
+            <span className="lc-dot d" />
+            <div className="lc-text">
+              <strong>发现卡 · 带动意图</strong>
+              <span>
+                从 Yelp / Ticketmaster 主动挖出值得一去的小众新店与热门活动
+              </span>
+            </div>
+          </div>
+        </div>
         <div className="legend-loop">
           {LOOP.map((s, i) => (
             <div className="legend-step" key={s.label}>
@@ -72,13 +90,15 @@ export function App() {
           ))}
         </div>
         <ul className="legend-tips">
-          <li>在 feed 里停留某篇文章约 2 秒 → 引擎读出出行意图</li>
-          <li>点开文章 → 读全文,文末是抽取出的真实 POI</li>
+          <li>停留任意一张卡片 → 引擎形成一条出行意图</li>
+          <li>文章卡可读全文与原文链接;发现卡含真实评分与评论</li>
           <li>POI 由 Yelp / Google Places 实时数据富化</li>
-          <li>「规划进行程」把文章里的地点编成一条行程</li>
-          <li>「我的」页可见阅读信号与北极星指标 WLA</li>
+          <li>「规划进行程」把地点编成一条可执行的轻量行程</li>
+          <li>「我的」页沉淀本地生活偏好画像与北极星指标 WLA</li>
         </ul>
-        <div className="legend-foot">POI 为真实 API 数据 · 文章为真实本地报道</div>
+        <div className="legend-foot">
+          真实本地报道 · 真实 API 数据 · WLA 为北极星指标
+        </div>
       </aside>
     </div>
   )
