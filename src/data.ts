@@ -10,6 +10,7 @@ import type {
   DiscoverCard,
   FeedEntry,
   Plan,
+  PlanKind,
   PlanSeed,
   PlanStop,
 } from './types'
@@ -985,68 +986,418 @@ export function getPreferences(
     .sort((a, b) => b.n - a.n)
 }
 
-// ---- Lightweight plan generator ---------------------------------------------
-// A plan is built around an article's primary POI, with a couple of moods.
+// ---- Plan generator ---------------------------------------------------------
+// A plan is tailored to the KIND of place it centres on — a dinner out, a
+// coffee morning, an outdoor half-day, a bookstore afternoon, a grocery run or
+// an evening event each get their own pacing, supporting stops and tips. It is
+// then PERSONALIZED with one extra stop matched to the user's local-life
+// preference profile. `{area}` in a description is filled with the anchor's
+// neighborhood.
 
 interface PlanVariant {
   vibe: string
+  when: string
+  anchorTime: string
   before: PlanStop[]
   after: PlanStop[]
 }
 
-const PLAN_VARIANTS: PlanVariant[] = [
-  {
-    vibe: '☕️ 周末觅食小路线',
-    before: [
+interface PlanKindTemplate {
+  title: string
+  anchorTravel: string
+  anchorTip: string
+  variants: [PlanVariant, PlanVariant]
+}
+
+const PLAN_KINDS: Record<PlanKind, PlanKindTemplate> = {
+  meal: {
+    title: '约会聚餐夜',
+    anchorTravel: '🚶 步行可达',
+    anchorTip: '💡 招牌菜先点上;工作日通常比周末好订位,热门时段建议提前订。',
+    variants: [
       {
-        time: '10:00',
-        emoji: '🚶',
-        title: '街区散步',
-        desc: '先到附近随便逛逛,慢慢进入状态。',
+        vibe: '🌆 经典约会夜',
+        when: '本周五 17:30',
+        anchorTime: '19:00',
+        before: [
+          {
+            time: '17:30',
+            emoji: '🚶',
+            title: '提前到,先散个步',
+            desc: '比订位时间早半小时到 {area},沿街走走、看看橱窗,把节奏先慢下来。',
+          },
+        ],
+        after: [
+          {
+            time: '21:00',
+            emoji: '🍨',
+            title: '餐后甜点散步',
+            travel: '🚶 6 分钟',
+            desc: '慢慢走去 {area} 附近还开着的甜品店,边走边把今晚的话聊完。',
+          },
+        ],
       },
-    ],
-    after: [
       {
-        time: '12:30',
-        emoji: '🍰',
-        title: '甜点收尾',
-        desc: '就近找家店,把这趟觅食画上句号。',
-        travel: '🚶 8 分钟',
+        vibe: '🍸 微醺夜生活',
+        when: '本周五 18:30',
+        anchorTime: '19:30',
+        before: [
+          {
+            time: '18:30',
+            emoji: '🍸',
+            title: '餐前小酌',
+            desc: '先在 {area} 附近找家酒吧喝一杯热场,空腹别太久,垫点小食。',
+          },
+        ],
+        after: [
+          {
+            time: '21:30',
+            emoji: '🎶',
+            title: '找点现场气氛',
+            travel: '🚶 8 分钟',
+            desc: '饭后转去附近的 live house 或安静酒馆,给这一晚收个尾。',
+          },
+        ],
       },
     ],
   },
+  cafe: {
+    title: '慢咖啡时光',
+    anchorTravel: '🚶 几步路',
+    anchorTip: '💡 招牌饮品配一份现烤的刚好;靠窗或户外位最舒服,现烤糕点卖得快、想吃早点到。',
+    variants: [
+      {
+        vibe: '☕️ 慵懒上午',
+        when: '本周六 10:00',
+        anchorTime: '10:30',
+        before: [
+          {
+            time: '10:00',
+            emoji: '🗞️',
+            title: '不慌不忙出门',
+            desc: '不用赶时间,带本书或耳机;{area} 这一带上午人少、光线也正好。',
+          },
+        ],
+        after: [
+          {
+            time: '12:00',
+            emoji: '🚶',
+            title: '喝完再逛逛',
+            travel: '🚶 5 分钟',
+            desc: '沿着 {area} 周边慢慢走一圈,逛逛小店再回家。',
+          },
+        ],
+      },
+      {
+        vibe: '🥐 边吃边逛',
+        when: '本周六 09:45',
+        anchorTime: '10:30',
+        before: [
+          {
+            time: '09:45',
+            emoji: '🛍️',
+            title: '先逛逛小店',
+            desc: '趁人少先在 {area} 附近转转,周末早晨常有刚开门的小店。',
+          },
+        ],
+        after: [
+          {
+            time: '12:00',
+            emoji: '📖',
+            title: '找个地方坐下',
+            travel: '🚶 7 分钟',
+            desc: '带上买的东西,找家书店或公园把上午收个尾。',
+          },
+        ],
+      },
+    ],
+  },
+  outdoor: {
+    title: '户外半日',
+    anchorTravel: '🚗 开车前往',
+    anchorTip: '💡 穿好走路的鞋、带够水和防晒;正午前结束最舒服。',
+    variants: [
+      {
+        vibe: '🌄 清晨户外',
+        when: '本周六 08:30',
+        anchorTime: '09:30',
+        before: [
+          {
+            time: '08:30',
+            emoji: '☕️',
+            title: '出发前补给',
+            desc: '路上买杯咖啡、带够水;{area} 一带上午凉快、人也少。',
+          },
+        ],
+        after: [
+          {
+            time: '12:00',
+            emoji: '🍜',
+            title: '迟来的午餐',
+            travel: '🚗 12 分钟',
+            desc: '走完一身轻松,回 {area} 附近找家小馆吃顿热乎的。',
+          },
+        ],
+      },
+      {
+        vibe: '🌇 黄昏漫步',
+        when: '本周六 16:00',
+        anchorTime: '16:45',
+        before: [
+          {
+            time: '16:00',
+            emoji: '🧺',
+            title: '带点零食出门',
+            desc: '下午晚些出发避开高温;带点零食,{area} 的傍晚最适合慢慢逛。',
+          },
+        ],
+        after: [
+          {
+            time: '18:30',
+            emoji: '🍽️',
+            title: '收尾晚餐',
+            travel: '🚗 10 分钟',
+            desc: '看完日落,就近找家餐馆把这一天画上句号。',
+          },
+        ],
+      },
+    ],
+  },
+  bookstore: {
+    title: '书店下午',
+    anchorTravel: '🚶 步行可达',
+    anchorTip: '💡 别排太赶的行程;问问店员,独立书店的推荐往往很准,留意本地作者与二手区。',
+    variants: [
+      {
+        vibe: '📖 安静的下午',
+        when: '本周六 14:00',
+        anchorTime: '14:30',
+        before: [
+          {
+            time: '14:00',
+            emoji: '☕️',
+            title: '先来杯咖啡',
+            desc: '逛书店前先在 {area} 附近喝杯咖啡,把状态调到「慢」。',
+          },
+        ],
+        after: [
+          {
+            time: '16:30',
+            emoji: '🍰',
+            title: '带书找个角落',
+            travel: '🚶 6 分钟',
+            desc: '拿着淘到的书,找家咖啡馆或公园翻上几页。',
+          },
+        ],
+      },
+      {
+        vibe: '🛍️ 街区漫游',
+        when: '本周六 13:30',
+        anchorTime: '14:15',
+        before: [
+          {
+            time: '13:30',
+            emoji: '🚶',
+            title: '逛逛街区',
+            desc: '先在 {area} 老城区随便走走,独立书店周边常有有意思的小店。',
+          },
+        ],
+        after: [
+          {
+            time: '16:00',
+            emoji: '🍵',
+            title: '歇脚收尾',
+            travel: '🚶 5 分钟',
+            desc: '逛累了找家茶馆或甜品店坐下,翻翻刚买的书。',
+          },
+        ],
+      },
+    ],
+  },
+  grocery: {
+    title: '周末囤货',
+    anchorTravel: '🚶 几步路',
+    anchorTip: '💡 周末上午人最多;自带保温袋,生鲜冷冻先逛后拿,留意开业优惠与会员注册。',
+    variants: [
+      {
+        vibe: '🛒 周末囤货',
+        when: '本周六 11:00',
+        anchorTime: '11:00',
+        before: [],
+        after: [
+          {
+            time: '12:30',
+            emoji: '🍜',
+            title: '美食广场午餐',
+            travel: '🚶 2 分钟',
+            desc: '逛完直接在超市的美食广场吃午饭 —— 大型亚洲超市的 food hall 选择很多。',
+          },
+          {
+            time: '14:00',
+            emoji: '🧊',
+            title: '把生鲜送回家',
+            travel: '🚗 顺路',
+            desc: '买了生鲜别久放,先回一趟家,下午再安排别的。',
+          },
+        ],
+      },
+      {
+        vibe: '🍱 边逛边吃',
+        when: '本周六 10:30',
+        anchorTime: '11:15',
+        before: [
+          {
+            time: '10:30',
+            emoji: '☕️',
+            title: '先垫垫肚子',
+            desc: '空腹逛超市容易乱买 —— 先在 {area} 附近喝杯咖啡、吃点东西。',
+          },
+        ],
+        after: [
+          {
+            time: '13:00',
+            emoji: '🥡',
+            title: '把想吃的带回家',
+            travel: '🚶 2 分钟',
+            desc: '挑些熟食和半成品,回家就能复刻一桌;别忘了试试自有品牌。',
+          },
+        ],
+      },
+    ],
+  },
+  event: {
+    title: '看演出的晚上',
+    anchorTravel: '🚶 步行到场馆',
+    anchorTip: '💡 提前查清入场时间与停车;城里的活动建议公共交通前往,热门场次早点到。',
+    variants: [
+      {
+        vibe: '🎭 看演出的晚上',
+        when: '演出当晚 18:00',
+        anchorTime: '19:30',
+        before: [
+          {
+            time: '18:00',
+            emoji: '🍽️',
+            title: '场馆附近吃晚餐',
+            desc: '提前到场馆所在的 {area} 先吃顿饭 —— 散场后餐馆大多打烊了。',
+          },
+        ],
+        after: [
+          {
+            time: '22:00',
+            emoji: '🍷',
+            title: '散场后小聚',
+            travel: '🚶 8 分钟',
+            desc: '看完别急着走,附近找家还开着的酒馆,聊聊刚才的演出。',
+          },
+        ],
+      },
+      {
+        vibe: '🌃 演出 + 夜游',
+        when: '演出当晚 17:30',
+        anchorTime: '19:30',
+        before: [
+          {
+            time: '17:30',
+            emoji: '🚶',
+            title: '先逛逛街区',
+            desc: '早点到场馆所在的 {area} 走走,顺便把晚饭解决了。',
+          },
+        ],
+        after: [
+          {
+            time: '22:00',
+            emoji: '🍜',
+            title: '深夜一碗',
+            travel: '🚶 10 分钟',
+            desc: '散场后找家深夜还营业的小馆,一碗面收尾。',
+          },
+        ],
+      },
+    ],
+  },
+}
+
+// Preference-matched extra stop — appended when it fits the user's profile.
+const PREF_STOPS: { match: string[]; skip: PlanKind; emoji: string; title: string; desc: string }[] = [
   {
-    vibe: '🚗 顺路一日',
-    before: [
-      {
-        time: '09:30',
-        emoji: '☕️',
-        title: '出发前咖啡',
-        desc: '路上先来一杯,顺便把路线理一理。',
-      },
-    ],
-    after: [
-      {
-        time: '13:00',
-        emoji: '🌳',
-        title: '公园歇脚',
-        desc: '吃饱后找个公园散散步消食。',
-        travel: '🚗 10 分钟',
-      },
-    ],
+    match: ['咖啡', '咖啡馆'],
+    skip: 'cafe',
+    emoji: '☕️',
+    title: '顺路来杯咖啡',
+    desc: '你最近常看咖啡内容 —— 收尾拐进一家 {area} 的本地咖啡馆歇个脚。',
+  },
+  {
+    match: ['甜品', '冰品', 'gelato', '抹茶'],
+    skip: 'cafe',
+    emoji: '🍦',
+    title: '加一份甜的',
+    desc: '你偏爱甜点 —— 顺道来支冰淇淋,或一块现做蛋糕。',
+  },
+  {
+    match: ['户外', '散步', '徒步', '自然', '植物园'],
+    skip: 'outdoor',
+    emoji: '🌳',
+    title: '绿地里走走',
+    desc: '你常关注户外 —— 顺路去 {area} 附近的公园绿地走一圈。',
+  },
+  {
+    match: ['书店', '阅读'],
+    skip: 'bookstore',
+    emoji: '📚',
+    title: '逛家书店',
+    desc: '你常看书店内容 —— 路过的话进家本地独立书店翻翻。',
+  },
+  {
+    match: ['红酒', '小酌'],
+    skip: 'meal',
+    emoji: '🍷',
+    title: '小酌一杯',
+    desc: '你偏好微醺时光 —— 找家红酒小馆,给这趟收个尾。',
+  },
+  {
+    match: ['烘焙', '面包'],
+    skip: 'cafe',
+    emoji: '🥐',
+    title: '带个面包走',
+    desc: '你常看烘焙内容 —— 顺路买个现烤的带回家。',
   },
 ]
 
-export function planVariantCount(): number {
-  return PLAN_VARIANTS.length
+function classify(tags: string[], category: string): PlanKind {
+  const has = (...ks: string[]) =>
+    ks.some((k) => tags.includes(k) || category.includes(k))
+  if (has('亚洲超市', '超市')) return 'grocery'
+  if (has('户外', '植物园', '徒步', '自然', '散步')) return 'outdoor'
+  if (has('书店', '阅读')) return 'bookstore'
+  if (
+    has('咖啡', '也门咖啡', '烘焙', '面包', 'gelato', '冰品', '抹茶', '甜品', '早午餐', '三明治', 'Cafe')
+  )
+    return 'cafe'
+  return 'meal'
 }
 
-/** A plan is built from an article's primary POI… */
+const cleanArea = (n: string) => n.split(' · ')[0]
+
+function addMinutes(t: string, mins: number): string {
+  const [h, m] = t.split(':').map(Number)
+  const total = h * 60 + m + mins
+  return `${String(Math.floor(total / 60) % 24).padStart(2, '0')}:${String(
+    total % 60,
+  ).padStart(2, '0')}`
+}
+
+export function planVariantCount(): number {
+  return 2
+}
+
 export function planSeedFromArticle(a: Article): PlanSeed {
   const p = a.pois[0]
   return {
     id: a.id,
     title: a.headline,
+    kind: classify(a.tags, p.category),
+    area: cleanArea(p.neighborhood),
     anchorName: p.name,
     anchorEmoji: p.emoji,
     anchorBlurb: p.blurb,
@@ -1054,11 +1405,12 @@ export function planSeedFromArticle(a: Article): PlanSeed {
   }
 }
 
-/** …or from a discover card. */
 export function planSeedFromDiscover(d: DiscoverCard): PlanSeed {
   return {
     id: d.id,
     title: d.title,
+    kind: d.kind === 'event' ? 'event' : classify(d.tags, d.category),
+    area: cleanArea(d.neighborhood),
     anchorName: d.title,
     anchorEmoji: d.emoji,
     anchorBlurb: d.blurb,
@@ -1066,28 +1418,56 @@ export function planSeedFromDiscover(d: DiscoverCard): PlanSeed {
   }
 }
 
-export function generatePlan(seed: PlanSeed, variant = 0): Plan {
-  const v =
-    PLAN_VARIANTS[
-      ((variant % PLAN_VARIANTS.length) + PLAN_VARIANTS.length) % PLAN_VARIANTS.length
-    ]
+/** Builds the optional preference-matched stop from the user's top tags. */
+function preferenceStop(
+  prefTags: string[],
+  kind: PlanKind,
+  area: string,
+  lastTime: string,
+): PlanStop | null {
+  for (const tag of prefTags) {
+    const m = PREF_STOPS.find((p) => p.match.includes(tag) && p.skip !== kind)
+    if (m) {
+      return {
+        time: addMinutes(lastTime, 75),
+        emoji: m.emoji,
+        title: m.title,
+        desc: m.desc.replace(/\{area\}/g, area),
+        travel: '🚶 顺路',
+        forYou: true,
+      }
+    }
+  }
+  return null
+}
+
+export function generatePlan(seed: PlanSeed, variant = 0, prefTags: string[] = []): Plan {
+  const t = PLAN_KINDS[seed.kind]
+  const v = t.variants[((variant % 2) + 2) % 2]
+  const fill = (s: string) => s.replace(/\{area\}/g, seed.area)
+  const before = v.before.map((s) => ({ ...s, desc: fill(s.desc) }))
+  const after = v.after.map((s) => ({ ...s, desc: fill(s.desc) }))
   const anchor: PlanStop = {
-    time: '11:00',
+    time: v.anchorTime,
     emoji: seed.anchorEmoji,
     title: seed.anchorName,
     desc: seed.anchorBlurb,
-    travel: '🚗 前往',
+    tip: t.anchorTip,
+    travel: before.length ? t.anchorTravel : undefined,
     image: seed.anchorImage,
     anchor: true,
   }
+  const stops = [...before, anchor, ...after]
+  const pref = preferenceStop(prefTags, seed.kind, seed.area, stops[stops.length - 1].time)
+  if (pref) stops.push(pref)
   return {
     id: `plan-${seed.id}-${Date.now()}`,
-    title: `${seed.anchorName} 出行计划`,
-    when: '本周六 10:00',
+    title: `${seed.anchorName} · ${t.title}`,
+    when: v.when,
     vibe: v.vibe,
     basedOnId: seed.id,
     basedOnTitle: seed.title,
-    stops: [...v.before, anchor, ...v.after],
+    stops,
     createdAt: Date.now(),
   }
 }

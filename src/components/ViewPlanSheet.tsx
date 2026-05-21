@@ -36,7 +36,11 @@ export function ViewPlanSheet() {
                   <span className="tconnector-chip">{s.travel}</span>
                 </div>
               )}
-              <div className={`tstop ${s.anchor ? 'anchor' : ''}`}>
+              <div
+                className={`tstop ${s.anchor ? 'anchor' : ''} ${
+                  s.forYou ? 'foryou' : ''
+                }`}
+              >
                 <div className="tstop-rail">
                   <span className="tstop-dot">{s.emoji}</span>
                 </div>
@@ -44,9 +48,11 @@ export function ViewPlanSheet() {
                   <div className="tstop-time">{s.time}</div>
                   <div className="tstop-title">
                     {s.title}
-                    {s.anchor && <span className="anchor-tag">来自文章</span>}
+                    {s.anchor && <span className="anchor-tag">来自内容</span>}
+                    {s.forYou && <span className="foryou-tag">✨ 为你定制</span>}
                   </div>
                   <div className="tstop-desc">{s.desc}</div>
+                  {s.tip && <div className="tstop-tip">{s.tip}</div>}
                   {s.anchor && s.image && (
                     <img className="tstop-photo" src={s.image} alt="" />
                   )}

@@ -851,6 +851,16 @@ h4 {
   color: var(--muted);
   margin-top: 9px;
 }
+.plan-foryou {
+  margin-top: 9px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #6a4bd6;
+  background: #efeaff;
+  border: 1px solid #ddd2fb;
+  border-radius: 9px;
+  padding: 7px 10px;
+}
 
 /* ---- Plan timeline ---- */
 .timeline {
@@ -953,6 +963,34 @@ h4 {
   object-fit: cover;
   border-radius: 10px;
   margin-top: 9px;
+}
+.tstop-tip {
+  font-size: 11px;
+  line-height: 1.55;
+  color: #9a6b00;
+  background: #fff4d6;
+  border-radius: 8px;
+  padding: 6px 9px;
+  margin-top: 7px;
+}
+.foryou-tag {
+  font-size: 9.5px;
+  font-weight: 700;
+  background: #6a4bd6;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+.tstop.foryou .tstop-dot {
+  border-color: #6a4bd6;
+  background: #efeaff;
+  box-shadow: 0 0 0 4px rgba(106, 75, 214, 0.1);
+}
+.tstop.foryou .tstop-body {
+  background: #f6f3ff;
+  border: 1px solid #e4ddfb;
+  border-radius: 12px;
+  padding: 9px 11px 11px;
 }
 .plan-realworld {
   margin: 4px 18px 6px;

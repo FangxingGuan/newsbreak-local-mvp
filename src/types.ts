@@ -106,11 +106,17 @@ export type FeedEntry = Article | DiscoverCard
 export interface PlanSeed {
   id: string
   title: string
+  kind: PlanKind
+  /** The anchor's neighborhood, used to ground supporting stops. */
+  area: string
   anchorName: string
   anchorEmoji: string
   anchorBlurb: string
   anchorImage?: string
 }
+
+/** The kind of outing a plan is — drives its pacing, stops and tips. */
+export type PlanKind = 'meal' | 'cafe' | 'outdoor' | 'bookstore' | 'grocery' | 'event'
 
 /** One stop inside a generated plan. */
 export interface PlanStop {
@@ -120,10 +126,14 @@ export interface PlanStop {
   desc: string
   /** How you get to this stop from the previous one, e.g. "🚶 6 分钟". */
   travel?: string
+  /** A caring, concrete tip for this stop. */
+  tip?: string
   /** Real photo, set on the anchor stop. */
   image?: string
   /** True when this stop is the POI the plan was built around. */
   anchor?: boolean
+  /** True when this stop was added to match the user's preference profile. */
+  forYou?: boolean
 }
 
 /** A lightweight plan generated from an article's POIs. */

@@ -4,13 +4,14 @@ import {
   generatePlan,
   getArticle,
   getDiscover,
+  getPreferences,
   planSeedFromArticle,
   planSeedFromDiscover,
   planVariantCount,
 } from '../data'
 import type { PlanStop } from '../types'
 
-const STEPS = ['读取你最近读过的内容…', '定位文章里提到的地点…', '编排一条轻量行程…']
+const STEPS = ['读取你最近读过的内容…', '匹配你的本地生活偏好…', '编排一条贴合的行程…']
 
 /** Rough total span of an itinerary, first stop to last. */
 function spanHours(stops: PlanStop[]): string {
@@ -37,6 +38,12 @@ export function PlanSheet() {
     return d ? planSeedFromDiscover(d) : null
   }, [planning])
 
+  // The user's top preference tags — drive the personalized stop.
+  const prefTags = useMemo(
+    () => getPreferences(state.read, state.seen).map((p) => p.tag),
+    [state.read, state.seen],
+  )
+
   const [phase, setPhase] = useState<'loading' | 'ready'>('loading')
   const [stepIdx, setStepIdx] = useState(0)
   const [variant, setVariant] = useState(0)
@@ -45,8 +52,8 @@ export function PlanSheet() {
   const [didCal, setDidCal] = useState(false)
 
   const plan = useMemo(
-    () => (seed ? generatePlan(seed, variant) : null),
-    [seed, variant],
+    () => (seed ? generatePlan(seed, variant, prefTags) : null),
+    [seed, variant, prefTags],
   )
 
   useEffect(() => {
@@ -75,6 +82,7 @@ export function PlanSheet() {
   if (!seed || !plan) return null
   const close = () => dispatch({ type: 'CLOSE_PLANNING' })
   const canReroll = planVariantCount() > 1
+  const personalized = plan.stops.some((s) => s.forYou)
 
   const reroll = () => {
     setVariant((v) => v + 1)
@@ -112,6 +120,11 @@ export function PlanSheet() {
                 </span>
               </div>
               <div className="plan-from">源自《{plan.basedOnTitle}》</div>
+              {personalized && (
+                <div className="plan-foryou">
+                  ✨ 已按你的本地生活偏好,在行程里加了一站
+                </div>
+              )}
             </div>
 
             <div className="timeline" key={variant}>
@@ -131,7 +144,9 @@ export function PlanSheet() {
                   ) : null
                   const stop = (
                     <div
-                      className={`tstop ${s.anchor ? 'anchor' : ''}`}
+                      className={`tstop ${s.anchor ? 'anchor' : ''} ${
+                        s.forYou ? 'foryou' : ''
+                      }`}
                       style={{ animationDelay: `${delay++ * 0.1}s` }}
                     >
                       <div className="tstop-rail">
@@ -142,8 +157,10 @@ export function PlanSheet() {
                         <div className="tstop-title">
                           {s.title}
                           {s.anchor && <span className="anchor-tag">来自内容</span>}
+                          {s.forYou && <span className="foryou-tag">✨ 为你定制</span>}
                         </div>
                         <div className="tstop-desc">{s.desc}</div>
+                        {s.tip && <div className="tstop-tip">{s.tip}</div>}
                         {s.anchor && s.image && (
                           <img className="tstop-photo" src={s.image} alt="" />
                         )}
