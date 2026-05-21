@@ -13,38 +13,81 @@ function PoiCard({ poi }: { poi: ArticlePOI }) {
   const { state, dispatch } = useStore()
   const saved = state.saved.includes(poi.id)
   const st = STATUS[poi.status]
+
   return (
     <div className="poi">
-      <div
-        className="poi-thumb"
-        style={poi.image ? undefined : { background: poi.cover }}
-      >
-        {poi.image ? (
-          <img className="acard-photo" src={poi.image} alt="" loading="lazy" />
-        ) : (
-          <span className="poi-emoji">{poi.emoji}</span>
-        )}
-      </div>
-      <div className="poi-info">
-        <div className="poi-namerow">
-          <h4>{poi.name}</h4>
-          <span className={`poi-status ${st.cls}`}>{st.label}</span>
+      <div className="poi-main">
+        <div
+          className="poi-thumb"
+          style={poi.image ? undefined : { background: poi.cover }}
+        >
+          {poi.image ? (
+            <img className="acard-photo" src={poi.image} alt="" loading="lazy" />
+          ) : (
+            <span className="poi-emoji">{poi.emoji}</span>
+          )}
         </div>
-        {poi.rating != null ? (
-          <div className="poi-rate">
-            ★ {poi.rating.toFixed(1)} · {poi.reviews?.toLocaleString()} 条评价
-            {poi.via && <span className="poi-via"> · {poi.via}</span>}
+        <div className="poi-info">
+          <div className="poi-namerow">
+            <h4>{poi.name}</h4>
+            <span className={`poi-status ${st.cls}`}>{st.label}</span>
           </div>
-        ) : (
-          <div className="poi-rate muted">{poi.note ?? '暂无评价'}</div>
-        )}
-        <div className="poi-meta">
-          {[poi.category, poi.price, poi.distance && `📍 ${poi.distance}`, poi.neighborhood]
-            .filter(Boolean)
-            .join(' · ')}
+          {poi.rating != null ? (
+            <div className="poi-rate">
+              ★ {poi.rating.toFixed(1)} · {poi.reviews?.toLocaleString()} 条评价
+              {poi.via && <span className="poi-via"> · {poi.via}</span>}
+            </div>
+          ) : (
+            <div className="poi-rate muted">{poi.note ?? '暂无评价'}</div>
+          )}
+          <div className="poi-meta">
+            {[poi.category, poi.price, poi.distance && `📍 ${poi.distance}`, poi.neighborhood]
+              .filter(Boolean)
+              .join(' · ')}
+          </div>
+          <p className="poi-blurb">{poi.blurb}</p>
         </div>
-        <p className="poi-blurb">{poi.blurb}</p>
       </div>
+
+      {poi.quotes && poi.quotes.length > 0 && (
+        <div className="poi-reviews">
+          {poi.quotes.map((r, i) => (
+            <div className="poi-review" key={i}>
+              <span className="poi-review-stars">{'★'.repeat(r.rating)}</span>
+              <span className="poi-review-text">“{r.text}”</span>
+              <span className="poi-review-by">
+                — {r.author} · {r.source}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {(poi.yelpUrl || poi.googleUrl) && (
+        <div className="poi-links">
+          {poi.yelpUrl && (
+            <a
+              className="poi-link"
+              href={poi.yelpUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              在 Yelp 查看 ↗
+            </a>
+          )}
+          {poi.googleUrl && (
+            <a
+              className="poi-link"
+              href={poi.googleUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Google 地图 ↗
+            </a>
+          )}
+        </div>
+      )}
+
       <button
         className={`poi-save ${saved ? 'on' : ''}`}
         onClick={() => dispatch({ type: 'TOGGLE_SAVE', id: poi.id, title: poi.name })}
@@ -98,7 +141,7 @@ export function ArticleReader() {
           </div>
 
           <div className="poi-head">
-            📍 文章里的地点 · 已用 Yelp / Google 实时查好
+            📍 文章里的地点 · 已用 Yelp / Google 实时查好评分与评论
           </div>
           {article.pois.map((p) => (
             <PoiCard key={p.id} poi={p} />

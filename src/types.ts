@@ -29,6 +29,19 @@ export interface ArticlePOI {
   via?: string
   /** Status note, e.g. "本月开业 · 暂无评价". */
   note?: string
+  /** Selected review excerpts (Yelp / Google), shown with attribution. */
+  quotes?: PoiReview[]
+  /** Outbound links to the place's Yelp / Google Maps page. */
+  yelpUrl?: string
+  googleUrl?: string
+}
+
+/** A short review excerpt from Yelp or Google, shown with attribution. */
+export interface PoiReview {
+  source: 'Yelp' | 'Google'
+  author: string
+  rating: number
+  text: string
 }
 
 /** A local-news article — the unit of the feed. */
