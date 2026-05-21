@@ -104,7 +104,7 @@ export function CommitSheet() {
         <div className="sheet-grip" />
 
         <div className="commit-head">
-          <span className="loop-pill">第 3 步 · 加入计划</span>
+          <span className="loop-pill">加入计划</span>
           <div className="commit-place">
             <div
               className="commit-thumb"
