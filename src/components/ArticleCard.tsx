@@ -71,7 +71,7 @@ export function ArticleCard({ article, scrollRoot }: Props) {
             dispatch({ type: 'DISMISS', id: article.id, title: article.headline })
           }}
         >
-          ✕
+          <span className="card-dismiss-x">✕</span> 不感兴趣
         </button>
       </div>
 

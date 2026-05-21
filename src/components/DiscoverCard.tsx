@@ -80,7 +80,7 @@ export function DiscoverCard({ card, scrollRoot }: Props) {
             dispatch({ type: 'DISMISS', id: card.id, title: card.title })
           }}
         >
-          ✕
+          <span className="card-dismiss-x">✕</span> 不感兴趣
         </button>
       </div>
 
