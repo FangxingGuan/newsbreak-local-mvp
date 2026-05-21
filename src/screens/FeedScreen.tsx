@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import { ARTICLES, DISCOVER, USER_LOCATION, isDiscover } from '../data'
 import { ArticleCard } from '../components/ArticleCard'
 import { DiscoverCard } from '../components/DiscoverCard'
@@ -20,9 +20,24 @@ function buildFeed(articles: FeedEntry[], discover: FeedEntry[]): FeedEntry[] {
   return out
 }
 
+/**
+ * Tabs are conditionally rendered in App, so the feed remounts each time the
+ * user returns to it. Keep its scroll position so committing a plan (which
+ * jumps to the Plans tab) doesn't drop the user back at the very top.
+ */
+let savedScroll = 0
+
 export function FeedScreen() {
   const scrollRef = useRef<HTMLDivElement>(null)
   const entries = buildFeed(ARTICLES, DISCOVER)
+
+  useLayoutEffect(() => {
+    const el = scrollRef.current
+    if (el) el.scrollTop = savedScroll
+    return () => {
+      if (el) savedScroll = el.scrollTop
+    }
+  }, [])
 
   return (
     <div className="screen feed" ref={scrollRef}>
