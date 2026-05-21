@@ -22,7 +22,7 @@ function relTime(ts: number): string {
 
 export function MeScreen() {
   const { state, wla } = useStore()
-  const { signals, read, seen, opened, saved, plans } = state
+  const { signals, read, seen, saved } = state
 
   const count = (t: SignalType) => signals.filter((s) => s.type === t).length
 
@@ -40,14 +40,14 @@ export function MeScreen() {
     .filter((x): x is { emoji: string; intent: string; from: string } => !!x)
     .slice(0, 6)
 
-  // Local-life preference profile — built from real interactions only
-  // (opened / saved / planned), weighted; a dwell does not count.
-  const prefs = getPreferences(opened, saved, plans).slice(0, 8)
-  const prefMax = prefs[0]?.n ?? 1
+  // Local-life preference profile — scored by interaction rate (real
+  // interactions ÷ times the card was dwelled / "checked").
+  const prefs = getPreferences(state).slice(0, 8)
+  const prefMax = prefs[0]?.rate ?? 1
 
   const loop = [
     { label: '本地内容流', done: read.length + seen.length > 0 },
-    { label: '读出意图', done: prefs.some((p) => p.n >= 2) },
+    { label: '读出意图', done: prefs.some((p) => p.num >= 2) },
     { label: '加入计划', done: count('commit') > 0 },
     { label: '真实行动', done: count('map_open') + count('calendar_add') > 0 },
     { label: '偏好信号', done: signals.length > 0 },
@@ -104,7 +104,7 @@ export function MeScreen() {
       <section className="block">
         <h2>你的本地生活偏好</h2>
         <p className="block-sub">
-          由你点开、收藏、加入计划的内容加权聚合 · 仅停留浏览不计入
+          按交互率排序 · 互动加权分(点开 1 / 收藏 2 / 规划 3)÷ 停留出 CTA 次数
         </p>
         {prefs.length === 0 ? (
           <div className="muted-line">还没有偏好信号 · 去「发现」读点内容</div>
@@ -114,11 +114,14 @@ export function MeScreen() {
               <div className="pref" key={p.tag}>
                 <div className="pref-row">
                   <span className="pref-tag">{p.tag}</span>
+                  <span className="pref-n">
+                    {p.num} / {p.denom} 次
+                  </span>
                 </div>
                 <div className="pref-bar">
                   <div
                     className="pref-fill"
-                    style={{ width: `${(p.n / prefMax) * 100}%` }}
+                    style={{ width: `${(p.rate / prefMax) * 100}%` }}
                   />
                 </div>
               </div>

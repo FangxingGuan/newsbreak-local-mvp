@@ -1169,27 +1169,42 @@ function tagsForRef(id: string): string[] {
 }
 
 /**
- * The user's local-life preference profile — built only from real interactions,
- * weighted by strength. A ~2-second dwell is deliberately NOT counted: it only
- * means the user's attention passed over the card. What counts:
- *   opened content (tapped through)  → weight 1
- *   saved a place                    → weight 2
- *   committed a plan                 → weight 3
+ * The user's local-life preference profile, scored by INTERACTION RATE.
+ *   denominator = times a card was dwelled long enough to surface its CTA
+ *                 (i.e. the user "checked" that content)
+ *   numerator   = weighted real interactions on that content —
+ *                 opened (1), saved a place (2), committed a plan (3)
+ *   preference  = numerator / denominator
+ * A topic the user reliably acts on outranks one they merely scroll past,
+ * even if the latter was seen more often.
  */
-export function getPreferences(
-  opened: string[],
-  saved: string[],
-  plans: Plan[],
-): { tag: string; n: number }[] {
-  const freq = new Map<string, number>()
-  const add = (id: string, w: number) =>
-    tagsForRef(id).forEach((t) => freq.set(t, (freq.get(t) ?? 0) + w))
-  opened.forEach((id) => add(id, 1))
-  saved.forEach((id) => add(id, 2))
-  plans.forEach((p) => add(p.basedOnId, 3))
-  return [...freq.entries()]
-    .map(([tag, n]) => ({ tag, n }))
-    .sort((a, b) => b.n - a.n)
+export function getPreferences(s: {
+  read: string[]
+  seen: string[]
+  opened: string[]
+  saved: string[]
+  plans: Plan[]
+}): { tag: string; rate: number; num: number; denom: number }[] {
+  const denom = new Map<string, number>()
+  const num = new Map<string, number>()
+  // Denominator: every card that dwelled long enough to show its CTA.
+  ;[...s.read, ...s.seen].forEach((id) =>
+    tagsForRef(id).forEach((t) => denom.set(t, (denom.get(t) ?? 0) + 1)),
+  )
+  // Numerator: weighted real interactions.
+  const addNum = (id: string, w: number) =>
+    tagsForRef(id).forEach((t) => num.set(t, (num.get(t) ?? 0) + w))
+  s.opened.forEach((id) => addNum(id, 1))
+  s.saved.forEach((id) => addNum(id, 2))
+  s.plans.forEach((p) => addNum(p.basedOnId, 3))
+  return [...new Set([...denom.keys(), ...num.keys()])]
+    .map((tag) => {
+      const n = num.get(tag) ?? 0
+      const d = denom.get(tag) ?? 0
+      return { tag, num: n, denom: d, rate: n / Math.max(d, 1) }
+    })
+    .filter((p) => p.num > 0)
+    .sort((a, b) => b.rate - a.rate || b.num - a.num)
 }
 
 // ---- Plan generator ---------------------------------------------------------
