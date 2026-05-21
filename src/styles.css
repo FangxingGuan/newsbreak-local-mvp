@@ -578,6 +578,74 @@ h3 {
   transform: scale(0.99);
 }
 
+/* ---- News article reader ---- */
+.article-hero {
+  height: 158px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+}
+.article-body-wrap {
+  padding: 16px 20px 8px;
+}
+.article-cat {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--brand);
+  letter-spacing: 0.3px;
+}
+.article-title {
+  font-size: 22px;
+  line-height: 1.34;
+  font-weight: 800;
+  margin-top: 8px;
+}
+.article-byline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: 11.5px;
+  color: var(--muted);
+  margin-top: 10px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+}
+.article-source {
+  font-weight: 700;
+  color: #44474f;
+}
+.article-p {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #2f323a;
+  margin-top: 13px;
+}
+.article-hook {
+  margin-top: 18px;
+  padding: 12px 13px;
+  font-size: 12.5px;
+  color: #8a3b3b;
+  background: linear-gradient(100deg, #fff3f3, #ffeae4);
+  border: 1px dashed #f3b9b9;
+  border-radius: 12px;
+}
+.article-hook strong {
+  font-weight: 800;
+}
+.article-hook-btn {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
+}
+.article-hook-btn:active {
+  transform: scale(0.99);
+}
+
 /* ---- Bottom sheets ---- */
 .sheet-wrap {
   position: absolute;

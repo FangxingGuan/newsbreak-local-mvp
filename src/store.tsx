@@ -32,6 +32,7 @@ interface State {
   detailId: string | null
   planningId: string | null
   viewPlanId: string | null
+  viewNewsId: string | null
   toast: string | null
 }
 
@@ -45,6 +46,7 @@ const initialState: State = {
   detailId: null,
   planningId: null,
   viewPlanId: null,
+  viewNewsId: null,
   toast: null,
 }
 
@@ -59,6 +61,8 @@ type Action =
   | { type: 'CLOSE_PLANNING' }
   | { type: 'ADD_PLAN'; plan: Plan }
   | { type: 'VIEW_PLAN'; id: string | null }
+  | { type: 'OPEN_NEWS'; id: string }
+  | { type: 'CLOSE_NEWS' }
   | { type: 'SIGNAL'; signalType: SignalType; itemTitle?: string }
   | { type: 'TOAST'; message: string | null }
 
@@ -111,6 +115,10 @@ function reducer(state: State, action: Action): State {
       return { ...state, plans: [action.plan, ...state.plans] }
     case 'VIEW_PLAN':
       return { ...state, viewPlanId: action.id }
+    case 'OPEN_NEWS':
+      return { ...state, viewNewsId: action.id }
+    case 'CLOSE_NEWS':
+      return { ...state, viewNewsId: null }
     case 'SIGNAL':
       return {
         ...state,

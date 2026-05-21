@@ -248,6 +248,11 @@ export const NEWS: NewsItem[] = [
     comments: 47,
     reactions: 213,
     hook: '这家就在你 0.4 mi 外 · 周末想去看看吗?',
+    body: [
+      '这家手工意面馆位于 University Ave 中段,本周五起对外试营业。主厨此前在旧金山一家米其林餐厅工作,菜单聚焦每日现做的意面与小份自然酒。',
+      '店内只有约 30 个座位,庭院位会优先开放给晚市。试营业期间,所有甜点免费赠送,持续到本周日。',
+      '店主表示,正式开业后会推出周中的双人套餐,目标是做成街区里轻松的约会餐厅。',
+    ],
   },
   {
     type: 'news',
@@ -263,6 +268,11 @@ export const NEWS: NewsItem[] = [
     comments: 132,
     reactions: 540,
     hook: '榜单里有 3 家就在你 1 mi 内',
+    body: [
+      'Peninsula Press 面向读者发起的年度投票结果出炉,Palo Alto「最适合约会的 10 家餐厅」名单正式公布。',
+      '投票数据显示,庭院座位、低照度环境和现场音乐是最常被提及的加分项。意餐与红酒吧在榜单中占比最高,其中三家集中在 University Ave 一带。',
+      '编辑部建议,热门约会餐厅周五周六最好提前预约,庭院位通常最先订满。',
+    ],
   },
   {
     type: 'news',
@@ -278,6 +288,11 @@ export const NEWS: NewsItem[] = [
     comments: 28,
     reactions: 96,
     hook: '周末顺路就能去逛一圈',
+    body: [
+      'California Ave 的周末美食市集宣布,本月起营业时间延长至晚 9 点。',
+      '主办方表示,夏季客流明显增长,本次新增 12 家餐车和现场乐队表演。建议错峰前往,傍晚 6 点前停车相对容易。',
+      '市集每周六、周日开放,入场免费,部分摊位仅收现金。',
+    ],
   },
   // ---- weekend ----
   {
@@ -294,6 +309,11 @@ export const NEWS: NewsItem[] = [
     comments: 19,
     reactions: 88,
     hook: '天气这么好 · 要不要规划个户外周末?',
+    body: [
+      '湾区气象部门预计,本周六、周日将连续晴天,白天气温约 22°C,非常适合户外活动。',
+      '需要注意的是,正午前后紫外线偏强,户外出行建议做好防晒并及时补水。',
+      '沿海一带早晨可能有短时雾气,通常在上午十点前散去。',
+    ],
   },
   {
     type: 'news',
@@ -309,6 +329,11 @@ export const NEWS: NewsItem[] = [
     comments: 64,
     reactions: 274,
     hook: '本周五就有一场 · 离你 1.8 mi',
+    body: [
+      '斯坦福露天电影季公布 6 月片单,每周五晚在校园草坪放映,免费入场。',
+      '今年片单以经典老片为主。主办方建议自带毯子或折叠椅,并提前到场占位,放映在日落后开始。',
+      '现场设有小食摊位,雨天将顺延至下一个周五。',
+    ],
   },
   {
     type: 'news',
@@ -324,6 +349,11 @@ export const NEWS: NewsItem[] = [
     comments: 41,
     reactions: 167,
     hook: '清单里好几个就在你附近',
+    body: [
+      'Peninsula Press 的本地编辑整理了一份 6 月户外清单,收录 20 个周末好去处。',
+      '从 Shoreline 的皮划艇到加州大道的农夫市集,清单里的大多数地点都在 30 分钟车程以内,并标注了适合的人群与最佳前往时段。',
+      '编辑提醒,水上项目和热门徒步路线周末名额紧张,最好提前预约。',
+    ],
   },
   // ---- family ----
   {
@@ -341,6 +371,13 @@ export const NEWS: NewsItem[] = [
     comments: 39,
     reactions: 156,
     hook: '这家就在 San Jose · 14.8 mi · 周末带娃去尝尝',
+    body: [
+      'San Jose 的早午餐去处不少,但本地人一次次回到 The Alameda 上的 Uncle John\'s Pancake House。原因很实在:上菜快、分量大,早餐做得朴实又熨帖。开放式厨房让人能一边喝咖啡聊天,一边看着自己的餐被做出来。',
+      '这家街区小馆最大的特点是效率 —— 出餐通常在 10 到 15 分钟内,brunch 吃得从容而不赶。食客对店员的评价是友好、麻利、周到,咖啡随时续杯。',
+      '菜单走经典美式路线:蓬松煎饼、班尼迪克蛋、扎实的早餐拼盘。招牌包括蓝莓面糊煎饼配丹麦风淋酱、酥脆炸鸡排配乡村肉汁,以及人气很高的古巴风班尼迪克蛋。分量很大方,吃完是「满足」而不是「一小时后又饿」。',
+      '环境像一家现代社区餐馆,座位明亮、周末气氛热闹但不嘈杂。还有带顶棚的户外座位,天气好时可以边吃热腾腾的早餐边享受 San Jose 的好天气。',
+      '地址:1205 The Alameda, San Jose, CA 95126 · 营业时间:每天 7:00–14:00 · 电话:(408) 899-4071',
+    ],
     linkId: 'curated-unclejohns',
   },
   {
@@ -357,6 +394,11 @@ export const NEWS: NewsItem[] = [
     comments: 53,
     reactions: 198,
     hook: 'Webb Ranch 就在 3.9 mi · 很适合带娃',
+    body: [
+      '随着加州樱桃进入采摘季,本地多家农场迎来周末客流高峰。',
+      '果农表示,今年雨水充足,樱桃个头更大、甜度更高。采摘季预计持续到 6 月中旬,周末上午人流最多,建议尽早出发。',
+      '部分农场提供桶装计重,园区建议穿深色衣物、带上遮阳帽。',
+    ],
   },
   {
     type: 'news',
@@ -372,6 +414,11 @@ export const NEWS: NewsItem[] = [
     comments: 88,
     reactions: 421,
     hook: '离你 0.2 mi · 周末家庭日的首选',
+    body: [
+      'Palo Alto 少儿博物馆与动物园完成翻新,本周重新对公众开放。',
+      '翻新后新增了互动科学展区和面向低龄幼儿的专属区域。会员在重开首周可免费入场,非会员建议线上预约时段。',
+      '园区表示,周末上午时段最热门,下午相对宽松。',
+    ],
   },
   {
     type: 'news',
@@ -387,12 +434,21 @@ export const NEWS: NewsItem[] = [
     comments: 76,
     reactions: 245,
     hook: '趁早把家庭活动排进日历',
+    body: [
+      '新学年学区日历已公布,暑期亲子活动报名同步开放。',
+      '多个社区中心推出夏令营与亲子工作坊,涵盖科学、艺术与户外项目。热门班次名额有限,建议尽早报名。',
+      '部分项目对学区居民优先开放,报名需提供地址证明。',
+    ],
   },
 ]
 
 /** Type guard: distinguishes a news article from a decision card. */
 export function isNews(entry: FeedEntry): entry is NewsItem {
   return 'headline' in entry
+}
+
+export function getNews(id: string): NewsItem | undefined {
+  return NEWS.find((n) => n.id === id)
 }
 
 // ---- Lightweight plan generator -------------------------------------------

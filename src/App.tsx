@@ -6,6 +6,7 @@ import { BottomNav } from './components/BottomNav'
 import { DetailSheet } from './components/DetailSheet'
 import { PlanSheet } from './components/PlanSheet'
 import { ViewPlanSheet } from './components/ViewPlanSheet'
+import { NewsArticleSheet } from './components/NewsArticleSheet'
 import { Toast } from './components/Toast'
 
 function StatusBar() {
@@ -48,6 +49,7 @@ export function App() {
             {state.detailId && <DetailSheet />}
             {state.planningId && <PlanSheet />}
             {state.viewPlanId && <ViewPlanSheet />}
+            {state.viewNewsId && <NewsArticleSheet />}
             <Toast />
           </div>
         </div>

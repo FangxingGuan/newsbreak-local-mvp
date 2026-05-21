@@ -43,7 +43,7 @@ export function NewsCard({ item, scrollRoot }: Props) {
 
   const open = () => {
     if (!dwelled) dispatch({ type: 'DWELL', id: item.id, title: item.headline })
-    dispatch({ type: 'TOAST', message: '📰 已记录你的阅读 · 偏好已更新' })
+    dispatch({ type: 'OPEN_NEWS', id: item.id })
   }
 
   return (

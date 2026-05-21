@@ -97,6 +97,8 @@ export interface NewsItem {
   reactions: number
   /** Intent hook surfaced after dwell — ties news reading to the decision loop. */
   hook: string
+  /** Full article text, one string per paragraph — shown in the reader. */
+  body: string[]
   /** FeedItem id this article points at — makes the dwell hook tappable. */
   linkId?: string
 }
