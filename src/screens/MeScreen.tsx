@@ -4,6 +4,7 @@ import type { SignalType } from '../types'
 
 const SIGNAL_EMOJI: Record<SignalType, string> = {
   read: '📖',
+  seen: '🔍',
   commit: '📌',
   map_open: '🗺️',
   calendar_add: '🗓️',
@@ -21,31 +22,31 @@ function relTime(ts: number): string {
 
 export function MeScreen() {
   const { state, wla } = useStore()
-  const { signals, read, seen, saved, plans } = state
+  const { signals, read, seen, saved } = state
 
   const count = (t: SignalType) => signals.filter((s) => s.type === t).length
 
-  // Intents NewsBreak read out of the content you engaged with.
-  const intents = [
-    ...read.map((id) => {
-      const a = getArticle(id)
-      return a && { emoji: a.emoji, intent: a.intent, from: a.headline }
-    }),
-    ...seen.map((id) => {
-      const d = getDiscover(id)
-      return d && { emoji: d.emoji, intent: d.intent, from: d.title }
-    }),
-  ]
+  // Intents the engine read out — newest first, drawn from the signal log so
+  // articles and discover cards interleave in true engagement order.
+  const intents = signals
+    .filter((s) => (s.type === 'read' || s.type === 'seen') && s.refId)
+    .map((s) => {
+      const a = getArticle(s.refId!)
+      if (a) return { emoji: a.emoji, intent: a.intent, from: a.headline }
+      const d = getDiscover(s.refId!)
+      if (d) return { emoji: d.emoji, intent: d.intent, from: d.title }
+      return null
+    })
     .filter((x): x is { emoji: string; intent: string; from: string } => !!x)
     .slice(0, 6)
 
-  // Local-life preference profile, built from read + seen tags.
-  const prefs = getPreferences(read, seen).slice(0, 8)
+  // Local-life preference profile — read + seen + saved (saved weighted x2).
+  const prefs = getPreferences(read, seen, saved).slice(0, 8)
   const prefMax = prefs[0]?.n ?? 1
 
   const loop = [
     { label: '本地内容流', done: read.length + seen.length > 0 },
-    { label: '读出意图', done: read.length + seen.length > 0 },
+    { label: '读出意图', done: prefs.some((p) => p.n >= 2) },
     { label: '加入计划', done: count('commit') > 0 },
     { label: '真实行动', done: count('map_open') + count('calendar_add') > 0 },
     { label: '偏好信号', done: signals.length > 0 },
@@ -86,10 +87,10 @@ export function MeScreen() {
           [
             ['read', '读过文章', read.length],
             ['seen', '看过推荐', seen.length],
+            ['save', '收藏地点', saved.length],
             ['commit', '加入计划', count('commit')],
             ['map_open', '打开地图', count('map_open')],
             ['calendar_add', '加入日历', count('calendar_add')],
-            ['plans', '计划数', plans.length],
           ] as [string, string, number][]
         ).map(([k, label, n]) => (
           <div className="stat" key={k}>
@@ -101,7 +102,7 @@ export function MeScreen() {
 
       <section className="block">
         <h2>你的本地生活偏好</h2>
-        <p className="block-sub">由你读过、看过的本地内容实时聚合</p>
+        <p className="block-sub">由你读过、看过、收藏过的内容聚合 · 收藏权重更高</p>
         {prefs.length === 0 ? (
           <div className="muted-line">还没有偏好信号 · 去「发现」读点内容</div>
         ) : (

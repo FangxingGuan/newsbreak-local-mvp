@@ -50,8 +50,8 @@ export function CommitSheet() {
   }, [planning])
 
   const prefTags = useMemo(
-    () => getPreferences(state.read, state.seen).map((p) => p.tag),
-    [state.read, state.seen],
+    () => getPreferences(state.read, state.seen, state.saved).map((p) => p.tag),
+    [state.read, state.seen, state.saved],
   )
 
   const [when, setWhen] = useState('本周末')

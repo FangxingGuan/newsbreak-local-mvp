@@ -11,7 +11,8 @@ import {
 import type { Plan, Signal, SignalType, Tab } from './types'
 
 const SIGNAL_LABEL: Record<SignalType, string> = {
-  read: '看过本地内容',
+  read: '读了一篇文章',
+  seen: '看了一张推荐卡',
   commit: '加入计划',
   map_open: '打开地图导航',
   calendar_add: '加入日历',
@@ -67,12 +68,13 @@ type Action =
   | { type: 'TOAST'; message: string | null }
 
 let signalSeq = 0
-function makeSignal(type: SignalType, itemTitle?: string): Signal {
+function makeSignal(type: SignalType, itemTitle?: string, refId?: string): Signal {
   return {
     id: `s${++signalSeq}`,
     type,
     label: SIGNAL_LABEL[type],
     itemTitle,
+    refId,
     ts: Date.now(),
   }
 }
@@ -83,7 +85,7 @@ function markRead(state: State, id: string, title: string): State {
   return {
     ...state,
     read: [...state.read, id],
-    signals: [makeSignal('read', title), ...state.signals],
+    signals: [makeSignal('read', title, id), ...state.signals],
   }
 }
 
@@ -102,7 +104,7 @@ function reducer(state: State, action: Action): State {
       return {
         ...state,
         seen: [...state.seen, action.id],
-        signals: [makeSignal('read', action.title), ...state.signals],
+        signals: [makeSignal('seen', action.title, action.id), ...state.signals],
       }
     }
     case 'TOGGLE_SAVE': {
@@ -114,7 +116,7 @@ function reducer(state: State, action: Action): State {
           : [...state.saved, action.id],
         signals: has
           ? state.signals
-          : [makeSignal('save', action.title), ...state.signals],
+          : [makeSignal('save', action.title, action.id), ...state.signals],
       }
     }
     case 'OPEN_PLANNING':

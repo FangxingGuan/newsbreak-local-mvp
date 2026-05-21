@@ -174,12 +174,20 @@ export interface Plan {
  * Behaviour signals. `read` is the core input — what you read drives the
  * engine; the rest count toward Weekly Local Actions.
  */
-export type SignalType = 'read' | 'commit' | 'map_open' | 'calendar_add' | 'save'
+export type SignalType =
+  | 'read'
+  | 'seen'
+  | 'commit'
+  | 'map_open'
+  | 'calendar_add'
+  | 'save'
 
 export interface Signal {
   id: string
   type: SignalType
   label: string
   itemTitle?: string
+  /** The article / discover-card / POI id this signal refers to. */
+  refId?: string
   ts: number
 }

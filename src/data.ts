@@ -1162,14 +1162,19 @@ export function isDiscover(entry: FeedEntry): entry is DiscoverCard {
 export function getPreferences(
   read: string[],
   seen: string[],
+  saved: string[] = [],
 ): { tag: string; n: number }[] {
   const freq = new Map<string, number>()
-  read.forEach((id) =>
-    getArticle(id)?.tags.forEach((t) => freq.set(t, (freq.get(t) ?? 0) + 1)),
-  )
-  seen.forEach((id) =>
-    getDiscover(id)?.tags.forEach((t) => freq.set(t, (freq.get(t) ?? 0) + 1)),
-  )
+  const add = (tags: string[] | undefined, w: number) =>
+    tags?.forEach((t) => freq.set(t, (freq.get(t) ?? 0) + w))
+  read.forEach((id) => add(getArticle(id)?.tags, 1))
+  seen.forEach((id) => add(getDiscover(id)?.tags, 1))
+  // A saved POI is a stronger interest signal — weight it x2, using the tags
+  // of the article it belongs to.
+  saved.forEach((id) => {
+    const a = ARTICLES.find((x) => x.pois.some((p) => p.id === id))
+    add(a?.tags, 2)
+  })
   return [...freq.entries()]
     .map(([tag, n]) => ({ tag, n }))
     .sort((a, b) => b.n - a.n)
