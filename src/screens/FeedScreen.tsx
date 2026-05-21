@@ -4,14 +4,18 @@ import { ArticleCard } from '../components/ArticleCard'
 import { DiscoverCard } from '../components/DiscoverCard'
 import type { FeedEntry } from '../types'
 
-/** Interleave the feed: 3 news articles, then 2 discover cards, repeating. */
+/** Weave articles and discover cards evenly, whatever their relative counts. */
 function buildFeed(articles: FeedEntry[], discover: FeedEntry[]): FeedEntry[] {
   const out: FeedEntry[] = []
   let ai = 0
   let di = 0
-  while (ai < articles.length || di < discover.length) {
-    for (let k = 0; k < 3 && ai < articles.length; k++) out.push(articles[ai++])
-    for (let k = 0; k < 2 && di < discover.length; k++) out.push(discover[di++])
+  const total = articles.length + discover.length
+  for (let i = 0; i < total; i++) {
+    const takeArticle =
+      ai < articles.length &&
+      (di >= discover.length ||
+        (ai + 1) / articles.length <= (di + 1) / discover.length)
+    out.push(takeArticle ? articles[ai++] : discover[di++])
   }
   return out
 }
