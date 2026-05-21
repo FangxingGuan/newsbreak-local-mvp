@@ -1,5 +1,6 @@
 import { useEffect, useRef, type RefObject } from 'react'
 import { useStore } from '../store'
+import { IntentCTA } from './IntentCTA'
 import type { DiscoverCard as DiscoverCardT } from '../types'
 
 interface Props {
@@ -14,7 +15,12 @@ export function DiscoverCard({ card, scrollRoot }: Props) {
   const { state, dispatch } = useStore()
   const ref = useRef<HTMLDivElement>(null)
   const seen = state.seen.includes(card.id)
-  const link = card.ticketUrl ?? card.yelpUrl
+  const link = card.ticketUrl ?? card.yelpUrl ?? card.googleUrl
+  const linkLabel = card.ticketUrl
+    ? '购票 ↗'
+    : card.yelpUrl
+      ? '在 Yelp 查看 ↗'
+      : 'Google 地图 ↗'
 
   useEffect(() => {
     const el = ref.current
@@ -87,28 +93,21 @@ export function DiscoverCard({ card, scrollRoot }: Props) {
         </div>
       )}
 
-      <div className="dcard-foot">
-        {link && (
+      {link && (
+        <div className="dcard-foot">
           <a
             className="poi-link"
             href={link}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
           >
-            {card.kind === 'event' ? '购票 ↗' : '在 Yelp 查看 ↗'}
+            {linkLabel}
           </a>
-        )}
-        <button className="dcard-plan" onClick={plan}>
-          ✨ 加入计划
-        </button>
-      </div>
+        </div>
+      )}
 
       {seen && (
-        <div className="dcard-intent">
-          <strong>✨ 为你推荐的出行意图</strong>
-          <span>{card.intent}</span>
-        </div>
+        <IntentCTA label="为你推荐出行意图" intent={card.intent} onClick={plan} />
       )}
     </article>
   )

@@ -1,5 +1,6 @@
 import { useEffect, useRef, type RefObject } from 'react'
 import { useStore } from '../store'
+import { IntentCTA } from './IntentCTA'
 import type { Article } from '../types'
 
 interface Props {
@@ -46,8 +47,8 @@ export function ArticleCard({ article, scrollRoot }: Props) {
     dispatch({ type: 'OPEN_ARTICLE', id: article.id, title: article.headline })
 
   return (
-    <article ref={ref} className={`acard ${read ? 'read' : ''}`} onClick={open}>
-      <div className="acard-top">
+    <article ref={ref} className={`acard ${read ? 'read' : ''}`}>
+      <div className="acard-top" onClick={open}>
         <div className="acard-text">
           <div className="acard-topic">📰 {article.topic}</div>
           <h3 className="acard-headline">{article.headline}</h3>
@@ -75,10 +76,11 @@ export function ArticleCard({ article, scrollRoot }: Props) {
       </div>
 
       {read && (
-        <div className="acard-intent">
-          <strong>✨ NewsBreak 读到出行意图</strong>
-          <span>{article.intent} →</span>
-        </div>
+        <IntentCTA
+          label="NewsBreak 读到出行意图"
+          intent={article.intent}
+          onClick={open}
+        />
       )}
     </article>
   )
