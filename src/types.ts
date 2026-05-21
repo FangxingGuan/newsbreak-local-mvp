@@ -123,6 +123,7 @@ export type PlanKind =
   | 'cafe'
   | 'outdoor'
   | 'bookstore'
+  | 'shopping'
   | 'grocery'
   | 'family'
   | 'event'

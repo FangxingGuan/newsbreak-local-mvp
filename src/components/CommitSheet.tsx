@@ -16,7 +16,7 @@ const WHO_CHIPS = ['自己一个人', '约会', '和朋友', '带家人']
 
 function defaultWho(kind: PlanKind): string {
   if (kind === 'meal') return '约会'
-  if (kind === 'event' || kind === 'outdoor') return '和朋友'
+  if (kind === 'event' || kind === 'outdoor' || kind === 'shopping') return '和朋友'
   if (kind === 'grocery' || kind === 'family') return '带家人'
   return '自己一个人'
 }
@@ -27,6 +27,7 @@ function actionHint(kind: PlanKind): string | null {
   if (kind === 'meal') return '💡 热门时段建议先订位,到了不用排队'
   if (kind === 'grocery') return '💡 周末上午人最多,早点去更从容'
   if (kind === 'family') return '💡 热门亲子场馆周末人多,建议提前在网上订票'
+  if (kind === 'shopping') return '💡 二手店多为独件、常收现金 —— 带个大袋子,合眼缘的别犹豫'
   return null
 }
 
