@@ -74,7 +74,7 @@ type Action =
   | { type: 'CLOSE_PLANNING' }
   | { type: 'ADD_PLAN'; plan: Plan }
   | { type: 'VIEW_PLAN'; id: string | null }
-  | { type: 'SIGNAL'; signalType: SignalType; itemTitle?: string }
+  | { type: 'SIGNAL'; signalType: SignalType; itemTitle?: string; refId?: string }
   | { type: 'TOAST'; message: string | null }
 
 let signalSeq = 0
@@ -165,11 +165,22 @@ function reducer(state: State, action: Action): State {
       return { ...state, plans: [action.plan, ...state.plans] }
     case 'VIEW_PLAN':
       return { ...state, viewPlanId: action.id }
-    case 'SIGNAL':
+    case 'SIGNAL': {
+      const { signalType, itemTitle, refId } = action
+      // A real-world action counts once per plan: opening the map or adding
+      // to the calendar for the same plan must not inflate WLA on re-tap.
+      if (
+        WLA_TYPES.includes(signalType) &&
+        refId != null &&
+        state.signals.some((s) => s.type === signalType && s.refId === refId)
+      ) {
+        return state
+      }
       return {
         ...state,
-        signals: [makeSignal(action.signalType, action.itemTitle), ...state.signals],
+        signals: [makeSignal(signalType, itemTitle, refId), ...state.signals],
       }
+    }
     case 'TOAST':
       return { ...state, toast: action.message }
     default:

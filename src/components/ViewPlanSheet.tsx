@@ -1,13 +1,20 @@
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 import { useStore } from '../store'
 
 /** Opens a saved plan — the commitment, its optional itinerary, real actions. */
 export function ViewPlanSheet() {
   const { state, dispatch } = useStore()
   const plan = state.plans.find((p) => p.id === state.viewPlanId)
-  const [didMap, setDidMap] = useState(false)
-  const [didCal, setDidCal] = useState(false)
   if (!plan) return null
+
+  // Derived from the signal log so each real action counts once per plan and
+  // the "done" state survives closing and reopening the sheet.
+  const didMap = state.signals.some(
+    (s) => s.type === 'map_open' && s.refId === plan.id,
+  )
+  const didCal = state.signals.some(
+    (s) => s.type === 'calendar_add' && s.refId === plan.id,
+  )
 
   const close = () => dispatch({ type: 'VIEW_PLAN', id: null })
 
@@ -91,9 +98,9 @@ export function ViewPlanSheet() {
             <div className="rw-btns">
               <button
                 className={`rw-btn ${didMap ? 'done' : ''}`}
+                disabled={didMap}
                 onClick={() => {
-                  setDidMap(true)
-                  dispatch({ type: 'SIGNAL', signalType: 'map_open', itemTitle: plan.placeName })
+                  dispatch({ type: 'SIGNAL', signalType: 'map_open', itemTitle: plan.placeName, refId: plan.id })
                   dispatch({ type: 'TOAST', message: `🗺️ 已在地图打开 · ${plan.placeName}` })
                 }}
               >
@@ -101,9 +108,9 @@ export function ViewPlanSheet() {
               </button>
               <button
                 className={`rw-btn ${didCal ? 'done' : ''}`}
+                disabled={didCal}
                 onClick={() => {
-                  setDidCal(true)
-                  dispatch({ type: 'SIGNAL', signalType: 'calendar_add', itemTitle: plan.placeName })
+                  dispatch({ type: 'SIGNAL', signalType: 'calendar_add', itemTitle: plan.placeName, refId: plan.id })
                   dispatch({ type: 'TOAST', message: `🗓️ 已加入日历 · ${plan.when}` })
                 }}
               >
