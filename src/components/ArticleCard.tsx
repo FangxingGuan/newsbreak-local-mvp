@@ -48,9 +48,9 @@ export function ArticleCard({ article, scrollRoot }: Props) {
 
   return (
     <article ref={ref} className={`acard ${read ? 'read' : ''}`}>
+      <div className="card-badge article">📰 {article.topic}</div>
       <div className="acard-top" onClick={open}>
         <div className="acard-text">
-          <div className="acard-topic">📰 {article.topic}</div>
           <h3 className="acard-headline">{article.headline}</h3>
           <div className="acard-meta">
             {article.source} · {article.publishedAgo}

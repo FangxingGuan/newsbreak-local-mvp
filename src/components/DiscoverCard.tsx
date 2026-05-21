@@ -58,7 +58,7 @@ export function DiscoverCard({ card, scrollRoot }: Props) {
 
   return (
     <article ref={ref} className={`dcard ${seen ? 'seen' : ''}`}>
-      <div className={`dcard-badge ${card.kind}`}>{card.badge}</div>
+      <div className={`card-badge ${card.kind}`}>{card.badge}</div>
 
       <div className="dcard-top" onClick={plan}>
         <div className="dcard-text">

@@ -225,24 +225,17 @@ h4 {
 .acard-top {
   display: flex;
   gap: 12px;
-  padding: 13px 13px 0;
+  padding: 4px 13px 0;
   cursor: pointer;
 }
 .acard-text {
   flex: 1;
   min-width: 0;
 }
-.acard-topic {
-  font-size: 10.5px;
-  font-weight: 800;
-  color: var(--brand);
-  letter-spacing: 0.3px;
-}
 .acard-headline {
   font-size: 15.5px;
   font-weight: 800;
   line-height: 1.36;
-  margin-top: 6px;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
@@ -339,17 +332,22 @@ h4 {
   box-shadow: 0 0 0 2px rgba(240, 53, 63, 0.26),
     0 10px 26px rgba(240, 53, 63, 0.13);
 }
-.dcard-badge {
+/* shared top category bar — article cards and discover cards */
+.card-badge {
   font-size: 10.5px;
   font-weight: 800;
   letter-spacing: 0.3px;
   padding: 9px 13px;
 }
-.dcard-badge.find {
+.card-badge.article {
+  color: #3f5b8c;
+  background: #e9eef7;
+}
+.card-badge.find {
   color: #1f7a8c;
   background: #e6f3f5;
 }
-.dcard-badge.event {
+.card-badge.event {
   color: #b03a8c;
   background: #fbe9f4;
 }
