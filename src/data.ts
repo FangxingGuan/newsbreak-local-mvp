@@ -928,6 +928,32 @@ export const DISCOVER: DiscoverCard[] = [
     },
     yelpUrl: 'https://www.yelp.com/biz/arizona-garden-stanford',
   },
+  {
+    type: 'discover',
+    id: 'd-yutori',
+    kind: 'find',
+    badge: '🍵 本地日式咖啡馆',
+    title: 'Yutori',
+    category: 'Matcha Cafe · 日式',
+    emoji: '🍵',
+    cover: 'linear-gradient(135deg,#7ba659,#3a5f0b)',
+    image: 'https://s3-media0.fl.yelpcdn.com/bphoto/xe4cT-ySpPlONXn4L7el4A/o.jpg',
+    neighborhood: 'Palo Alto',
+    distance: '1.6 mi',
+    rating: 4.1,
+    reviews: 91,
+    blurb: 'El Camino 上新开的日式咖啡馆 —— 抹茶、mochi 华夫、司康,还带点 conbini 便利店的味道。',
+    intent: '找个下午去 Yutori 喝杯抹茶',
+    tags: ['抹茶', '咖啡', '日式'],
+    quote: {
+      source: 'Yelp',
+      author: 'Vicky L.',
+      rating: 5,
+      text: 'Excited for this new neighbourhood cafe — the Earl grey matcha with a black sesame scone is a favourite.',
+    },
+    yelpUrl: 'https://www.yelp.com/biz/yutori-palo-alto',
+    googleUrl: 'https://www.google.com/maps?cid=10708300136315527516',
+  },
 ]
 
 export function getDiscover(id: string): DiscoverCard | undefined {
