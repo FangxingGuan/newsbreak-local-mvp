@@ -4,13 +4,13 @@ import type { SignalType } from '../types'
 
 const SIGNAL_EMOJI: Record<SignalType, string> = {
   read: '📖',
-  plan_generated: '✨',
+  commit: '📌',
   map_open: '🗺️',
   calendar_add: '🗓️',
   save: '♥',
 }
 
-const WLA_GOAL = 6
+const WLA_GOAL = 4
 
 function relTime(ts: number): string {
   const diff = Math.round((Date.now() - ts) / 1000)
@@ -46,7 +46,7 @@ export function MeScreen() {
   const loop = [
     { label: '本地内容流', done: read.length + seen.length > 0 },
     { label: '读出意图', done: read.length + seen.length > 0 },
-    { label: '轻量规划', done: count('plan_generated') > 0 },
+    { label: '加入计划', done: count('commit') > 0 },
     { label: '真实行动', done: count('map_open') + count('calendar_add') > 0 },
     { label: '偏好信号', done: signals.length > 0 },
   ]
@@ -86,10 +86,10 @@ export function MeScreen() {
           [
             ['read', '读过文章', read.length],
             ['seen', '看过推荐', seen.length],
-            ['plan_generated', '生成计划', count('plan_generated')],
+            ['commit', '加入计划', count('commit')],
             ['map_open', '打开地图', count('map_open')],
-            ['save', '收藏地点', count('save')],
-            ['plans', '已存计划', plans.length],
+            ['calendar_add', '加入日历', count('calendar_add')],
+            ['plans', '计划数', plans.length],
           ] as [string, string, number][]
         ).map(([k, label, n]) => (
           <div className="stat" key={k}>

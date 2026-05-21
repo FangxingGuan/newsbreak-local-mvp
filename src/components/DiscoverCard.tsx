@@ -100,7 +100,7 @@ export function DiscoverCard({ card, scrollRoot }: Props) {
           </a>
         )}
         <button className="dcard-plan" onClick={plan}>
-          ✨ 规划进行程
+          ✨ 加入计划
         </button>
       </div>
 

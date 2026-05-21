@@ -12,14 +12,17 @@ import type { Plan, Signal, SignalType, Tab } from './types'
 
 const SIGNAL_LABEL: Record<SignalType, string> = {
   read: '看过本地内容',
-  plan_generated: '生成行程',
+  commit: '加入计划',
   map_open: '打开地图导航',
   calendar_add: '加入日历',
   save: '收藏地点',
 }
 
-/** Signal types that count toward the North Star metric (Weekly Local Actions). */
-const WLA_TYPES: SignalType[] = ['plan_generated', 'map_open', 'calendar_add']
+/**
+ * Weekly Local Actions counts only *real-world* actions — opening directions
+ * and adding to the calendar. Committing to a plan is intent, not yet an action.
+ */
+const WLA_TYPES: SignalType[] = ['map_open', 'calendar_add']
 
 type PlanTarget = { kind: 'article' | 'discover'; id: string }
 

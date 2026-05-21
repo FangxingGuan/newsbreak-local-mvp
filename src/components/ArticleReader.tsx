@@ -171,7 +171,7 @@ export function ArticleReader() {
               })
             }}
           >
-            ✨ 规划进行程
+            ✨ 加入计划
           </button>
         </div>
       </div>

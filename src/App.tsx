@@ -4,7 +4,7 @@ import { PlansScreen } from './screens/PlansScreen'
 import { MeScreen } from './screens/MeScreen'
 import { BottomNav } from './components/BottomNav'
 import { ArticleReader } from './components/ArticleReader'
-import { PlanSheet } from './components/PlanSheet'
+import { CommitSheet } from './components/CommitSheet'
 import { ViewPlanSheet } from './components/ViewPlanSheet'
 import { Toast } from './components/Toast'
 
@@ -24,7 +24,7 @@ function StatusBar() {
 const LOOP = [
   { emoji: '📰', label: '本地内容流(新闻 + 推荐)' },
   { emoji: '✨', label: '形成出行意图' },
-  { emoji: '🗺️', label: '轻量规划' },
+  { emoji: '📌', label: '加入计划(轻量承诺)' },
   { emoji: '🚀', label: '真实行动' },
   { emoji: '💜', label: '偏好画像回流' },
 ]
@@ -46,7 +46,7 @@ export function App() {
             </div>
             <BottomNav />
             {state.openArticleId && <ArticleReader />}
-            {state.planning && <PlanSheet />}
+            {state.planning && <CommitSheet />}
             {state.viewPlanId && <ViewPlanSheet />}
             <Toast />
           </div>
@@ -59,8 +59,8 @@ export function App() {
         </div>
         <h1>本地内容驱动的决策引擎</h1>
         <p>
-          交互式 MVP 演示。把 NewsBreak 的本地内容流变成出行意图,再到一条
-          可执行的轻量行程。出行意图有<strong>两个来源</strong>:
+          交互式 MVP 演示。把 NewsBreak 的本地内容流变成出行意图,再变成一个
+          会被记住、真的去成的<strong>本地行动</strong>。出行意图有两个来源:
         </p>
         <div className="legend-cards">
           <div className="legend-card">
@@ -93,7 +93,8 @@ export function App() {
           <li>停留任意一张卡片 → 引擎形成一条出行意图</li>
           <li>文章卡可读全文与原文链接;发现卡含真实评分与评论</li>
           <li>POI 由 Yelp / Google Places 实时数据富化</li>
-          <li>「规划进行程」把地点编成一条可执行的轻量行程</li>
+          <li>「加入计划」把想去的存成会提醒你的小约定,可选展开成一日行程</li>
+          <li>WLA 北极星只计真实行动(打开地图 / 加入日历),不计「加入计划」</li>
           <li>「我的」页沉淀本地生活偏好画像与北极星指标 WLA</li>
         </ul>
         <div className="legend-foot">

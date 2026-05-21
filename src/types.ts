@@ -113,6 +113,8 @@ export interface PlanSeed {
   anchorEmoji: string
   anchorBlurb: string
   anchorImage?: string
+  /** For time-bound items (events), the date the plan is locked to. */
+  fixedWhen?: string
 }
 
 /** The kind of outing a plan is — drives its pacing, stops and tips. */
@@ -136,15 +138,28 @@ export interface PlanStop {
   forYou?: boolean
 }
 
-/** A lightweight plan generated from an article's POIs. */
+/**
+ * A plan is a lightweight *commitment* — turning a fleeting intent into a
+ * remembered thing the user means to do: a place, a when, who with, a reminder.
+ * The multi-stop itinerary is optional, expanded only on demand.
+ */
 export interface Plan {
   id: string
-  title: string
-  when: string
-  vibe: string
   basedOnId: string
   basedOnTitle: string
-  stops: PlanStop[]
+  kind: PlanKind
+  emoji: string
+  image?: string
+  placeName: string
+  placeBlurb: string
+  /** When the user committed to going, e.g. "本周末". */
+  when: string
+  /** Who they plan to go with, e.g. "约会". */
+  withWhom: string
+  remind: boolean
+  /** Optional multi-stop itinerary — only present if the user expanded one. */
+  itinerary?: PlanStop[]
+  itineraryVibe?: string
   createdAt: number
 }
 
@@ -152,7 +167,7 @@ export interface Plan {
  * Behaviour signals. `read` is the core input — what you read drives the
  * engine; the rest count toward Weekly Local Actions.
  */
-export type SignalType = 'read' | 'plan_generated' | 'map_open' | 'calendar_add' | 'save'
+export type SignalType = 'read' | 'commit' | 'map_open' | 'calendar_add' | 'save'
 
 export interface Signal {
   id: string

@@ -8,7 +8,7 @@ export function PlansScreen() {
     <div className="screen">
       <header className="appbar simple">
         <h1>我的计划</h1>
-        <p>从你读过的文章里生成的本地行程都会留在这里。</p>
+        <p>觉得想去就「加入计划」—— 这里存着你打算去做的本地小约定。</p>
       </header>
 
       {plans.length === 0 ? (
@@ -16,37 +16,36 @@ export function PlansScreen() {
           <span className="empty-emoji">🗂️</span>
           <h3>还没有计划</h3>
           <p>
-            回到「发现」,读一篇本地文章 —— NewsBreak 会从文章里
-            读出地点和意图,帮你生成第一份行程。
+            回到「发现」,读一篇本地文章或看张推荐卡 —— 觉得想去,
+            「加入计划」就把它存成一个会提醒你的小约定。
           </p>
           <button
             className="btn-primary"
             onClick={() => dispatch({ type: 'SET_TAB', tab: 'feed' })}
           >
-            去读文章 →
+            去发现 →
           </button>
         </div>
       ) : (
         <div className="plan-list">
-          {plans.map((p) => {
-            const anchor = p.stops.find((s) => s.anchor)
-            return (
-              <button
-                key={p.id}
-                className="plancard"
-                onClick={() => dispatch({ type: 'VIEW_PLAN', id: p.id })}
-              >
-                <span className="plancard-emoji">{anchor?.emoji ?? '🗺️'}</span>
-                <span className="plancard-info">
-                  <span className="plancard-title">{p.title}</span>
-                  <span className="plancard-meta">
-                    {p.when} · {p.stops.length} 站 · 源自《{p.basedOnTitle}》
-                  </span>
+          {plans.map((p) => (
+            <button
+              key={p.id}
+              className="plancard"
+              onClick={() => dispatch({ type: 'VIEW_PLAN', id: p.id })}
+            >
+              <span className="plancard-emoji">{p.emoji}</span>
+              <span className="plancard-info">
+                <span className="plancard-title">{p.placeName}</span>
+                <span className="plancard-meta">
+                  🗓️ {p.when} · 👥 {p.withWhom}
+                  {p.remind ? ' · 🔔' : ''}
+                  {p.itinerary ? ' · 📋 含一日行程' : ''}
                 </span>
-                <span className="plancard-arrow">›</span>
-              </button>
-            )
-          })}
+              </span>
+              <span className="plancard-arrow">›</span>
+            </button>
+          ))}
         </div>
       )}
     </div>

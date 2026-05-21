@@ -24,12 +24,17 @@ Both feed into the same loop, and both contribute to the user's local-life
 Core loop:
 
 ```
-本地文章流 → 阅读文章 → 从文章抽取 POI 与意图 → 围绕文章 POI 轻量规划
-  → 真实行动 → 阅读偏好信号
+本地内容流(新闻 + 推荐) → 形成出行意图 → 加入计划(轻量承诺)
+  → 真实行动 → 偏好画像回流
 ```
 
-North Star metric: **Weekly Local Actions (WLA)** — counts plan generation, map
-opens and calendar adds.
+Planning is deliberately lightweight: tapping "加入计划" turns an intent into a
+remembered commitment (a place, a when, who with, a reminder). A multi-stop
+itinerary is optional, expanded only on demand.
+
+North Star metric: **Weekly Local Actions (WLA)** — counts only real-world
+actions (opening directions, adding to calendar). Committing to a plan is
+intent, not yet an action, so it does not count.
 
 Full PRD: `newsbreak_ai_local_mvp_prd.md`.
 
@@ -44,14 +49,15 @@ Full PRD: `newsbreak_ai_local_mvp_prd.md`.
 ## Code layout (`src/`)
 
 - `types.ts` — domain types: `Article`, `ArticlePOI`, `Plan`, `Signal`
-- `data.ts` — the `ARTICLES` array (real local-news reports with embedded,
-  API-enriched POIs) + the plan generator
+- `data.ts` — `ARTICLES` (news reports + API-enriched POIs), `DISCOVER`
+  (recommendation cards), the category/preference-aware itinerary generator,
+  and the local-life preference profile
 - `store.tsx` — single reducer + context driving the loop; derives WLA
 - `App.tsx` — phone frame, screen routing, overlay sheets, desktop legend
-- `screens/` — `FeedScreen` (article feed), `PlansScreen`, `MeScreen`
-- `components/` — `ArticleCard` (feed card, dwell-tracked), `ArticleReader`
-  (full article + extracted POIs + plan CTA), `PlanSheet`, `ViewPlanSheet`,
-  `BottomNav`, `Toast`
+- `screens/` — `FeedScreen` (mixed feed), `PlansScreen`, `MeScreen`
+- `components/` — `ArticleCard`, `DiscoverCard` (the two feed card types),
+  `ArticleReader`, `CommitSheet` (lightweight planning + optional itinerary),
+  `ViewPlanSheet`, `BottomNav`, `Toast`
 - `styles.css` — all styling; one file, sectioned by component
 
 ## Data model & honesty

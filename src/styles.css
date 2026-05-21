@@ -1023,6 +1023,188 @@ h4 {
   background: #fdecec;
 }
 
+/* ---- Commit sheet (lightweight planning) ---- */
+.commit-head {
+  padding: 14px 18px 4px;
+}
+.commit-place {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+.commit-thumb {
+  width: 62px;
+  height: 62px;
+  border-radius: 13px;
+  flex: none;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.commit-emoji {
+  font-size: 30px;
+}
+.commit-place-text {
+  flex: 1;
+  min-width: 0;
+}
+.commit-place-text h2 {
+  font-size: 18px;
+}
+.commit-place-text p {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin-top: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.commit-from {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 10px;
+}
+.commit-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 11px;
+}
+.commit-summary span {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #44474f;
+  background: var(--bg);
+  padding: 5px 10px;
+  border-radius: 9px;
+}
+.commit-body {
+  padding: 4px 18px 8px;
+}
+.commit-q {
+  font-size: 12.5px;
+  font-weight: 800;
+  margin: 16px 0 9px;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.chip {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--bg);
+  padding: 9px 14px;
+  border-radius: 11px;
+  border: 1.5px solid transparent;
+  transition: 0.15s;
+}
+.chip.on {
+  background: #fdecec;
+  color: var(--brand);
+  border-color: var(--brand);
+  font-weight: 700;
+}
+.commit-fixed {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--brand);
+  background: #fdecec;
+  padding: 9px 13px;
+  border-radius: 11px;
+  display: inline-block;
+}
+.commit-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px 14px;
+  background: var(--bg);
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.commit-switch {
+  width: 42px;
+  height: 24px;
+  border-radius: 12px;
+  background: #d4d6dc;
+  position: relative;
+  transition: background 0.18s;
+  flex: none;
+}
+.commit-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: transform 0.18s;
+}
+.commit-toggle.on .commit-switch {
+  background: var(--brand);
+}
+.commit-toggle.on .commit-switch::after {
+  transform: translateX(18px);
+}
+.commit-hint {
+  margin-top: 14px;
+  font-size: 12px;
+  line-height: 1.55;
+  color: #8a6d1f;
+  background: #fff4d6;
+  border-radius: 11px;
+  padding: 10px 12px;
+}
+.commit-expand {
+  width: 100%;
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--bg);
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.commit-itin {
+  margin-top: 16px;
+  border-top: 1px solid var(--line);
+}
+.commit-itin-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 13px;
+}
+.commit-itin-vibe {
+  font-size: 12.5px;
+  font-weight: 800;
+}
+.commit-reroll {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--brand);
+  background: #fdecec;
+  padding: 6px 11px;
+  border-radius: 9px;
+}
+.commit-itin .timeline {
+  padding-left: 0;
+  padding-right: 0;
+}
+
 /* ---- Plans screen ---- */
 .empty {
   text-align: center;

@@ -1428,6 +1428,11 @@ export function planSeedFromArticle(a: Article): PlanSeed {
 }
 
 export function planSeedFromDiscover(d: DiscoverCard): PlanSeed {
+  let fixedWhen: string | undefined
+  if (d.kind === 'event' && d.date) {
+    const [, mm, dd] = d.date.split('-')
+    fixedWhen = `演出日期 · ${Number(mm)}/${Number(dd)}`
+  }
   return {
     id: d.id,
     title: d.title,
@@ -1437,6 +1442,7 @@ export function planSeedFromDiscover(d: DiscoverCard): PlanSeed {
     anchorEmoji: d.emoji,
     anchorBlurb: d.blurb,
     anchorImage: d.image,
+    fixedWhen,
   }
 }
 
@@ -1482,7 +1488,15 @@ function preferenceStop(
   return null
 }
 
-export function generatePlan(seed: PlanSeed, variant = 0, prefTags: string[] = []): Plan {
+/**
+ * Builds the OPTIONAL multi-stop itinerary — only when the user chooses to
+ * expand one. A plain commitment doesn't need it.
+ */
+export function generateItinerary(
+  seed: PlanSeed,
+  variant = 0,
+  prefTags: string[] = [],
+): { vibe: string; stops: PlanStop[] } {
   const t = PLAN_KINDS[seed.kind]
   const v = t.variants[((variant % 2) + 2) % 2]
   const fill = (s: string) => s.replace(/\{area\}/g, seed.area)
@@ -1506,25 +1520,13 @@ export function generatePlan(seed: PlanSeed, variant = 0, prefTags: string[] = [
     stops[0].time,
     stops[stops.length - 1].time,
   )
-  let when = v.when
   if (pref) {
     if (pref.pos === 'post') {
       stops.push(pref.stop)
     } else {
-      // Slot the preference stop in first; the old first stop now needs a connector.
       stops[0] = { ...stops[0], travel: stops[0].travel ?? '🚶 顺路' }
       stops.unshift(pref.stop)
-      when = v.when.replace(/\d{1,2}:\d{2}/, pref.stop.time)
     }
   }
-  return {
-    id: `plan-${seed.id}-${Date.now()}`,
-    title: `${seed.anchorName} · ${t.title}`,
-    when,
-    vibe: v.vibe,
-    basedOnId: seed.id,
-    basedOnTitle: seed.title,
-    stops,
-    createdAt: Date.now(),
-  }
+  return { vibe: v.vibe, stops }
 }
