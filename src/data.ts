@@ -506,6 +506,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-oakland-thrift',
+    addedAt: '2026-05-20',
     source: 'The Thrifty Apartment',
     sourceUrl:
       'https://thethriftyapartment.com/i-checked-out-oaklands-thrift-scene-and-these-stores-impressed-me-most/',
@@ -632,6 +633,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-uncle-johns',
+    addedAt: '2026-05-20',
     source: 'Go To Destinations',
     sourceUrl: 'https://www.gotodestinations.com/must-try-pancake-house-san-jose-ca/',
     publishedAgo: '1 天前',
@@ -688,6 +690,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-good-place-books',
+    addedAt: '2026-05-20',
     source: 'SFGATE',
     sourceUrl:
       'https://www.sfgate.com/sf-culture/article/oakland-bookstore-closing-montclair-22259109.php',
@@ -745,6 +748,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-cafe-bolita',
+    addedAt: '2026-05-21',
     source: 'Eater SF',
     sourceUrl: 'https://sf.eater.com/dining-report/212499/cafe-bolita-review',
     publishedAgo: '6 天前',
@@ -799,6 +803,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-maillards',
+    addedAt: '2026-05-21',
     source: 'Eater SF',
     sourceUrl:
       'https://sf.eater.com/dining-report/212433/maillards-two-pitchers-review',
@@ -855,6 +860,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-soma-social',
+    addedAt: '2026-05-21',
     source: 'Eater SF',
     sourceUrl:
       'https://sf.eater.com/restaurant-news/212321/san-francisco-bay-area-restaurant-bar-openings-may-2026',
@@ -904,6 +910,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-studio-estepan',
+    addedAt: '2026-05-21',
     source: 'Eater SF',
     sourceUrl: 'https://sf.eater.com/dining-report/212521/studio-estepan-review',
     publishedAgo: '2 天前',
@@ -1580,6 +1587,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-fanime',
+    addedAt: '2026-05-22',
     kind: 'event',
     badge: '🔥 本周热门活动',
     title: 'FanimeCon 2026',
@@ -1599,6 +1607,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-mv-obon',
+    addedAt: '2026-05-22',
     kind: 'event',
     badge: '🏮 本地夏日活动',
     title: 'Mountain View 盆踊り祭(Obon)',
@@ -1617,6 +1626,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-hakone',
+    addedAt: '2026-05-22',
     kind: 'find',
     badge: '⛩️ 本地日式去处',
     title: 'Hakone Estate and Gardens',
@@ -1644,6 +1654,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-sushi-adachi',
+    addedAt: '2026-05-22',
     kind: 'find',
     badge: '🔍 本地小众新发现',
     title: 'Sushi Adachi',
@@ -1672,6 +1683,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-asian-art',
+    addedAt: '2026-05-22',
     kind: 'find',
     badge: '🖼️ 本地文化去处',
     title: 'Asian Art Museum(亚洲艺术博物馆)',

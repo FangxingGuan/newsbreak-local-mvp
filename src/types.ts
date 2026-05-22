@@ -65,6 +65,8 @@ export interface Article {
   tags: string[]
   /** Places mentioned in the article; pois[0] is the primary one. */
   pois: ArticlePOI[]
+  /** Date added to the feed (YYYY-MM-DD); freshly added content sorts first. */
+  addedAt?: string
 }
 
 /**
@@ -97,6 +99,8 @@ export interface DiscoverCard {
   yelpUrl?: string
   googleUrl?: string
   ticketUrl?: string
+  /** Date added to the feed (YYYY-MM-DD); freshly added content sorts first. */
+  addedAt?: string
 }
 
 /** Anything that can appear in the feed. */

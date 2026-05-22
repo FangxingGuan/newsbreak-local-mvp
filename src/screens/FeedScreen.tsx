@@ -4,6 +4,20 @@ import { ArticleCard } from '../components/ArticleCard'
 import { DiscoverCard } from '../components/DiscoverCard'
 import type { FeedEntry } from '../types'
 
+/**
+ * Newest-added content first. Entries carrying an `addedAt` (everything the
+ * news pipeline adds) sort ahead by date, descending; original content has no
+ * `addedAt` and keeps its order after them (Array.sort is stable).
+ */
+function freshFirst<T extends { addedAt?: string }>(list: T[]): T[] {
+  return [...list].sort((a, b) => {
+    if (a.addedAt && b.addedAt) return b.addedAt.localeCompare(a.addedAt)
+    if (a.addedAt) return -1
+    if (b.addedAt) return 1
+    return 0
+  })
+}
+
 /** Weave articles and discover cards evenly, whatever their relative counts. */
 function buildFeed(articles: FeedEntry[], discover: FeedEntry[]): FeedEntry[] {
   const out: FeedEntry[] = []
@@ -29,7 +43,7 @@ let savedScroll = 0
 
 export function FeedScreen() {
   const scrollRef = useRef<HTMLDivElement>(null)
-  const entries = buildFeed(ARTICLES, DISCOVER)
+  const entries = buildFeed(freshFirst(ARTICLES), freshFirst(DISCOVER))
 
   useLayoutEffect(() => {
     const el = scrollRef.current
