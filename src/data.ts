@@ -2112,6 +2112,26 @@ export const DISCOVER: DiscoverCard[] = [
     yelpUrl: 'https://www.yelp.com/biz/blue-house-farm-san-gregorio-2',
     googleUrl: 'https://www.google.com/maps?cid=3129822426916407570',
   },
+  {
+    type: 'discover',
+    id: 'd-rwc-summer',
+    addedAt: '2026-05-22',
+    kind: 'event',
+    badge: '🎪 本地夏日活动',
+    title: 'Redwood City 夏季广场系列',
+    category: '露天音乐会 · 免费',
+    emoji: '🎵',
+    cover: 'linear-gradient(135deg,#834d9b,#d04ed6)',
+    neighborhood: 'Redwood City',
+    distance: '6 mi',
+    date: '2026-05-29',
+    price: '多数免费',
+    blurb:
+      'Redwood City 夏季广场系列迎来 20 周年 —— 5/29 起,每周五傍晚在 Courthouse Square 有免费露天音乐会,整夏还有周四露天电影、周三公园音乐会与周六亲子演出。',
+    intent: '周五傍晚去 Courthouse Square 听一场免费露天音乐会',
+    tags: ['露天音乐会', '夏日活动', '亲子'],
+    googleUrl: 'https://www.google.com/maps?cid=1693260971588954190',
+  },
 ]
 
 export function getDiscover(id: string): DiscoverCard | undefined {
