@@ -4,21 +4,6 @@ import { ArticleCard } from '../components/ArticleCard'
 import { DiscoverCard } from '../components/DiscoverCard'
 import type { FeedEntry } from '../types'
 
-/**
- * Newest-added content first. Entries carrying an `addedAt` (everything the
- * news pipeline adds) sort ahead by ISO timestamp, descending — so the most
- * recent update batch lands at the very top. Original content has no
- * `addedAt` and keeps its order after them (Array.sort is stable).
- */
-function freshFirst<T extends { addedAt?: string }>(list: T[]): T[] {
-  return [...list].sort((a, b) => {
-    if (a.addedAt && b.addedAt) return b.addedAt.localeCompare(a.addedAt)
-    if (a.addedAt) return -1
-    if (b.addedAt) return 1
-    return 0
-  })
-}
-
 /** Weave articles and discover cards evenly, whatever their relative counts. */
 function buildFeed(articles: FeedEntry[], discover: FeedEntry[]): FeedEntry[] {
   const out: FeedEntry[] = []
@@ -42,9 +27,27 @@ function buildFeed(articles: FeedEntry[], discover: FeedEntry[]): FeedEntry[] {
  */
 let savedScroll = 0
 
+/**
+ * Final feed order: every freshly-added entry (anything carrying an `addedAt`,
+ * across both types) sorts by timestamp descending and lands above the
+ * original content. Below the fresh band, the original article/discover weave
+ * is preserved. Sorting both types together — not weaving them — keeps the
+ * latest update batch at the very top regardless of relative type counts.
+ */
+function orderedFeed(): FeedEntry[] {
+  const freshArticles = ARTICLES.filter((a) => a.addedAt)
+  const staleArticles = ARTICLES.filter((a) => !a.addedAt)
+  const freshDiscover = DISCOVER.filter((d) => d.addedAt)
+  const staleDiscover = DISCOVER.filter((d) => !d.addedAt)
+  const fresh = [...freshArticles, ...freshDiscover].sort((a, b) =>
+    (b.addedAt ?? '').localeCompare(a.addedAt ?? ''),
+  )
+  return [...fresh, ...buildFeed(staleArticles, staleDiscover)]
+}
+
 export function FeedScreen() {
   const scrollRef = useRef<HTMLDivElement>(null)
-  const entries = buildFeed(freshFirst(ARTICLES), freshFirst(DISCOVER))
+  const entries = orderedFeed()
 
   useLayoutEffect(() => {
     const el = scrollRef.current
