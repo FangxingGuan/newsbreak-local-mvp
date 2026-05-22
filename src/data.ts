@@ -506,7 +506,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-oakland-thrift',
-    addedAt: '2026-05-20',
+    addedAt: '2026-05-20T10:00:00Z',
     source: 'The Thrifty Apartment',
     sourceUrl:
       'https://thethriftyapartment.com/i-checked-out-oaklands-thrift-scene-and-these-stores-impressed-me-most/',
@@ -633,7 +633,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-uncle-johns',
-    addedAt: '2026-05-20',
+    addedAt: '2026-05-20T10:00:00Z',
     source: 'Go To Destinations',
     sourceUrl: 'https://www.gotodestinations.com/must-try-pancake-house-san-jose-ca/',
     publishedAgo: '1 天前',
@@ -690,7 +690,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-good-place-books',
-    addedAt: '2026-05-20',
+    addedAt: '2026-05-20T10:00:00Z',
     source: 'SFGATE',
     sourceUrl:
       'https://www.sfgate.com/sf-culture/article/oakland-bookstore-closing-montclair-22259109.php',
@@ -748,7 +748,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-cafe-bolita',
-    addedAt: '2026-05-21',
+    addedAt: '2026-05-21T10:00:00Z',
     source: 'Eater SF',
     sourceUrl: 'https://sf.eater.com/dining-report/212499/cafe-bolita-review',
     publishedAgo: '6 天前',
@@ -803,7 +803,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-maillards',
-    addedAt: '2026-05-21',
+    addedAt: '2026-05-21T10:00:00Z',
     source: 'Eater SF',
     sourceUrl:
       'https://sf.eater.com/dining-report/212433/maillards-two-pitchers-review',
@@ -860,7 +860,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-soma-social',
-    addedAt: '2026-05-21',
+    addedAt: '2026-05-21T10:00:00Z',
     source: 'Eater SF',
     sourceUrl:
       'https://sf.eater.com/restaurant-news/212321/san-francisco-bay-area-restaurant-bar-openings-may-2026',
@@ -910,7 +910,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-studio-estepan',
-    addedAt: '2026-05-21',
+    addedAt: '2026-05-21T10:00:00Z',
     source: 'Eater SF',
     sourceUrl: 'https://sf.eater.com/dining-report/212521/studio-estepan-review',
     publishedAgo: '2 天前',
@@ -946,7 +946,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-pizza-shop',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T12:00:00Z',
     source: 'Go To Destinations',
     sourceUrl: 'https://www.gotodestinations.com/hidden-pizza-gem-nyc-slices-san-francisco/',
     publishedAgo: '1 天前',
@@ -1002,7 +1002,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-dont-eat-me',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T12:00:00Z',
     source: 'NBC Bay Area',
     sourceUrl:
       'https://www.nbcbayarea.com/celebrating-aapi-heritage/mountain-view-shop-dont-eat-me/4084937/',
@@ -1052,7 +1052,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-barbaras-fishtrap',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T12:00:00Z',
     source: 'Fast Food Club',
     sourceUrl:
       'https://fastfoodclub.com/p/your-first-bowl-of-clam-chowder-at-this-california-hole-in-the-wall-is-impossible-to-forget/',
@@ -1109,7 +1109,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-fish-and-bird',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T12:00:00Z',
     source: 'KRON4',
     sourceUrl:
       'https://www.kron4.com/news/bay-area/japanese-restaurant-in-downtown-berkeley-closing-next-month-been-a-tough-6-1-2-years/',
@@ -1167,7 +1167,7 @@ export const ARTICLES: Article[] = [
   },
   {
     id: 'a-kumako-ramen',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T18:00:00Z',
     source: 'San Francisco Chronicle',
     sourceUrl: 'https://www.sfchronicle.com/entertainment/article/bts-rm-kumako-ramen-22269837.php',
     publishedAgo: '2 天前',
@@ -1864,7 +1864,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-fanime',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T09:00:00Z',
     kind: 'event',
     badge: '🔥 本周热门活动',
     title: 'FanimeCon 2026',
@@ -1884,7 +1884,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-mv-obon',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T09:00:00Z',
     kind: 'event',
     badge: '🏮 本地夏日活动',
     title: 'Mountain View 盆踊り祭(Obon)',
@@ -1903,7 +1903,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-hakone',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T09:00:00Z',
     kind: 'find',
     badge: '⛩️ 本地日式去处',
     title: 'Hakone Estate and Gardens',
@@ -1931,7 +1931,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-sushi-adachi',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T09:00:00Z',
     kind: 'find',
     badge: '🔍 本地小众新发现',
     title: 'Sushi Adachi',
@@ -1960,7 +1960,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-asian-art',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T09:00:00Z',
     kind: 'find',
     badge: '🖼️ 本地文化去处',
     title: 'Asian Art Museum(亚洲艺术博物馆)',
@@ -1988,7 +1988,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-liangs-village',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T12:00:00Z',
     kind: 'find',
     badge: '🍜 值得开车一去的中餐',
     title: 'Liang’s Village(梁家村)',
@@ -2016,7 +2016,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-mama-chens',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T12:00:00Z',
     kind: 'find',
     badge: '🍜 值得开车一去的中餐',
     title: 'Ma Ma Chen’s Kitchen',
@@ -2035,7 +2035,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-palette-tea',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T12:00:00Z',
     kind: 'find',
     badge: '🍜 值得开车一去的中餐',
     title: 'Palette Tea Garden & Dim Sum',
@@ -2063,7 +2063,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-tai-er',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T12:00:00Z',
     kind: 'find',
     badge: '🍜 值得开车一去的中餐',
     title: 'Tai Er Sichuan Cuisine(太二)',
@@ -2090,7 +2090,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-webb-ranch',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T12:00:00Z',
     kind: 'find',
     badge: '🍒 夏日采摘季',
     title: 'U-Pick at Webb Ranch',
@@ -2116,7 +2116,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-mariani',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T12:00:00Z',
     kind: 'find',
     badge: '🍒 夏日采摘季',
     title: 'Mariani Orchards',
@@ -2143,7 +2143,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-blue-house',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T12:00:00Z',
     kind: 'find',
     badge: '🍒 夏日采摘季',
     title: 'Blue House Farm',
@@ -2171,7 +2171,7 @@ export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
     id: 'd-rwc-summer',
-    addedAt: '2026-05-22',
+    addedAt: '2026-05-22T15:00:00Z',
     kind: 'event',
     badge: '🎪 本地夏日活动',
     title: 'Redwood City 夏季广场系列',

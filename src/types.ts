@@ -65,7 +65,10 @@ export interface Article {
   tags: string[]
   /** Places mentioned in the article; pois[0] is the primary one. */
   pois: ArticlePOI[]
-  /** Date added to the feed (YYYY-MM-DD); freshly added content sorts first. */
+  /**
+   * ISO timestamp the entry was added to the feed. Each pipeline update uses a
+   * fresh timestamp, so the newest batch always sorts to the very top.
+   */
   addedAt?: string
 }
 
@@ -99,7 +102,10 @@ export interface DiscoverCard {
   yelpUrl?: string
   googleUrl?: string
   ticketUrl?: string
-  /** Date added to the feed (YYYY-MM-DD); freshly added content sorts first. */
+  /**
+   * ISO timestamp the entry was added to the feed. Each pipeline update uses a
+   * fresh timestamp, so the newest batch always sorts to the very top.
+   */
   addedAt?: string
 }
 

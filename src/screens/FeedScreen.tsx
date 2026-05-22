@@ -6,7 +6,8 @@ import type { FeedEntry } from '../types'
 
 /**
  * Newest-added content first. Entries carrying an `addedAt` (everything the
- * news pipeline adds) sort ahead by date, descending; original content has no
+ * news pipeline adds) sort ahead by ISO timestamp, descending — so the most
+ * recent update batch lands at the very top. Original content has no
  * `addedAt` and keeps its order after them (Array.sort is stable).
  */
 function freshFirst<T extends { addedAt?: string }>(list: T[]): T[] {

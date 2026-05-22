@@ -77,6 +77,8 @@ Full PRD: `newsbreak_ai_local_mvp_prd.md`.
   article the user read — never a proactive recommendation.
 - This is a demo: state is in-memory and resets on reload.
 - When adding an article: fetch it, extract POIs, enrich via the APIs, write an
-  original-prose summary, and add it to `ARTICLES`. Set `addedAt` (YYYY-MM-DD)
-  on every pipeline-added article and discover card — the feed sorts entries
-  carrying an `addedAt` to the top, newest first.
+  original-prose summary, and add it to `ARTICLES`. Set `addedAt` (a full ISO
+  timestamp) on every pipeline-added article and discover card; give every
+  entry in one update batch the same fresh timestamp, newer than any prior
+  batch — the feed sorts by `addedAt` descending, so the latest batch lands at
+  the very top.
