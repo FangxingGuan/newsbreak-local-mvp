@@ -91,7 +91,7 @@ export function App() {
           ))}
         </div>
         <ul className="legend-tips">
-          <li>停留任意一张卡片 → 引擎形成一条出行意图</li>
+          <li>每张卡底部都标着它读出的出行意图,点一下就进入加入计划</li>
           <li>文章卡可读全文与原文链接;发现卡含真实评分与评论</li>
           <li>POI 由 Yelp / Google Places 实时数据富化</li>
           <li>定时抓取的本地新内容,会自动排到信息流最前面,每张卡上方都标了更新时间</li>

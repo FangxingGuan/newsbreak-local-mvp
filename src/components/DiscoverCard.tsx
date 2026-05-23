@@ -134,9 +134,7 @@ export function DiscoverCard({ card, scrollRoot }: Props) {
         </div>
       )}
 
-      {seen && (
-        <IntentCTA label="为你推荐出行意图" intent={card.intent} onClick={plan} />
-      )}
+      <IntentCTA label="为你推荐出行意图" intent={card.intent} onClick={plan} />
     </article>
   )
 }

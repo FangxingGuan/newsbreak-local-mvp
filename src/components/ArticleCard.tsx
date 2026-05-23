@@ -105,13 +105,11 @@ export function ArticleCard({ article, scrollRoot }: Props) {
         <span className="acard-poi">📍 提到 {article.pois.length} 个地点</span>
       </div>
 
-      {read && (
-        <IntentCTA
-          label="NewsBreak 读到出行意图"
-          intent={article.intent}
-          onClick={open}
-        />
-      )}
+      <IntentCTA
+        label="NewsBreak 读到出行意图"
+        intent={article.intent}
+        onClick={open}
+      />
     </article>
   )
 }
