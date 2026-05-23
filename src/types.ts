@@ -112,6 +112,24 @@ export interface DiscoverCard {
 /** Anything that can appear in the feed. */
 export type FeedEntry = Article | DiscoverCard
 
+/**
+ * An editorial theme that bundles a curated set of articles + discover cards
+ * for the top-of-feed lanes. Tapping a theme filters the feed to just its
+ * entries — gives cold-start users a clear "what is this app surfacing right
+ * now" frame, instead of an undifferentiated mixed stream.
+ */
+export interface FeedTheme {
+  id: string
+  emoji: string
+  title: string
+  /** One-line context shown under the title. */
+  subtitle: string
+  /** Gradient used as the lane card's background. */
+  cover: string
+  /** Article ids and discover-card ids in this theme. */
+  entryIds: string[]
+}
+
 /** Minimal input needed to generate a plan — from an article or a card. */
 export interface PlanSeed {
   id: string

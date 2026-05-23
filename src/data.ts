@@ -9,6 +9,7 @@ import type {
   Article,
   DiscoverCard,
   FeedEntry,
+  FeedTheme,
   Plan,
   PlanKind,
   PlanSeed,
@@ -16,6 +17,60 @@ import type {
 } from './types'
 
 export const USER_LOCATION = 'Palo Alto, CA'
+
+// ---- Editorial themes ------------------------------------------------------
+// Top-of-feed lanes that bundle existing cards into curated stories — so a
+// cold-start user sees "what's the engine surfacing right now?" in one glance
+// (closing soon, summer outings, BTS food tour…) instead of a mixed scroll.
+// Themes are curatorial; the same card can appear in more than one.
+
+export const THEMES: FeedTheme[] = [
+  {
+    id: 't-closing',
+    emoji: '⏳',
+    title: '来不及就没了',
+    subtitle: '本地老店告别窗口',
+    cover: 'linear-gradient(135deg,#2c3e50,#7b8a99)',
+    entryIds: ['a-trumer', 'a-fish-and-bird', 'a-good-place-books', 'a-mixt'],
+  },
+  {
+    id: 't-summer',
+    emoji: '🍒',
+    title: '入夏正当时',
+    subtitle: '采摘 · 夏夜 · 户外',
+    cover: 'linear-gradient(135deg,#f6d365,#fda085)',
+    entryIds: [
+      'd-webb-ranch',
+      'd-mariani',
+      'd-blue-house',
+      'd-rwc-summer',
+      'd-mv-obon',
+    ],
+  },
+  {
+    id: 't-bts',
+    emoji: '🎤',
+    title: 'BTS 的湾区食堂',
+    subtitle: '同一趟巡演,两家本地店',
+    cover: 'linear-gradient(135deg,#3a1c71,#d76d77)',
+    entryIds: ['a-kumako-ramen', 'a-bts-vesta'],
+  },
+  {
+    id: 't-jp',
+    emoji: '🇯🇵',
+    title: '湾区日本文化月',
+    subtitle: '美食 · 庭园 · 节庆 · 展览',
+    cover: 'linear-gradient(135deg,#c31432,#240b36)',
+    entryIds: [
+      'd-fanime',
+      'd-hakone',
+      'd-sushi-adachi',
+      'd-asian-art',
+      'd-mv-obon',
+      'a-cafe-bolita',
+    ],
+  },
+]
 
 /**
  * Humanised relative time for a card's pipeline-update timestamp. Shown on
@@ -550,7 +605,7 @@ export const ARTICLES: Article[] = [
         category: '古着 · 二手寄卖',
         emoji: '👗',
         status: 'open',
-        blurb: '风格现代、选品好上手 · College Ave 古着寻宝的常见起点。',
+        blurb: 'Oakland 古着寻宝最稳的起点 · 现代风、好上手。',
         neighborhood: 'Rockridge, Oakland',
         distance: '33 mi',
         rating: 3.0,
@@ -576,7 +631,7 @@ export const ARTICLES: Article[] = [
         category: '古着 · 二手寄卖',
         emoji: '🧥',
         status: 'open',
-        blurb: '九十年代与千禧风单品 + 小众配饰,店里还兼做社区市集。',
+        blurb: 'Rockridge 的 90s/Y2K 古着 · 兼做社区市集。',
         neighborhood: 'Rockridge, Oakland',
         distance: '33 mi',
         rating: 4.7,
@@ -601,7 +656,7 @@ export const ARTICLES: Article[] = [
         category: '古着 · 二手寄卖',
         emoji: '👜',
         status: 'open',
-        blurb: '偏时装史的选品,大胆讲究 · 真古着与「未来古着」混搭。',
+        blurb: '偏时装史的选品 · 真古着与「未来古着」混搭。',
         neighborhood: 'Rockridge, Oakland',
         distance: '33 mi',
         rating: 4.1,
@@ -627,7 +682,7 @@ export const ARTICLES: Article[] = [
         category: '古着 · 二手寄卖',
         emoji: '👗',
         status: 'open',
-        blurb: '黑人女性经营 · 复古、设计师二手与现代单品,策展感强。',
+        blurb: '黑人女性经营的策展感小店 · Grand Lake。',
         neighborhood: 'Grand Lake, Oakland',
         distance: '35 mi',
         rating: 4.6,
@@ -676,7 +731,7 @@ export const ARTICLES: Article[] = [
         category: '早午餐 · 美式煎饼',
         emoji: '🥞',
         status: 'open',
-        blurb: '老派煎饼屋 · 出餐快、分量大,Yelp 千余条评价、常年排队。',
+        blurb: '排队也要吃的圣何塞老派煎饼 · 一份顶两顿。',
         neighborhood: 'The Alameda, San Jose',
         distance: '14 mi',
         rating: 4.4,
@@ -734,7 +789,7 @@ export const ARTICLES: Article[] = [
         category: '书店 · 独立书店',
         emoji: '📚',
         status: 'open',
-        blurb: 'Montclair Village 开了二十多年的社区独立书店,6 月中旬结业。',
+        blurb: 'Montclair 的小书店开了 20 多年 · 只剩两周可以来告别。',
         neighborhood: 'Montclair, Oakland',
         distance: '36 mi',
         rating: 4.5,
@@ -791,7 +846,7 @@ export const ARTICLES: Article[] = [
         category: '墨西哥菜 · masa 专门店',
         emoji: '🌮',
         status: 'open',
-        blurb: '快闪起家的 masa 专门店 · 传家宝玉米现做面底,招牌 burro 与塔玛利。',
+        blurb: '伯克利的玉米面殿堂 · Eater 记者去了两天还想再去。',
         neighborhood: 'West Berkeley',
         distance: '37 mi',
         rating: 4.3,
@@ -847,7 +902,7 @@ export const ARTICLES: Article[] = [
         category: 'Smash Burger · 啤酒厂',
         emoji: '🍔',
         status: 'open',
-        blurb: '快闪摊做成常驻 · 开在 Two Pitchers 啤酒厂里的人气 smash burger,常排长队。',
+        blurb: 'Outer Sunset 的 smash burger 圣地 · 开门前 20 分钟到也只能排第 12 位。',
         neighborhood: 'Outer Sunset, SF',
         distance: '33 mi',
         rating: 3.8,
@@ -904,7 +959,7 @@ export const ARTICLES: Article[] = [
         category: '运动酒吧 · 餐酒吧',
         emoji: '🏈',
         status: 'open',
-        blurb: '开在 SoMa House 酒店内 · 全天候 gastropub,满墙电视的看球去处。',
+        blurb: 'SoMa 新开的体育餐酒吧 · 满墙电视、happy hour 3–6,从早开到晚。',
         neighborhood: 'SoMa, SF',
         distance: '33 mi',
         rating: 5.0,
@@ -953,7 +1008,7 @@ export const ARTICLES: Article[] = [
         category: '烘焙 · 手作面包',
         emoji: '🥖',
         status: 'open',
-        blurb: 'Quince 三星面包师自立门户 · 周末限定,招牌盐面包与蓝玉米 concha。',
+        blurb: '三星面包师自立门户 · 只卖周末,蓝玉米 concha 让人专程跑来。',
         neighborhood: 'West Oakland',
         distance: '35 mi',
         cover: 'linear-gradient(135deg,#d9a566,#6b4423)',
@@ -989,7 +1044,7 @@ export const ARTICLES: Article[] = [
         category: 'Pizza · 纽约风味',
         emoji: '🍕',
         status: 'open',
-        blurb: 'Mission 区街角披萨店 · 可对折的纽约式大切片,薄脆饼底,人均实惠。',
+        blurb: '在 SF 真找到一片能折起来的纽约披萨 · 一片实实在在的大。',
         neighborhood: 'Mission, SF',
         distance: '30 mi',
         rating: 4.5,
@@ -1046,7 +1101,7 @@ export const ARTICLES: Article[] = [
         category: '文创小店 · 玩具杂货',
         emoji: '🧸',
         status: 'open',
-        blurb: '四位亚裔女艺术家的合作小店 · 怪趣可爱的毛绒、文具、卡片与艺术品。',
+        blurb: '四位亚裔女艺术家的合作小店 · 怪趣可爱,从快闪做成实体。',
         neighborhood: 'Mountain View',
         distance: '4 mi',
         rating: 5.0,
@@ -1096,7 +1151,7 @@ export const ARTICLES: Article[] = [
         category: '海鲜 · 蛤蜊浓汤',
         emoji: '🥣',
         status: 'open',
-        blurb: 'Half Moon Bay 海边的老牌海鲜小棚 · 招牌蛤蜊浓汤靠土豆熬出浓稠。',
+        blurb: '海边小棚里的蛤蜊浓汤 · 有人专程从萨克拉门托开车来喝。',
         neighborhood: 'Half Moon Bay',
         distance: '20 mi',
         rating: 4.0,
@@ -1153,7 +1208,7 @@ export const ARTICLES: Article[] = [
         category: '日料 · 创作 izakaya',
         emoji: '🐟',
         status: 'open',
-        blurb: '伯克利市中心的创作系日料小馆 · 经营六年半,6 月 14 日结业。',
+        blurb: '伯克利日料的「艰难六年半」· 6/14 是最后一晚。',
         neighborhood: 'Downtown Berkeley',
         distance: '37 mi',
         rating: 3.9,
@@ -1210,7 +1265,7 @@ export const ARTICLES: Article[] = [
         category: '拉面 · 日料',
         emoji: '🍜',
         status: 'open',
-        blurb: 'San Jose Japantown 的人气拉面小店 · BTS 队长 RM 开唱前探访过。',
+        blurb: 'BTS·RM 开唱前悄悄来吃的拉面 · 就在 SJ Japantown。',
         neighborhood: 'Japantown, San Jose',
         distance: '14 mi',
         rating: 3.6,
@@ -1266,7 +1321,7 @@ export const ARTICLES: Article[] = [
         category: '酒吧 · 怀旧主题鸡尾酒',
         emoji: '🍸',
         status: 'opening',
-        blurb: 'Che Fico 团队的首家酒吧 · 主打 70/80/90 年代怀旧风味鸡尾酒,5/23 在 Thrive City 开门。',
+        blurb: 'Che Fico 团队首次做酒吧 · Hubba Bubba 西瓜泡泡糖雾在杯口。',
         neighborhood: 'Thrive City, SF',
         distance: '33 mi',
         cover: 'linear-gradient(135deg,#f857a6,#ff5858)',
@@ -1303,7 +1358,7 @@ export const ARTICLES: Article[] = [
         category: '烘焙 · 创作甜点',
         emoji: '🥧',
         status: 'open',
-        blurb: '前 Mister Jiu’s 烘焙师 Melissa Chou 自立门户 · 与 Studio Estepan 同一栋,招牌烧蜜派与巴黎蛋挞曾入选 NYT 年度。',
+        blurb: '前 Mister Jiu’s 甜点师自立门户 · 烧蜜派与巴黎蛋挞两度入选 NYT。',
         neighborhood: 'West Oakland',
         distance: '35 mi',
         cover: 'linear-gradient(135deg,#eacda3,#d6ae7b)',
@@ -1341,7 +1396,7 @@ export const ARTICLES: Article[] = [
         category: '啤酒厂 · 德式 Pilsner',
         emoji: '🍺',
         status: 'open',
-        blurb: '伯克利 Fourth Street 的 20+ 年啤酒厂 · 招牌德式 Pils,5/29 关停,taproom 同步告别。',
+        blurb: '湾区那只绿瓶 Pils · 只剩 6 天可以在原产地喝。',
         neighborhood: 'Fourth Street, Berkeley',
         distance: '37 mi',
         rating: 4.3,
@@ -2025,7 +2080,7 @@ export const DISCOVER: DiscoverCard[] = [
     date: '2026-05-22',
     price: '门票 $65–105',
     blurb:
-      '北加州最大的动漫展 —— 在 San Jose McEnery 会展中心,cosplay、游戏、音乐、比赛与 panel,5 月 22–25 日。',
+      '北加州最大动漫展 · 本周末就在 SJ 会展中心。',
     intent: '订张 badge 去 FanimeCon 看动漫展',
     tags: ['动漫', '二次元', '活动'],
     googleUrl: 'https://www.google.com/maps?cid=8316651831005724690',
@@ -2044,7 +2099,7 @@ export const DISCOVER: DiscoverCard[] = [
     distance: '4 mi',
     date: '2026-07-18',
     blurb:
-      'Mountain View 佛教寺院的年度盆踊り祭 —— 传统舞蹈、夏威夷舞、美食、游戏与文化展,7 月 18–19 日,在 N. Shoreline Blvd。',
+      'Mountain View 寺院的盆踊り祭 · 7 月夏夜的传统舞蹈与小吃。',
     intent: '夏天带家人去逛 Obon 盆踊り祭',
     tags: ['日本文化', '夏日祭', '亲子'],
     googleUrl: 'https://www.google.com/maps?cid=15007417484976484042',
@@ -2065,7 +2120,7 @@ export const DISCOVER: DiscoverCard[] = [
     rating: 4.1,
     reviews: 599,
     blurb:
-      'Saratoga 的百年日式庭园 —— 每月第一个周日有公开茶道演示(6/7 下午三场,$10 起,庭园门票另计)。',
+      'Saratoga 的百年日式庭园 · 每月第一个周日有公开茶道。',
     intent: '挑个周末去 Hakone 日式庭园走走、看场茶道',
     tags: ['日式庭园', '茶道', '户外'],
     quote: {
@@ -2094,7 +2149,7 @@ export const DISCOVER: DiscoverCard[] = [
     reviews: 18,
     price: '$$$$',
     blurb:
-      'Mountain View 一家低调的高级寿司店 —— omakase 套餐 $160 / $225,周三至周日,需预约。',
+      'Mountain View 藏起来的高级寿司 · omakase $160 起,要预约。',
     intent: '挑个特别的日子订 Sushi Adachi 的 omakase',
     tags: ['寿司', 'omakase', '日料'],
     quote: {
@@ -2122,7 +2177,7 @@ export const DISCOVER: DiscoverCard[] = [
     rating: 4.4,
     reviews: 852,
     blurb:
-      '旧金山亚洲艺术博物馆两场日本特展可一次看完 ——「New Japanese Clay」当代陶艺(展至 6/1),「Chiharu Shiota: Two Home Countries」红线装置(展至 7/20)。',
+      '在 SF 美术馆一次看完两场日本特展 · 红线装置 + 当代陶艺。',
     intent: '安排一次美术馆日,去看两场日本特展',
     tags: ['美术馆', '日本文化', '展览'],
     quote: {
@@ -2150,7 +2205,7 @@ export const DISCOVER: DiscoverCard[] = [
     rating: 3.7,
     reviews: 1501,
     price: '$$',
-    blurb: 'Cupertino 的台式牛肉面据点 —— KQED 点名它的牛筋面,汤头浓而不腻。',
+    blurb: 'Cupertino 的台式牛肉面据点 · 牛筋面被 KQED 点名。',
     intent: '去 Liang’s Village 吃一碗台式牛肉面',
     tags: ['台湾菜', '牛肉面', '中餐'],
     quote: {
@@ -2176,7 +2231,7 @@ export const DISCOVER: DiscoverCard[] = [
     distance: '12 mi',
     rating: 4.1,
     reviews: 368,
-    blurb: 'Cupertino 的台式小吃店 —— KQED 推荐蚵仔煎、台式肉圆与刈包,适合多人分食。',
+    blurb: 'Cupertino 的台式小吃店 · 蚵仔煎、肉圆、刈包要多人分。',
     intent: '约几个人去 Ma Ma Chen’s 点一桌台式小吃',
     tags: ['台湾菜', '小吃', '中餐'],
     googleUrl: 'https://www.google.com/maps?cid=11584721749521377140',
@@ -2197,7 +2252,7 @@ export const DISCOVER: DiscoverCard[] = [
     rating: 3.8,
     reviews: 2017,
     price: '$$$',
-    blurb: 'San Mateo Hillsdale 商场里的精致粤菜 —— 与 Koi Palace、Dragon Beaux 同一团队,点心、烧味与北京烤鸭俱全。',
+    blurb: 'Hillsdale 商场里的精致粤菜 · Koi Palace 团队做的点心。',
     intent: '去 Palette Tea Garden 吃一顿精致粤式点心',
     tags: ['粤菜', '点心', '中餐'],
     quote: {
@@ -2224,7 +2279,7 @@ export const DISCOVER: DiscoverCard[] = [
     distance: '15 mi',
     rating: 4.2,
     reviews: 242,
-    blurb: 'San Mateo 市中心的话题川菜 —— 广州起家的太二,首家「升级版」全服务概念店,招牌是猪骨汤酸菜鱼。',
+    blurb: '广州起家的太二「升级版」首店 · 招牌猪骨汤酸菜鱼。',
     intent: '去太二吃一锅招牌酸菜鱼',
     tags: ['川菜', '酸菜鱼', '中餐'],
     quote: {
@@ -2251,7 +2306,7 @@ export const DISCOVER: DiscoverCard[] = [
     distance: '5 mi',
     rating: 4.1,
     reviews: 20,
-    blurb: 'Portola Valley 的有机自采农场 —— 黑莓、欧拉莓与马里恩莓,六月初开摘;开放时段短(8–11 点),想挑好货要趁早。',
+    blurb: 'Portola Valley 的有机自采农场 · 六月初开摘,8 点就要到。',
     intent: '六月去 Webb Ranch 摘莓果',
     tags: ['自采农场', '户外', '亲子'],
     quote: {
@@ -2277,7 +2332,7 @@ export const DISCOVER: DiscoverCard[] = [
     distance: '24 mi',
     rating: 4.5,
     reviews: 8,
-    blurb: 'Morgan Hill 的果园 —— 金黄杏子、Rainier 黄樱桃与深红 Bing 樱桃,本周五起对公众开放采摘。',
+    blurb: '本周五开摘 · Morgan Hill 的 Rainier 黄樱桃和 Bing 红樱桃。',
     intent: '周末去 Mariani Orchards 摘樱桃和杏子',
     tags: ['自采农场', '樱桃', '亲子'],
     quote: {
@@ -2305,7 +2360,7 @@ export const DISCOVER: DiscoverCard[] = [
     rating: 4.8,
     reviews: 80,
     price: '$',
-    blurb: 'Half Moon Bay 与 Pescadero 之间海岸线上的有机农场 —— 整个夏天每周六日 12–5 点开放自采有机草莓。',
+    blurb: 'HMB 海岸线上的有机草莓园 · 周末 12–5 点自采。',
     intent: '挑个周末去 Blue House Farm 摘草莓',
     tags: ['自采农场', '草莓', '亲子'],
     quote: {
@@ -2332,7 +2387,7 @@ export const DISCOVER: DiscoverCard[] = [
     date: '2026-05-29',
     price: '多数免费',
     blurb:
-      'Redwood City 夏季广场系列迎来 20 周年 —— 5/29 起,每周五傍晚在 Courthouse Square 有免费露天音乐会,整夏还有周四露天电影、周三公园音乐会与周六亲子演出。',
+      '20 周年的免费露天音乐会 · 5/29 起每周五傍晚在 RWC 广场。',
     intent: '周五傍晚去 Courthouse Square 听一场免费露天音乐会',
     tags: ['露天音乐会', '夏日活动', '亲子'],
     googleUrl: 'https://www.google.com/maps?cid=1693260971588954190',

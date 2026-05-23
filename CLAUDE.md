@@ -89,3 +89,11 @@ Full PRD: `newsbreak_ai_local_mvp_prd.md`.
   editorial angle, or any judgement call where two reasonable people would
   disagree. The notification summary should say what was added and what (if
   anything) is being held back for confirmation.
+- Card `blurb` is a one-line **hook**, not an info dump — lead with the
+  sensory / time-bound / contrarian thing that creates desire ("只剩 6 天可以
+  在原产地喝", "排第 12 位的开门前 20 分钟"), not a neutral summary. Keep it
+  under ~30 characters of payload.
+- When the editorial story warrants it (a closing wave, a seasonal cluster, a
+  cross-card narrative like a celebrity food tour), add an entry to `THEMES`
+  in `data.ts` so the top-of-feed lanes surface it. Themes are curatorial; a
+  card may belong to more than one.

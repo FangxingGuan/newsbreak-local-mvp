@@ -1,5 +1,5 @@
-import { useLayoutEffect, useRef } from 'react'
-import { ARTICLES, DISCOVER, USER_LOCATION, isDiscover } from '../data'
+import { useLayoutEffect, useRef, useState } from 'react'
+import { ARTICLES, DISCOVER, THEMES, USER_LOCATION, isDiscover } from '../data'
 import { ArticleCard } from '../components/ArticleCard'
 import { DiscoverCard } from '../components/DiscoverCard'
 import type { FeedEntry } from '../types'
@@ -47,7 +47,16 @@ function orderedFeed(): FeedEntry[] {
 
 export function FeedScreen() {
   const scrollRef = useRef<HTMLDivElement>(null)
-  const entries = orderedFeed()
+  const [themeId, setThemeId] = useState<string | null>(null)
+  const theme = themeId ? THEMES.find((t) => t.id === themeId) ?? null : null
+
+  const all = orderedFeed()
+  const entries = theme
+    ? // Preserve the theme's curated order, so filtering reads like a story.
+      theme.entryIds
+        .map((id) => all.find((e) => e.id === id))
+        .filter((e): e is FeedEntry => !!e)
+    : all
 
   useLayoutEffect(() => {
     const el = scrollRef.current
@@ -69,10 +78,36 @@ export function FeedScreen() {
         </div>
       </header>
 
-      <div className="feed-hint">
-        <span className="hint-dot live" />
-        本地新闻 + 为你发现的小众好去处 · 两类内容都能读出出行意图
+      <div className="theme-strip">
+        {THEMES.map((t) => (
+          <button
+            key={t.id}
+            className={`theme-card ${themeId === t.id ? 'on' : ''}`}
+            style={{ background: t.cover }}
+            onClick={() => setThemeId(themeId === t.id ? null : t.id)}
+          >
+            <span className="theme-emoji">{t.emoji}</span>
+            <span className="theme-title">{t.title}</span>
+            <span className="theme-sub">
+              {t.subtitle} · {t.entryIds.length} 篇
+            </span>
+          </button>
+        ))}
       </div>
+
+      {theme ? (
+        <div className="theme-filter-bar">
+          <span>
+            🔍 主题筛选:{theme.emoji} {theme.title}
+          </span>
+          <button onClick={() => setThemeId(null)}>✕ 看全部</button>
+        </div>
+      ) : (
+        <div className="feed-hint">
+          <span className="hint-dot live" />
+          本地新闻 + 为你发现的小众好去处 · 上方主题廊道一眼看清本周策展
+        </div>
+      )}
 
       <div className="feed-list">
         {entries.map((e) =>
