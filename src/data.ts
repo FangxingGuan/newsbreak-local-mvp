@@ -74,6 +74,24 @@ export const THEMES: FeedTheme[] = [
     tagMatch: ['早午餐', '咖啡', '烘焙', '面包', '咖啡馆', '甜'],
     minEntries: 4,
   },
+  {
+    id: 't-museum',
+    emoji: '🏛️',
+    title: '一日博物馆',
+    subtitle: '美术馆 · 历史 · 特展',
+    cover: 'linear-gradient(135deg,#283c86,#45a247)',
+    tagMatch: ['博物馆', '美术馆', '展览'],
+    minEntries: 3,
+  },
+  {
+    id: 't-events',
+    emoji: '🎫',
+    title: '演出 · 球赛 · 现场',
+    subtitle: '订票就能去的本地夜晚',
+    cover: 'linear-gradient(135deg,#7f00ff,#e100ff)',
+    tagMatch: ['演唱会', '音乐剧', '现场演出', '演出', '体育', '话剧', '音乐'],
+    minEntries: 4,
+  },
 ]
 
 /**

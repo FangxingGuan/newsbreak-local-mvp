@@ -100,6 +100,11 @@ Full PRD: `newsbreak_ai_local_mvp_prd.md`.
     lane picks it up.
   - Seasonal content uses the existing season tags (`'夏日活动'`,
     `'夏日祭'`, `'采摘'`, `'户外'`, etc.).
+  - Museum / gallery content carries `'博物馆'` or `'美术馆'`, optionally
+    `'展览'` (auto-routed into the 「一日博物馆」 lane).
+  - Concert / sport / theater content carries one of `'演唱会'` `'音乐剧'`
+    `'现场演出'` `'演出'` `'体育'` `'话剧'` `'音乐'` (auto-routed into
+    「演出 · 球赛 · 现场」).
   - Add a new entry to `THEMES` only when a genuinely new story emerges that
     no tag set captures; prefer expanding `tagMatch` or `pinned` on an
     existing theme first.
