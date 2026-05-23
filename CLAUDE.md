@@ -82,3 +82,10 @@ Full PRD: `newsbreak_ai_local_mvp_prd.md`.
   entry in one update batch the same fresh timestamp, newer than any prior
   batch — the feed sorts by `addedAt` descending, so the latest batch lands at
   the very top.
+- The scheduled pipeline (every 6h) auto-adds clear candidates straight to the
+  demo (build + commit + push). Pause and ask only when something is genuinely
+  uncertain: a candidate that overlaps thematically with an existing demo POI,
+  ambiguous or non-locatable location, no API footprint without a strong
+  editorial angle, or any judgement call where two reasonable people would
+  disagree. The notification summary should say what was added and what (if
+  anything) is being held back for confirmation.
