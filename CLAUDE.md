@@ -93,7 +93,13 @@ Full PRD: `newsbreak_ai_local_mvp_prd.md`.
   sensory / time-bound / contrarian thing that creates desire ("只剩 6 天可以
   在原产地喝", "排第 12 位的开门前 20 分钟"), not a neutral summary. Keep it
   under ~30 characters of payload.
-- When the editorial story warrants it (a closing wave, a seasonal cluster, a
-  cross-card narrative like a celebrity food tour), add an entry to `THEMES`
-  in `data.ts` so the top-of-feed lanes surface it. Themes are curatorial; a
-  card may belong to more than one.
+- Themes (`THEMES` in `data.ts`) are RULE-based — `tagMatch` + optional
+  `pinned` + optional `validUntil` + `minEntries`. Pipeline-added cards flow
+  into themes automatically as long as their tags match. Conventions:
+  - A closing-soon article must carry the tag `'即将结业'` so the closing
+    lane picks it up.
+  - Seasonal content uses the existing season tags (`'夏日活动'`,
+    `'夏日祭'`, `'采摘'`, `'户外'`, etc.).
+  - Add a new entry to `THEMES` only when a genuinely new story emerges that
+    no tag set captures; prefer expanding `tagMatch` or `pinned` on an
+    existing theme first.

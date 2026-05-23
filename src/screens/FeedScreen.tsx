@@ -1,5 +1,13 @@
 import { useLayoutEffect, useRef, useState } from 'react'
-import { ARTICLES, DISCOVER, THEMES, USER_LOCATION, isDiscover } from '../data'
+import {
+  ARTICLES,
+  DISCOVER,
+  THEMES,
+  USER_LOCATION,
+  isDiscover,
+  isThemeLive,
+  themeEntries,
+} from '../data'
 import { ArticleCard } from '../components/ArticleCard'
 import { DiscoverCard } from '../components/DiscoverCard'
 import type { FeedEntry } from '../types'
@@ -48,14 +56,23 @@ function orderedFeed(): FeedEntry[] {
 export function FeedScreen() {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [themeId, setThemeId] = useState<string | null>(null)
-  const theme = themeId ? THEMES.find((t) => t.id === themeId) ?? null : null
+
+  // Only the currently-live themes are shown — seasonal ones expire, thin
+  // ones (< minEntries) hide. Cards flow into themes by tag, no manual list.
+  const liveThemes = THEMES.filter((t) => isThemeLive(t))
+  const theme = themeId
+    ? liveThemes.find((t) => t.id === themeId) ?? null
+    : null
 
   const all = orderedFeed()
   const entries = theme
-    ? // Preserve the theme's curated order, so filtering reads like a story.
-      theme.entryIds
-        .map((id) => all.find((e) => e.id === id))
-        .filter((e): e is FeedEntry => !!e)
+    ? // Inside a theme, keep the natural feed order (newest first) over the
+      // theme's entry set; pinned + tag-matched entries are dynamically
+      // resolved by themeEntries().
+      (() => {
+        const idSet = new Set(themeEntries(theme).map((e) => e.id))
+        return all.filter((e) => idSet.has(e.id))
+      })()
     : all
 
   useLayoutEffect(() => {
@@ -78,22 +95,27 @@ export function FeedScreen() {
         </div>
       </header>
 
-      <div className="theme-strip">
-        {THEMES.map((t) => (
-          <button
-            key={t.id}
-            className={`theme-card ${themeId === t.id ? 'on' : ''}`}
-            style={{ background: t.cover }}
-            onClick={() => setThemeId(themeId === t.id ? null : t.id)}
-          >
-            <span className="theme-emoji">{t.emoji}</span>
-            <span className="theme-title">{t.title}</span>
-            <span className="theme-sub">
-              {t.subtitle} · {t.entryIds.length} 篇
-            </span>
-          </button>
-        ))}
-      </div>
+      {liveThemes.length > 0 && (
+        <div className="theme-strip">
+          {liveThemes.map((t) => {
+            const count = themeEntries(t).length
+            return (
+              <button
+                key={t.id}
+                className={`theme-card ${themeId === t.id ? 'on' : ''}`}
+                style={{ background: t.cover }}
+                onClick={() => setThemeId(themeId === t.id ? null : t.id)}
+              >
+                <span className="theme-emoji">{t.emoji}</span>
+                <span className="theme-title">{t.title}</span>
+                <span className="theme-sub">
+                  {t.subtitle} · {count} 篇
+                </span>
+              </button>
+            )
+          })}
+        </div>
+      )}
 
       {theme ? (
         <div className="theme-filter-bar">

@@ -31,7 +31,8 @@ export const THEMES: FeedTheme[] = [
     title: '来不及就没了',
     subtitle: '本地老店告别窗口',
     cover: 'linear-gradient(135deg,#2c3e50,#7b8a99)',
-    entryIds: ['a-trumer', 'a-fish-and-bird', 'a-good-place-books', 'a-mixt'],
+    tagMatch: ['即将结业', '告别', '结业'],
+    minEntries: 3,
   },
   {
     id: 't-summer',
@@ -39,13 +40,9 @@ export const THEMES: FeedTheme[] = [
     title: '入夏正当时',
     subtitle: '采摘 · 夏夜 · 户外',
     cover: 'linear-gradient(135deg,#f6d365,#fda085)',
-    entryIds: [
-      'd-webb-ranch',
-      'd-mariani',
-      'd-blue-house',
-      'd-rwc-summer',
-      'd-mv-obon',
-    ],
+    tagMatch: ['自采农场', '采摘', '夏日活动', '夏日祭', '户外'],
+    validUntil: '2026-09-22',
+    minEntries: 4,
   },
   {
     id: 't-jp',
@@ -53,17 +50,20 @@ export const THEMES: FeedTheme[] = [
     title: '湾区日本风',
     subtitle: '日料 · 庭园 · 节庆 · 展览',
     cover: 'linear-gradient(135deg,#c31432,#240b36)',
-    entryIds: [
-      'd-fanime',
-      'd-hakone',
-      'd-sushi-adachi',
-      'd-asian-art',
-      'd-mv-obon',
-      'd-yutori',
-      'd-hibari',
-      'a-kumako-ramen',
-      'a-fish-and-bird',
+    tagMatch: [
+      '日本文化',
+      '日料',
+      '寿司',
+      '拉面',
+      'izakaya',
+      'omakase',
+      '日式庭园',
+      '茶道',
+      '夏日祭',
+      '抹茶',
     ],
+    pinned: ['d-fanime', 'd-asian-art'],
+    minEntries: 4,
   },
   {
     id: 't-brunch',
@@ -71,16 +71,45 @@ export const THEMES: FeedTheme[] = [
     title: '慢早午餐 · 咖啡时光',
     subtitle: '懒洋洋的周末上午这样过',
     cover: 'linear-gradient(135deg,#d38312,#a83279)',
-    entryIds: [
-      'a-uncle-johns',
-      'a-studio-estepan',
-      'a-grand-opening',
-      'a-haraz',
-      'd-redwood',
-      'd-yutori',
-    ],
+    tagMatch: ['早午餐', '咖啡', '烘焙', '面包', '咖啡馆', '甜'],
+    minEntries: 4,
   },
 ]
+
+/**
+ * Entries that belong to a theme: pinned ids first (editorial order), then
+ * tag-matched entries from the rest, deduped. Sourced from the live feed
+ * order so the natural newest-first sort applies inside the theme.
+ */
+export function themeEntries(theme: FeedTheme): FeedEntry[] {
+  const all: FeedEntry[] = [...ARTICLES, ...DISCOVER]
+  const byId = new Map(all.map((e) => [e.id, e]))
+  const tagHit = (e: FeedEntry) =>
+    !!theme.tagMatch &&
+    e.tags.some((t) => theme.tagMatch!.some((n) => t.includes(n)))
+  const seen = new Set<string>()
+  const out: FeedEntry[] = []
+  for (const id of theme.pinned ?? []) {
+    const e = byId.get(id)
+    if (e && !seen.has(e.id)) {
+      out.push(e)
+      seen.add(e.id)
+    }
+  }
+  for (const e of all) {
+    if (!seen.has(e.id) && tagHit(e)) {
+      out.push(e)
+      seen.add(e.id)
+    }
+  }
+  return out
+}
+
+/** A theme is shown only if it has enough entries and hasn't expired. */
+export function isThemeLive(theme: FeedTheme, now = new Date()): boolean {
+  if (theme.validUntil && new Date(theme.validUntil) < now) return false
+  return themeEntries(theme).length >= (theme.minEntries ?? 3)
+}
 
 /**
  * Humanised relative time for a card's pipeline-update timestamp. Shown on
@@ -785,7 +814,7 @@ export const ARTICLES: Article[] = [
     comments: 138,
     reactions: 506,
     intent: '趁结业前,去 A Great Good Place for Books 探一次店',
-    tags: ['书店', '社区', '独立小店'],
+    tags: ['即将结业', '书店', '社区', '独立小店'],
     body: [
       '开在奥克兰 Montclair Village 二十多年的独立书店 A Great Good Place for Books,将在 6 月中旬结业。',
       '店主 Kathleen Caldwell 今年 62 岁,4 月对外宣布了这个决定。她告诉 SFGATE,原因是经营上的:「当投入比收入还多时,你得认真想想它还撑不撑得下去。」',
@@ -1204,7 +1233,7 @@ export const ARTICLES: Article[] = [
     comments: 121,
     reactions: 487,
     intent: '趁结业前,去 Fish & Bird 吃一顿告别日料',
-    tags: ['日料', 'izakaya', '社区'],
+    tags: ['即将结业', '日料', 'izakaya', '社区'],
     body: [
       '伯克利市中心的日料店 Fish & Bird Sousaku Izakaya 将在下月中旬谢幕。',
       '据 KRON4 报道,这家位于 Shattuck 大道 2451 号的餐厅在社交媒体上宣布:6 月 14 日(周日)是最后的营业日。',
@@ -1392,7 +1421,7 @@ export const ARTICLES: Article[] = [
     comments: 142,
     reactions: 587,
     intent: '趁 5/29 关停前,去 Trumer Taproom 喝一杯告别 Pils',
-    tags: ['啤酒', 'taproom', 'pilsner'],
+    tags: ['即将结业', '啤酒', 'taproom', 'pilsner'],
     body: [
       '伯克利 Trumer 啤酒厂宣布将在下周关停湾区生产线 —— 招牌的绿瓶 Trumer Pils 不会消失,但「在湾区酿造」的章节就此画上句号。',
       'Trumer 2004 年在伯克利 Fourth Street 开厂,以德式 Pilsner 闻名;那只在加州酒吧、餐厅与超市里随处可见的亮绿色瓶,就是它。被 Firestone Walker Brewing 收购后,生产线将搬到帕索罗布尔斯(Paso Robles)的本厂。',

@@ -113,10 +113,11 @@ export interface DiscoverCard {
 export type FeedEntry = Article | DiscoverCard
 
 /**
- * An editorial theme that bundles a curated set of articles + discover cards
- * for the top-of-feed lanes. Tapping a theme filters the feed to just its
- * entries — gives cold-start users a clear "what is this app surfacing right
- * now" frame, instead of an undifferentiated mixed stream.
+ * An editorial theme that bundles articles + discover cards into a top-of-feed
+ * lane. Themes are RULE-based, not id lists: pipeline-added cards flow into a
+ * theme as long as their tags match, with no manual upkeep. Editorial pins
+ * cover cross-card narratives that don't tag-match cleanly. Seasonal themes
+ * auto-expire; thin themes auto-hide.
  */
 export interface FeedTheme {
   id: string
@@ -126,8 +127,18 @@ export interface FeedTheme {
   subtitle: string
   /** Gradient used as the lane card's background. */
   cover: string
-  /** Article ids and discover-card ids in this theme. */
-  entryIds: string[]
+  /**
+   * Auto-include any entry whose tags contain ANY of these as a substring.
+   * Using substring (not equality) absorbs minor wording drift —— e.g. the
+   * needle `咖啡` catches both `咖啡` and `也门咖啡`; `甜` catches `甜点`+`甜品`.
+   */
+  tagMatch?: string[]
+  /** Editorial pins — always include, even without a tag match. */
+  pinned?: string[]
+  /** Hide the theme after this ISO date (seasonal / time-bound). */
+  validUntil?: string
+  /** Hide the theme if fewer than this many entries match. Default 3. */
+  minEntries?: number
 }
 
 /** Minimal input needed to generate a plan — from an article or a card. */
