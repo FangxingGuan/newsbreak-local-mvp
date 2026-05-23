@@ -92,6 +92,24 @@ export const THEMES: FeedTheme[] = [
     tagMatch: ['演唱会', '音乐剧', '现场演出', '演出', '体育', '话剧', '音乐'],
     minEntries: 4,
   },
+  {
+    id: 't-family',
+    emoji: '🧸',
+    title: '带娃出门',
+    subtitle: '亲子 · 科普 · 玩乐',
+    cover: 'linear-gradient(135deg,#ff9966,#ff5e62)',
+    tagMatch: ['亲子', '玩乐', '科普'],
+    minEntries: 5,
+  },
+  {
+    id: 't-new-shops',
+    emoji: '🆕',
+    title: '本月新店',
+    subtitle: '刚开业 · 还没排起队',
+    cover: 'linear-gradient(135deg,#16a085,#f4d03f)',
+    tagMatch: ['新店'],
+    minEntries: 4,
+  },
 ]
 
 /**

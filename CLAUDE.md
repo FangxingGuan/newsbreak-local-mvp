@@ -93,6 +93,12 @@ Full PRD: `newsbreak_ai_local_mvp_prd.md`.
   sensory / time-bound / contrarian thing that creates desire ("只剩 6 天可以
   在原产地喝", "排第 12 位的开门前 20 分钟"), not a neutral summary. Keep it
   under ~30 characters of payload.
+- Every scheduled pipeline run, after auto-adding cards, also **revise
+  `THEMES`**: count cards by tag, and if ≥4 cards share a tag (or a tight
+  synonym cluster) that no existing `tagMatch` covers, add a new theme.
+  Don't churn — only add when the cluster is defensible. Expired themes
+  (`validUntil` past, or below `minEntries`) auto-hide; only prune them from
+  the array if it's been stale for ≥1 run.
 - Themes (`THEMES` in `data.ts`) are RULE-based — `tagMatch` + optional
   `pinned` + optional `validUntil` + `minEntries`. Pipeline-added cards flow
   into themes automatically as long as their tags match. Conventions:
