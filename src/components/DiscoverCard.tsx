@@ -1,5 +1,6 @@
 import { useEffect, useRef, type RefObject } from 'react'
 import { useStore } from '../store'
+import { relAdded } from '../data'
 import { IntentCTA } from './IntentCTA'
 import type { DiscoverCard as DiscoverCardT } from '../types'
 
@@ -72,6 +73,9 @@ export function DiscoverCard({ card, scrollRoot }: Props) {
     <article ref={ref} className={`dcard ${seen ? 'seen' : ''}`}>
       <div className={`card-badge ${card.kind}`}>
         <span className="card-badge-main">{card.badge}</span>
+        {card.addedAt && (
+          <span className="card-updated">🕒 {relAdded(card.addedAt)} 更新</span>
+        )}
         <button
           className="card-dismiss"
           aria-label="不感兴趣"

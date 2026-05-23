@@ -1,5 +1,6 @@
 import { useEffect, useRef, type RefObject } from 'react'
 import { useStore } from '../store'
+import { relAdded } from '../data'
 import { IntentCTA } from './IntentCTA'
 import type { Article } from '../types'
 
@@ -63,6 +64,9 @@ export function ArticleCard({ article, scrollRoot }: Props) {
       <div className="card-badge article">
         <span>📰 本地报道</span>
         <span className="card-badge-src">{article.source}</span>
+        {article.addedAt && (
+          <span className="card-updated">🕒 {relAdded(article.addedAt)} 更新</span>
+        )}
         <button
           className="card-dismiss"
           aria-label="不感兴趣"
