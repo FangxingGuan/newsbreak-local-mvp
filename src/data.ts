@@ -2791,6 +2791,33 @@ export const DISCOVER: DiscoverCard[] = [
     ticketUrl:
       'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketweb.com%2Fevent%2Fdamon-wayans-jr-san-jose-improv-tickets%2F13769404&utm_medium=affiliate',
   },
+  {
+    type: 'discover',
+    id: 'd-tt-deli',
+    addedAt: '2026-05-24T16:00:00Z',
+    kind: 'find',
+    badge: '🔍 本地小众新发现',
+    title: 'T-T Deli',
+    category: '越南菜 · Banh Mi',
+    emoji: '🥖',
+    cover: 'linear-gradient(135deg,#f7971e,#ffd200)',
+    image: 'https://s3-media0.fl.yelpcdn.com/bphoto/mwV1hojcetd23UOsZO1vpg/o.jpg',
+    neighborhood: 'The Alameda, San Jose',
+    distance: '14 mi',
+    rating: 4.9,
+    reviews: 134,
+    blurb: '圣何塞 The Alameda 上的越南三明治据点 · 4.9 分 / 134 评,Banh Mi 现做。',
+    intent: '中午绕去 T-T Deli 抓一个现做 Banh Mi',
+    tags: ['越南菜', 'banh mi', '小众'],
+    quote: {
+      source: 'Yelp',
+      author: 'Kent',
+      rating: 5,
+      text: 'The Banh Mi is one of the best I have ever had — made to order, carefully constructed, fresh ingredients.',
+    },
+    yelpUrl: 'https://www.yelp.com/biz/t-t-deli-san-jose',
+    googleUrl: 'https://www.google.com/maps?cid=374857151370516450',
+  },
 ]
 
 export function getDiscover(id: string): DiscoverCard | undefined {
