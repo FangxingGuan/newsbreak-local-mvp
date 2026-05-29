@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-29T18:13:59.447Z",
+  "generatedAt": "2026-05-29T18:31:08.242Z",
   "anchor": {
     "city": "Palo Alto",
     "latlng": "37.4419,-122.1430"
@@ -117,6 +117,118 @@
           "window": "couple_dinner",
           "reason": "Yelp 高分 + 在你的半岛半径内"
         }
+      },
+      {
+        "type": "discover",
+        "id": "ap-couple_dinner--EMppAncnOot",
+        "kind": "find",
+        "badge": "🍷 约会就餐",
+        "title": "Zola + BarZola",
+        "category": "French · Wine Bars",
+        "emoji": "🍷",
+        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/wmfuWcGNtuEjNUzshuC9RQ/o.jpg",
+        "neighborhood": "Palo Alto",
+        "distance": "1.2 mi",
+        "rating": 4.2,
+        "reviews": 624,
+        "price": "$$$",
+        "blurb": "French · 4.2★ / 624 评价 · 由 Local Life Assistant 推荐",
+        "intent": "约个晚上去 Zola + BarZola 吃顿好的",
+        "tags": [
+          "约会",
+          "晚餐",
+          "半岛"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/zola-barzola-palo-alto-2",
+        "assistant": {
+          "window": "couple_dinner",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-couple_dinner-_mkNOTiQ-kbc",
+        "kind": "find",
+        "badge": "🍷 约会就餐",
+        "title": "Tamarine Restaurant",
+        "category": "Vietnamese",
+        "emoji": "📍",
+        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/8DCga1zY2KP5jRKzS3ti7Q/o.jpg",
+        "neighborhood": "Palo Alto",
+        "distance": "1.2 mi",
+        "rating": 4,
+        "reviews": 2316,
+        "price": "$$$",
+        "blurb": "Vietnamese · 4★ / 2,316 评价 · 由 Local Life Assistant 推荐",
+        "intent": "约个晚上去 Tamarine Restaurant 吃顿好的",
+        "tags": [
+          "约会",
+          "晚餐",
+          "半岛"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/tamarine-restaurant-palo-alto",
+        "assistant": {
+          "window": "couple_dinner",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-couple_dinner--ddXCC8YE1kT",
+        "kind": "find",
+        "badge": "🍷 约会就餐",
+        "title": "Donato Enoteca",
+        "category": "Italian · Desserts",
+        "emoji": "🍷",
+        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/lNvuWIdvKX9L_WVv72lPnw/o.jpg",
+        "neighborhood": "Redwood City",
+        "distance": "1.2 mi",
+        "rating": 3.8,
+        "reviews": 1115,
+        "price": "$$$",
+        "blurb": "Italian · 3.8★ / 1,115 评价 · 由 Local Life Assistant 推荐",
+        "intent": "约个晚上去 Donato Enoteca 吃顿好的",
+        "tags": [
+          "约会",
+          "晚餐",
+          "半岛"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/donato-enoteca-redwood-city",
+        "assistant": {
+          "window": "couple_dinner",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-couple_dinner-1vMgajRAI3lY",
+        "kind": "find",
+        "badge": "🍷 约会就餐",
+        "title": "Evvia Estiatorio",
+        "category": "Greek",
+        "emoji": "📍",
+        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/yOnhCNx9B-l_rxT4nFAyhw/o.jpg",
+        "neighborhood": "Palo Alto",
+        "distance": "1.3 mi",
+        "rating": 4.3,
+        "reviews": 3173,
+        "price": "$$$",
+        "blurb": "Greek · 4.3★ / 3,173 评价 · 由 Local Life Assistant 推荐",
+        "intent": "约个晚上去 Evvia Estiatorio 吃顿好的",
+        "tags": [
+          "约会",
+          "晚餐",
+          "半岛"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/evvia-estiatorio-palo-alto",
+        "assistant": {
+          "window": "couple_dinner",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
       }
     ],
     "family_outing": [
@@ -225,6 +337,87 @@
           "周末"
         ],
         "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fariana-grande-the-eternal-sunshine-tour-oakland-california-06-06-2026%2Fevent%2F1C00631913D14AD8&utm_medium=affiliate",
+        "assistant": {
+          "window": "weekend_events",
+          "reason": "在你半岛半径内的本周末事件 · 按热度排"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-weekend-G5vYZ_AlCvzz",
+        "kind": "event",
+        "badge": "🎫 周末活动",
+        "title": "MANÁ y LOS FABULOSOS CADILLACS",
+        "category": "Music · SAP Center at San Jose",
+        "emoji": "🎫",
+        "cover": "linear-gradient(135deg,#7f00ff,#e100ff)",
+        "image": "https://s1.ticketm.net/dam/a/552/c0c89575-7a66-4c1c-aab7-8fa9b723c552_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+        "neighborhood": "SAP Center at San Jose",
+        "distance": "",
+        "date": "2026-05-30",
+        "price": "门票",
+        "blurb": "Music · SAP Center at San Jose · San Jose · 由 Local Life Assistant 推荐",
+        "intent": "订张票去 SAP Center at San Jose 看一场",
+        "tags": [
+          "演出",
+          "活动",
+          "周末"
+        ],
+        "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fmana-y-los-fabulosos-cadillacs-san-jose-california-05-30-2026%2Fevent%2F1C00645ACE078E25&utm_medium=affiliate",
+        "assistant": {
+          "window": "weekend_events",
+          "reason": "在你半岛半径内的本周末事件 · 按热度排"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-weekend-G5vYZbSUc2VE",
+        "kind": "event",
+        "badge": "🎫 周末活动",
+        "title": "Louis Tomlinson - How Did We Get Here? World Tour",
+        "category": "Music · Bill Graham Civic Auditorium",
+        "emoji": "🎫",
+        "cover": "linear-gradient(135deg,#7f00ff,#e100ff)",
+        "image": "https://s1.ticketm.net/dam/a/68c/b3dcece4-12b0-4210-8bb1-a0a36478768c_RETINA_LANDSCAPE_16_9.jpg",
+        "neighborhood": "Bill Graham Civic Auditorium",
+        "distance": "",
+        "date": "2026-06-06",
+        "price": "门票",
+        "blurb": "Music · Bill Graham Civic Auditorium · San Francisco · 由 Local Life Assistant 推荐",
+        "intent": "订张票去 Bill Graham Civic Auditorium 看一场",
+        "tags": [
+          "演出",
+          "活动",
+          "周末"
+        ],
+        "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Flouis-tomlinson-how-did-we-get-san-francisco-california-06-06-2026%2Fevent%2F1C00633DAD3F49D8&utm_medium=affiliate",
+        "assistant": {
+          "window": "weekend_events",
+          "reason": "在你半岛半径内的本周末事件 · 按热度排"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-weekend-Z7r9jZ1A7xo7",
+        "kind": "event",
+        "badge": "🎫 周末活动",
+        "title": "Missing Persons",
+        "category": "Music · The Guild Theatre - CA",
+        "emoji": "🎫",
+        "cover": "linear-gradient(135deg,#7f00ff,#e100ff)",
+        "image": "https://s1.ticketm.net/dam/a/d17/8e22bf59-79cf-4d2f-9d22-3d8b829c6d17_71501_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+        "neighborhood": "The Guild Theatre - CA",
+        "distance": "",
+        "date": "2026-05-30",
+        "price": "门票",
+        "blurb": "Music · The Guild Theatre - CA · Menlo Park · 由 Local Life Assistant 推荐",
+        "intent": "订张票去 The Guild Theatre - CA 看一场",
+        "tags": [
+          "演出",
+          "活动",
+          "周末"
+        ],
+        "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A7xo7o&utm_medium=affiliate",
         "assistant": {
           "window": "weekend_events",
           "reason": "在你半岛半径内的本周末事件 · 按热度排"

@@ -3915,25 +3915,70 @@ export function coldStartScore(c: DiscoverCard): number {
   return s
 }
 
+/** User-supplied refinements ("改一改") that override the cold-start guesses. */
+export interface AssistantOverrides {
+  maxMiles?: number
+  budget?: 'cheap' | 'mid' | 'fancy'
+  text?: string
+}
+
+const priceTier = (c: DiscoverCard): number | null =>
+  c.price && /^\$+$/.test(c.price) ? c.price.length : null
+
+function budgetMatch(c: DiscoverCard, budget: NonNullable<AssistantOverrides['budget']>) {
+  const t = priceTier(c)
+  if (t == null) return true // unknown price (e.g. 门票) — don't filter out
+  if (budget === 'cheap') return t <= 2
+  if (budget === 'mid') return t === 2 || t === 3
+  return t >= 3 // fancy
+}
+
+function textMatch(c: DiscoverCard, text: string) {
+  const q = text.trim().toLowerCase()
+  if (!q) return true
+  const hay = [c.title, c.category, c.blurb, ...(c.tags ?? [])]
+    .join(' ')
+    .toLowerCase()
+  return q.split(/\s+/).some((tok) => tok && hay.includes(tok))
+}
+
+/** Heuristic: free text → structured overrides, no LLM. */
+export function parseRefine(text: string): AssistantOverrides {
+  const q = text.toLowerCase()
+  const o: AssistantOverrides = { text }
+  if (/(便宜|实惠|平价|cheap|budget)/.test(q)) o.budget = 'cheap'
+  if (/(高级|精致|特别|高端|fancy|nice|fine)/.test(q)) o.budget = 'fancy'
+  if (/(就近|附近|近一点|近点|走路|walk|nearby)/.test(q)) o.maxMiles = 5
+  return o
+}
+
 /**
  * Final picks for an assistant window: live API picks + curated nearby
- * DISCOVER fallbacks, deduped, then ordered by the cold-start score
- * (最新/最热/最近) — the right default when we don't know the user yet.
+ * DISCOVER fallbacks, deduped, ordered by cold-start score (最新/最热/最近).
+ * `overrides` from the 改一改 sheet narrow the pool (距离 / 预算 / 关键词).
  */
-export function assistantPicks(window: AssistantWindow): DiscoverCard[] {
+export function assistantPicks(
+  window: AssistantWindow,
+  overrides: AssistantOverrides = {},
+): DiscoverCard[] {
   const api = ASSISTANT.windows[window] ?? []
   const fallback = ASSISTANT_FALLBACK[window]
     .map((id) => DISCOVER.find((d) => d.id === id))
     .filter((d): d is DiscoverCard => !!d)
   const seen = new Set<string>()
-  const merged: DiscoverCard[] = []
+  let pool: DiscoverCard[] = []
   for (const c of [...api, ...fallback]) {
     if (seen.has(c.id)) continue
     seen.add(c.id)
-    merged.push(c)
+    pool.push(c)
   }
-  merged.sort((a, b) => coldStartScore(b) - coldStartScore(a))
-  return merged.slice(0, 4)
+  if (overrides.maxMiles != null)
+    pool = pool.filter((c) => distNum(c) <= overrides.maxMiles!)
+  if (overrides.budget)
+    pool = pool.filter((c) => budgetMatch(c, overrides.budget!))
+  if (overrides.text) pool = pool.filter((c) => textMatch(c, overrides.text!))
+  pool.sort((a, b) => coldStartScore(b) - coldStartScore(a))
+  return pool.slice(0, 4)
 }
 
 // ---- Geography of relevance --------------------------------------------------

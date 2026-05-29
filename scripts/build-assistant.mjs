@@ -177,9 +177,9 @@ async function fetchCoupleDinner(yk) {
   }
   const canon = [...found.values()].sort((a, b) => (a.distance ?? 0) - (b.distance ?? 0))
 
-  let picks = canon.slice(0, 4)
-  // Fill from a strict category search only if the canon is thin.
-  if (picks.length < 3) {
+  // Keep a deeper pool (up to 8) so the refine sheet has room to filter.
+  let picks = canon.slice(0, 8)
+  if (picks.length < 6) {
     const list = await yelpSearch(
       {
         location: PA_ZIP,
@@ -191,9 +191,9 @@ async function fetchCoupleDinner(yk) {
       },
       yk,
     )
-    const fill = pickFromYelp(list, { max: 4, minRating: 4.3, maxDistanceM: 10 * 1609, decayMi: 6 })
+    const fill = pickFromYelp(list, { max: 8, minRating: 4.3, maxDistanceM: 10 * 1609, decayMi: 6 })
     for (const b of fill) {
-      if (picks.length >= 4) break
+      if (picks.length >= 8) break
       if (!found.has(b.id)) {
         found.set(b.id, b)
         picks.push(b)
@@ -201,7 +201,7 @@ async function fetchCoupleDinner(yk) {
     }
   }
 
-  return picks.slice(0, 4).map((b) =>
+  return picks.slice(0, 8).map((b) =>
     toCard({
       window: 'couple_dinner',
       b,
@@ -249,7 +249,7 @@ async function fetchFamilyOuting(yk) {
     (x.categories || []).some((c) => FAMILY_KEEP.some((k) => c.title.includes(k))),
   )
   return pickFromYelp(filtered, {
-    max: 3,
+    max: 6,
     minRating: 4.3,
     minReviews: 15,
     maxDistanceM: 18 * 1609,
@@ -330,9 +330,9 @@ function tmToCard(e) {
 
 async function fetchWeekendEvents(yk, tk) {
   const tmEvents = await fetchTmEvents(tk)
-  const picks = tmEvents.slice(0, 3).map(tmToCard)
+  const picks = tmEvents.slice(0, 6).map(tmToCard)
   // If TM is thin, add a brewery alt from Yelp so the window is never empty.
-  if (picks.length < 3) {
+  if (picks.length < 4) {
     const breweries = await yelpSearch(
       {
         location: PA_ZIP,
@@ -343,8 +343,8 @@ async function fetchWeekendEvents(yk, tk) {
       },
       yk,
     )
-    const yelpPicks = pickFromYelp(breweries, { minReviews: 80 })
-      .slice(0, 3 - picks.length)
+    const yelpPicks = pickFromYelp(breweries, { minReviews: 80, max: 8 })
+      .slice(0, 6 - picks.length)
       .map((b) =>
         toCard({
           window: 'weekend_events',

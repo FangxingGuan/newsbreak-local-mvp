@@ -1,7 +1,30 @@
 import { useState } from 'react'
-import { assistantPicks, type AssistantWindow } from '../data'
+import {
+  assistantPicks,
+  parseRefine,
+  type AssistantOverrides,
+  type AssistantWindow,
+} from '../data'
 import type { DiscoverCard } from '../types'
 import { useStore } from '../store'
+
+const WINDOWS: { id: AssistantWindow; emoji: string; label: string }[] = [
+  { id: 'couple_dinner', emoji: '🍷', label: '约会就餐' },
+  { id: 'family_outing', emoji: '👨‍👩‍👧', label: '带娃出行' },
+  { id: 'weekend_events', emoji: '🎫', label: '周末活动' },
+]
+
+const DISTANCE_OPTS: { label: string; miles?: number }[] = [
+  { label: '就近 ≤5mi', miles: 5 },
+  { label: '半岛 ≤20mi', miles: 20 },
+  { label: '都行', miles: undefined },
+]
+
+const BUDGET_OPTS: { label: string; v: AssistantOverrides['budget'] }[] = [
+  { label: '💰 便宜', v: 'cheap' },
+  { label: '💰💰 适中', v: 'mid' },
+  { label: '✨ 特别一点', v: 'fancy' },
+]
 
 const tagHit = (c: DiscoverCard, ...ns: string[]) =>
   c.tags?.some((t) => ns.some((n) => t.includes(n))) ?? false
@@ -17,32 +40,33 @@ function why(c: DiscoverCard): string {
   return '半岛周边 · 值得一去'
 }
 
-const WINDOWS: { id: AssistantWindow; emoji: string; label: string }[] = [
-  { id: 'couple_dinner',  emoji: '🍷', label: '约会就餐' },
-  { id: 'family_outing',  emoji: '👨‍👩‍👧', label: '带娃出行' },
-  { id: 'weekend_events', emoji: '🎫', label: '周末活动' },
-]
-
-/**
- * The Local Life Assistant — a top-of-feed widget that swaps the question
- * "what's in the feed?" for "what should I actually do?". Three time windows
- * (date dinner / family outing / weekend events) each carry 2-3 anchor picks
- * pre-built from Yelp + Ticketmaster. Tapping a pick goes straight into the
- * existing 加入计划 flow.
- */
 export function AssistantPanel() {
   const { dispatch } = useStore()
   const [windowId, setWindowId] = useState<AssistantWindow>('couple_dinner')
-  const picks = assistantPicks(windowId)
+  const [overrides, setOverrides] = useState<AssistantOverrides>({})
+  const [showRefine, setShowRefine] = useState(false)
+  const [text, setText] = useState('')
+
+  const picks = assistantPicks(windowId, overrides)
+  const active =
+    overrides.maxMiles != null || overrides.budget != null || !!overrides.text
 
   const plan = (id: string) =>
     dispatch({ type: 'OPEN_PLANNING', target: { kind: 'discover', id } })
+
+  const applyText = () =>
+    setOverrides((o) => ({ ...o, ...parseRefine(text) }))
+
+  const clearRefine = () => {
+    setOverrides({})
+    setText('')
+  }
 
   return (
     <section className="assistant">
       <div className="assistant-head">
         <span className="assistant-title">🤖 今天去哪儿</span>
-        <span className="assistant-sub">Local Life Assistant · 每 6 小时刷新</span>
+        <span className="assistant-sub">Local Life Assistant · 每 6h 刷新</span>
       </div>
 
       <div className="assistant-chips">
@@ -56,10 +80,78 @@ export function AssistantPanel() {
             {w.label}
           </button>
         ))}
+        <button
+          className={`assistant-refine-btn ${active ? 'on' : ''}`}
+          onClick={() => setShowRefine((s) => !s)}
+        >
+          🔧 改一改
+        </button>
       </div>
 
+      {showRefine && (
+        <div className="assistant-refine">
+          <div className="refine-row">
+            <span className="refine-label">📍 距离</span>
+            {DISTANCE_OPTS.map((o) => (
+              <button
+                key={o.label}
+                className={`refine-chip ${overrides.maxMiles === o.miles ? 'on' : ''}`}
+                onClick={() => setOverrides((p) => ({ ...p, maxMiles: o.miles }))}
+              >
+                {o.label}
+              </button>
+            ))}
+          </div>
+          <div className="refine-row">
+            <span className="refine-label">💰 预算</span>
+            {BUDGET_OPTS.map((o) => (
+              <button
+                key={o.label}
+                className={`refine-chip ${overrides.budget === o.v ? 'on' : ''}`}
+                onClick={() =>
+                  setOverrides((p) => ({
+                    ...p,
+                    budget: p.budget === o.v ? undefined : o.v,
+                  }))
+                }
+              >
+                {o.label}
+              </button>
+            ))}
+          </div>
+          <div className="refine-row">
+            <input
+              className="refine-input"
+              value={text}
+              placeholder="想要点什么?如「便宜点」「就近」「素食」"
+              onChange={(e) => setText(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && applyText()}
+            />
+            <button className="refine-apply" onClick={applyText}>
+              应用
+            </button>
+          </div>
+          {active && (
+            <button className="refine-clear" onClick={clearRefine}>
+              ✕ 清除筛选
+            </button>
+          )}
+        </div>
+      )}
+
       {picks.length === 0 ? (
-        <div className="muted-line">这个时间窗暂无候选 · 稍后再看看</div>
+        <div className="assistant-empty">
+          没有符合「{[
+            overrides.budget && '预算',
+            overrides.maxMiles != null && '距离',
+            overrides.text && `「${overrides.text}」`,
+          ]
+            .filter(Boolean)
+            .join(' + ')}」的候选 ·{' '}
+          <button className="refine-clear inline" onClick={clearRefine}>
+            放宽条件
+          </button>
+        </div>
       ) : (
         <div className="assistant-picks">
           {picks.map((p) => (
