@@ -1,6 +1,17 @@
 import { useState } from 'react'
-import { ASSISTANT, type AssistantWindow } from '../data'
+import { assistantPicks, type AssistantWindow } from '../data'
 import { useStore } from '../store'
+
+/** A short, honest "why this" line for cold-start trust. */
+function why(window: AssistantWindow, distance: string): string {
+  const near = (() => {
+    const m = distance?.match(/([\d.]+)/)
+    return m ? parseFloat(m[1]) <= 8 : false
+  })()
+  if (window === 'weekend_events') return '本周末就在湾区,订票即可去'
+  if (near) return '离你近 · 口碑稳的半岛之选'
+  return '半岛周边 · 值得专程一去'
+}
 
 const WINDOWS: { id: AssistantWindow; emoji: string; label: string }[] = [
   { id: 'couple_dinner',  emoji: '🍷', label: '约会就餐' },
@@ -18,7 +29,7 @@ const WINDOWS: { id: AssistantWindow; emoji: string; label: string }[] = [
 export function AssistantPanel() {
   const { dispatch } = useStore()
   const [windowId, setWindowId] = useState<AssistantWindow>('couple_dinner')
-  const picks = ASSISTANT.windows[windowId] ?? []
+  const picks = assistantPicks(windowId)
 
   const plan = (id: string) =>
     dispatch({ type: 'OPEN_PLANNING', target: { kind: 'discover', id } })
@@ -77,6 +88,7 @@ export function AssistantPanel() {
                       .filter(Boolean)
                       .join(' · ')}
                   </div>
+                  <div className="assistant-pick-why">💡 {why(windowId, p.distance)}</div>
                 </div>
               </div>
               <button className="assistant-pick-cta" onClick={() => plan(p.id)}>

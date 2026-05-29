@@ -3875,6 +3875,47 @@ export function getAssistantPick(id: string): DiscoverCard | undefined {
   return ASSISTANT_PICKS.find((p) => p.id === id)
 }
 
+// Cold-start "safe anchors": hand-picked PA-area cards already in DISCOVER.
+// When the live API picks for a window are thin or far, we backfill from
+// these known-good, nearby spots — a Palo Alto user would actually go.
+const ASSISTANT_FALLBACK: Record<AssistantWindow, string[]> = {
+  couple_dinner: ['d-sushi-adachi', 'd-hibari', 'd-rouge-lounge', 'd-redwood'],
+  family_outing: [
+    'd-juniormuseum',
+    'd-magicalbridge',
+    'd-arizonagarden',
+    'd-curiodyssey',
+    'd-cdm',
+  ],
+  weekend_events: ['d-paul-simon', 'd-rwc-summer', 'd-fanime', 'd-mv-obon'],
+}
+
+const distNum = (c: DiscoverCard): number => {
+  const m = c.distance?.match(/([\d.]+)/)
+  return m ? parseFloat(m[1]) : 999
+}
+
+/**
+ * Final picks for an assistant window: live API picks first, backfilled with
+ * curated nearby DISCOVER cards, deduped. Dining/family sort nearest-first
+ * (proximity is the whole point); events keep editorial order.
+ */
+export function assistantPicks(window: AssistantWindow): DiscoverCard[] {
+  const api = ASSISTANT.windows[window] ?? []
+  const fallback = ASSISTANT_FALLBACK[window]
+    .map((id) => DISCOVER.find((d) => d.id === id))
+    .filter((d): d is DiscoverCard => !!d)
+  const seen = new Set<string>()
+  const merged: DiscoverCard[] = []
+  for (const c of [...api, ...fallback]) {
+    if (seen.has(c.id)) continue
+    seen.add(c.id)
+    merged.push(c)
+  }
+  if (window !== 'weekend_events') merged.sort((a, b) => distNum(a) - distNum(b))
+  return merged.slice(0, 4)
+}
+
 // ---- Geography of relevance --------------------------------------------------
 // A Palo Alto user's willingness to travel changes per category. Coffee tops
 // out around 5 mi; a destination event is OK at 35+. The pipeline doesn't

@@ -59,12 +59,15 @@ function isServiceCategory(b) {
   return false
 }
 
+// Cold-start scoring: a nearby decent place beats an excellent far one.
+// score = rating × exp(-distanceMi / decayMi). Smaller decay = nearer-biased.
 function pickFromYelp(list, opts = {}) {
   const {
-    max = 5,
-    minRating = 4.4,
+    max = 3,
+    minRating = 4.2,
     minReviews = 40,
     maxDistanceM = 25 * 1609,
+    decayMi = 8,
   } = opts
   return list
     .filter(
@@ -77,12 +80,10 @@ function pickFromYelp(list, opts = {}) {
         b.distance <= maxDistanceM &&
         !isServiceCategory(b),
     )
-    .sort(
-      (a, b) =>
-        b.rating - a.rating ||
-        Math.log(b.review_count) - Math.log(a.review_count),
-    )
+    .map((b) => ({ b, score: b.rating * Math.exp(-b.distance / 1609.34 / decayMi) }))
+    .sort((a, b) => b.score - a.score)
     .slice(0, max)
+    .map((x) => x.b)
 }
 
 const COVERS = {
@@ -142,17 +143,21 @@ async function fetchCoupleDinner(yk) {
   const list = await yelpSearch(
     {
       location: PA_ZIP,
-      radius: String(YELP_RADIUS_M),
+      // Tight search radius — a Palo Alto date dinner lives on the Peninsula,
+      // not 18 mi away in the East Bay.
+      radius: String(16000), // ~10 mi
+      // Classic date-night cuisines; intentionally NOT the broad japanese/sushi
+      // umbrella (which dredged up casual teriyaki/ramen). Sushi date spots
+      // come from the curated fallback instead.
       categories:
-        'wine_bars,french,italian,japanese,newamerican,sushi,tapas',
+        'wine_bars,french,italian,newamerican,mediterranean,tapas,seafood,steak,cocktailbars',
       price: '2,3,4',
       sort_by: 'rating',
       limit: '40',
-      open_to: String(Math.floor(Date.now() / 1000) + 60 * 60 * 3), // open 3h from now
     },
     yk,
   )
-  return pickFromYelp(list, { max: 3, maxDistanceM: 20 * 1609 }).map((b) =>
+  return pickFromYelp(list, { max: 3, maxDistanceM: 10 * 1609, decayMi: 6 }).map((b) =>
     toCard({
       window: 'couple_dinner',
       b,
@@ -203,7 +208,8 @@ async function fetchFamilyOuting(yk) {
     max: 3,
     minRating: 4.3,
     minReviews: 15,
-    maxDistanceM: 30 * 1609,
+    maxDistanceM: 18 * 1609,
+    decayMi: 8,
   }).map((x) =>
     toCard({
       window: 'family_outing',

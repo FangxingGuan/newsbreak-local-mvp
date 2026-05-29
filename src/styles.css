@@ -284,6 +284,11 @@ h4 {
   color: var(--muted);
   letter-spacing: 0.15px;
 }
+.assistant-pick-why {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #c0653a;
+}
 .assistant-pick-cta {
   width: 100%;
   padding: 8px 0;

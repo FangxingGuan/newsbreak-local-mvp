@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-29T17:31:52.306Z",
+  "generatedAt": "2026-05-29T17:49:16.787Z",
   "anchor": {
     "city": "Palo Alto",
     "latlng": "37.4419,-122.1430"
@@ -8,83 +8,83 @@
     "couple_dinner": [
       {
         "type": "discover",
-        "id": "ap-couple_dinner-d0ATPBWXnLPV",
+        "id": "ap-couple_dinner-4b3ZWTLlzZHg",
         "kind": "find",
         "badge": "🍷 约会就餐",
-        "title": "Omee J 2",
-        "category": "Korean · Japanese",
-        "emoji": "🍣",
+        "title": "Hummus Mediterranean Kitchen",
+        "category": "Mediterranean · Halal",
+        "emoji": "📍",
         "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
-        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/zL9n-ZaXJIao3obiJJi7HA/o.jpg",
-        "neighborhood": "San Jose",
-        "distance": "13.4 mi",
-        "rating": 4.7,
-        "reviews": 346,
-        "price": "$$",
-        "blurb": "Korean · 4.7★ / 346 评价 · 由 Local Life Assistant 推荐",
-        "intent": "约个晚上去 Omee J 2 吃顿好的",
-        "tags": [
-          "约会",
-          "晚餐",
-          "半岛"
-        ],
-        "yelpUrl": "https://www.yelp.com/biz/omee-j-2-san-jose-4",
-        "assistant": {
-          "window": "couple_dinner",
-          "reason": "Yelp 高分 + 在你的半岛半径内"
-        }
-      },
-      {
-        "type": "discover",
-        "id": "ap-couple_dinner-RgOZPyRs6-_i",
-        "kind": "find",
-        "badge": "🍷 约会就餐",
-        "title": "Aoi Teriyaki & Ramen",
-        "category": "Ramen",
-        "emoji": "🍣",
-        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
-        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/J2hjyDtvZUCqK9k1gNVcZg/o.jpg",
-        "neighborhood": "San Leandro",
-        "distance": "17.6 mi",
-        "rating": 4.7,
-        "reviews": 190,
-        "price": "$$",
-        "blurb": "Ramen · 4.7★ / 190 评价 · 由 Local Life Assistant 推荐",
-        "intent": "约个晚上去 Aoi Teriyaki & Ramen 吃顿好的",
-        "tags": [
-          "约会",
-          "晚餐",
-          "半岛"
-        ],
-        "yelpUrl": "https://www.yelp.com/biz/aoi-teriyaki-and-ramen-san-leandro",
-        "assistant": {
-          "window": "couple_dinner",
-          "reason": "Yelp 高分 + 在你的半岛半径内"
-        }
-      },
-      {
-        "type": "discover",
-        "id": "ap-couple_dinner-UVMRiVsf_PmR",
-        "kind": "find",
-        "badge": "🍷 约会就餐",
-        "title": "HiroNori Craft Ramen",
-        "category": "Ramen · Noodles",
-        "emoji": "🍣",
-        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
-        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/t7lIMdHr47VXK4bEX_PrKw/o.jpg",
-        "neighborhood": "Cupertino",
-        "distance": "10.5 mi",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/bFqIPuexPuuKwl6HhCLghw/o.jpg",
+        "neighborhood": "Palo Alto",
+        "distance": "1.2 mi",
         "rating": 4.6,
-        "reviews": 1452,
+        "reviews": 558,
         "price": "$$",
-        "blurb": "Ramen · 4.6★ / 1,452 评价 · 由 Local Life Assistant 推荐",
-        "intent": "约个晚上去 HiroNori Craft Ramen 吃顿好的",
+        "blurb": "Mediterranean · 4.6★ / 558 评价 · 由 Local Life Assistant 推荐",
+        "intent": "约个晚上去 Hummus Mediterranean Kitchen 吃顿好的",
         "tags": [
           "约会",
           "晚餐",
           "半岛"
         ],
-        "yelpUrl": "https://www.yelp.com/biz/hironori-craft-ramen-cupertino",
+        "yelpUrl": "https://www.yelp.com/biz/hummus-mediterranean-kitchen-palo-alto",
+        "assistant": {
+          "window": "couple_dinner",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-couple_dinner-dmzJUFo-ZuyU",
+        "kind": "find",
+        "badge": "🍷 约会就餐",
+        "title": "Eskina",
+        "category": "Coffee & Tea · Breakfast & Brunch",
+        "emoji": "📍",
+        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/QVDsZi3Xg1a5QGGAnlwLwQ/o.jpg",
+        "neighborhood": "Redwood City",
+        "distance": "3.7 mi",
+        "rating": 4.5,
+        "reviews": 179,
+        "price": "$$",
+        "blurb": "Coffee & Tea · 4.5★ / 179 评价 · 由 Local Life Assistant 推荐",
+        "intent": "约个晚上去 Eskina 吃顿好的",
+        "tags": [
+          "约会",
+          "晚餐",
+          "半岛"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/eskina-redwood-city",
+        "assistant": {
+          "window": "couple_dinner",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-couple_dinner-ePveS2LLCqGS",
+        "kind": "find",
+        "badge": "🍷 约会就餐",
+        "title": "Nomadic Kitchen",
+        "category": "Turkish · Mediterranean",
+        "emoji": "📍",
+        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/CKUjKLWrdOuV0LnsM4Y7aw/o.jpg",
+        "neighborhood": "Redwood City",
+        "distance": "5.2 mi",
+        "rating": 4.9,
+        "reviews": 266,
+        "price": "$$",
+        "blurb": "Turkish · 4.9★ / 266 评价 · 由 Local Life Assistant 推荐",
+        "intent": "约个晚上去 Nomadic Kitchen 吃顿好的",
+        "tags": [
+          "约会",
+          "晚餐",
+          "半岛"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/nomadic-kitchen-redwood-city",
         "assistant": {
           "window": "couple_dinner",
           "reason": "Yelp 高分 + 在你的半岛半径内"
@@ -114,61 +114,6 @@
           "家庭"
         ],
         "yelpUrl": "https://www.yelp.com/biz/the-foster-museum-palo-alto-2",
-        "assistant": {
-          "window": "family_outing",
-          "reason": "Yelp 高分 + 在你的半岛半径内"
-        }
-      },
-      {
-        "type": "discover",
-        "id": "ap-family_outing-f4M05Oln84BP",
-        "kind": "find",
-        "badge": "👨‍👩‍👧 带娃出行",
-        "title": "Presidio Heights Playground",
-        "category": "Playgrounds",
-        "emoji": "📍",
-        "cover": "linear-gradient(135deg,#ff9966,#ff5e62)",
-        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/TLlHqYHDuZ8puAPwvSBKFw/o.jpg",
-        "neighborhood": "San Francisco",
-        "distance": "29.0 mi",
-        "rating": 4.9,
-        "reviews": 20,
-        "blurb": "Playgrounds · 4.9★ / 20 评价 · 由 Local Life Assistant 推荐",
-        "intent": "周末带娃去 Presidio Heights Playground",
-        "tags": [
-          "亲子",
-          "玩乐",
-          "家庭"
-        ],
-        "yelpUrl": "https://www.yelp.com/biz/presidio-heights-playground-san-francisco",
-        "assistant": {
-          "window": "family_outing",
-          "reason": "Yelp 高分 + 在你的半岛半径内"
-        }
-      },
-      {
-        "type": "discover",
-        "id": "ap-family_outing-NNnvDNHwXT3d",
-        "kind": "find",
-        "badge": "👨‍👩‍👧 带娃出行",
-        "title": "Pardee Home Museum",
-        "category": "Museums · Landmarks & Historical Buildings",
-        "emoji": "🏛️",
-        "cover": "linear-gradient(135deg,#ff9966,#ff5e62)",
-        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/Nr2fqwjA8EZ-ikCkzVDzcw/o.jpg",
-        "neighborhood": "Oakland",
-        "distance": "26.0 mi",
-        "rating": 4.8,
-        "reviews": 74,
-        "price": "$$",
-        "blurb": "Museums · 4.8★ / 74 评价 · 由 Local Life Assistant 推荐",
-        "intent": "周末带娃去 Pardee Home Museum",
-        "tags": [
-          "亲子",
-          "玩乐",
-          "家庭"
-        ],
-        "yelpUrl": "https://www.yelp.com/biz/pardee-home-museum-oakland",
         "assistant": {
           "window": "family_outing",
           "reason": "Yelp 高分 + 在你的半岛半径内"
