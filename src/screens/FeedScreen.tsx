@@ -11,6 +11,7 @@ import {
   withinRadius,
 } from '../data'
 import { ArticleCard } from '../components/ArticleCard'
+import { AssistantPanel } from '../components/AssistantPanel'
 import { DiscoverCard } from '../components/DiscoverCard'
 import { useStore } from '../store'
 import type { FeedEntry } from '../types'
@@ -104,6 +105,8 @@ export function FeedScreen() {
           <span className="appbar-loc">📍 {USER_LOCATION}</span>
         </div>
       </header>
+
+      <AssistantPanel />
 
       {liveThemes.length > 0 && (
         <div className="theme-strip">

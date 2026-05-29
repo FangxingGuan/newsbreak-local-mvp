@@ -1,0 +1,262 @@
+{
+  "generatedAt": "2026-05-29T17:31:52.306Z",
+  "anchor": {
+    "city": "Palo Alto",
+    "latlng": "37.4419,-122.1430"
+  },
+  "windows": {
+    "couple_dinner": [
+      {
+        "type": "discover",
+        "id": "ap-couple_dinner-d0ATPBWXnLPV",
+        "kind": "find",
+        "badge": "🍷 约会就餐",
+        "title": "Omee J 2",
+        "category": "Korean · Japanese",
+        "emoji": "🍣",
+        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/zL9n-ZaXJIao3obiJJi7HA/o.jpg",
+        "neighborhood": "San Jose",
+        "distance": "13.4 mi",
+        "rating": 4.7,
+        "reviews": 346,
+        "price": "$$",
+        "blurb": "Korean · 4.7★ / 346 评价 · 由 Local Life Assistant 推荐",
+        "intent": "约个晚上去 Omee J 2 吃顿好的",
+        "tags": [
+          "约会",
+          "晚餐",
+          "半岛"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/omee-j-2-san-jose-4",
+        "assistant": {
+          "window": "couple_dinner",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-couple_dinner-RgOZPyRs6-_i",
+        "kind": "find",
+        "badge": "🍷 约会就餐",
+        "title": "Aoi Teriyaki & Ramen",
+        "category": "Ramen",
+        "emoji": "🍣",
+        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/J2hjyDtvZUCqK9k1gNVcZg/o.jpg",
+        "neighborhood": "San Leandro",
+        "distance": "17.6 mi",
+        "rating": 4.7,
+        "reviews": 190,
+        "price": "$$",
+        "blurb": "Ramen · 4.7★ / 190 评价 · 由 Local Life Assistant 推荐",
+        "intent": "约个晚上去 Aoi Teriyaki & Ramen 吃顿好的",
+        "tags": [
+          "约会",
+          "晚餐",
+          "半岛"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/aoi-teriyaki-and-ramen-san-leandro",
+        "assistant": {
+          "window": "couple_dinner",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-couple_dinner-UVMRiVsf_PmR",
+        "kind": "find",
+        "badge": "🍷 约会就餐",
+        "title": "HiroNori Craft Ramen",
+        "category": "Ramen · Noodles",
+        "emoji": "🍣",
+        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/t7lIMdHr47VXK4bEX_PrKw/o.jpg",
+        "neighborhood": "Cupertino",
+        "distance": "10.5 mi",
+        "rating": 4.6,
+        "reviews": 1452,
+        "price": "$$",
+        "blurb": "Ramen · 4.6★ / 1,452 评价 · 由 Local Life Assistant 推荐",
+        "intent": "约个晚上去 HiroNori Craft Ramen 吃顿好的",
+        "tags": [
+          "约会",
+          "晚餐",
+          "半岛"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/hironori-craft-ramen-cupertino",
+        "assistant": {
+          "window": "couple_dinner",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      }
+    ],
+    "family_outing": [
+      {
+        "type": "discover",
+        "id": "ap-family_outing-wjXyFbPmq5jr",
+        "kind": "find",
+        "badge": "👨‍👩‍👧 带娃出行",
+        "title": "The Foster Museum",
+        "category": "Community Service/Non-Profit · Art Museums",
+        "emoji": "🏛️",
+        "cover": "linear-gradient(135deg,#ff9966,#ff5e62)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/pAjtgBQsDuE6glDTxY3R3w/o.jpg",
+        "neighborhood": "Palo Alto",
+        "distance": "3.1 mi",
+        "rating": 5,
+        "reviews": 35,
+        "blurb": "Community Service/Non-Profit · 5★ / 35 评价 · 由 Local Life Assistant 推荐",
+        "intent": "周末带娃去 The Foster Museum",
+        "tags": [
+          "亲子",
+          "玩乐",
+          "家庭"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/the-foster-museum-palo-alto-2",
+        "assistant": {
+          "window": "family_outing",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-family_outing-f4M05Oln84BP",
+        "kind": "find",
+        "badge": "👨‍👩‍👧 带娃出行",
+        "title": "Presidio Heights Playground",
+        "category": "Playgrounds",
+        "emoji": "📍",
+        "cover": "linear-gradient(135deg,#ff9966,#ff5e62)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/TLlHqYHDuZ8puAPwvSBKFw/o.jpg",
+        "neighborhood": "San Francisco",
+        "distance": "29.0 mi",
+        "rating": 4.9,
+        "reviews": 20,
+        "blurb": "Playgrounds · 4.9★ / 20 评价 · 由 Local Life Assistant 推荐",
+        "intent": "周末带娃去 Presidio Heights Playground",
+        "tags": [
+          "亲子",
+          "玩乐",
+          "家庭"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/presidio-heights-playground-san-francisco",
+        "assistant": {
+          "window": "family_outing",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-family_outing-NNnvDNHwXT3d",
+        "kind": "find",
+        "badge": "👨‍👩‍👧 带娃出行",
+        "title": "Pardee Home Museum",
+        "category": "Museums · Landmarks & Historical Buildings",
+        "emoji": "🏛️",
+        "cover": "linear-gradient(135deg,#ff9966,#ff5e62)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/Nr2fqwjA8EZ-ikCkzVDzcw/o.jpg",
+        "neighborhood": "Oakland",
+        "distance": "26.0 mi",
+        "rating": 4.8,
+        "reviews": 74,
+        "price": "$$",
+        "blurb": "Museums · 4.8★ / 74 评价 · 由 Local Life Assistant 推荐",
+        "intent": "周末带娃去 Pardee Home Museum",
+        "tags": [
+          "亲子",
+          "玩乐",
+          "家庭"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/pardee-home-museum-oakland",
+        "assistant": {
+          "window": "family_outing",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      }
+    ],
+    "weekend_events": [
+      {
+        "type": "discover",
+        "id": "ap-weekend-G5vYZby6WSrj",
+        "kind": "event",
+        "badge": "🎫 周末活动",
+        "title": "Pitbull - I'm Back with special guest Lil Jon",
+        "category": "Music · Shoreline Amphitheatre",
+        "emoji": "🎫",
+        "cover": "linear-gradient(135deg,#7f00ff,#e100ff)",
+        "image": "https://s1.ticketm.net/dam/a/918/bd324c03-b456-4cb9-87b2-fe8664cb1918_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+        "neighborhood": "Shoreline Amphitheatre",
+        "distance": "",
+        "date": "2026-06-07",
+        "price": "门票",
+        "blurb": "Music · Shoreline Amphitheatre · Mountain View · 由 Local Life Assistant 推荐",
+        "intent": "订张票去 Shoreline Amphitheatre 看一场",
+        "tags": [
+          "演出",
+          "活动",
+          "周末"
+        ],
+        "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fpitbull-im-back-with-special-guest-mountain-view-california-06-07-2026%2Fevent%2F1C006391FDCDE716&utm_medium=affiliate",
+        "assistant": {
+          "window": "weekend_events",
+          "reason": "在你半岛半径内的本周末事件 · 按热度排"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-weekend-G5vYZ_d95FN_",
+        "kind": "event",
+        "badge": "🎫 周末活动",
+        "title": "Golden State Valkyries vs. Las Vegas Aces",
+        "category": "Sports · Chase Center",
+        "emoji": "🎫",
+        "cover": "linear-gradient(135deg,#7f00ff,#e100ff)",
+        "image": "https://s1.ticketm.net/dam/a/a5a/44de9aa2-a60d-4392-a2ed-05ea7642ea5a_TABLET_LANDSCAPE_16_9.jpg",
+        "neighborhood": "Chase Center",
+        "distance": "",
+        "date": "2026-05-31",
+        "price": "门票",
+        "blurb": "Sports · Chase Center · San Francisco · 由 Local Life Assistant 推荐",
+        "intent": "订张票去 Chase Center 看一场",
+        "tags": [
+          "演出",
+          "活动",
+          "周末"
+        ],
+        "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fgolden-state-valkyries-vs-las-vegas-san-francisco-california-05-31-2026%2Fevent%2F1C006435CB223651&utm_medium=affiliate",
+        "assistant": {
+          "window": "weekend_events",
+          "reason": "在你半岛半径内的本周末事件 · 按热度排"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-weekend-G5vYZbs0KVfl",
+        "kind": "event",
+        "badge": "🎫 周末活动",
+        "title": "Ariana Grande - The Eternal Sunshine Tour",
+        "category": "Music · Oakland Arena",
+        "emoji": "🎫",
+        "cover": "linear-gradient(135deg,#7f00ff,#e100ff)",
+        "image": "https://s1.ticketm.net/dam/a/adb/fc874544-aef0-468d-8db5-0507863cbadb_RETINA_LANDSCAPE_16_9.jpg",
+        "neighborhood": "Oakland Arena",
+        "distance": "",
+        "date": "2026-06-06",
+        "price": "门票",
+        "blurb": "Music · Oakland Arena · Oakland · 由 Local Life Assistant 推荐",
+        "intent": "订张票去 Oakland Arena 看一场",
+        "tags": [
+          "演出",
+          "活动",
+          "周末"
+        ],
+        "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fariana-grande-the-eternal-sunshine-tour-oakland-california-06-06-2026%2Fevent%2F1C00631913D14AD8&utm_medium=affiliate",
+        "assistant": {
+          "window": "weekend_events",
+          "reason": "在你半岛半径内的本周末事件 · 按热度排"
+        }
+      }
+    ]
+  }
+}

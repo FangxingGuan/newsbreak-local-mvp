@@ -17,6 +17,7 @@ import type {
   PlanStop,
   RadiusStyle,
 } from './types'
+import assistantPicksRaw from './assistant-picks.json'
 
 export const USER_LOCATION = 'Palo Alto, CA'
 
@@ -3843,12 +3844,35 @@ export const DISCOVER: DiscoverCard[] = [
 ]
 
 export function getDiscover(id: string): DiscoverCard | undefined {
-  return DISCOVER.find((d) => d.id === id)
+  return DISCOVER.find((d) => d.id === id) ?? getAssistantPick(id)
 }
 
 /** Type guard: distinguishes a discover card from an article. */
 export function isDiscover(entry: FeedEntry): entry is DiscoverCard {
   return (entry as DiscoverCard).type === 'discover'
+}
+
+// ---- Local Life Assistant ---------------------------------------------------
+// The assistant's anchor picks are pre-fetched by scripts/build-assistant.mjs
+// from Yelp Fusion + Ticketmaster, shaped as DiscoverCard so they re-use the
+// existing CommitSheet flow ("加入计划") without any new plumbing.
+
+export type AssistantWindow = 'couple_dinner' | 'family_outing' | 'weekend_events'
+
+export interface AssistantData {
+  generatedAt: string
+  anchor: { city: string; latlng: string }
+  windows: Record<AssistantWindow, DiscoverCard[]>
+}
+
+export const ASSISTANT: AssistantData = assistantPicksRaw as AssistantData
+
+/** Flat list of every assistant pick, across all windows. */
+const ASSISTANT_PICKS: DiscoverCard[] = Object.values(ASSISTANT.windows).flat()
+
+/** Lookup including assistant picks — so OPEN_PLANNING(target.id) works. */
+export function getAssistantPick(id: string): DiscoverCard | undefined {
+  return ASSISTANT_PICKS.find((p) => p.id === id)
 }
 
 // ---- Geography of relevance --------------------------------------------------

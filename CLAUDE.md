@@ -109,6 +109,13 @@ Full PRD: `newsbreak_ai_local_mvp_prd.md`.
   Don't churn — only add when the cluster is defensible. Expired themes
   (`validUntil` past, or below `minEntries`) auto-hide; only prune them from
   the array if it's been stale for ≥1 run.
+- The Local Life Assistant (`scripts/build-assistant.mjs` → `src/assistant-picks.json`,
+  rendered by `AssistantPanel`) pre-builds anchor picks for three time windows
+  (couple_dinner / family_outing / weekend_events) by querying Yelp + Ticketmaster
+  with persona-tuned filters. Picks are shaped as `DiscoverCard` so the
+  existing CommitSheet flow ("加入计划") works without new plumbing —
+  `getDiscover(id)` now falls through to `getAssistantPick(id)`. Re-run
+  `node scripts/build-assistant.mjs` every cron round so picks stay fresh.
 - Themes (`THEMES` in `data.ts`) are RULE-based — `tagMatch` + optional
   `pinned` + optional `validUntil` + `minEntries`. Pipeline-added cards flow
   into themes automatically as long as their tags match. Conventions:
