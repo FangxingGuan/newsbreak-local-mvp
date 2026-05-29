@@ -113,6 +113,21 @@ export interface DiscoverCard {
 export type FeedEntry = Article | DiscoverCard
 
 /**
+ * How willing the user is to travel for content of varying categories.
+ * Each style maps to per-category max distances (in miles); see RADIUS_FOR.
+ */
+export type RadiusStyle = 'walk' | 'peninsula' | 'bay'
+
+/**
+ * "Willingness-to-travel" class of a feed entry. Derived from its tags so the
+ * pipeline doesn't have to tag this explicitly.
+ *   daily       — coffee, breakfast (tight radius, almost daily-life)
+ *   weekend     — dinner out, drinks, shopping, parks
+ *   destination — events, museums, time-bound things worth a special trip
+ */
+export type CategoryClass = 'daily' | 'weekend' | 'destination'
+
+/**
  * An editorial theme that bundles articles + discover cards into a top-of-feed
  * lane. Themes are RULE-based, not id lists: pipeline-added cards flow into a
  * theme as long as their tags match, with no manual upkeep. Editorial pins

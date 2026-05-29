@@ -89,6 +89,16 @@ Full PRD: `newsbreak_ai_local_mvp_prd.md`.
   editorial angle, or any judgement call where two reasonable people would
   disagree. The notification summary should say what was added and what (if
   anything) is being held back for confirmation.
+- Distance matters by **category**, not flatly. Each entry's category class
+  is derived from tags by `categoryClass()` in `data.ts`:
+  - `daily` — coffee, breakfast (tight; ~4–15 mi)
+  - `weekend` — dinner out, drinks, shopping, parks (~12–35 mi)
+  - `destination` — events, museums, time-bound closings, festivals
+    (~25–70 mi)
+  Closing-soon and event content is `destination` automatically via the
+  `'即将结业'` and event tags. When deciding whether to auto-add a card,
+  check `RADIUS_FOR.peninsula[categoryClass(card)]` against its distance —
+  a casual cafe 30 mi away will not be useful to a Palo Alto user.
 - Card `blurb` is a one-line **hook**, not an info dump — lead with the
   sensory / time-bound / contrarian thing that creates desire ("只剩 6 天可以
   在原产地喝", "排第 12 位的开门前 20 分钟"), not a neutral summary. Keep it

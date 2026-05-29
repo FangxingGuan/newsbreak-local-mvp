@@ -2,14 +2,17 @@ import { useLayoutEffect, useRef, useState } from 'react'
 import {
   ARTICLES,
   DISCOVER,
+  RADIUS_LABELS,
   THEMES,
   USER_LOCATION,
   isDiscover,
   isThemeLive,
   themeEntries,
+  withinRadius,
 } from '../data'
 import { ArticleCard } from '../components/ArticleCard'
 import { DiscoverCard } from '../components/DiscoverCard'
+import { useStore } from '../store'
 import type { FeedEntry } from '../types'
 
 /** Weave articles and discover cards evenly, whatever their relative counts. */
@@ -56,6 +59,8 @@ function orderedFeed(): FeedEntry[] {
 export function FeedScreen() {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [themeId, setThemeId] = useState<string | null>(null)
+  const { state } = useStore()
+  const style = state.radiusStyle
 
   // Only the currently-live themes are shown — seasonal ones expire, thin
   // ones (< minEntries) hide. Cards flow into themes by tag, no manual list.
@@ -64,11 +69,16 @@ export function FeedScreen() {
     ? liveThemes.find((t) => t.id === themeId) ?? null
     : null
 
-  const all = orderedFeed()
+  const allUnfiltered = orderedFeed()
+  // Each entry has an implicit category class (daily/weekend/destination)
+  // derived from its tags. The user's radius style sets max miles per class.
+  const all = allUnfiltered.filter((e) => withinRadius(e, style))
+  const hiddenByRadius = allUnfiltered.length - all.length
+
   const entries = theme
     ? // Inside a theme, keep the natural feed order (newest first) over the
       // theme's entry set; pinned + tag-matched entries are dynamically
-      // resolved by themeEntries().
+      // resolved by themeEntries(), then filtered by the radius too.
       (() => {
         const idSet = new Set(themeEntries(theme).map((e) => e.id))
         return all.filter((e) => idSet.has(e.id))
@@ -98,7 +108,7 @@ export function FeedScreen() {
       {liveThemes.length > 0 && (
         <div className="theme-strip">
           {liveThemes.map((t) => {
-            const count = themeEntries(t).length
+            const count = themeEntries(t).filter((e) => withinRadius(e, style)).length
             return (
               <button
                 key={t.id}
@@ -138,6 +148,12 @@ export function FeedScreen() {
           ) : (
             <ArticleCard key={e.id} article={e} scrollRoot={scrollRef} />
           ),
+        )}
+        {hiddenByRadius > 0 && (
+          <div className="feed-radius-note">
+            🏠 还有 {hiddenByRadius} 张在你「{RADIUS_LABELS[style]}」的半径之外 ——
+            到「我」页换成「跨湾也行」可以看到全部
+          </div>
         )}
         <div className="feed-end">— 已经到底啦 —</div>
       </div>

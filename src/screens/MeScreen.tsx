@@ -1,6 +1,13 @@
 import { useStore } from '../store'
-import { getArticle, getDiscover, getPersona, getPreferences } from '../data'
-import type { SignalType } from '../types'
+import {
+  RADIUS_FOR,
+  RADIUS_LABELS,
+  getArticle,
+  getDiscover,
+  getPersona,
+  getPreferences,
+} from '../data'
+import type { RadiusStyle, SignalType } from '../types'
 
 const LEVEL_TEXT: Record<'low' | 'mid' | 'high', string> = {
   low: '初步',
@@ -31,7 +38,7 @@ function relTime(ts: number): string {
 }
 
 export function MeScreen() {
-  const { state, wla } = useStore()
+  const { state, dispatch, wla } = useStore()
   const { signals, read, seen, opened, saved } = state
 
   const count = (t: SignalType) => signals.filter((s) => s.type === t).length
@@ -126,6 +133,32 @@ export function MeScreen() {
               <span className="loopstep-label">{s.label}</span>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="block">
+        <h2>🏠 我的生活半径</h2>
+        <p className="block-sub">
+          📍 Palo Alto · 不同品类的「值得动一下」距离差很多 ——
+          选一个生活节奏,信息流按它过滤
+        </p>
+        <div className="radius-styles">
+          {(['walk', 'peninsula', 'bay'] as RadiusStyle[]).map((s) => {
+            const r = RADIUS_FOR[s]
+            return (
+              <button
+                key={s}
+                className={`radius-style ${state.radiusStyle === s ? 'on' : ''}`}
+                onClick={() => dispatch({ type: 'SET_RADIUS_STYLE', style: s })}
+              >
+                <span className="radius-style-name">{RADIUS_LABELS[s]}</span>
+                <span className="radius-style-detail">
+                  ☕ 咖啡 ≤{r.daily} mi · 🍴 周末 ≤{r.weekend} mi · 🎫 展演 ≤
+                  {r.destination} mi
+                </span>
+              </button>
+            )
+          })}
         </div>
       </section>
 

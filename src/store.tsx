@@ -8,7 +8,7 @@ import {
   useReducer,
   type ReactNode,
 } from 'react'
-import type { Plan, Signal, SignalType, Tab } from './types'
+import type { Plan, RadiusStyle, Signal, SignalType, Tab } from './types'
 
 const SIGNAL_LABEL: Record<SignalType, string> = {
   read: '读了一篇文章',
@@ -44,6 +44,8 @@ interface State {
   planning: PlanTarget | null
   viewPlanId: string | null
   toast: string | null
+  /** How far the user is willing to travel — drives per-category feed filtering. */
+  radiusStyle: RadiusStyle
 }
 
 const initialState: State = {
@@ -59,6 +61,7 @@ const initialState: State = {
   planning: null,
   viewPlanId: null,
   toast: null,
+  radiusStyle: 'peninsula',
 }
 
 type Action =
@@ -76,6 +79,7 @@ type Action =
   | { type: 'VIEW_PLAN'; id: string | null }
   | { type: 'SIGNAL'; signalType: SignalType; itemTitle?: string; refId?: string }
   | { type: 'TOAST'; message: string | null }
+  | { type: 'SET_RADIUS_STYLE'; style: RadiusStyle }
 
 let signalSeq = 0
 function makeSignal(type: SignalType, itemTitle?: string, refId?: string): Signal {
@@ -183,6 +187,8 @@ function reducer(state: State, action: Action): State {
     }
     case 'TOAST':
       return { ...state, toast: action.message }
+    case 'SET_RADIUS_STYLE':
+      return { ...state, radiusStyle: action.style }
     default:
       return state
   }

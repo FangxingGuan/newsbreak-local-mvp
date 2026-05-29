@@ -7,6 +7,7 @@
 
 import type {
   Article,
+  CategoryClass,
   DiscoverCard,
   FeedEntry,
   FeedTheme,
@@ -14,6 +15,7 @@ import type {
   PlanKind,
   PlanSeed,
   PlanStop,
+  RadiusStyle,
 } from './types'
 
 export const USER_LOCATION = 'Palo Alto, CA'
@@ -3847,6 +3849,62 @@ export function getDiscover(id: string): DiscoverCard | undefined {
 /** Type guard: distinguishes a discover card from an article. */
 export function isDiscover(entry: FeedEntry): entry is DiscoverCard {
   return (entry as DiscoverCard).type === 'discover'
+}
+
+// ---- Geography of relevance --------------------------------------------------
+// A Palo Alto user's willingness to travel changes per category. Coffee tops
+// out around 5 mi; a destination event is OK at 35+. The pipeline doesn't
+// tag this explicitly — we derive it from tags. The user picks one of three
+// RadiusStyle archetypes on the Me page; the feed filters by it.
+
+const DEST_NEEDLES = [
+  '博物馆', '美术馆', '展览',
+  '演唱会', '音乐剧', '现场演出', '演出', '体育', '话剧',
+  '动漫', '二次元',
+  '即将结业',
+  '日式庭园', '茶道', '夏日祭', '采摘', '自采农场',
+]
+
+/**
+ * Derive the willingness-to-travel class from tags. Closing and event content
+ * is destination-class even if the place itself is a casual venue. Coffee is
+ * daily unless it explicitly co-tags as brunch (a planned outing).
+ */
+export function categoryClass(entry: FeedEntry): CategoryClass {
+  const tags = entry.tags
+  if (tags.some((t) => DEST_NEEDLES.some((n) => t.includes(n)))) return 'destination'
+  const hasCoffee = tags.some((t) => t.includes('咖啡'))
+  const hasBrunch = tags.some((t) => t.includes('早午餐'))
+  if (hasCoffee && !hasBrunch) return 'daily'
+  return 'weekend'
+}
+
+/** Per-category max miles from the user's anchor (Palo Alto) for each style. */
+export const RADIUS_FOR: Record<RadiusStyle, Record<CategoryClass, number>> = {
+  walk:      { daily: 4,  weekend: 12, destination: 25 },
+  peninsula: { daily: 8,  weekend: 20, destination: 40 },
+  bay:       { daily: 15, weekend: 35, destination: 70 },
+}
+
+export const RADIUS_LABELS: Record<RadiusStyle, string> = {
+  walk: '走路就好',
+  peninsula: '南湾半岛(默认)',
+  bay: '跨湾也行',
+}
+
+/** Parse the leading number from a distance string like "33 mi" or "5.5 mi". */
+export function distanceOf(entry: FeedEntry): number | null {
+  const s = isDiscover(entry) ? entry.distance : entry.pois[0]?.distance
+  if (!s) return null
+  const m = s.match(/([\d.]+)/)
+  return m ? parseFloat(m[1]) : null
+}
+
+/** Should this entry be shown given the user's radius style? */
+export function withinRadius(entry: FeedEntry, style: RadiusStyle): boolean {
+  const d = distanceOf(entry)
+  if (d == null) return true // unknown distance — don't filter
+  return d <= RADIUS_FOR[style][categoryClass(entry)]
 }
 
 /**
