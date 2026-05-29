@@ -139,25 +139,69 @@ function toCard({ window, b, badge, intent, tags }) {
 
 // --- Couple dinner -----------------------------------------------------------
 
+// "Date-worthiness" isn't in a rating × distance score — it's price, ambiance,
+// sit-down, occasion fit. For restaurants we curate the Peninsula date canon
+// (the spots a local knows are date-night material) and pull live Yelp data
+// for each by name. Raw category search only fills if the canon comes up short.
+const DATE_CANON = [
+  ['Evvia Estiatorio', 'Palo Alto, CA'],
+  ['Tamarine Restaurant', 'Palo Alto, CA'],
+  ['Bird Dog', 'Palo Alto, CA'],
+  ['Protégé', 'Palo Alto, CA'],
+  ['Zola', 'Palo Alto, CA'],
+  ['Sundance the Steakhouse', 'Palo Alto, CA'],
+  ['Camper', 'Menlo Park, CA'],
+  ['Selby’s', 'Atherton, CA'],
+  ['Donato Enoteca', 'Redwood City, CA'],
+  ['Vesta', 'Redwood City, CA'],
+  ['Sushi Adachi', 'Mountain View, CA'],
+  ['Naomi Sushi', 'Menlo Park, CA'],
+]
+
 async function fetchCoupleDinner(yk) {
-  const list = await yelpSearch(
-    {
-      location: PA_ZIP,
-      // Tight search radius — a Palo Alto date dinner lives on the Peninsula,
-      // not 18 mi away in the East Bay.
-      radius: String(16000), // ~10 mi
-      // Classic date-night cuisines; intentionally NOT the broad japanese/sushi
-      // umbrella (which dredged up casual teriyaki/ramen). Sushi date spots
-      // come from the curated fallback instead.
-      categories:
-        'wine_bars,french,italian,newamerican,mediterranean,tapas,seafood,steak,cocktailbars',
-      price: '2,3,4',
-      sort_by: 'rating',
-      limit: '40',
-    },
-    yk,
-  )
-  return pickFromYelp(list, { max: 3, maxDistanceM: 10 * 1609, decayMi: 6 }).map((b) =>
+  const found = new Map()
+  for (const [term, loc] of DATE_CANON) {
+    try {
+      const r = await yelpSearch({ term, location: loc, limit: '1' }, yk)
+      const b = r[0]
+      if (!b || b.is_closed) continue
+      // Confirm the match name roughly equals the canon term (avoid wrong hits).
+      const t = term.toLowerCase().replace(/[^a-z]/g, '')
+      const n = b.name.toLowerCase().replace(/[^a-z]/g, '')
+      if (!n.includes(t.slice(0, 5)) && !t.includes(n.slice(0, 5))) continue
+      if (b.distance != null && b.distance > 12 * 1609) continue
+      if (!found.has(b.id)) found.set(b.id, b)
+    } catch {
+      /* skip a canon miss */
+    }
+  }
+  const canon = [...found.values()].sort((a, b) => (a.distance ?? 0) - (b.distance ?? 0))
+
+  let picks = canon.slice(0, 4)
+  // Fill from a strict category search only if the canon is thin.
+  if (picks.length < 3) {
+    const list = await yelpSearch(
+      {
+        location: PA_ZIP,
+        radius: String(16000),
+        categories: 'wine_bars,french,italian,newamerican,mediterranean,tapas,seafood,steak',
+        price: '3,4',
+        sort_by: 'rating',
+        limit: '40',
+      },
+      yk,
+    )
+    const fill = pickFromYelp(list, { max: 4, minRating: 4.3, maxDistanceM: 10 * 1609, decayMi: 6 })
+    for (const b of fill) {
+      if (picks.length >= 4) break
+      if (!found.has(b.id)) {
+        found.set(b.id, b)
+        picks.push(b)
+      }
+    }
+  }
+
+  return picks.slice(0, 4).map((b) =>
     toCard({
       window: 'couple_dinner',
       b,

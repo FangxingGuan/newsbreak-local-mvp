@@ -1,16 +1,20 @@
 import { useState } from 'react'
 import { assistantPicks, type AssistantWindow } from '../data'
+import type { DiscoverCard } from '../types'
 import { useStore } from '../store'
 
-/** A short, honest "why this" line for cold-start trust. */
-function why(window: AssistantWindow, distance: string): string {
-  const near = (() => {
-    const m = distance?.match(/([\d.]+)/)
-    return m ? parseFloat(m[1]) <= 8 : false
-  })()
-  if (window === 'weekend_events') return '本周末就在湾区,订票即可去'
-  if (near) return '离你近 · 口碑稳的半岛之选'
-  return '半岛周边 · 值得专程一去'
+const tagHit = (c: DiscoverCard, ...ns: string[]) =>
+  c.tags?.some((t) => ns.some((n) => t.includes(n))) ?? false
+
+/** Surface the cold-start reason (最近 / 最新 / 最热 / 近) honestly. */
+function why(c: DiscoverCard): string {
+  if (tagHit(c, '即将结业')) return '⏳ 快关门了 · 趁还在去一次'
+  if (c.date) return '📅 本周末就有 · 订票即可去'
+  if (tagHit(c, '新店')) return '🆕 最近刚开 · 还没排起队'
+  if ((c.reviews ?? 0) >= 800) return '🔥 本地最热门之一'
+  const m = c.distance?.match(/([\d.]+)/)
+  if (m && parseFloat(m[1]) <= 6) return '📍 离你近 · 口碑稳'
+  return '半岛周边 · 值得一去'
 }
 
 const WINDOWS: { id: AssistantWindow; emoji: string; label: string }[] = [
@@ -88,7 +92,7 @@ export function AssistantPanel() {
                       .filter(Boolean)
                       .join(' · ')}
                   </div>
-                  <div className="assistant-pick-why">💡 {why(windowId, p.distance)}</div>
+                  <div className="assistant-pick-why">{why(p)}</div>
                 </div>
               </div>
               <button className="assistant-pick-cta" onClick={() => plan(p.id)}>

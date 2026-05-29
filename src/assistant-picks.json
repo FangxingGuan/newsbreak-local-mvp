@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-29T17:49:16.787Z",
+  "generatedAt": "2026-05-29T18:13:59.447Z",
   "anchor": {
     "city": "Palo Alto",
     "latlng": "37.4419,-122.1430"
@@ -8,27 +8,27 @@
     "couple_dinner": [
       {
         "type": "discover",
-        "id": "ap-couple_dinner-4b3ZWTLlzZHg",
+        "id": "ap-couple_dinner-sW_zH7aCKlUU",
         "kind": "find",
         "badge": "🍷 约会就餐",
-        "title": "Hummus Mediterranean Kitchen",
-        "category": "Mediterranean · Halal",
-        "emoji": "📍",
+        "title": "Protégé",
+        "category": "New American · Cocktail Bars",
+        "emoji": "🍷",
         "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
-        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/bFqIPuexPuuKwl6HhCLghw/o.jpg",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/MHe2akmRUGNVlwlrl7nwiw/o.jpg",
         "neighborhood": "Palo Alto",
-        "distance": "1.2 mi",
-        "rating": 4.6,
-        "reviews": 558,
-        "price": "$$",
-        "blurb": "Mediterranean · 4.6★ / 558 评价 · 由 Local Life Assistant 推荐",
-        "intent": "约个晚上去 Hummus Mediterranean Kitchen 吃顿好的",
+        "distance": "0.5 mi",
+        "rating": 4.3,
+        "reviews": 552,
+        "price": "$$$$",
+        "blurb": "New American · 4.3★ / 552 评价 · 由 Local Life Assistant 推荐",
+        "intent": "约个晚上去 Protégé 吃顿好的",
         "tags": [
           "约会",
           "晚餐",
           "半岛"
         ],
-        "yelpUrl": "https://www.yelp.com/biz/hummus-mediterranean-kitchen-palo-alto",
+        "yelpUrl": "https://www.yelp.com/biz/prot%C3%A9g%C3%A9-palo-alto-2",
         "assistant": {
           "window": "couple_dinner",
           "reason": "Yelp 高分 + 在你的半岛半径内"
@@ -36,55 +36,83 @@
       },
       {
         "type": "discover",
-        "id": "ap-couple_dinner-dmzJUFo-ZuyU",
+        "id": "ap-couple_dinner-0k58IxlG1h3F",
         "kind": "find",
         "badge": "🍷 约会就餐",
-        "title": "Eskina",
-        "category": "Coffee & Tea · Breakfast & Brunch",
+        "title": "Camper",
+        "category": "New American · Cocktail Bars",
+        "emoji": "🍷",
+        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/yOJLK_Th9hZb3t5GgOm6Eg/o.jpg",
+        "neighborhood": "Menlo Park",
+        "distance": "0.5 mi",
+        "rating": 4,
+        "reviews": 396,
+        "price": "$$$",
+        "blurb": "New American · 4★ / 396 评价 · 由 Local Life Assistant 推荐",
+        "intent": "约个晚上去 Camper 吃顿好的",
+        "tags": [
+          "约会",
+          "晚餐",
+          "半岛"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/camper-menlo-park",
+        "assistant": {
+          "window": "couple_dinner",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-couple_dinner-StDaVYW5Fujm",
+        "kind": "find",
+        "badge": "🍷 约会就餐",
+        "title": "Sundance The Steakhouse",
+        "category": "Steakhouses · Lounges",
         "emoji": "📍",
         "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
-        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/QVDsZi3Xg1a5QGGAnlwLwQ/o.jpg",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/zh7qKyjCInFbgZcewppP2g/o.jpg",
+        "neighborhood": "Palo Alto",
+        "distance": "0.6 mi",
+        "rating": 3.9,
+        "reviews": 1812,
+        "price": "$$$$",
+        "blurb": "Steakhouses · 3.9★ / 1,812 评价 · 由 Local Life Assistant 推荐",
+        "intent": "约个晚上去 Sundance The Steakhouse 吃顿好的",
+        "tags": [
+          "约会",
+          "晚餐",
+          "半岛"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/sundance-the-steakhouse-palo-alto",
+        "assistant": {
+          "window": "couple_dinner",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-couple_dinner-CVMK_rAUl0fo",
+        "kind": "find",
+        "badge": "🍷 约会就餐",
+        "title": "Vesta",
+        "category": "Pizza · Tapas/Small Plates",
+        "emoji": "🍷",
+        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/8wNIwFvsQvBAuFFHmBuxQQ/o.jpg",
         "neighborhood": "Redwood City",
-        "distance": "3.7 mi",
+        "distance": "1.1 mi",
         "rating": 4.5,
-        "reviews": 179,
+        "reviews": 2635,
         "price": "$$",
-        "blurb": "Coffee & Tea · 4.5★ / 179 评价 · 由 Local Life Assistant 推荐",
-        "intent": "约个晚上去 Eskina 吃顿好的",
+        "blurb": "Pizza · 4.5★ / 2,635 评价 · 由 Local Life Assistant 推荐",
+        "intent": "约个晚上去 Vesta 吃顿好的",
         "tags": [
           "约会",
           "晚餐",
           "半岛"
         ],
-        "yelpUrl": "https://www.yelp.com/biz/eskina-redwood-city",
-        "assistant": {
-          "window": "couple_dinner",
-          "reason": "Yelp 高分 + 在你的半岛半径内"
-        }
-      },
-      {
-        "type": "discover",
-        "id": "ap-couple_dinner-ePveS2LLCqGS",
-        "kind": "find",
-        "badge": "🍷 约会就餐",
-        "title": "Nomadic Kitchen",
-        "category": "Turkish · Mediterranean",
-        "emoji": "📍",
-        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
-        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/CKUjKLWrdOuV0LnsM4Y7aw/o.jpg",
-        "neighborhood": "Redwood City",
-        "distance": "5.2 mi",
-        "rating": 4.9,
-        "reviews": 266,
-        "price": "$$",
-        "blurb": "Turkish · 4.9★ / 266 评价 · 由 Local Life Assistant 推荐",
-        "intent": "约个晚上去 Nomadic Kitchen 吃顿好的",
-        "tags": [
-          "约会",
-          "晚餐",
-          "半岛"
-        ],
-        "yelpUrl": "https://www.yelp.com/biz/nomadic-kitchen-redwood-city",
+        "yelpUrl": "https://www.yelp.com/biz/vesta-redwood-city",
         "assistant": {
           "window": "couple_dinner",
           "reason": "Yelp 高分 + 在你的半岛半径内"

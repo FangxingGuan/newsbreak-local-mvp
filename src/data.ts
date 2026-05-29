@@ -3895,10 +3895,30 @@ const distNum = (c: DiscoverCard): number => {
   return m ? parseFloat(m[1]) : 999
 }
 
+const hasTag = (c: DiscoverCard, ...needles: string[]) =>
+  c.tags?.some((t) => needles.some((n) => t.includes(n))) ?? false
+
 /**
- * Final picks for an assistant window: live API picks first, backfilled with
- * curated nearby DISCOVER cards, deduped. Dining/family sort nearest-first
- * (proximity is the whole point); events keep editorial order.
+ * Cold-start ordering = 最新 + 最热 + 最近. With no behaviour to personalise on,
+ * lead with what's universally compelling: popular (rating × review volume),
+ * newly opened, and time-sensitive (closing soon / happening this week).
+ * Proximity is a gentle nudge, not the lead.
+ */
+export function coldStartScore(c: DiscoverCard): number {
+  let s = 0
+  if (c.rating) s += c.rating * Math.log10((c.reviews ?? 0) + 10) // 最热 (~4–18)
+  if (hasTag(c, '新店')) s += 4 // 最新
+  if (c.addedAt) s += 2
+  if (hasTag(c, '即将结业')) s += 6 // 最近 · 紧迫
+  if (c.date) s += 3 // 最近 · 即将上演
+  s += Math.max(0, 4 - distNum(c) / 5) // 近一点小加分
+  return s
+}
+
+/**
+ * Final picks for an assistant window: live API picks + curated nearby
+ * DISCOVER fallbacks, deduped, then ordered by the cold-start score
+ * (最新/最热/最近) — the right default when we don't know the user yet.
  */
 export function assistantPicks(window: AssistantWindow): DiscoverCard[] {
   const api = ASSISTANT.windows[window] ?? []
@@ -3912,7 +3932,7 @@ export function assistantPicks(window: AssistantWindow): DiscoverCard[] {
     seen.add(c.id)
     merged.push(c)
   }
-  if (window !== 'weekend_events') merged.sort((a, b) => distNum(a) - distNum(b))
+  merged.sort((a, b) => coldStartScore(b) - coldStartScore(a))
   return merged.slice(0, 4)
 }
 
