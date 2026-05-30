@@ -3959,6 +3959,28 @@ export const DISCOVER: DiscoverCard[] = [
     ticketUrl:
       'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A7OSkA&utm_medium=affiliate',
   },
+  {
+    type: 'discover',
+    id: 'd-worldcup-qat-sui',
+    addedAt: '2026-05-30T14:00:00Z',
+    kind: 'event',
+    badge: '⚽ 世界杯就在家门口',
+    title: '世界杯 B 组:卡塔尔 vs 瑞士',
+    category: '体育 · 足球',
+    emoji: '⚽',
+    cover: 'linear-gradient(135deg,#1e3c72,#2a5298)',
+    image:
+      'https://s1.ticketm.net/dam/a/9d4/101abbaa-1635-4f78-a6a7-ef820ced19d4_SOURCE',
+    neighborhood: "Levi's Stadium, Santa Clara",
+    distance: '15 mi',
+    date: '2026-06-13',
+    price: '门票',
+    blurb: '2026 世界杯就踢在 Levi\'s · 6/13 中午,半岛家门口看世界杯。',
+    intent: "订张票去 Levi's Stadium 看一场世界杯",
+    tags: ['体育', '演出', '活动'],
+    ticketUrl:
+      'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A7433K&utm_medium=affiliate',
+  },
 ]
 
 export function getDiscover(id: string): DiscoverCard | undefined {
