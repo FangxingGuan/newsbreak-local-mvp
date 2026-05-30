@@ -3915,6 +3915,50 @@ export const DISCOVER: DiscoverCard[] = [
     ticketUrl:
       'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fthe-pussycat-dolls-pcd-forever-tour-mountain-view-california-06-12-2026%2Fevent%2F1C0064699A5EA2A3&utm_medium=affiliate',
   },
+  {
+    type: 'discover',
+    id: 'd-jake-shimabukuro',
+    addedAt: '2026-05-30T08:00:00Z',
+    kind: 'event',
+    badge: '🎫 本周末就有',
+    title: 'Jake Shimabukuro',
+    category: '现场演出 · 尤克里里',
+    emoji: '🪕',
+    cover: 'linear-gradient(135deg,#11998e,#38ef7d)',
+    image:
+      'https://s1.ticketm.net/dam/a/796/66db7215-d93a-445f-a780-c3ec70626796_1546151_RETINA_LANDSCAPE_16_9.jpg',
+    neighborhood: 'The Guild Theatre, Menlo Park',
+    distance: '3 mi',
+    date: '2026-06-12',
+    price: '门票',
+    blurb: '夏威夷尤克里里大师 · 6/12 就在 Menlo Park Guild,几乎家门口。',
+    intent: '订张票去 Menlo Park Guild 听 Jake Shimabukuro',
+    tags: ['现场演出', '音乐', '演出'],
+    ticketUrl:
+      'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A7xo79&utm_medium=affiliate',
+  },
+  {
+    type: 'discover',
+    id: 'd-brit-floyd',
+    addedAt: '2026-05-30T08:00:00Z',
+    kind: 'event',
+    badge: '🎫 本周末就有',
+    title: 'Brit Floyd',
+    category: '演唱会 · 摇滚',
+    emoji: '🎸',
+    cover: 'linear-gradient(135deg,#0f2027,#2c5364)',
+    image:
+      'https://s1.ticketm.net/dam/a/a5b/d64a6ad6-ab25-4204-978f-7a6a1352fa5b_SOURCE',
+    neighborhood: 'Mountain Winery, Saratoga',
+    distance: '20 mi',
+    date: '2026-06-12',
+    price: '门票',
+    blurb: '全球最强 Pink Floyd 致敬秀 · 6/12 萨拉托加山顶酒庄露天舞台。',
+    intent: '订张票去 Mountain Winery 看 Brit Floyd',
+    tags: ['演唱会', '音乐', '摇滚'],
+    ticketUrl:
+      'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A7OSkA&utm_medium=affiliate',
+  },
 ]
 
 export function getDiscover(id: string): DiscoverCard | undefined {
