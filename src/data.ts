@@ -3981,6 +3981,28 @@ export const DISCOVER: DiscoverCard[] = [
     ticketUrl:
       'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A7433K&utm_medium=affiliate',
   },
+  {
+    type: 'discover',
+    id: 'd-jim-gaffigan',
+    addedAt: '2026-05-30T20:00:00Z',
+    kind: 'event',
+    badge: '🎤 本周末就有',
+    title: 'Jim Gaffigan: Everything is Wonderful!',
+    category: '脱口秀 · 喜剧',
+    emoji: '🎤',
+    cover: 'linear-gradient(135deg,#f7971e,#ffd200)',
+    image:
+      'https://s1.ticketm.net/dam/a/838/aabe1f75-fe3d-4040-b17b-7f53ded6d838_TABLET_LANDSCAPE_16_9.jpg',
+    neighborhood: 'The Masonic, SF',
+    distance: '33 mi',
+    date: '2026-06-13',
+    price: '门票',
+    blurb: '美式干脆吐槽天王 · 6/13 傍晚在 SF Masonic,笑到岔气。',
+    intent: '订张票去 SF Masonic 看 Jim Gaffigan 脱口秀',
+    tags: ['现场演出', '演出', '喜剧'],
+    ticketUrl:
+      'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fjim-gaffigan-everything-is-wonderful-san-francisco-california-06-13-2026%2Fevent%2F1C00635CDBC3AC08&utm_medium=affiliate',
+  },
 ]
 
 export function getDiscover(id: string): DiscoverCard | undefined {
