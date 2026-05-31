@@ -4003,6 +4003,50 @@ export const DISCOVER: DiscoverCard[] = [
     ticketUrl:
       'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fjim-gaffigan-everything-is-wonderful-san-francisco-california-06-13-2026%2Fevent%2F1C00635CDBC3AC08&utm_medium=affiliate',
   },
+  {
+    type: 'discover',
+    id: 'd-natalia-lafourcade',
+    addedAt: '2026-05-31T08:00:00Z',
+    kind: 'event',
+    badge: '🎫 本周末就有',
+    title: 'Natalia Lafourcade · Cancionera Tour',
+    category: '演唱会 · 拉丁',
+    emoji: '🎙️',
+    cover: 'linear-gradient(135deg,#c94b4b,#4b134f)',
+    image:
+      'https://s1.ticketm.net/dam/a/5d4/21700809-2211-46d5-a314-4d29a6a3e5d4_SOURCE',
+    neighborhood: 'San Jose Civic',
+    distance: '14 mi',
+    date: '2026-06-13',
+    price: '门票',
+    blurb: '拉丁格莱美天后 · 6/13 在 SJ Civic,一把吉他唱遍墨西哥。',
+    intent: '订张票去 SJ Civic 看 Natalia Lafourcade',
+    tags: ['演唱会', '音乐', '拉丁'],
+    ticketUrl:
+      'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fnatalia-lafourcade-cancionera-tour-san-jose-california-06-13-2026%2Fevent%2F1C00623E8CF429CE&utm_medium=affiliate',
+  },
+  {
+    type: 'discover',
+    id: 'd-coyote-chuy',
+    addedAt: '2026-05-31T08:00:00Z',
+    kind: 'event',
+    badge: '🎫 本周末就有',
+    title: 'Coyote y Chuy Lizárraga · Capibaras Tour',
+    category: '演唱会 · 班达',
+    emoji: '🎺',
+    cover: 'linear-gradient(135deg,#f12711,#f5af19)',
+    image:
+      'https://s1.ticketm.net/dam/e/5f2/8e35d14c-9d48-4a54-b3b0-4abbb641a5f2_SOURCE',
+    neighborhood: 'SAP Center, San Jose',
+    distance: '17 mi',
+    date: '2026-06-13',
+    price: '门票',
+    blurb: '墨西哥班达全场蹦迪 · 6/13 SAP Center 万人合唱。',
+    intent: '订张票去 SAP Center 看 Coyote y Chuy 班达',
+    tags: ['演唱会', '音乐', '拉丁'],
+    ticketUrl:
+      'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fcoyote-y-chuy-lizarraga-capibaras-tour-san-jose-california-06-13-2026%2Fevent%2F1C006475BFAAC930&utm_medium=affiliate',
+  },
 ]
 
 export function getDiscover(id: string): DiscoverCard | undefined {

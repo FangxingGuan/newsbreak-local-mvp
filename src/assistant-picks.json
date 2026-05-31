@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-30T19:43:38.585Z",
+  "generatedAt": "2026-05-31T07:43:38.008Z",
   "anchor": {
     "city": "Palo Alto",
     "latlng": "37.4419,-122.1430"
@@ -103,9 +103,9 @@
         "neighborhood": "Redwood City",
         "distance": "1.1 mi",
         "rating": 4.5,
-        "reviews": 2635,
+        "reviews": 2638,
         "price": "$$",
-        "blurb": "Pizza · 4.5★ / 2,635 评价 · 由 Local Life Assistant 推荐",
+        "blurb": "Pizza · 4.5★ / 2,638 评价 · 由 Local Life Assistant 推荐",
         "intent": "约个晚上去 Vesta 吃顿好的",
         "tags": [
           "约会",
@@ -159,9 +159,9 @@
         "neighborhood": "Palo Alto",
         "distance": "1.2 mi",
         "rating": 4,
-        "reviews": 2316,
+        "reviews": 2315,
         "price": "$$$",
-        "blurb": "Vietnamese · 4★ / 2,316 评价 · 由 Local Life Assistant 推荐",
+        "blurb": "Vietnamese · 4★ / 2,315 评价 · 由 Local Life Assistant 推荐",
         "intent": "约个晚上去 Tamarine Restaurant 吃顿好的",
         "tags": [
           "约会",
@@ -371,17 +371,17 @@
       },
       {
         "type": "discover",
-        "id": "ap-weekend-G5vYZ_AlCvzz",
+        "id": "ap-weekend-G5vYZ_6pTni0",
         "kind": "event",
         "badge": "🎫 周末活动",
-        "title": "MANÁ y LOS FABULOSOS CADILLACS",
+        "title": "Coyote Y Chuy Lizarraga - Capibaras Tour 2026",
         "category": "Music · SAP Center at San Jose",
         "emoji": "🎫",
         "cover": "linear-gradient(135deg,#7f00ff,#e100ff)",
-        "image": "https://s1.ticketm.net/dam/a/552/c0c89575-7a66-4c1c-aab7-8fa9b723c552_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+        "image": "https://s1.ticketm.net/dam/e/5f2/8e35d14c-9d48-4a54-b3b0-4abbb641a5f2_SOURCE",
         "neighborhood": "SAP Center at San Jose",
         "distance": "",
-        "date": "2026-05-30",
+        "date": "2026-06-13",
         "price": "门票",
         "blurb": "Music · SAP Center at San Jose · San Jose · 由 Local Life Assistant 推荐",
         "intent": "订张票去 SAP Center at San Jose 看一场",
@@ -390,7 +390,7 @@
           "活动",
           "周末"
         ],
-        "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fmana-y-los-fabulosos-cadillacs-san-jose-california-05-30-2026%2Fevent%2F1C00645ACE078E25&utm_medium=affiliate",
+        "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fcoyote-y-chuy-lizarraga-capibaras-tour-san-jose-california-06-13-2026%2Fevent%2F1C006475BFAAC930&utm_medium=affiliate",
         "assistant": {
           "window": "weekend_events",
           "reason": "在你半岛半径内的本周末事件 · 按热度排"
