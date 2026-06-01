@@ -245,8 +245,15 @@ async function fetchFamilyOuting(yk) {
     'Playground', 'Amusement', "Children's Activities", 'Kids Activities',
     'Mini Golf', 'Karting', 'Trampoline', 'Aquarium',
   ]
-  const filtered = [...byId.values()].filter((x) =>
-    (x.categories || []).some((c) => FAMILY_KEEP.some((k) => c.title.includes(k))),
+  // Negative block-list: the kids_activities bucket leaks party-rental /
+  // claw-machine / soft-play / bounce-house *services* (not walk-in
+  // destinations). Drop them by name even if their category matched KEEP.
+  const FAMILY_BLOCK_RE =
+    /(Part(?:y|ies)\b|Claw|Soft Play|Stuffed|Bounce|Inflatable|Rental|Petting|Pop-?Up|Mobile)/i
+  const filtered = [...byId.values()].filter(
+    (x) =>
+      (x.categories || []).some((c) => FAMILY_KEEP.some((k) => c.title.includes(k))) &&
+      !FAMILY_BLOCK_RE.test(x.name),
   )
   return pickFromYelp(filtered, {
     max: 6,

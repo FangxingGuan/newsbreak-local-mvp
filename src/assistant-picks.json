@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-01T13:43:39.983Z",
+  "generatedAt": "2026-06-01T19:45:23.337Z",
   "anchor": {
     "city": "Palo Alto",
     "latlng": "37.4419,-122.1430"
@@ -281,114 +281,6 @@
           "家庭"
         ],
         "yelpUrl": "https://www.yelp.com/biz/los-altos-history-museum-los-altos",
-        "assistant": {
-          "window": "family_outing",
-          "reason": "Yelp 高分 + 在你的半岛半径内"
-        }
-      },
-      {
-        "type": "discover",
-        "id": "ap-family_outing-0InvkokpR7Kd",
-        "kind": "find",
-        "badge": "👨‍👩‍👧 带娃出行",
-        "title": "Moffett Field Museum",
-        "category": "Museums",
-        "emoji": "🏛️",
-        "cover": "linear-gradient(135deg,#ff9966,#ff5e62)",
-        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/axbx5m29SXHH0v1M-kWSjA/o.jpg",
-        "neighborhood": "Mountain View",
-        "distance": "5.7 mi",
-        "rating": 4.9,
-        "reviews": 21,
-        "blurb": "Museums · 4.9★ / 21 评价 · 由 Local Life Assistant 推荐",
-        "intent": "周末带娃去 Moffett Field Museum",
-        "tags": [
-          "亲子",
-          "玩乐",
-          "家庭"
-        ],
-        "yelpUrl": "https://www.yelp.com/biz/moffett-field-museum-mountain-view",
-        "assistant": {
-          "window": "family_outing",
-          "reason": "Yelp 高分 + 在你的半岛半径内"
-        }
-      },
-      {
-        "type": "discover",
-        "id": "ap-family_outing-FkAhqRxt1HFu",
-        "kind": "find",
-        "badge": "👨‍👩‍👧 带娃出行",
-        "title": "Cherry On Top Parties",
-        "category": "Party & Event Planning · Kids Activities",
-        "emoji": "👨‍👩‍👧",
-        "cover": "linear-gradient(135deg,#ff9966,#ff5e62)",
-        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/IvrCg35wZWL5wPH4jcfm5A/o.jpg",
-        "neighborhood": "San Carlos",
-        "distance": "7.6 mi",
-        "rating": 5,
-        "reviews": 34,
-        "blurb": "Party & Event Planning · 5★ / 34 评价 · 由 Local Life Assistant 推荐",
-        "intent": "周末带娃去 Cherry On Top Parties",
-        "tags": [
-          "亲子",
-          "玩乐",
-          "家庭"
-        ],
-        "yelpUrl": "https://www.yelp.com/biz/cherry-on-top-parties-san-carlos",
-        "assistant": {
-          "window": "family_outing",
-          "reason": "Yelp 高分 + 在你的半岛半径内"
-        }
-      },
-      {
-        "type": "discover",
-        "id": "ap-family_outing-qC0KGEKmhUS9",
-        "kind": "find",
-        "badge": "👨‍👩‍👧 带娃出行",
-        "title": "Clawesome",
-        "category": "Arcades",
-        "emoji": "🎳",
-        "cover": "linear-gradient(135deg,#ff9966,#ff5e62)",
-        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/B_DXepI0-UIdL6lk_vuo5w/o.jpg",
-        "neighborhood": "San Mateo",
-        "distance": "12.6 mi",
-        "rating": 4.8,
-        "reviews": 38,
-        "blurb": "Arcades · 4.8★ / 38 评价 · 由 Local Life Assistant 推荐",
-        "intent": "周末带娃去 Clawesome",
-        "tags": [
-          "亲子",
-          "玩乐",
-          "家庭"
-        ],
-        "yelpUrl": "https://www.yelp.com/biz/clawesome-san-mateo",
-        "assistant": {
-          "window": "family_outing",
-          "reason": "Yelp 高分 + 在你的半岛半径内"
-        }
-      },
-      {
-        "type": "discover",
-        "id": "ap-family_outing-I2Iih75xLzMl",
-        "kind": "find",
-        "badge": "👨‍👩‍👧 带娃出行",
-        "title": "The Playday Co",
-        "category": "Kids Activities · Bounce House Rentals",
-        "emoji": "👨‍👩‍👧",
-        "cover": "linear-gradient(135deg,#ff9966,#ff5e62)",
-        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/avteQOP_GchXZFY0IdEQeA/o.jpg",
-        "neighborhood": "Los Gatos",
-        "distance": "16.6 mi",
-        "rating": 5,
-        "reviews": 23,
-        "blurb": "Kids Activities · 5★ / 23 评价 · 由 Local Life Assistant 推荐",
-        "intent": "周末带娃去 The Playday Co",
-        "tags": [
-          "亲子",
-          "玩乐",
-          "家庭"
-        ],
-        "yelpUrl": "https://www.yelp.com/biz/the-playday-co-los-gatos-4",
         "assistant": {
           "window": "family_outing",
           "reason": "Yelp 高分 + 在你的半岛半径内"
