@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-31T19:43:40.680Z",
+  "generatedAt": "2026-06-01T01:43:43.806Z",
   "anchor": {
     "city": "Palo Alto",
     "latlng": "37.4419,-122.1430"
@@ -75,9 +75,9 @@
         "neighborhood": "Palo Alto",
         "distance": "0.6 mi",
         "rating": 3.9,
-        "reviews": 1813,
+        "reviews": 1814,
         "price": "$$$$",
-        "blurb": "Steakhouses · 3.9★ / 1,813 评价 · 由 Local Life Assistant 推荐",
+        "blurb": "Steakhouses · 3.9★ / 1,814 评价 · 由 Local Life Assistant 推荐",
         "intent": "约个晚上去 Sundance The Steakhouse 吃顿好的",
         "tags": [
           "约会",
@@ -371,6 +371,33 @@
       },
       {
         "type": "discover",
+        "id": "ap-weekend-Z7r9jZ1A70eG",
+        "kind": "event",
+        "badge": "🎫 周末活动",
+        "title": "The Rocky Horror Picture Show",
+        "category": "Arts & Theatre · The Guild Theatre - CA",
+        "emoji": "🎫",
+        "cover": "linear-gradient(135deg,#7f00ff,#e100ff)",
+        "image": "https://s1.ticketm.net/dam/a/879/eb0656ac-c826-4a4a-944e-7ba18cf9f879_816351_TABLET_LANDSCAPE_16_9.jpg",
+        "neighborhood": "The Guild Theatre - CA",
+        "distance": "",
+        "date": "2026-06-14",
+        "price": "门票",
+        "blurb": "Arts & Theatre · The Guild Theatre - CA · Menlo Park · 由 Local Life Assistant 推荐",
+        "intent": "订张票去 The Guild Theatre - CA 看一场",
+        "tags": [
+          "演出",
+          "活动",
+          "周末"
+        ],
+        "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A70eG-&utm_medium=affiliate",
+        "assistant": {
+          "window": "weekend_events",
+          "reason": "在你半岛半径内的本周末事件 · 按热度排"
+        }
+      },
+      {
+        "type": "discover",
         "id": "ap-weekend-G5vYZbSUc2VE",
         "kind": "event",
         "badge": "🎫 周末活动",
@@ -391,33 +418,6 @@
           "周末"
         ],
         "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Flouis-tomlinson-how-did-we-get-san-francisco-california-06-06-2026%2Fevent%2F1C00633DAD3F49D8&utm_medium=affiliate",
-        "assistant": {
-          "window": "weekend_events",
-          "reason": "在你半岛半径内的本周末事件 · 按热度排"
-        }
-      },
-      {
-        "type": "discover",
-        "id": "ap-weekend-Z7r9jZ1A7xo7",
-        "kind": "event",
-        "badge": "🎫 周末活动",
-        "title": "Dogs In A Pile",
-        "category": "Music · The Guild Theatre - CA",
-        "emoji": "🎫",
-        "cover": "linear-gradient(135deg,#7f00ff,#e100ff)",
-        "image": "https://s1.ticketm.net/dam/a/2ee/6fa63c93-a255-4790-8345-9e7ef4d032ee_TABLET_LANDSCAPE_LARGE_16_9.jpg",
-        "neighborhood": "The Guild Theatre - CA",
-        "distance": "",
-        "date": "2026-06-13",
-        "price": "门票",
-        "blurb": "Music · The Guild Theatre - CA · Menlo Park · 由 Local Life Assistant 推荐",
-        "intent": "订张票去 The Guild Theatre - CA 看一场",
-        "tags": [
-          "演出",
-          "活动",
-          "周末"
-        ],
-        "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A7xo7b&utm_medium=affiliate",
         "assistant": {
           "window": "weekend_events",
           "reason": "在你半岛半径内的本周末事件 · 按热度排"

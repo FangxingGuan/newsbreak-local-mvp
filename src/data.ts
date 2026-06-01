@@ -4047,6 +4047,28 @@ export const DISCOVER: DiscoverCard[] = [
     ticketUrl:
       'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fcoyote-y-chuy-lizarraga-capibaras-tour-san-jose-california-06-13-2026%2Fevent%2F1C006475BFAAC930&utm_medium=affiliate',
   },
+  {
+    type: 'discover',
+    id: 'd-rocky-horror',
+    addedAt: '2026-06-01T08:00:00Z',
+    kind: 'event',
+    badge: '🎭 周末就有',
+    title: 'The Rocky Horror Picture Show',
+    category: '现场演出 · 邪典经典',
+    emoji: '🎭',
+    cover: 'linear-gradient(135deg,#7b0a2a,#1a0033)',
+    image:
+      'https://s1.ticketm.net/dam/a/879/eb0656ac-c826-4a4a-944e-7ba18cf9f879_816351_TABLET_LANDSCAPE_16_9.jpg',
+    neighborhood: 'The Guild Theatre, Menlo Park',
+    distance: '3 mi',
+    date: '2026-06-14',
+    price: '门票',
+    blurb: '邪典经典互动放映 · 6/14 在 Menlo Park Guild,带道具一起喊。',
+    intent: '订张票去 Menlo Park Guild 看 Rocky Horror',
+    tags: ['现场演出', '演出', '话剧'],
+    ticketUrl:
+      'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A70eG-&utm_medium=affiliate',
+  },
 ]
 
 export function getDiscover(id: string): DiscoverCard | undefined {
