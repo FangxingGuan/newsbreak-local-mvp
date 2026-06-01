@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-01T01:43:43.806Z",
+  "generatedAt": "2026-06-01T07:43:51.597Z",
   "anchor": {
     "city": "Palo Alto",
     "latlng": "37.4419,-122.1430"
@@ -254,6 +254,60 @@
           "家庭"
         ],
         "yelpUrl": "https://www.yelp.com/biz/the-foster-museum-palo-alto-2",
+        "assistant": {
+          "window": "family_outing",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-family_outing-3antkFC7JWh6",
+        "kind": "find",
+        "badge": "👨‍👩‍👧 带娃出行",
+        "title": "Decathlon Summer Sports Camp",
+        "category": "Summer Camps · Day Camps",
+        "emoji": "👨‍👩‍👧",
+        "cover": "linear-gradient(135deg,#ff9966,#ff5e62)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/QrlxtmuBOsivY5OWKAvIXg/o.jpg",
+        "neighborhood": "Mountain View",
+        "distance": "5.8 mi",
+        "rating": 5,
+        "reviews": 16,
+        "blurb": "Summer Camps · 5★ / 16 评价 · 由 Local Life Assistant 推荐",
+        "intent": "周末带娃去 Decathlon Summer Sports Camp",
+        "tags": [
+          "亲子",
+          "玩乐",
+          "家庭"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/decathlon-summer-sports-camp-mountain-view",
+        "assistant": {
+          "window": "family_outing",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-family_outing-EztxHQhn_uE8",
+        "kind": "find",
+        "badge": "👨‍👩‍👧 带娃出行",
+        "title": "Mega Claws",
+        "category": "Arcades",
+        "emoji": "🎳",
+        "cover": "linear-gradient(135deg,#ff9966,#ff5e62)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/ZqxmD6zy24Uad-hSPbvzPw/o.jpg",
+        "neighborhood": "San Jose",
+        "distance": "17.9 mi",
+        "rating": 4.8,
+        "reviews": 145,
+        "blurb": "Arcades · 4.8★ / 145 评价 · 由 Local Life Assistant 推荐",
+        "intent": "周末带娃去 Mega Claws",
+        "tags": [
+          "亲子",
+          "玩乐",
+          "家庭"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/mega-claws-san-jose",
         "assistant": {
           "window": "family_outing",
           "reason": "Yelp 高分 + 在你的半岛半径内"

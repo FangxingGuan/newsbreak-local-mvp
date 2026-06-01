@@ -4069,6 +4069,28 @@ export const DISCOVER: DiscoverCard[] = [
     ticketUrl:
       'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A70eG-&utm_medium=affiliate',
   },
+  {
+    type: 'discover',
+    id: 'd-dana-carvey',
+    addedAt: '2026-06-01T20:00:00Z',
+    kind: 'event',
+    badge: '🎤 周末就有',
+    title: 'Dana Carvey w/ David Spade',
+    category: '脱口秀 · 喜剧',
+    emoji: '🎙️',
+    cover: 'linear-gradient(135deg,#373b44,#4286f4)',
+    image:
+      'https://s1.ticketm.net/dam/a/761/fc98f044-5208-4bff-a65f-4c9a11bf9761_TABLET_LANDSCAPE_LARGE_16_9.jpg',
+    neighborhood: 'Mountain Winery, Saratoga',
+    distance: '20 mi',
+    date: '2026-06-14',
+    price: '门票',
+    blurb: '两位 SNL 老炮同台 · 6/14 萨拉托加山顶酒庄,笑一整晚。',
+    intent: '订张票去 Mountain Winery 看 Dana Carvey & David Spade',
+    tags: ['现场演出', '演出', '喜剧'],
+    ticketUrl:
+      'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A7x7Co&utm_medium=affiliate',
+  },
 ]
 
 export function getDiscover(id: string): DiscoverCard | undefined {
