@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-02T07:43:34.012Z",
+  "generatedAt": "2026-06-02T13:43:39.449Z",
   "anchor": {
     "city": "Palo Alto",
     "latlng": "37.4419,-122.1430"
@@ -85,34 +85,6 @@
           "半岛"
         ],
         "yelpUrl": "https://www.yelp.com/biz/sundance-the-steakhouse-palo-alto",
-        "assistant": {
-          "window": "couple_dinner",
-          "reason": "Yelp 高分 + 在你的半岛半径内"
-        }
-      },
-      {
-        "type": "discover",
-        "id": "ap-couple_dinner-D_SSFBMwM88y",
-        "kind": "find",
-        "badge": "🍷 约会就餐",
-        "title": "Selby House Ltd",
-        "category": "Interior Design · Furniture Stores",
-        "emoji": "📍",
-        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
-        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/96Mb7-pd41h4ObE5E5Mtsg/o.jpg",
-        "neighborhood": "Menlo Park",
-        "distance": "0.8 mi",
-        "rating": 4.3,
-        "reviews": 3,
-        "price": "$$$",
-        "blurb": "Interior Design · 4.3★ / 3 评价 · 由 Local Life Assistant 推荐",
-        "intent": "约个晚上去 Selby House Ltd 吃顿好的",
-        "tags": [
-          "约会",
-          "晚餐",
-          "半岛"
-        ],
-        "yelpUrl": "https://www.yelp.com/biz/selby-house-ltd-menlo-park-2",
         "assistant": {
           "window": "couple_dinner",
           "reason": "Yelp 高分 + 在你的半岛半径内"
@@ -229,6 +201,34 @@
           "window": "couple_dinner",
           "reason": "Yelp 高分 + 在你的半岛半径内"
         }
+      },
+      {
+        "type": "discover",
+        "id": "ap-couple_dinner-1vMgajRAI3lY",
+        "kind": "find",
+        "badge": "🍷 约会就餐",
+        "title": "Evvia Estiatorio",
+        "category": "Greek",
+        "emoji": "📍",
+        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/yOnhCNx9B-l_rxT4nFAyhw/o.jpg",
+        "neighborhood": "Palo Alto",
+        "distance": "1.3 mi",
+        "rating": 4.3,
+        "reviews": 3173,
+        "price": "$$$",
+        "blurb": "Greek · 4.3★ / 3,173 评价 · 由 Local Life Assistant 推荐",
+        "intent": "约个晚上去 Evvia Estiatorio 吃顿好的",
+        "tags": [
+          "约会",
+          "晚餐",
+          "半岛"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/evvia-estiatorio-palo-alto",
+        "assistant": {
+          "window": "couple_dinner",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
       }
     ],
     "family_outing": [
@@ -317,33 +317,6 @@
       },
       {
         "type": "discover",
-        "id": "ap-weekend-G5vYZby6WSrj",
-        "kind": "event",
-        "badge": "🎫 周末活动",
-        "title": "Pitbull - I'm Back with special guest Lil Jon",
-        "category": "Music · Shoreline Amphitheatre",
-        "emoji": "🎫",
-        "cover": "linear-gradient(135deg,#7f00ff,#e100ff)",
-        "image": "https://s1.ticketm.net/dam/a/918/bd324c03-b456-4cb9-87b2-fe8664cb1918_TABLET_LANDSCAPE_LARGE_16_9.jpg",
-        "neighborhood": "Shoreline Amphitheatre",
-        "distance": "",
-        "date": "2026-06-07",
-        "price": "门票",
-        "blurb": "Music · Shoreline Amphitheatre · Mountain View · 由 Local Life Assistant 推荐",
-        "intent": "订张票去 Shoreline Amphitheatre 看一场",
-        "tags": [
-          "演出",
-          "活动",
-          "周末"
-        ],
-        "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fpitbull-im-back-with-special-guest-mountain-view-california-06-07-2026%2Fevent%2F1C006391FDCDE716&utm_medium=affiliate",
-        "assistant": {
-          "window": "weekend_events",
-          "reason": "在你半岛半径内的本周末事件 · 按热度排"
-        }
-      },
-      {
-        "type": "discover",
         "id": "ap-weekend-G5vYZbs0KVfl",
         "kind": "event",
         "badge": "🎫 周末活动",
@@ -364,6 +337,33 @@
           "周末"
         ],
         "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fariana-grande-the-eternal-sunshine-tour-oakland-california-06-06-2026%2Fevent%2F1C00631913D14AD8&utm_medium=affiliate",
+        "assistant": {
+          "window": "weekend_events",
+          "reason": "在你半岛半径内的本周末事件 · 按热度排"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-weekend-G5vYZby6WSrj",
+        "kind": "event",
+        "badge": "🎫 周末活动",
+        "title": "Pitbull - I'm Back with special guest Lil Jon",
+        "category": "Music · Shoreline Amphitheatre",
+        "emoji": "🎫",
+        "cover": "linear-gradient(135deg,#7f00ff,#e100ff)",
+        "image": "https://s1.ticketm.net/dam/a/918/bd324c03-b456-4cb9-87b2-fe8664cb1918_TABLET_LANDSCAPE_LARGE_16_9.jpg",
+        "neighborhood": "Shoreline Amphitheatre",
+        "distance": "",
+        "date": "2026-06-07",
+        "price": "门票",
+        "blurb": "Music · Shoreline Amphitheatre · Mountain View · 由 Local Life Assistant 推荐",
+        "intent": "订张票去 Shoreline Amphitheatre 看一场",
+        "tags": [
+          "演出",
+          "活动",
+          "周末"
+        ],
+        "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fpitbull-im-back-with-special-guest-mountain-view-california-06-07-2026%2Fevent%2F1C006391FDCDE716&utm_medium=affiliate",
         "assistant": {
           "window": "weekend_events",
           "reason": "在你半岛半径内的本周末事件 · 按热度排"
@@ -398,33 +398,6 @@
       },
       {
         "type": "discover",
-        "id": "ap-weekend-Z7r9jZ1A70eG",
-        "kind": "event",
-        "badge": "🎫 周末活动",
-        "title": "The Rocky Horror Picture Show",
-        "category": "Arts & Theatre · The Guild Theatre - CA",
-        "emoji": "🎫",
-        "cover": "linear-gradient(135deg,#7f00ff,#e100ff)",
-        "image": "https://s1.ticketm.net/dam/a/879/eb0656ac-c826-4a4a-944e-7ba18cf9f879_816351_TABLET_LANDSCAPE_16_9.jpg",
-        "neighborhood": "The Guild Theatre - CA",
-        "distance": "",
-        "date": "2026-06-14",
-        "price": "门票",
-        "blurb": "Arts & Theatre · The Guild Theatre - CA · Menlo Park · 由 Local Life Assistant 推荐",
-        "intent": "订张票去 The Guild Theatre - CA 看一场",
-        "tags": [
-          "演出",
-          "活动",
-          "周末"
-        ],
-        "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A70eG-&utm_medium=affiliate",
-        "assistant": {
-          "window": "weekend_events",
-          "reason": "在你半岛半径内的本周末事件 · 按热度排"
-        }
-      },
-      {
-        "type": "discover",
         "id": "ap-weekend-G5vYZbSUc2VE",
         "kind": "event",
         "badge": "🎫 周末活动",
@@ -445,6 +418,33 @@
           "周末"
         ],
         "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Flouis-tomlinson-how-did-we-get-san-francisco-california-06-06-2026%2Fevent%2F1C00633DAD3F49D8&utm_medium=affiliate",
+        "assistant": {
+          "window": "weekend_events",
+          "reason": "在你半岛半径内的本周末事件 · 按热度排"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-weekend-Z7r9jZ1A70eG",
+        "kind": "event",
+        "badge": "🎫 周末活动",
+        "title": "The Rocky Horror Picture Show",
+        "category": "Arts & Theatre · The Guild Theatre - CA",
+        "emoji": "🎫",
+        "cover": "linear-gradient(135deg,#7f00ff,#e100ff)",
+        "image": "https://s1.ticketm.net/dam/a/879/eb0656ac-c826-4a4a-944e-7ba18cf9f879_816351_TABLET_LANDSCAPE_16_9.jpg",
+        "neighborhood": "The Guild Theatre - CA",
+        "distance": "",
+        "date": "2026-06-14",
+        "price": "门票",
+        "blurb": "Arts & Theatre · The Guild Theatre - CA · Menlo Park · 由 Local Life Assistant 推荐",
+        "intent": "订张票去 The Guild Theatre - CA 看一场",
+        "tags": [
+          "演出",
+          "活动",
+          "周末"
+        ],
+        "ticketUrl": "https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A70eG-&utm_medium=affiliate",
         "assistant": {
           "window": "weekend_events",
           "reason": "在你半岛半径内的本周末事件 · 按热度排"
