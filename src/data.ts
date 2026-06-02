@@ -4112,6 +4112,28 @@ export const DISCOVER: DiscoverCard[] = [
     ticketUrl:
       'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A7x7Co&utm_medium=affiliate',
   },
+  {
+    type: 'discover',
+    id: 'd-valkyries-sparks',
+    addedAt: '2026-06-02T08:00:00Z',
+    kind: 'event',
+    badge: '🏀 本周主场',
+    title: 'Golden State Valkyries vs. LA Sparks',
+    category: '体育 · WNBA',
+    emoji: '🏀',
+    cover: 'linear-gradient(135deg,#5e2b97,#b06ab3)',
+    image:
+      'https://s1.ticketm.net/dam/a/a5a/44de9aa2-a60d-4392-a2ed-05ea7642ea5a_TABLET_LANDSCAPE_16_9.jpg',
+    neighborhood: 'Chase Center, SF',
+    distance: '32 mi',
+    date: '2026-06-15',
+    price: '门票',
+    blurb: '湾区新晋 WNBA 主队 · 6/15 Chase Center 主场夜。',
+    intent: '订张票去 Chase Center 看 Valkyries 主场',
+    tags: ['体育', '演出', '活动'],
+    ticketUrl:
+      'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fgolden-state-valkyries-vs-los-angeles-san-francisco-california-06-15-2026%2Fevent%2F1C006435CB3236DA&utm_medium=affiliate',
+  },
 ]
 
 export function getDiscover(id: string): DiscoverCard | undefined {

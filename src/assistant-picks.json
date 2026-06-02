@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-01T19:45:23.337Z",
+  "generatedAt": "2026-06-02T07:43:34.012Z",
   "anchor": {
     "city": "Palo Alto",
     "latlng": "37.4419,-122.1430"
@@ -92,6 +92,34 @@
       },
       {
         "type": "discover",
+        "id": "ap-couple_dinner-D_SSFBMwM88y",
+        "kind": "find",
+        "badge": "🍷 约会就餐",
+        "title": "Selby House Ltd",
+        "category": "Interior Design · Furniture Stores",
+        "emoji": "📍",
+        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/96Mb7-pd41h4ObE5E5Mtsg/o.jpg",
+        "neighborhood": "Menlo Park",
+        "distance": "0.8 mi",
+        "rating": 4.3,
+        "reviews": 3,
+        "price": "$$$",
+        "blurb": "Interior Design · 4.3★ / 3 评价 · 由 Local Life Assistant 推荐",
+        "intent": "约个晚上去 Selby House Ltd 吃顿好的",
+        "tags": [
+          "约会",
+          "晚餐",
+          "半岛"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/selby-house-ltd-menlo-park-2",
+        "assistant": {
+          "window": "couple_dinner",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
         "id": "ap-couple_dinner-CVMK_rAUl0fo",
         "kind": "find",
         "badge": "🍷 约会就餐",
@@ -103,9 +131,9 @@
         "neighborhood": "Redwood City",
         "distance": "1.1 mi",
         "rating": 4.5,
-        "reviews": 2639,
+        "reviews": 2640,
         "price": "$$",
-        "blurb": "Pizza · 4.5★ / 2,639 评价 · 由 Local Life Assistant 推荐",
+        "blurb": "Pizza · 4.5★ / 2,640 评价 · 由 Local Life Assistant 推荐",
         "intent": "约个晚上去 Vesta 吃顿好的",
         "tags": [
           "约会",
@@ -197,34 +225,6 @@
           "半岛"
         ],
         "yelpUrl": "https://www.yelp.com/biz/donato-enoteca-redwood-city",
-        "assistant": {
-          "window": "couple_dinner",
-          "reason": "Yelp 高分 + 在你的半岛半径内"
-        }
-      },
-      {
-        "type": "discover",
-        "id": "ap-couple_dinner-1vMgajRAI3lY",
-        "kind": "find",
-        "badge": "🍷 约会就餐",
-        "title": "Evvia Estiatorio",
-        "category": "Greek",
-        "emoji": "📍",
-        "cover": "linear-gradient(135deg,#7b1f1f,#c54658)",
-        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/yOnhCNx9B-l_rxT4nFAyhw/o.jpg",
-        "neighborhood": "Palo Alto",
-        "distance": "1.3 mi",
-        "rating": 4.3,
-        "reviews": 3173,
-        "price": "$$$",
-        "blurb": "Greek · 4.3★ / 3,173 评价 · 由 Local Life Assistant 推荐",
-        "intent": "约个晚上去 Evvia Estiatorio 吃顿好的",
-        "tags": [
-          "约会",
-          "晚餐",
-          "半岛"
-        ],
-        "yelpUrl": "https://www.yelp.com/biz/evvia-estiatorio-palo-alto",
         "assistant": {
           "window": "couple_dinner",
           "reason": "Yelp 高分 + 在你的半岛半径内"
