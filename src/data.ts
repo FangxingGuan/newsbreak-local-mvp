@@ -4211,6 +4211,28 @@ export const DISCOVER: DiscoverCard[] = [
     ticketUrl:
       'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fgolden-state-valkyries-vs-los-angeles-san-francisco-california-06-15-2026%2Fevent%2F1C006435CB3236DA&utm_medium=affiliate',
   },
+  {
+    type: 'discover',
+    id: 'd-sj-giants',
+    addedAt: '2026-06-02T22:00:00Z',
+    kind: 'event',
+    badge: '⚾ 周末就有',
+    title: 'San Jose Giants vs. Lake Elsinore Storm',
+    category: '体育 · 小联盟棒球',
+    emoji: '⚾',
+    cover: 'linear-gradient(135deg,#ff7e5f,#feb47b)',
+    image:
+      'https://s1.ticketm.net/dam/c/3c2/23f6a973-82f1-4503-ab46-e890539e13c2_106101_TABLET_LANDSCAPE_LARGE_16_9.jpg',
+    neighborhood: 'Excite Ballpark, San Jose',
+    distance: '15 mi',
+    date: '2026-06-16',
+    price: '门票',
+    blurb: '平价又热闹的小联盟夜场 · 6/16 Excite 球场,带娃看一场。',
+    intent: '订张票带家人去 Excite 球场看小联盟棒球',
+    tags: ['体育', '演出', '活动'],
+    ticketUrl:
+      'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A7Qbvy&utm_medium=affiliate',
+  },
 ]
 
 export function getDiscover(id: string): DiscoverCard | undefined {
