@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-03T01:43:45.583Z",
+  "generatedAt": "2026-06-04T07:43:37.430Z",
   "anchor": {
     "city": "Palo Alto",
     "latlng": "37.4419,-122.1430"
@@ -19,9 +19,9 @@
         "neighborhood": "Palo Alto",
         "distance": "0.5 mi",
         "rating": 4.3,
-        "reviews": 552,
+        "reviews": 553,
         "price": "$$$$",
-        "blurb": "New American · 4.3★ / 552 评价 · 由 Local Life Assistant 推荐",
+        "blurb": "New American · 4.3★ / 553 评价 · 由 Local Life Assistant 推荐",
         "intent": "约个晚上去 Protégé 吃顿好的",
         "tags": [
           "约会",
@@ -47,9 +47,9 @@
         "neighborhood": "Menlo Park",
         "distance": "0.5 mi",
         "rating": 4,
-        "reviews": 396,
+        "reviews": 397,
         "price": "$$$",
-        "blurb": "New American · 4★ / 396 评价 · 由 Local Life Assistant 推荐",
+        "blurb": "New American · 4★ / 397 评价 · 由 Local Life Assistant 推荐",
         "intent": "约个晚上去 Camper 吃顿好的",
         "tags": [
           "约会",
@@ -103,9 +103,9 @@
         "neighborhood": "Redwood City",
         "distance": "1.1 mi",
         "rating": 4.5,
-        "reviews": 2640,
+        "reviews": 2642,
         "price": "$$",
-        "blurb": "Pizza · 4.5★ / 2,640 评价 · 由 Local Life Assistant 推荐",
+        "blurb": "Pizza · 4.5★ / 2,642 评价 · 由 Local Life Assistant 推荐",
         "intent": "约个晚上去 Vesta 吃顿好的",
         "tags": [
           "约会",
@@ -261,26 +261,134 @@
       },
       {
         "type": "discover",
-        "id": "ap-family_outing-_T9Wnv1NKkCc",
+        "id": "ap-family_outing-3antkFC7JWh6",
         "kind": "find",
         "badge": "👨‍👩‍👧 带娃出行",
-        "title": "Los Altos History Museum",
-        "category": "Museums · Venues & Event Spaces",
-        "emoji": "🏛️",
+        "title": "Decathlon Summer Sports Camp",
+        "category": "Summer Camps · Day Camps",
+        "emoji": "👨‍👩‍👧",
         "cover": "linear-gradient(135deg,#ff9966,#ff5e62)",
-        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/DtP-Ox9wChBALoofdecQkw/o.jpg",
-        "neighborhood": "Los Altos",
-        "distance": "4.8 mi",
-        "rating": 4.8,
-        "reviews": 94,
-        "blurb": "Museums · 4.8★ / 94 评价 · 由 Local Life Assistant 推荐",
-        "intent": "周末带娃去 Los Altos History Museum",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/QrlxtmuBOsivY5OWKAvIXg/o.jpg",
+        "neighborhood": "Mountain View",
+        "distance": "5.8 mi",
+        "rating": 5,
+        "reviews": 16,
+        "blurb": "Summer Camps · 5★ / 16 评价 · 由 Local Life Assistant 推荐",
+        "intent": "周末带娃去 Decathlon Summer Sports Camp",
         "tags": [
           "亲子",
           "玩乐",
           "家庭"
         ],
-        "yelpUrl": "https://www.yelp.com/biz/los-altos-history-museum-los-altos",
+        "yelpUrl": "https://www.yelp.com/biz/decathlon-summer-sports-camp-mountain-view",
+        "assistant": {
+          "window": "family_outing",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-family_outing-macgcAdwczkY",
+        "kind": "find",
+        "badge": "👨‍👩‍👧 带娃出行",
+        "title": "Sunnyvale Skate Park",
+        "category": "Skate Parks",
+        "emoji": "🌳",
+        "cover": "linear-gradient(135deg,#ff9966,#ff5e62)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/67hsI_NEfP3cweUbcdcuUg/o.jpg",
+        "neighborhood": "Sunnyvale",
+        "distance": "7.9 mi",
+        "rating": 4.8,
+        "reviews": 24,
+        "blurb": "Skate Parks · 4.8★ / 24 评价 · 由 Local Life Assistant 推荐",
+        "intent": "周末带娃去 Sunnyvale Skate Park",
+        "tags": [
+          "亲子",
+          "玩乐",
+          "家庭"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/sunnyvale-skate-park-sunnyvale",
+        "assistant": {
+          "window": "family_outing",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-family_outing-OV-RxUQF3ji0",
+        "kind": "find",
+        "badge": "👨‍👩‍👧 带娃出行",
+        "title": "Hudson Gymnastics",
+        "category": "Gymnastics · Kids Activities",
+        "emoji": "👨‍👩‍👧",
+        "cover": "linear-gradient(135deg,#ff9966,#ff5e62)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/Cauuy2N7KQheT_p-X69xmQ/o.jpg",
+        "neighborhood": "San Leandro",
+        "distance": "16.4 mi",
+        "rating": 5,
+        "reviews": 42,
+        "blurb": "Gymnastics · 5★ / 42 评价 · 由 Local Life Assistant 推荐",
+        "intent": "周末带娃去 Hudson Gymnastics",
+        "tags": [
+          "亲子",
+          "玩乐",
+          "家庭"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/hudson-gymnastics-san-leandro",
+        "assistant": {
+          "window": "family_outing",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-family_outing-ZmvD3LBpgbSK",
+        "kind": "find",
+        "badge": "👨‍👩‍👧 带娃出行",
+        "title": "Empower Thrive",
+        "category": "Kids Activities · Musical Instruments & Teachers",
+        "emoji": "👨‍👩‍👧",
+        "cover": "linear-gradient(135deg,#ff9966,#ff5e62)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/MESHT3ED55pNj4hYcWgxWQ/o.jpg",
+        "neighborhood": "Los Gatos",
+        "distance": "17.3 mi",
+        "rating": 5,
+        "reviews": 21,
+        "blurb": "Kids Activities · 5★ / 21 评价 · 由 Local Life Assistant 推荐",
+        "intent": "周末带娃去 Empower Thrive",
+        "tags": [
+          "亲子",
+          "玩乐",
+          "家庭"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/empower-thrive-los-gatos-2",
+        "assistant": {
+          "window": "family_outing",
+          "reason": "Yelp 高分 + 在你的半岛半径内"
+        }
+      },
+      {
+        "type": "discover",
+        "id": "ap-family_outing-dsrPTWPQDFkl",
+        "kind": "find",
+        "badge": "👨‍👩‍👧 带娃出行",
+        "title": "Little Reds Barnyard Friends",
+        "category": "Petting Zoos",
+        "emoji": "🐾",
+        "cover": "linear-gradient(135deg,#ff9966,#ff5e62)",
+        "image": "https://s3-media0.fl.yelpcdn.com/bphoto/_pSrI8JFGhQq_tyvNKVleg/o.jpg",
+        "neighborhood": "Castro Valley",
+        "distance": "18.0 mi",
+        "rating": 5,
+        "reviews": 45,
+        "blurb": "Petting Zoos · 5★ / 45 评价 · 由 Local Life Assistant 推荐",
+        "intent": "周末带娃去 Little Reds Barnyard Friends",
+        "tags": [
+          "亲子",
+          "玩乐",
+          "家庭"
+        ],
+        "yelpUrl": "https://www.yelp.com/biz/little-reds-barnyard-friends-castro-valley-6",
         "assistant": {
           "window": "family_outing",
           "reason": "Yelp 高分 + 在你的半岛半径内"
