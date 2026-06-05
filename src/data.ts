@@ -2155,6 +2155,26 @@ export function getArticle(id: string): Article | undefined {
 export const DISCOVER: DiscoverCard[] = [
   {
     type: 'discover',
+    id: 'd-lobos-tacos',
+    addedAt: '2026-06-05T08:00:00Z',
+    kind: 'find',
+    badge: '🔍 本地小众新发现',
+    title: 'Lobo’s Tacos',
+    category: '墨西哥 · 塔可',
+    emoji: '🌮',
+    cover: 'linear-gradient(135deg,#f7971e,#ffd200)',
+    image: 'https://s3-media0.fl.yelpcdn.com/bphoto/RVD7Ez4DTjGVxKmszUePMA/o.jpg',
+    neighborhood: 'S 10th St, San Jose',
+    distance: '15 mi',
+    rating: 4.9,
+    reviews: 48,
+    blurb: 'San Jose 评分高得离谱的塔可摊 · 48 条评价拿下 4.9。',
+    intent: '专程去 San Jose 的 Lobo’s 吃几个塔可',
+    tags: ['塔可', '墨西哥', '小众'],
+    yelpUrl: 'https://www.yelp.com/biz/lobo-s-tacos-san-jose',
+  },
+  {
+    type: 'discover',
     id: 'd-taza-deli',
     addedAt: '2026-06-04T08:00:00Z',
     kind: 'find',
@@ -4293,6 +4313,28 @@ export const DISCOVER: DiscoverCard[] = [
     tags: ['体育', '演出', '活动'],
     ticketUrl:
       'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A7Qbvy&utm_medium=affiliate',
+  },
+  {
+    type: 'discover',
+    id: 'd-kenny-g',
+    addedAt: '2026-06-05T08:00:00Z',
+    kind: 'event',
+    badge: '🎷 本周末就有',
+    title: 'Kenny G',
+    category: '演唱会 · 萨克斯',
+    emoji: '🎷',
+    cover: 'linear-gradient(135deg,#1d2671,#c33764)',
+    image:
+      'https://s1.ticketm.net/dam/a/388/120de5c3-5da8-4708-aa63-3319aa178388_TABLET_LANDSCAPE_LARGE_16_9.jpg',
+    neighborhood: 'Mountain Winery, Saratoga',
+    distance: '20 mi',
+    date: '2026-06-18',
+    price: '门票',
+    blurb: '萨克斯传奇 Kenny G · 6/18 萨拉托加山顶酒庄的醉人一夜。',
+    intent: '订张票去 Mountain Winery 听 Kenny G',
+    tags: ['演唱会', '音乐', '现场演出'],
+    ticketUrl:
+      'https://ticketmaster.evyy.net/c/nbotaction/264167/4272?u=https%3A%2F%2Fwww.ticketmaster.com%2Fevent%2FZ7r9jZ1A7x7CK&utm_medium=affiliate',
   },
 ]
 
